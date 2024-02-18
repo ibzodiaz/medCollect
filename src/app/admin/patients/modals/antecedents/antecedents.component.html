@@ -1,0 +1,141 @@
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <h4>Antécédents</h4>
+        <!-- Formulaire -->
+        <form name="antecedantForm" #f="ngForm" (ngSubmit)="onSubmitAntecedant()">
+            <div class="text-center border border-primary p-3 rounded-2">
+                <h6 class="text-center">Médicaux</h6>
+                <div class="row">
+                    <div class="col">
+                        <!-- Groupe HTA Gravidique -->
+                        
+                        <label for="htaGravidique">HTA Gravidique:</label>
+                        <input type="checkbox" id="htaGravidique" name="htaGravidique" [(ngModel)]="antecedantForm.htaGravidique">
+                    </div>
+                    <div class="col">
+                        <label for="diabete_gestionnelle">Diabète Gestationnelle:</label>
+                        <input type="checkbox" id="diabete_gestionnelle" name="diabete_gestionnelle" [(ngModel)]="antecedantForm.diabete_gestionnelle">
+                
+                    </div>
+                    <div class="col">
+                        <label for="pre_eclampsie">Pré-éclampsie:</label>
+                        <input type="checkbox" id="pre_eclampsie" name="pre_eclampsie" [(ngModel)]="antecedantForm.pre_eclampsie">
+                
+                    </div>
+                    <div class="col">
+                        <!-- Groupe Autres -->
+                        <label for="others">Autres:</label>
+                        <textarea id="others" name="others" [(ngModel)]="antecedantForm.autres"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="border border-primary p-3 rounded-2">
+
+                <!-- Groupe Gyneco-Obstetricaux -->
+                <h6 class="text-center">Gyneco-Obstetricaux</h6>
+    
+                <div class="row">
+                    <div class="col">
+                        <label for="menarche">Menarche:</label>
+                        <input type="number" id="menarche" name="menarche" [(ngModel)]="antecedantForm.menarche">
+                    </div>
+
+                    <div class="col">
+                        <label for="gestite">Gestite:</label>
+                        <input type="number" id="gestite" name="gestite" [(ngModel)]="antecedantForm.gestite">
+                    </div>
+
+                    <div class="col">
+                        <label for="parite">Parite:</label>
+                        <input type="number" id="parite" name="parite" [(ngModel)]="antecedantForm.parite">
+                    </div>
+
+                    <div class="col">
+                        <label for="grossessesGemellaires">GrossessesGemellaires:</label>
+                        <input type="checkbox" id="grossessesGemellaires" name="grossessesGemellaires" [(ngModel)]="antecedantForm.grossessesGemellaires">
+                    </div>
+
+                    <div class="col">
+                        <label for="tocolyseProlongee">TocolyseProlongee:</label>
+                        <input type="text" id="tocolyseProlongee" name="tocolyseProlongee" [(ngModel)]="antecedantForm.tocolyseProlongee">
+                    </div>
+                    
+                </div>
+
+            </div>
+
+            
+            
+
+            <div class="text-center">
+                <div class="row">
+                    
+                    <div class="col">
+                        <div class="border border-primary p-3 rounded-2">
+                            <h6>ATCD Decompensation:</h6>
+                            <div class="row">
+                                <div class="col">
+                                    <label>
+                                        <input type="radio" name="atcdDecompensation" [(ngModel)]="antecedantForm.atcdDecompensation" [value]="true">OUI
+                                    </label>     
+                                </div>
+                                <div class="col">
+                                    <label>
+                                        <input type="radio" name="atcdDecompensation" [(ngModel)]="antecedantForm.atcdDecompensation" [value]="false" (click)="initATCD()">NON
+                                    </label>     
+                                </div>
+                                <div *ngIf="antecedantForm.atcdDecompensation" class="col">
+                                 
+                                    <button class="c-button" (click)="openModal('modal7',$event)"><i class="fa-regular fa-pen-to-square"></i></button>
+                                </div>
+                            </div>
+                            <app-atcd></app-atcd>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="border border-primary p-3 rounded-2">
+                            <h6>Hospitalisations Anterieures:</h6>
+                            <div class="row">
+                                <div class="col">
+                                    <label>
+                                        <input type="radio"  name="hospitalisationsAnterieures" [(ngModel)]="antecedantForm.hospitalisationsAnterieures" [value]="true">OUI
+                                    </label>     
+                                </div>
+                                <div class="col">
+                                    <label>
+                                        <input type="radio"  name="hospitalisationsAnterieures" [(ngModel)]="antecedantForm.hospitalisationsAnterieures" [value]="false" (click)="initHA()">NON
+                                    </label>     
+                                </div>
+                                <div *ngIf="antecedantForm.hospitalisationsAnterieures" class="col">
+                                 
+                                    <button class="c-button" (click)="openModal('modal8',$event)"><i class="fa-regular fa-pen-to-square"></i></button>
+                                </div>
+                            </div>
+                            <app-hospitalisations></app-hospitalisations>  
+                        </div>  
+                    </div>
+
+                </div>
+                
+            </div>
+
+            
+
+            <div class="row text-center">
+                <div class="col"></div>
+                <div class="col">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal2',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                </div>
+                <div class="col"></div>
+            </div>
+      
+        </form>
+    </div>
+</div>

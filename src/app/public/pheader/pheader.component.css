@@ -1,0 +1,44 @@
+
+.image-top {
+  position: relative;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  display: block;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.except-1{
+  position: relative;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  display: block;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.except-2{
+  position: relative;
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
+  margin-left: 10px;
+  display: block;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.except-3{
+  position: relative;
+  overflow: hidden;
+  width: 70px;
+  height: 60px;
+  margin-left: 10px;
+  display: block;
+  object-fit: contain;
+  border-radius: 50%;
+}

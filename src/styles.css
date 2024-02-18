@@ -1,1 +1,24 @@
+@import '../node_modules/@syncfusion/ej2-material-theme/styles/material.css';
 /* You can add global styles to this file, and also import other style files */
+
+/* Pour la barre de défilement principale */
+::-webkit-scrollbar {
+    width: 1px;
+  }
+  
+  /* Pour le track (le fond) de la barre de défilement */
+  ::-webkit-scrollbar-track {
+    background: #007BFF;
+  }
+  
+  /* Pour la poignée de la barre de défilement */
+  ::-webkit-scrollbar-thumb {
+    background: #007BFF;
+    border-radius: 10px;
+  }
+  
+  /* Pour la poignée de la barre de défilement au survol */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #007BFF;
+  }
+  

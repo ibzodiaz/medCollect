@@ -1,0 +1,66 @@
+
+
+<form name="planning" (ngSubmit)="onSubmit()">
+    <h5>Planification d'indisponibilité <i class="fa-regular fa-calendar-xmark"></i></h5>
+    <div class="row">
+        <div class="col">
+            <label>Date</label>
+            <input type="date" class="form-control" [(ngModel)]="planningForm.date" name="date">
+        </div>
+        <div class="col">
+            <label>Début</label>
+            <input type="time" class="form-control" step="1" [(ngModel)]="planningForm.hourStart" name="hourStart">
+        </div>
+        <div class="col">
+            <label>Fin</label>
+            <input type="time" class="form-control" step="1" [(ngModel)]="planningForm.hourEnd" name="hourEnd">
+        </div>
+
+        <div class="col">
+            <br>
+            <button type="submit" class="btn btn-primary w-100"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+        </div>
+    </div>
+</form>
+
+<div class="row mt-5">
+    <div class="col">
+        <div *ngIf="isLoading; else content">
+            <!-- Afficher le loader ici -->
+            <div class="loader"></div>
+        </div>
+        <ng-template #content>
+            <div class="card">
+                <full-calendar [options]="calendarOptions"  (eventClick)="handleEventClick($event)"></full-calendar>
+            </div>
+            <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <form class="form-modal" name="plans" (ngSubmit)="onUpdate()">
+                        <div class="modal-header">
+                        <h6 class="modal-title" id="eventModalLabel">indisponibilité <i class="fa-regular fa-circle-xmark"></i></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="handleCloseModal()"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Date : <input type="date" class="form-control" [(ngModel)]="planningForm.date" value="{{ date }}" name="date"></p>
+                            <p>De <input type="time" step="1" [(ngModel)]="planningForm.hourStart" value="{{ start }}" name="hourStart"> à <input type="time" step="1" [(ngModel)]="planningForm.hourEnd" value="{{ end }}" name="hourEnd"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <table class="text-center">
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-primary rounded-0 w-100" type="submit">Modifier</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger rounded-0 w-100" (click)="delete($event)">Supprimer</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

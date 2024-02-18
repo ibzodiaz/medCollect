@@ -1,0 +1,18 @@
+.nav-link {
+    border-top: 3px solid transparent;
+    transition: border-top-color 0.3s ease;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    margin-left: 10px;
+    color: #007BFF;
+    padding: 5px 15px;
+  }
+
+  .nav-link.active {
+    border-top-color: #007BFF;
+    color: #007BFF;
+  }
+
+  nav i{
+    font-size: 15px;
+  }

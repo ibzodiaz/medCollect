@@ -1,0 +1,40 @@
+
+<div id="modal6" class="modal">
+    <div class="modal-content">
+        <h4>Évolution</h4>
+
+        <!-- Formulaire -->
+        <form id="evolutionForm" data-modal-id="3">
+            <div class="row text-center">
+                <div class="col">
+                    <div class="border border-primary rounded-3">
+                        <label for="women">Femmes</label>
+                        <input type="checkbox" id="women" (click)="openModal('modal16')" name="women">
+                        <app-women (emittedEvent)="checkboxState($event)"></app-women>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="border border-primary rounded-3">
+                        <label for="baby">Bébés</label>
+                        <input type="checkbox" (click)="openModal('modal17')" id="baby" name="baby">
+                        <app-babies (emittedEvent)="checkboxState($event)"></app-babies>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col"></div>
+                <div class="col">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal6')"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                </div>
+                <div class="col"></div>
+            </div>
+            
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,81 @@
+<div class="row mb-3">
+    <div class="col">
+        <div class="float-end">
+            <button (click)="openModal('modal0','')" class="btn custom-btn-color"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau&nbsp;<i class="fa-regular fa-user"></i></button>
+            &nbsp;&nbsp;&nbsp;
+            <a [routerLink]="['../../patients/historiques']" class="btn custom-btn-color-2"><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;Historiques&nbsp;<i class="fa-regular fa-user"></i></a>
+        </div>
+    </div>
+</div>
+<div class="custom-top">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="float-start">
+                <div class="search text-center">
+                    <label>Recherche :</label>
+                    <input type="text" [(ngModel)]="searchTerm" placeholder="nom ou prénom">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col-md-3">
+            <div class="float-end">
+                <label class="see">Afficher&nbsp;<i class="fa-regular fa-eye"></i></label>
+                <select [(ngModel)]="rowsPerPage">
+                    <option>5</option>
+                    <option>10</option>
+                    <option>15</option>
+                    <option>20</option>
+                    <option>25</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading; else content">
+    <!-- Afficher le loader ici -->
+    <div class="loader"></div>
+</div>
+<ng-template #content>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Prénom :</th>
+                    <th scope="col">Nom :</th>
+                    <th scope="col">Socio-Démographiques :</th>
+                    <th scope="col">Antécédents :</th>
+                    <th scope="col">Signes cliniques :</th>
+                    <th scope="col">Signes paracliniques :</th>
+                    <th scope="col">Evolution :</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let patient of filteredPatients" class="text-center">
+                    <td>{{ patient.prenom }}</td>
+                    <td>{{ patient.nom }}</td>
+                    <td><span (click)="openModal('modal1',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><span (click)="openModal('modal2',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><span (click)="openModal('modal3',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><span (click)="openModal('modal4',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><span (click)="openModal('modal6',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><i (click)="openModal('modal5',patient._id)" class="fa-regular fa-folder"></i>&nbsp;<i class="fa-solid fa-file-medical"></i>&nbsp;<i (click)="openModal('modal20',patient._id)" class='bx bx-cloud-upload'></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--****************************************-->
+
+    <app-addpatient (emittedEvent)="insertState($event)"></app-addpatient>
+    <app-sociodemo (emittedEvent)="updateState($event)"></app-sociodemo>
+    <app-confirmation (confirmed)="deletionConfirmed = $event; delete(patientIdToDelete)"></app-confirmation>
+    <app-uploadfiles></app-uploadfiles>
+    <app-antecedents></app-antecedents>
+    <app-cliniques></app-cliniques>
+    <app-paracliniques></app-paracliniques>
+    <app-fichepatient></app-fichepatient>
+    <app-evolution></app-evolution>
+</ng-template>

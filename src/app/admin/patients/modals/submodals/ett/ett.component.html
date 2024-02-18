@@ -1,0 +1,61 @@
+<div id="modal14" class="modal">
+    <div class="modal-content">
+        <div class="row mb-3 border border-primary p-3 rounded-3">
+            <div class="col">
+                <label for="dtdvg">DTDVG:</label>
+                <input type="text" id="dtdvg" name="dtdvg">
+            </div>
+   
+            <div class="col">
+                <label for="dtsvg">DTSVG:</label>
+                <input type="text" id="dtsvg" name="dtsvg">
+            </div>
+
+            <div class="col">
+                <label for="fevg">FEVG:</label>
+                <input type="text" id="fevg" name="fevg">
+            </div>
+        </div>
+
+        <div class="row mb-3 border border-primary p-3 rounded-3">
+            <div class="col text-center">
+                <label for="epanchementPericardiquePresent">Épanchement Péricardique:</label>
+                <input type="checkbox" id="epanchementPericardiquePresent" name="epanchementPericardique.present" required>
+            </div>
+        </div>
+
+        <h5>Fuite Valvulaire:</h5>
+        <div class="row mb-3 border border-primary p-3 rounded-3">
+            <div class="col-md-3 mb-3" *ngFor="let option of ['Absente', 'Aortique', 'Mitrale', 'Tricuspidienne','Pulmonaire']">
+                <label> {{ option }}</label>
+                <input type="checkbox" [value]="option" (change)="onCheckboxChange($event)">
+               
+            </div>
+        </div>
+        
+        <h5>Sténose Valvulaire:</h5>
+        <div class="row mb-3 border border-primary p-3 rounded-3">
+            <div class="col-md-3 mb-3" *ngFor="let option of ['Absente', 'Aortique', 'Mitrale', 'Tricuspidienne','Pulmonaire']">
+                <label>{{ option }}</label>
+                <input type="checkbox" [value]="option" (change)="onCheckboxChange($event)">
+                
+            </div>
+            <div class="col">
+                <label>Autres</label>
+                <textarea></textarea>
+            </div>
+        </div>
+           
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-md-3">
+                <!-- Bouton Enregistrer -->
+                <button type="submit"><span>Enregistrer</span></button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal14')">Fermer</button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</div>

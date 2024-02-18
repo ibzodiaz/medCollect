@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col">
+        <h5><i class="fa-solid fa-users"></i>&nbsp;Les patients</h5>
+    </div>
+    <div class="col">
+        <div class="float-end">
+            <input type="text" placeholder="Recherche.." [(ngModel)]="searchTerm">
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading; else content">
+    <div class="loader"></div>
+</div>
+<ng-template #content>
+    <div class="row">
+        <div class="col">
+            <div class="table-wrapper">
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><i class="fa-solid fa-fire-flame-curved"></i> Prénom :</th>
+                            <th scope="col"><i class="fa-solid fa-fire-flame-curved"></i> Nom :</th>
+                            <th scope="col"><i class="fa-solid fa-fire-flame-curved"></i> Adresse :</th>
+                            <th scope="col"><i class="fa-solid fa-fire-flame-curved"></i> Téléphone :</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            
+                    
+                        <tr *ngFor="let patient of filterPatients" [routerLink]="'../details/' + patient._id">
+                            <td><i class="fa-solid fa-fire-flame-curved"></i> {{patient.prenom}}</td>
+                            <td><i class="fa-solid fa-fire-flame-curved"></i> {{patient.nom}}</td>
+                            <td><i class="fa-solid fa-fire-flame-curved"></i> {{patient.adresse}}</td>
+                            <td><i class="fa-solid fa-fire-flame-curved"></i> {{patient.telephone}}</td>
+                        </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</ng-template>

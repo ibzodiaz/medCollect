@@ -1,0 +1,105 @@
+<!-- Modal Content -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Informations Socio-Démographiques</h4>
+        <div *ngIf="isLoading; else content">
+            <!-- Afficher le loader ici -->
+            <div class="loader"></div>
+        </div>
+        <ng-template #content>
+            <!-- Formulaire -->
+            <form name="patientForm" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" >
+                <div class="border p-3 rounded-3">
+                    <div class="row">
+
+                        <div class="col">
+                            <!-- Champ Âge -->
+                            <label for="prenom">Prénom:</label>
+                            <input type="text" id="prenom" name="prenom" [(ngModel)]="patientForm.prenom" #prenom="ngModel" required>
+                        </div>
+                        <div class="col">                         
+                            <!-- Champ Adresse -->
+                            <label for="nom">Nom:</label>
+                            <input type="text" id="nom" name="nom" [(ngModel)]="patientForm.nom" #nom="ngModel" required>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="border p-3 rounded-3">
+                    <div class="row">
+
+                        <div class="col">
+                            <!-- Champ Âge -->
+                            <label for="age">Âge:</label>
+                            <input type="number" id="age" name="age" [(ngModel)]="patientForm.age" #age="ngModel" required>
+                        </div>
+                        <div class="col">                         
+                            <!-- Champ Adresse -->
+                            <label for="adresse">Adresse:</label>
+                            <input type="text" id="adresse" name="adresse" [(ngModel)]="patientForm.adresse" #adresse="ngModel" required>
+                        </div>
+
+                      
+                    </div>
+                </div>
+                
+                <div class="border p-3 rounded-3">
+                    <div class="row">
+                        
+                        <div class="col">
+                            <!-- Champ Téléphone -->
+                            <label for="telephone">Téléphone:</label>
+                            <input type="text" id="telephone" name="telephone" [(ngModel)]="patientForm.telephone" #telephone="ngModel" required>
+                        </div>
+                        
+                        <div class="col">
+                            <!-- Champ Statut -->
+                            <label for="statut">Statut matrimonial:</label>
+                            <select id="statut" name="statut" [(ngModel)]="patientForm.statut" #statut="ngModel">
+                                <option>Célibataire</option>
+                                <option>Marié(e)</option>
+                                <option>Divorcé(e)</option>
+                                <option>Veuf(ve)</option>
+                            </select>
+                        </div>
+                       
+                    </div>
+                </div>
+
+                <div class="border p-3 rounded-3">
+                    <div class="row">
+                         <div class="col">
+                            <!-- Champ Profession -->
+                            <label for="profession">Profession:</label>
+                            <input type="text" id="profession" name="profession" [(ngModel)]="patientForm.profession" #profession="ngModel" required>
+                        </div>
+                        <div class="col">
+                            <!-- Champ Niveau socio-économique -->
+                            <label for="niveau_socioeconomique">Niveau socio-économique:</label>
+                            <select id="niveau_socioeconomique" name="niveau_socioeconomique" [(ngModel)]="patientForm.niveau_socioeconomique" #niveau_socioeconomique="ngModel">
+                                <option value="Bon">Bon</option>
+                                <option value="Moyen">Moyen</option>
+                                <option value="Bas">Bas</option>
+                            </select>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row text-center">
+                    <div class="col"></div>
+                    <div class="col">
+                        <!-- Bouton Enregistrer -->
+                        <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal1',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                    </div>
+                    <div class="col"></div>
+                </div>
+
+            </form>
+        </ng-template>
+    </div>
+</div>

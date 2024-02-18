@@ -1,0 +1,83 @@
+<!-- <header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AlloDoc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" [routerLink]="['home']">Accueil</a>
+
+                <a class="nav-link" [routerLink]="['contact']">Contact</a>
+                <a class="nav-link float-end" [routerLink]="['admin']">Connexion</a>
+            </div>
+            </div>
+        </div>
+    </nav>
+</header> -->
+
+<!-- Spinner Start -->
+<!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div> -->
+<!-- Spinner End -->
+
+ <!-- Topbar Start -->
+ <div class="container-fluid bg-light p-0 wow fadeIn" id="go-top" data-wow-delay="0.1s">
+    <div class="row gx-0 d-none d-lg-flex">
+        <div class="col-lg-7 px-5 text-start">
+            <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                <small class="fa fa-map-marker-alt text-primary me-2"></small>
+                <small> Dakar, Sénégal</small>
+            </div>
+            <div class="h-100 d-inline-flex align-items-center py-3">
+                <small class="far fa-clock text-primary me-2"></small>
+                <small>{{ currentTimeFRLocale }}</small>
+            </div>
+        </div>
+        <div class="col-lg-5 px-5 text-end">
+            <div class="h-100 d-inline-flex align-items-center">
+                <img src="assets/images/dantec.png" class="image-top except-3">
+                <img src="assets/images/ird.png" class="image-top">
+                <img src="assets/images/ummisco.png" class="image-top except-2">
+                <img src="assets/images/ucad.png" class="image-top except-1">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+    <a [routerLink]="['home']" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <h1 class="m-0 text-primary"><i class="fa-solid fa-hand-holding-droplet"></i>MedCollect</h1>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a class="nav-link" [routerLinkActive]="['active']" aria-current="page" [routerLink]="['home']">Accueil</a>
+            <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['contact']">Contact</a>
+            
+            <!-- <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu rounded-0 rounded-bottom m-0">
+                    <a href="feature.html" class="dropdown-item">Feature</a>
+                    <a href="team.html" class="dropdown-item">Our Doctor</a>
+                    <a href="appointment.html" class="dropdown-item">Appointment</a>
+                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                    <a href="404.html" class="dropdown-item">404 Page</a>
+                </div>
+            </div> -->
+            <!-- <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['rendez-vous']">Rendez-vous</a> -->
+            <a class="nav-link float-end" [routerLink]="['admin']">Connexion</a>
+        </div>
+        <!-- <a [routerLink]="['rendez-vous']" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a> -->
+    </div>
+</nav>
+<!-- Navbar End -->

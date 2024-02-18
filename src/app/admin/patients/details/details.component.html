@@ -1,0 +1,259 @@
+<div class="container">
+    <div class="main-body">
+    
+        <div class="row gutters-sm">
+            <div class="col-md-2 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <i class="fa-solid fa-user"></i>
+            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="float-start"><i class="fa-solid fa-folder-open"></i>&nbsp;Documents</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="float-start"><i class="fa-regular fa-handshake"></i>&nbsp;Rendez-vous</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="float-start"><i class="fa-solid fa-prescription-bottle-medical"></i>&nbsp;Ordonnances</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="float-start"><i class="fa-solid fa-file-signature"></i>&nbsp;Consultation</p>
+                                        </div>
+                                    </div>
+
+                                  
+                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="mb-5 text-center"><span>Informations du patient</span></h5>
+            
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <p class="mb-0"><strong>Nom:</strong></p>
+                                    </div>
+                                    <div class="col text-secondary">
+                                        {{patient.nom}}
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0"><strong>Prénom:</strong></p>
+                                    </div>
+                                    <div class="col text-secondary">
+                                        {{patient.prenom}}
+                                    </div>
+                                   
+                                </div>
+                                <div class="line"></div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <p class="mb-0"><strong>Age:</strong></p>
+                                    </div>
+                                    <div class="col text-secondary">
+                                        {{patient.age}}
+                                    </div>
+
+                                    <div class="col">
+                                        <p class="mb-0"><strong>Téléphone:</strong></p>
+                                    </div>
+                                    <div class="col text-secondary">
+                                        {{patient.telephone}}
+                                    </div>
+                                
+                                </div>
+
+                                <div class="line"></div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <p class="mb-0"><strong>Statut matrimonial:</strong></p>
+                                    </div>
+                                    <div class="col text-secondary">
+                                        {{patient.statut}}
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0"><strong>Profession:</strong></p>
+                                    </div>
+                                    <div class="col text-secondary">
+                                        {{patient.profession}}
+                                    </div>
+                   
+                                </div>
+                                <div class="line"></div>
+                                <div class="row mb-3">
+                
+                                    <div class="col-md-3">
+                                        <p class="mb-0"><strong>Niveau socio-économique:</strong></p>
+                                    </div>
+                                    <div class="col text-secondary">
+                                        {{patient.niveau_socioeconomique}}
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+            
+                            </div>
+                          </div>
+                    </div>
+                </div>
+              <div class="card mb-3">
+                
+                <div class="card-body">
+                    <h5 class="mb-5 text-center"><span>Antécédants</span></h5>
+                    <h6>Médicaux</h6>
+                    <div class="line"></div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">HTA Gravidique:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ antecedants.htaGravidique ? "OUI" : "NON" }}
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"> Diabète Gestationnelle:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ antecedants.diabete_gestionnelle ? "OUI" : "NON" }}
+                    </div>
+                  </div>
+              
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Pré-éclampsie:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{ antecedants.pre_eclampsie ? "OUI" : "NON" }}
+                    </div>
+                  </div>
+                  
+       
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Autres:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{antecedants.autres}}
+                    </div>
+                  </div>
+                  <div class="line"></div>
+
+                  <h6>Gyneco-Obstetricaux</h6>
+
+                  <div class="line"></div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Menarche:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{antecedants.menarche}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Gestite:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                       {{antecedants.gestite}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Parite:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                       {{antecedants.parite}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">GrossessesGemellaires:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                       {{antecedants.grossessesGemellaires ? "OUI":"NON"}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">TocolyseProlongee:</p>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                       {{antecedants.tocolyseProlongee}}
+                    </div>
+                  </div>
+                  <div class="line"></div>
+                  
+                  <h6>ATCD Decompensation:</h6>
+                  <div class="line"></div>
+                  <div class="row">
+
+                    <div class="col-sm-2 text-secondary">
+                       {{antecedants.atcdDecompensation ? "OUI":"NON"}}
+                    </div>
+                    <div class="col-sm-2">
+                        Nombre: {{antecedants.nombreAtcdDecompensation}}
+                    </div>
+                    <div class="col-sm-5">
+                        Type Insuffisance Cardiaque: {{antecedants.typeInsuffisanceCardiaque}}
+                    </div>
+                  </div>
+
+                  <div class="line"></div>
+                  <h6>Hospitalisations Anterieures</h6>
+                  <div class="line"></div>
+                  <div class="row">
+          
+                    <div class="col-sm-2 text-secondary">
+                        {{antecedants.hospitalisationsAnterieures ? "OUI":"NON"}}
+                    </div>
+                    <div class="col-sm-2 text-secondary">
+                        Nombre: {{antecedants.nombreHospitalisations}}
+                    </div>
+                  </div>
+                  <div class="line"></div>
+
+                </div>
+              </div>
+            </div>
+  
+
+          </div>
+
+    </div>
+</div>

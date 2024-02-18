@@ -1,0 +1,83 @@
+<div id="modal16" class="modal">
+    <div class="modal-content">
+        <h5 class="text-center">Femmes</h5>
+        <div class="row border border-primary p-3 rounded-3 mb-3">
+            <div class="col text-center">
+                <label for="evolutionSortie">Évolution après la sortie:</label>
+                <select id="evolutionSortie" name="evolutionSortie">
+                    <option value=""></option>
+                    <option value="3mois">3 mois</option>
+                    <option value="6mois">6 mois</option>
+                    <option value="9mois">9 mois</option>
+                    <option value="12mois">12 mois</option>
+                </select>
+            </div>
+        </div>
+
+        
+        <div class="row border border-primary p-3 rounded-3 mb-3">
+            <div class="row">
+                <h5 class="text-center">Classe NYHA:</h5>
+                <div class="col mb-3" *ngFor="let option of ['Récupération totale', 'Récupération partielle']">
+                    <label> {{ option }}</label>
+                    <input type="checkbox" [value]="option" (change)="onCheckboxChange($event)">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col mb-3" *ngFor="let option of ['État stationnaire', 'Dégradation de la qualité de vie']">
+                    <label> {{ option }}</label>
+                    <input type="checkbox" [value]="option" (change)="onCheckboxChange($event)">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col text-center">
+                    <label for="deces">Décès:</label>
+                    <input type="checkbox" id="deces" (click)="openModal('modal18')" name="deces">
+                    <app-deces (emittedEvent)="checkboxState($event)"></app-deces>
+                </div>
+            </div>
+        
+            
+        </div>
+
+
+        <div class="row border border-primary p-3 rounded-3 mb-3">
+        
+            <div class="col text-center">  
+                <label for="observanceTherapeutique">Observance Thérapeutique:</label>
+                <select id="observanceTherapeutique" name="observanceTherapeutique">
+                    <option value="oui">Oui</option>
+                    <option value="non">Non</option>
+                </select>
+            </div>
+            <div class="col text-center">
+                <label for="nombreRehospitalisations">Nombre de Réhospitalisations:</label>
+                <input type="number" id="nombreRehospitalisations" name="nombreRehospitalisations">                 
+            </div>
+        </div>
+
+        <div class="row border border-primary p-3 rounded-3 mb-3">
+            <div class="col text-center">
+                <label for="facteursDecompensation">Facteurs de Décompensation:</label>
+                <input type="text" id="facteursDecompensation" name="facteursDecompensation">
+            </div>
+         
+        </div>
+
+        <div class="row mt-3">
+            <div class="col"></div>
+            <div class="col-md-3">
+                <!-- Bouton Enregistrer -->
+                <button type="submit"><span>Modifier</span></button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal16')">Fermer</button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</div>

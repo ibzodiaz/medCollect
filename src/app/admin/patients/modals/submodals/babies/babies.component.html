@@ -1,0 +1,37 @@
+<div id="modal17" class="modal">
+    <div class="modal-content">
+        <h5 class="text-center">Bébés</h5>
+        <div class="row border border-primary p-3 rounded-3 mb-3">
+            <div class="col text-center">
+                <label for="evolutionSortie">Évolution après la sortie:</label>
+                <select id="evolutionSortie" name="evolutionSortie">
+                    <option value="init">Poids du bébé à la naissance</option>
+                    <option value="3mois">3 mois</option>
+                    <option value="6mois">6 mois</option>
+                    <option value="12mois">12 mois</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row border border-primary p-3 rounded-3 mb-3">
+            <div class="col mb-3" *ngFor="let option of ['Mort nés', 'faible poids de naissance', 'Prématurité']">
+                <label> {{ option }}</label>
+                <input type="checkbox" [value]="option" (change)="onCheckboxChange($event)">
+            </div>
+
+            
+        </div>
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-md-3">
+                <!-- Bouton Enregistrer -->
+                <button type="submit"><span>Modifier</span></button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal17')">Fermer</button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</div>

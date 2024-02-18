@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="main-body mt-5">
+        <div class="row">
+            <div class="col">
+                <a [routerLink]="['../../']" class="btn btn-customized-2"><i class="fa-solid fa-left-long"></i>&nbsp;Retour</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nom</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" value="{{user.nom}}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Prénom</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" value="{{user.prenom}}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" value="{{user.email}}">
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nouveau mot de passe</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <input type="text" value="{{user.password}}" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-customized">Générer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Actions</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select>
+                                    <option>Editeur</option>
+                                    <option>Lecteur</option>
+                                </select>
+                            </div>
+                        </div>                    
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9 text-secondary">
+                                <button class="btn btn-customized">Modifier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

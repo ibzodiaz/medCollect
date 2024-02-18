@@ -1,0 +1,162 @@
+
+/**********Modal*****************/
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    animation: openDialog 0.4s ease-in-out;
+}
+
+@keyframes openDialog {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1)
+    }
+}  
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2{
+    margin-bottom: 30px;
+    border-bottom: 1px solid #007BFF;
+}
+
+h4{
+    color: #007BFF;
+    border: 1px solid #007BFF;
+    background: linear-gradient(to right, #81b9f5, #fff);
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.border{
+    padding: 10px;
+}
+
+button i{
+    font-size: 20px;
+}
+
+
+form {
+    display: grid;
+    gap: 10px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #838181;
+    outline: none;
+    transition: border-bottom-width 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform-origin: 50% 100%;
+}
+
+@keyframes inputAnimation {
+    0% {
+        border-bottom-width: 1px;
+        transform: scaleX(0);
+    }
+  
+    100% {
+        border-bottom-width: 100%;
+        transform: scaleX(1);
+        border-bottom: 1.3px solid #007BFF;
+    }
+}
+
+/* Applique l'animation uniquement lorsqu'on focus sur l'input */
+input:focus,
+textarea:focus {
+    animation: inputAnimation 0.5s forwards; /* forwards pour conserver l'état final de l'animation */
+}
+
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+button[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+}
+
+.c-button{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+    box-shadow: 2px 3px 2px rgba(0,0,0,0.2);
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    border: none;
+}
+
+/**********Modal*****************/
+
+/*************Loader*******************/
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #007BFF;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/*************Loader*******************/

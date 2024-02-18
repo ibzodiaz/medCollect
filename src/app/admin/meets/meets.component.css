@@ -1,0 +1,72 @@
+.card {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    border-top: 3px solid #007BFF;
+    padding: 15px 3px;
+    border-radius: 0px;
+}
+
+.custom-btn-color {
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 14px;
+}
+
+.alert{
+    background-color: #b6dcfc;
+    height: 80px;
+}
+
+.alert p{
+    border-bottom: 1px solid #f0eded;
+}
+
+
+.alert small{
+    font-weight: bold;
+}
+
+.input-w{
+    position: relative;
+    left: 30px;
+}
+
+.form-modal{
+    background-color: #fff;
+}
+
+@media(min-width:900px){
+    form{
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 7px;
+        width: 100%;
+    }
+}
+
+.back-secondary{
+    margin-top: 15px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+}
+
+/*************Loader*******************/
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #007BFF;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/*************Loader*******************/

@@ -1,0 +1,174 @@
+
+<div id="modal4" class="modal">
+    <div class="modal-content">
+        <h4>Signes Paracliniques</h4>
+
+        <!-- Formulaire -->
+        <form id="signesParacliniquesForm" data-modal-id="3">
+            
+            <div class="border p-3 rounded-3 border-primary">
+                <div class="row">
+                    <!-- Groupe Biologie -->
+                    <h5 class="text-center">Biologie</h5>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <label for="hemoglobinemie">Hémoglobinémie:</label>
+                                <input type="text" id="hemoglobinemie" name="hemoglobinemie">
+                            </div>
+                            <div class="col">
+                                <label for="gb">GB:</label>
+                                <input type="text" id="gb" name="gb">                
+                            </div>
+                            <div class="col">
+                                <label for="plaquettes">Plaquettes:</label>
+                                <input type="text" id="plaquettes" name="plaquettes">                
+                            </div>
+                           
+                        
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                                        
+                                <label for="vgm">VGM:</label>
+                                <input type="text" id="vgm" name="vgm">
+
+                            </div>
+                            <div class="col">
+                                <label for="ccmh">CCMH:</label>
+                                <input type="text" id="ccmh" name="ccmh">
+                            </div>
+                            <div class="col">
+                                <label for="tmch">TMCH:</label>
+                                <input type="text" id="tmch" name="tmch">                
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="crp">CRP:</label>
+                                <input type="text" id="crp" name="crp">                
+                            </div>
+                            <div class="col">
+                                <label for="uree">Urée:</label>
+                                <input type="text" id="uree" name="uree">                
+                            </div>
+                            <div class="col">
+                                <label for="creatininemie">Créatininémie:</label>
+                                <input type="text" id="creatininemie" name="creatininemie">                
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="ntProBNP">NT pro BNP:</label>
+                                <input type="text" id="ntProBNP" name="ntProBNP">                
+                            </div>
+                            <div class="col">
+                                <label for="prolactine">Prolactine:</label>
+                                <input type="text" id="prolactine" name="prolactine">                
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="border p-3 rounded-3 border-primary">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="text-center">
+                            <label for="telecoeurPresent" class="text-center">Télécoeur:</label>
+                            <input type="checkbox" (click)="openModal('modal12')" id="telecoeurPresent" name="telecoeur.present" required>
+                            <app-telecoeur (emittedEvent)="checkboxState($event)"></app-telecoeur>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <label for="ecgPresent">ECG:</label>
+                        <input type="checkbox" (click)="openModal('modal13')" id="ecgPresent" name="ecg.present" required>
+                        <app-ecg (emittedEvent)="checkboxState($event)"></app-ecg>
+                    </div>
+
+                    <div class="col text-center">
+                        <label for="ettPresent">ETT:</label>
+                        <input type="checkbox" (click)="openModal('modal14')" id="ettPresent" name="ett.present" required>
+                        <app-ett (emittedEvent)="checkboxState($event)"></app-ett>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="border p-3 rounded-3 border-primary">
+                <div class="row">
+                    <h5 class="text-center">Traitement</h5>
+                    <div class="col text-center">
+                        <label for="diuretique">Diurétique:</label>
+                        <input type="checkbox" id="diuretique" name="traitement.diuretique">
+                    </div>
+                    <div class="col text-center">
+                        <label for="iec">IEC:</label>
+                        <input type="checkbox" id="iec" name="traitement.iec">
+                    </div>
+                    <div class="col text-center">
+                        <label for="tonicardiaque">Tonicardiaque:</label>
+                        <input type="checkbox" id="tonicardiaque" name="traitement.tonicardiaque">
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <label for="bromocriptine">Bromocriptine:</label>
+                        <input type="checkbox" id="bromocriptine" name="traitement.bromocriptine">                
+                    </div>
+                    <div class="col text-center">
+                        <label for="anticoagulants">Anticoagulants:</label>
+                        <input type="checkbox" id="anticoagulants" name="traitement.anticoagulants">
+                    </div>
+                    <div class="col text-center">
+                        <label for="betabloquants">Betabloquants:</label>
+                        <input type="checkbox" id="betabloquants" name="traitement.betabloquants">
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <label for="contraception">Contraception:</label>
+                        <input type="checkbox" id="contraception" name="traitement.contraception">
+                    </div>
+                    <div class="col"></div>
+                    <div class="col">
+                        <label for="autresTraitements">Autres Traitements:</label>
+                        <textarea id="autresTraitements" name="traitement.autres"></textarea>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="border p-3 rounded-3 border-primary">
+                <div class="row">
+                    <h5 class="text-center">Modalité Évolutive en hospitalisation:</h5>
+                    <div class="col text-center">
+                        <label for="modaliteEvolutive">defavorable</label>
+                        <input type="checkbox" (click)="openModal('modal15')" id="modaliteEvolutive" name="modaliteEvolutive">
+                        <app-modaliteevolution (emittedEvent)="checkboxState($event)"></app-modaliteevolution>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col"></div>
+                <div class="col">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal4')"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                </div>
+                <div class="col"></div>
+            </div>
+            
+        </form>
+    </div>
+</div>
+

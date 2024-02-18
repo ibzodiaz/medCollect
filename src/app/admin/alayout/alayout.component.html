@@ -1,0 +1,83 @@
+<div class='dashboard'>
+    <div class="dashboard-nav">
+        <header><a class="menu-toggle"><i class="fas fa-bars"></i></a>
+
+            <h3 class="m-0 text-primary"><i class="fa-solid fa-hand-holding-droplet"></i>&nbsp;MedCollect</h3>
+            
+            <!-- <p class="name-admin">Dr. Joe</p> -->
+        </header>
+
+        
+        <nav class="dashboard-nav-list">
+
+        <a [routerLink]="['dashboard']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-gauge-high"></i> Tableau de bord
+        </a>
+        
+        <a [routerLink]="['meetings']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-user-clock"></i> Rendez-vous
+        </a>
+
+        <a [routerLink]="['planning']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-regular fa-calendar-days"></i> Planning
+        </a>
+
+        <a [routerLink]="['patients/informations']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-users"></i> Patients
+        </a>
+
+
+        <a [routerLink]="['patients/dossiers']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-regular fa-folder-open"></i>&nbsp;Dossiers Patients
+        </a>
+        <a [routerLink]="['assistants']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-handshake-angle"></i>&nbsp;Assistants
+        </a>
+
+        <a [routerLink]="['doctor']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-file-signature"></i> Consultations
+        </a>
+
+        <a [routerLink]="['prescription']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-prescription-bottle-medical"></i> Ordonnances
+        </a>
+        
+        <a [routerLink]="['parametres']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-hourglass-half"></i> Salles d'attente </a>
+          
+        <a [routerLink]="['help']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-circle-info"></i> Aide ? </a>
+          
+        </nav>
+    </div>
+
+    
+    <div class='dashboard-app'>
+        <header class='dashboard-toolbar'>
+            <a class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </a>
+            <div class="go-left">
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" [routerLink]="['user']">Mon profil</a></li>
+                      <li><a class="dropdown-item" [routerLink]="['parametres']">Paramètres</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" (click)="logout()">Déconnexion</a></li>
+                    </ul>
+                </div>
+        
+                <!-- <a (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></a> -->
+        
+            </div>
+            
+        </header>
+        <div class='dashboard-content'>
+            <div class='container'>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

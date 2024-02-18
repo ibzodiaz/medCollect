@@ -1,0 +1,147 @@
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <h4>Signes Cliniques</h4>
+
+        <!-- Formulaire -->
+        <form id="signesCliniquesForm" #f="ngForm" (ngSubmit)="onSubmit()" data-modal-id="2">
+            <!-- Groupe Dyspnée d'Effort -->
+            <div class="border border-primary rounded-3 p-3">
+                <div class="row mb-3">
+                    <div class="col-md-3 text-center">
+                        <label>Dyspnée d'Effort:</label>
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <input type="radio" [(ngModel)]="cliniquesForm.dyspneeEffort.presente" [value]="true" name="dyspneeEffort.presente">OUI
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <input type="radio" [(ngModel)]="cliniquesForm.dyspneeEffort.presente" [value]="false" name="dyspneeEffort.presente">NON
+                                </label>
+                            </div>
+                            <div *ngIf="cliniquesForm.dyspneeEffort.presente" class="col">
+                                <button class="c-button" (click)="openModal('modal10',$event)"><i class="fa-regular fa-pen-to-square"></i></button>
+                            </div>
+                        </div>
+                        <app-dyspnee></app-dyspnee>
+                    </div>
+                    
+
+                    <div class="col text-center">
+                        <label for="touxPresente">Toux:</label>
+                        <input type="checkbox" id="touxPresente" name="toux.presente" [(ngModel)]="cliniquesForm.toux.presente">        
+                    </div>
+
+                    <div class="col text-center">
+                        <label for="palpitationsPresente">Palpitations:</label>
+                        <input type="checkbox" id="palpitationsPresente" name="palpitations.presente" [(ngModel)]="cliniquesForm.palpitations.presente">        
+                    </div>
+
+                    <div class="col text-center">
+                        <label for="omiPresente">OMI:</label>
+                        <input type="checkbox" id="omiPresente" name="omi.presente" [(ngModel)]="cliniquesForm.omi.presente">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Groupe Constantes -->
+            <div class="border border-primary rounded-3 p-3">
+                <h5 class="text-center">Constantes</h5>
+                <div class="row  mb-3">
+
+                    <div class="col text-center">
+                        <label for="taSystolique">TA Systolique:</label>
+                        <input type="number" id="taSystolique" name="constantes.ta.systolique" [(ngModel)]="cliniquesForm.constantes.ta.systolique">        
+                    </div>
+                    
+                    <div class="col text-center">
+                        <label for="taDiastolique">TA Diastolique:</label>
+                        <input type="number" id="taDiastolique" name="constantes.ta.diastolique" [(ngModel)]="cliniquesForm.constantes.ta.diastolique">
+                    </div>
+                    
+                    <div class="col text-center">
+                        <label for="fc">FC:</label>
+                        <input type="number" id="fc" name="constantes.fc" [(ngModel)]="cliniquesForm.constantes.fc">
+                    </div>
+                    <div class="col text-center">
+                        <label for="fr">FR:</label>
+                        <input type="number" id="fr" name="constantes.fr" [(ngModel)]="cliniquesForm.constantes.fr">
+                    </div>
+                
+                
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col text-center">
+                        <label for="temperature">Température:</label>
+                        <input type="number" id="temperature" name="constantes.temperature" [(ngModel)]="cliniquesForm.constantes.temperature">
+                    </div>
+                    <div class="col text-center">
+                        <label for="poids">Poids:</label>
+                        <input type="number" id="poids" name="constantes.poids" [(ngModel)]="cliniquesForm.constantes.poids" (input)="calculateIMC()">
+                    </div>
+                    <div class="col text-center">
+                        <label for="taille">Taille:</label>
+                        <input type="number" id="taille" name="constantes.taille" [(ngModel)]="cliniquesForm.constantes.taille" (input)="calculateIMC()">
+                    </div>
+                    <div class="col text-center">
+                        <label for="imc">IMC:</label>
+                        <input type="number" id="imc" name="constantes.imc" [(ngModel)]="cliniquesForm.constantes.imc">
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="border border-primary rounded-3 p-3">
+                <!-- Groupe TSVJ -->
+                <div class="row  mb-3">
+                    <div class="col text-center">
+                        <label for="souffleCardiaquePresente">Souffle Cardiaque:</label>
+                        
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <input type="radio" [(ngModel)]="cliniquesForm.souffleCardiaque.presente" [value]="true" name="souffleCardiaque.presente">OUI
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <input type="radio" [(ngModel)]="cliniquesForm.souffleCardiaque.presente" [value]="false" name="souffleCardiaque.presente">NON
+                                </label>
+                            </div>
+                            <div *ngIf="cliniquesForm.souffleCardiaque.presente" class="col">
+                                <button class="c-button" (click)="openModal('modal11',$event)"><i class="fa-regular fa-pen-to-square"></i></button>
+                            </div>
+                        </div>
+                        <app-cardio></app-cardio>
+                    </div>
+
+                    
+                    <div class="col text-center">
+                        <label for="tsvjPresente">TSVJ:</label>
+                        <input type="checkbox" id="tsvjPresente" name="tsvj.presente" [(ngModel)]="cliniquesForm.tsvj.presente">
+                    </div>
+
+                    <div class="col text-center">
+                        <label for="hepatomegaliePresente">Hépatomégalie:</label>
+                        <input type="checkbox" id="hepatomegaliePresente" name="hepatomegalie.presente" [(ngModel)]="cliniquesForm.hepatomegalie.presente">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col"></div>
+                <div class="col">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal3',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                </div>
+                <div class="col"></div>
+            </div>
+            
+        </form>
+    </div>
+</div>

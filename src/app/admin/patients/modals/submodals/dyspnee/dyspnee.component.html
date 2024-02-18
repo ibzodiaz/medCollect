@@ -1,0 +1,35 @@
+<div id="modal10" class="modal">
+    <div class="modal-content">
+        <form name="dyspnee" (ngSubmit)="onSubmit()">
+            <div class="row text-center mb-3">
+                <div class="col">
+                    <label for="typeNYHA">Type NYHA:</label>
+                    <select id="typeNYHA" name="dyspneeEffort.typeNYHA" [(ngModel)]="dyspneeForm.dyspneeEffort.typeNYHA">
+                        <option value="Type I">Type I</option>
+                        <option value="Type II">Type II</option>
+                        <option value="Type III">Type III</option>
+                        <option value="Type IV">Type IV</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <label for="oedemeAiguPoumonPresente">Œdème Aigu du Poumon:</label>
+                    <input type="checkbox" id="oedemeAiguPoumonPresente" name="oedemeAiguPoumon.presente" [(ngModel)]="dyspneeForm.oedemeAiguPoumon.presente">        
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><span>Enregistrer</span></button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary rounded-0" (click)="closeModal('modal10',$event)">Fermer</button>
+                </div>
+
+            </div>
+        </form>
+        
+    </div>
+</div>

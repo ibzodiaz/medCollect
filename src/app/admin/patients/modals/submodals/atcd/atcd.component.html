@@ -1,0 +1,38 @@
+<div id="modal7" class="modal">
+    <div class="modal-content">
+        <form name="atcdForm" #f="ngForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="nombreAtcdDecompensation">Nombre:</label>
+                    <input type="number" id="nombreAtcdDecompensation" name="nombreAtcdDecompensation" [(ngModel)]="atcdForm.nombreAtcdDecompensation">
+                </div>
+
+            
+            </div>
+
+            <div class="row  mb-3">
+                <div class="col">
+                    <label for="typeInsuffisanceCardiaque">Type Insuffisance Cardiaque:</label>
+                    <select id="typeInsuffisanceCardiaque" name="atcdDecompensation.typeInsuffisanceCardiaque" [(ngModel)]="atcdForm.typeInsuffisanceCardiaque">
+                        <option value=""></option>
+                        <option value="IVG">IVG</option>
+                        <option value="IVD">IVD</option>
+                        <option value="ICG">ICG</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-md-3">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><span>Enregistrer</span></button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal7',$event)">Fermer</button>
+                </div>
+                <div class="col"></div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div id="modal15" class="modal">
+    <div class="modal-content">
+
+        <div class="row mb-3 border border-primary p-3 rounded-3">
+            <h5 class="text-center">Aspects Défavorables:</h5>
+            <div class="col text-center">
+                <textarea id="aspectsDefavorables" name="aspectsDefavorables"></textarea>
+            </div>
+        </div>
+
+        
+        <div class="row mb-3 border border-primary p-3 rounded-3">
+            <h5>Complications:</h5>
+            <div class="col-md-3 mb-3" *ngFor="let option of ['AVC', 'IVG', 'IVD', 'ICG','TDR','TDC', 'Péricardite', 'Insuffisance Coronarienne', 'Acc. Embolique','Néphropathie','Abcès Splénique']">
+                <label> {{ option }}</label>
+                <input type="checkbox" [value]="option" (change)="onCheckboxChange($event)">
+               
+            </div>
+
+            <div class="col">
+                <label>Autres</label>
+                <textarea></textarea>
+            </div>
+        </div>
+
+
+        <div class="row mb-3 border border-primary p-3 rounded-3">
+            <h5 class="text-center">Délai de Décès (en jours):</h5>
+            <div class="col text-center">
+                <input type="number" id="delaiDeces" name="delaiDeces">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-md-3">
+                <!-- Bouton Enregistrer -->
+                <button type="submit"><span>Enregistrer</span></button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal15')">Fermer</button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div id="modal12" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            
+            <div class="col text-center">
+                <label for="indexCardiothoracique">Index cardiothoracique (%):</label>
+                <input type="text" id="indexCardiothoracique" name="indexCardiothoracique">        
+            </div>
+            <div class="col text-center">
+                <label for="autresSignes">Autres Signes:</label>
+                <textarea id="autresSignes" name="autresSignes"></textarea>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Bouton Enregistrer -->
+                <button type="submit"><span>Enregistrer</span></button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-secondary rounded-0" (click)="closeModal('modal12')">Fermer</button>
+            </div>
+
+        </div>
+    </div>
+</div>
