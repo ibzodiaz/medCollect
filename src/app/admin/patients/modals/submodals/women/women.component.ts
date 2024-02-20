@@ -9,7 +9,54 @@ export class WomenComponent {
 
   constructor() {}
 
+  options:String[] =  ['Récupération totale', 'Récupération partielle','État stationnaire', 'Dégradation de la qualité de vie'];
+
   decesCanceled:boolean = false;
+
+  womenForm:any = {
+    patientId: '',
+    evolutionApresSortie: '',
+    classeNYHA: '',
+    detailsDeces: {
+       date: '',
+       causes: '',
+       lieu: ''
+    },
+    bonneObservanceTherapeutique: false,
+    nombreRehospitalisations: 0,
+    facteursDecompensation: {
+      anemie: false,
+      infectionsVirales: false,
+      infectionsBacteriennes: false,
+      denutrition: false,
+      rupturesTherapeutiques: false
+    },
+    echocardiographie: {
+      DTDVG: '',
+      DTSVG: '',
+      FEVG: '',
+      FR: '', 
+      e: '',
+      a: '',
+      td: '',
+      ee: '',
+      tapse: '',
+      dtog:''
+    },
+    biologie: {
+      hemoglobinemie: 0,
+      gb: 0,
+      plaquettes: 0,
+      vgm: 0,
+      ccmh: 0,
+      tcmh: 0,
+      crp: 0,
+      uree: 0,
+      creatininemie: 0,
+      ntProBNP: 0,
+      prolactine: 0
+    }
+  }
 
   ngOnInit(): void {}
 

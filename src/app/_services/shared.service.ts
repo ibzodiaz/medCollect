@@ -11,6 +11,10 @@ export class SharedService {
   hospitalisation:any;
   cardio:any;
   dyspnee:any;
+  telecoeur:any;
+  ecg:any;
+  ett:any;
+  evolution:any;
 
   setterATCD(atcd:any){
     this.atcd = atcd;
@@ -42,5 +46,38 @@ export class SharedService {
 
   getterDyspnee():any{
     return this.dyspnee;
+  }
+
+  
+  setterTelecoeur(telecoeur:any){
+    this.telecoeur = telecoeur;
+  }
+
+  getterTelecoeur():any{
+    return this.telecoeur;
+  }
+    
+  setterEcg(ecg:any){
+    this.ecg = ecg;
+  }
+
+  getterEcg():any{
+    return this.ecg;
+  }
+
+  setterEtt(ett:any){
+    this.ett = ett;
+  }
+
+  getterEtt():any{
+    return this.ett;
+  }
+
+  setterEvolution(evolution:any){
+    this.evolution = evolution;
+  }
+
+  getterEvolution():any{
+    return this.evolution;
   }
 }

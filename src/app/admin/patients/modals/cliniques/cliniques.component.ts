@@ -109,17 +109,23 @@ export class CliniquesComponent {
     if(this.cliniquesForm.souffleCardiaque.presente){
       this.cliniquesForm.souffleCardiaque.typeSouffle = this.sharedService.getterCardio().souffleCardiaque.typeSouffle;
     }
+    else
+    {
+      this.cliniquesForm.souffleCardiaque.typeSouffle = [];
+    }
  
     if(this.cliniquesForm.dyspneeEffort.presente){
       this.cliniquesForm.dyspneeEffort.typeNYHA = this.sharedService.getterDyspnee().dyspneeEffort.typeNYHA;
       this.cliniquesForm.oedemeAiguPoumon.presente = this.sharedService.getterDyspnee().oedemeAiguPoumon.presente;  
     }
-
-    //console.log(JSON.stringify(this.cliniquesForm));
+    else
+    {
+      this.cliniquesForm.dyspneeEffort.typeNYHA = '';
+      this.cliniquesForm.oedemeAiguPoumon.presente = false;
+    }
 
     if(this.patientExists){
-      alert(this.patientId)
-      alert(JSON.stringify(this.cliniquesForm));
+
       this.cliniquesService.updateClinicSigns(this.patientId,this.cliniquesForm).subscribe(
         (success:any)=>{
           alert("modification réussie!");

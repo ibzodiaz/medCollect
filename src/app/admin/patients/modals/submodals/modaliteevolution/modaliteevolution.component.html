@@ -1,46 +1,77 @@
 <div id="modal15" class="modal">
     <div class="modal-content">
+        <form name="evolution" (ngSubmit)="onSubmitEvolution()">
 
-        <div class="row mb-3 border border-primary p-3 rounded-3">
             <h5 class="text-center">Aspects Défavorables:</h5>
-            <div class="col text-center">
-                <textarea id="aspectsDefavorables" name="aspectsDefavorables"></textarea>
-            </div>
-        </div>
+            <div class="row">
+                <div class="col">
+                    <label>Complications</label>
+                    <div class="row">
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="complications" [value]="true" [(ngModel)]="modeliteevolutionForm.aspectsDefavorables.complications">OUI
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="complications" [value]="false" [(ngModel)]="modeliteevolutionForm.aspectsDefavorables.complications">NON
+                            </label>
+                        </div>
+                    </div>
 
-        
-        <div class="row mb-3 border border-primary p-3 rounded-3">
-            <h5>Complications:</h5>
-            <div class="col-md-3 mb-3" *ngFor="let option of ['AVC', 'IVG', 'IVD', 'ICG','TDR','TDC', 'Péricardite', 'Insuffisance Coronarienne', 'Acc. Embolique','Néphropathie','Abcès Splénique']">
-                <label> {{ option }}</label>
-                <input type="checkbox" [value]="option" (change)="onCheckboxChange($event)">
-               
+                </div>
+                <div class="col">
+                    <label>Décès</label>
+                    <div class="row">
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="deces" [value]="true" [(ngModel)]="modeliteevolutionForm.aspectsDefavorables.deces">OUI
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="deces" [value]="false" [(ngModel)]="modeliteevolutionForm.aspectsDefavorables.deces">NON
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col">
-                <label>Autres</label>
-                <textarea></textarea>
+            <div *ngIf="modeliteevolutionForm.aspectsDefavorables.complications" class="row mb-3 border border-primary p-3 rounded-3">
+                <h5>Complications:</h5>
+                <div class="col-md-3 mb-3" *ngFor="let option of ['AVC', 'IVG', 'IVD', 'ICG','TDR','TDC', 'Péricardite', 'Insuffisance Coronarienne', 'Acc. Embolique','Néphropathie','Abcès Splénique']">
+                    <label> {{ option }}</label>
+                    <input type="checkbox" [value]="option" [checked]="modeliteevolutionForm.typeComplications.includes(option)" (change)="onCheckboxChange(option)">
+                
+                </div>
+
+                <div class="col">
+                    <label>Autres</label>
+                    <textarea name="autres" [(ngModel)]="modeliteevolutionForm.autres"></textarea>
+                </div>
             </div>
-        </div>
 
 
-        <div class="row mb-3 border border-primary p-3 rounded-3">
-            <h5 class="text-center">Délai de Décès (en jours):</h5>
-            <div class="col text-center">
-                <input type="number" id="delaiDeces" name="delaiDeces">
+            <div *ngIf="modeliteevolutionForm.aspectsDefavorables.deces" class="row mb-3 border border-primary p-3 rounded-3">
+                <h5 class="text-center">Délai de Décès (en jours):</h5>
+                <div class="col-md-3"></div>
+                <div class="col">
+                    <input type="number" id="delaiDeces" name="delaiDeces" [(ngModel)]="modeliteevolutionForm.delaiDeces">
+                </div>
+                <div class="col-md-3"></div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-md-3">
-                <!-- Bouton Enregistrer -->
-                <button type="submit"><span>Enregistrer</span></button>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-md-3">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><span>Enregistrer</span></button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal15')">Fermer</button>
+                </div>
+                <div class="col"></div>
             </div>
-            <div class="col-md-3">
-                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal15')">Fermer</button>
-            </div>
-            <div class="col"></div>
-        </div>
+        </form>
     </div>
 </div>

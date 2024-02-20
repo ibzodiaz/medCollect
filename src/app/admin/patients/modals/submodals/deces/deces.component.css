@@ -100,11 +100,6 @@ textarea {
     }
 }
 
-/* Applique l'animation uniquement lorsqu'on focus sur l'input */
-input:focus,
-textarea:focus {
-    animation: inputAnimation 0.5s forwards; /* forwards pour conserver l'état final de l'animation */
-}
 
 
 .checkbox-container {

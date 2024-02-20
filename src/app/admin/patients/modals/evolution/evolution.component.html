@@ -8,14 +8,28 @@
             <div class="row text-center">
                 <div class="col">
                     <div class="border border-primary rounded-3">
-                        <label for="women">Femmes</label>
-                        <input type="checkbox" id="women" (click)="openModal('modal16')" name="women">
+                        <label for="women">Mère</label>
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <input type="radio" [value]="true" name="women">OUI
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <input type="radio" [value]="false" name="women">NON
+                                </label>
+                            </div>
+                            <div class="col">
+                                <button (click)="openModal('modal16')" >Open</button>
+                            </div>
+                        </div>
                         <app-women (emittedEvent)="checkboxState($event)"></app-women>
                     </div>
                 </div>
                 <div class="col">
                     <div class="border border-primary rounded-3">
-                        <label for="baby">Bébés</label>
+                        <label for="baby">Enfant</label>
                         <input type="checkbox" (click)="openModal('modal17')" id="baby" name="baby">
                         <app-babies (emittedEvent)="checkboxState($event)"></app-babies>
                     </div>

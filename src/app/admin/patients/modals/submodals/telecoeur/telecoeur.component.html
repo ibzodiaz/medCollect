@@ -1,27 +1,29 @@
 <div id="modal12" class="modal">
     <div class="modal-content">
-        <div class="row">
-            
-            <div class="col text-center">
-                <label for="indexCardiothoracique">Index cardiothoracique (%):</label>
-                <input type="text" id="indexCardiothoracique" name="indexCardiothoracique">        
-            </div>
-            <div class="col text-center">
-                <label for="autresSignes">Autres Signes:</label>
-                <textarea id="autresSignes" name="autresSignes"></textarea>
+        <form name="telecoeur" (ngSubmit)="onSubmitTelecoeur()">
+            <div class="row">
+                
+                <div class="col text-center">
+                    <label for="indexCardiothoracique">Index cardiothoracique (%):</label>
+                    <input type="text" id="indexCardiothoracique" name="indexCardiothoracique" [(ngModel)]="telecoeurForm.indexCardiothoracique">        
+                </div>
+                <div class="col text-center">
+                    <label for="autresSignes">Autres Signes:</label>
+                    <textarea id="autresSignes" name="autresSignes" [(ngModel)]="telecoeurForm.autresSignes"></textarea>
+                </div>
+
             </div>
 
-        </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><span>Enregistrer</span></button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary rounded-0" (click)="closeModal('modal12',$event)">Fermer</button>
+                </div>
 
-        <div class="row">
-            <div class="col-md-3">
-                <!-- Bouton Enregistrer -->
-                <button type="submit"><span>Enregistrer</span></button>
             </div>
-            <div class="col-md-3">
-                <button class="btn btn-secondary rounded-0" (click)="closeModal('modal12')">Fermer</button>
-            </div>
-
-        </div>
+        </form>
     </div>
 </div>

@@ -4,7 +4,7 @@
         <h4>Signes Paracliniques</h4>
 
         <!-- Formulaire -->
-        <form id="signesParacliniquesForm" data-modal-id="3">
+        <form id="signesParacliniquesForm" (ngSubmit)="onSubmit()" data-modal-id="3">
             
             <div class="border p-3 rounded-3 border-primary">
                 <div class="row">
@@ -14,15 +14,15 @@
                         <div class="row">
                             <div class="col">
                                 <label for="hemoglobinemie">Hémoglobinémie:</label>
-                                <input type="text" id="hemoglobinemie" name="hemoglobinemie">
+                                <input type="text" id="hemoglobinemie" name="hemoglobinemie" [(ngModel)]="paracliniquesForm.biologie.hemoglobinemie">
                             </div>
                             <div class="col">
                                 <label for="gb">GB:</label>
-                                <input type="text" id="gb" name="gb">                
+                                <input type="text" id="gb" name="gb" [(ngModel)]="paracliniquesForm.biologie.gb">                
                             </div>
                             <div class="col">
                                 <label for="plaquettes">Plaquettes:</label>
-                                <input type="text" id="plaquettes" name="plaquettes">                
+                                <input type="text" id="plaquettes" name="plaquettes" [(ngModel)]="paracliniquesForm.biologie.plaquettes">                
                             </div>
                            
                         
@@ -32,42 +32,42 @@
                             <div class="col">
                                                         
                                 <label for="vgm">VGM:</label>
-                                <input type="text" id="vgm" name="vgm">
+                                <input type="text" id="vgm" name="vgm" [(ngModel)]="paracliniquesForm.biologie.vgm">
 
                             </div>
                             <div class="col">
                                 <label for="ccmh">CCMH:</label>
-                                <input type="text" id="ccmh" name="ccmh">
+                                <input type="text" id="ccmh" name="ccmh" [(ngModel)]="paracliniquesForm.biologie.ccmh">
                             </div>
                             <div class="col">
-                                <label for="tmch">TMCH:</label>
-                                <input type="text" id="tmch" name="tmch">                
+                                <label for="tcmh">TCMH:</label>
+                                <input type="text" id="tcmh" name="tcmh" [(ngModel)]="paracliniquesForm.biologie.tcmh">                
                             </div>
                            
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label for="crp">CRP:</label>
-                                <input type="text" id="crp" name="crp">                
+                                <input type="text" id="crp" name="crp" [(ngModel)]="paracliniquesForm.biologie.crp">                
                             </div>
                             <div class="col">
                                 <label for="uree">Urée:</label>
-                                <input type="text" id="uree" name="uree">                
+                                <input type="text" id="uree" name="uree" [(ngModel)]="paracliniquesForm.biologie.uree">                
                             </div>
                             <div class="col">
                                 <label for="creatininemie">Créatininémie:</label>
-                                <input type="text" id="creatininemie" name="creatininemie">                
+                                <input type="text" id="creatininemie" name="creatininemie" [(ngModel)]="paracliniquesForm.biologie.creatininemie">                
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
                                 <label for="ntProBNP">NT pro BNP:</label>
-                                <input type="text" id="ntProBNP" name="ntProBNP">                
+                                <input type="text" id="ntProBNP" name="ntProBNP" [(ngModel)]="paracliniquesForm.biologie.ntProBNP">                
                             </div>
                             <div class="col">
                                 <label for="prolactine">Prolactine:</label>
-                                <input type="text" id="prolactine" name="prolactine">                
+                                <input type="text" id="prolactine" name="prolactine" [(ngModel)]="paracliniquesForm.biologie.prolactine">                
                             </div>
                             <div class="col"></div>
                         </div>
@@ -81,20 +81,65 @@
                     <div class="col">
                         <div class="text-center">
                             <label for="telecoeurPresent" class="text-center">Télécoeur:</label>
-                            <input type="checkbox" (click)="openModal('modal12')" id="telecoeurPresent" name="telecoeur.present" required>
-                            <app-telecoeur (emittedEvent)="checkboxState($event)"></app-telecoeur>
+                            <div class="row">
+                                <div class="col">
+                                    <label>
+                                        <input type="radio" name="telecoeur.presente" [value]="true" [(ngModel)]="paracliniquesForm.telecoeur.presente">OUI
+                                    </label>
+                                </div>
+                                <div class="col">
+                                    <label>
+                                        <input type="radio" name="telecoeur.presente" [value]="false" [(ngModel)]="paracliniquesForm.telecoeur.presente">NON
+                                    </label>
+                                </div>
+                                <div class="col" *ngIf="paracliniquesForm.telecoeur.presente">
+                                    <button (click)="openModal('modal12',$event)" class="c-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                                </div>
+                            </div>
+                            
+                            <app-telecoeur></app-telecoeur>
                         </div>
                     </div>
                     <div class="col text-center">
                         <label for="ecgPresent">ECG:</label>
-                        <input type="checkbox" (click)="openModal('modal13')" id="ecgPresent" name="ecg.present" required>
-                        <app-ecg (emittedEvent)="checkboxState($event)"></app-ecg>
+
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <input type="radio" name="ecg.presente" [value]="true" [(ngModel)]="paracliniquesForm.ecg.presente">OUI
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <input type="radio" name="ecg.presente" [value]="false" [(ngModel)]="paracliniquesForm.ecg.presente">NON
+                                </label>
+                            </div>
+                            <div class="col" *ngIf="paracliniquesForm.ecg.presente">
+                                <button (click)="openModal('modal13',$event)" class="c-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                            </div>
+                        </div>
+                        <app-ecg></app-ecg>
                     </div>
 
                     <div class="col text-center">
                         <label for="ettPresent">ETT:</label>
-                        <input type="checkbox" (click)="openModal('modal14')" id="ettPresent" name="ett.present" required>
-                        <app-ett (emittedEvent)="checkboxState($event)"></app-ett>
+
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <input type="radio" name="ett.presente" [value]="true" [(ngModel)]="paracliniquesForm.ett.presente">OUI
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <input type="radio" name="ett.presente" [value]="false" [(ngModel)]="paracliniquesForm.ett.presente">NON
+                                </label>
+                            </div>
+                            <div class="col" *ngIf="paracliniquesForm.ett.presente">
+                                <button (click)="openModal('modal14',$event)" class="c-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                            </div>
+                        </div>
+                        <app-ett></app-ett>
                     </div>
                 
                 </div>
@@ -105,42 +150,42 @@
                     <h5 class="text-center">Traitement</h5>
                     <div class="col text-center">
                         <label for="diuretique">Diurétique:</label>
-                        <input type="checkbox" id="diuretique" name="traitement.diuretique">
+                        <input type="checkbox" id="diuretique" name="traitement.diuretique" [(ngModel)]="paracliniquesForm.traitement.diuretique">
                     </div>
                     <div class="col text-center">
                         <label for="iec">IEC:</label>
-                        <input type="checkbox" id="iec" name="traitement.iec">
+                        <input type="checkbox" id="iec" name="traitement.iec" [(ngModel)]="paracliniquesForm.traitement.iec">
                     </div>
                     <div class="col text-center">
                         <label for="tonicardiaque">Tonicardiaque:</label>
-                        <input type="checkbox" id="tonicardiaque" name="traitement.tonicardiaque">
+                        <input type="checkbox" id="tonicardiaque" name="traitement.tonicardiaque" [(ngModel)]="paracliniquesForm.traitement.tonicardiaque">
                     </div>
                     
                 </div>
                 <div class="row">
                     <div class="col text-center">
                         <label for="bromocriptine">Bromocriptine:</label>
-                        <input type="checkbox" id="bromocriptine" name="traitement.bromocriptine">                
+                        <input type="checkbox" id="bromocriptine" name="traitement.bromocriptine" [(ngModel)]="paracliniquesForm.traitement.bromocriptine">                
                     </div>
                     <div class="col text-center">
                         <label for="anticoagulants">Anticoagulants:</label>
-                        <input type="checkbox" id="anticoagulants" name="traitement.anticoagulants">
+                        <input type="checkbox" id="anticoagulants" name="traitement.anticoagulants" [(ngModel)]="paracliniquesForm.traitement.anticoagulants">
                     </div>
                     <div class="col text-center">
                         <label for="betabloquants">Betabloquants:</label>
-                        <input type="checkbox" id="betabloquants" name="traitement.betabloquants">
+                        <input type="checkbox" id="betabloquants" name="traitement.betabloquants" [(ngModel)]="paracliniquesForm.traitement.betabloquants">
                     </div>
                     
                 </div>
                 <div class="row">
                     <div class="col-md-4 text-center">
                         <label for="contraception">Contraception:</label>
-                        <input type="checkbox" id="contraception" name="traitement.contraception">
+                        <input type="checkbox" id="contraception" name="traitement.contraception" [(ngModel)]="paracliniquesForm.traitement.contraception">
                     </div>
                     <div class="col"></div>
                     <div class="col">
                         <label for="autresTraitements">Autres Traitements:</label>
-                        <textarea id="autresTraitements" name="traitement.autres"></textarea>
+                        <textarea id="autresTraitements" name="traitement.autres" [(ngModel)]="paracliniquesForm.traitement.autres"></textarea>
                     </div>
                 </div>
             </div>
@@ -149,9 +194,23 @@
                 <div class="row">
                     <h5 class="text-center">Modalité Évolutive en hospitalisation:</h5>
                     <div class="col text-center">
-                        <label for="modaliteEvolutive">defavorable</label>
-                        <input type="checkbox" (click)="openModal('modal15')" id="modaliteEvolutive" name="modaliteEvolutive">
-                        <app-modaliteevolution (emittedEvent)="checkboxState($event)"></app-modaliteevolution>
+                        <label>Défavorable</label>
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <input type="radio" name="modaliteEvolutiveHospitalisation.presente" [value]="true" [(ngModel)]="paracliniquesForm.modaliteEvolutiveHospitalisation.presente">OUI
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <input type="radio" name="modaliteEvolutiveHospitalisation.presente" [value]="false" [(ngModel)]="paracliniquesForm.modaliteEvolutiveHospitalisation.presente">NON
+                                </label>
+                            </div>
+                            <div class="col" *ngIf="paracliniquesForm.modaliteEvolutiveHospitalisation.presente">
+                                <button (click)="openModal('modal15',$event)" class="c-button"><i class="fa-regular fa-pen-to-square"></i></button>
+                            </div>
+                        </div>
+                        <app-modaliteevolution></app-modaliteevolution>
                     </div>
                 </div>
             </div>
@@ -163,7 +222,7 @@
                     <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
                 </div>
                 <div class="col">
-                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal4')"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal4',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
                 </div>
                 <div class="col"></div>
             </div>
