@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EvolutionService } from 'src/app/_services/evolution.service';
 import { SharedService } from 'src/app/_services/shared.service';
 
 @Component({
@@ -9,57 +11,98 @@ import { SharedService } from 'src/app/_services/shared.service';
 export class WomenComponent {
 
   constructor(
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    private route:ActivatedRoute,
+    private evolutionService:EvolutionService
   ) {}
 
-  womenForm:any = {
-    mere:{
-      evolutionApresSortie: '',
-      classeNYHA: '',
-      detailsDeces: {
-        presente: false,
-        date: '',
-        causes: '',
-        lieu: ''
-      },
-      bonneObservanceTherapeutique: false,
-      nombreRehospitalisations: 0,
-      facteursDecompensation: {
-         anemie: false,
-         infectionsVirales: false,
-         infectionsBacteriennes: false,
-         denutrition: false,
-         rupturesTherapeutiques: false
-      },
-      echocardiographie: {
-         dtdvg: '',
-         dtsvg: '',
-         fevg: '',
-         fr: '', 
-         e: '',
-         a: '',
-         td: '',
-         ee: '',
-         tapse: '',
-         dtog:''
-      },
-      biologie: {
-         hemoglobinemie: 0,
-         gb: 0,
-         plaquettes: 0,
-         vgm: 0,
-         ccmh: 0,
-         tcmh: 0,
-         crp: 0,
-         uree: 0,
-         creatininemie: 0,
-         ntProBNP: 0,
-         prolactine: 0
-      }
-   }
+  PatientId:string='';
+
+  womenForm:any = {};
+
+  initForm(){
+    
+    this.womenForm = {
+      mere:{
+        evolutionApresSortie: '',
+        classeNYHA: '',
+        detailsDeces: {
+          presente: false,
+          date: '',
+          causes: '',
+          lieu: ''
+        },
+        bonneObservanceTherapeutique: false,
+        nombreRehospitalisations: 0,
+        facteursDecompensation: {
+          anemie: false,
+          infectionsVirales: false,
+          infectionsBacteriennes: false,
+          denutrition: false,
+          rupturesTherapeutiques: false
+        },
+        echocardiographie: {
+          dtdvg: '',
+          dtsvg: '',
+          fevg: '',
+          fr: '', 
+          e: '',
+          a: '',
+          td: '',
+          ee: '',
+          tapse: '',
+          dtog:''
+        },
+        biologie: {
+          hemoglobinemie: 0,
+          gb: 0,
+          plaquettes: 0,
+          vgm: 0,
+          ccmh: 0,
+          tcmh: 0,
+          crp: 0,
+          uree: 0,
+          creatininemie: 0,
+          ntProBNP: 0,
+          prolactine: 0
+        }
+    }
+    }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initForm();
+    this.updateFormWithPatientData();
+  }
+
+  updateFormWithPatientData(){
+    this.route.queryParamMap.subscribe((queryParams:any) => {
+ 
+      if (queryParams.has('patientId')) {
+        this.PatientId = queryParams.get('patientId');
+
+        this.evolutionService.getEvolutionByPatientId(this.PatientId).subscribe(
+          (women: any) => {
+
+            this.womenForm = {...women};
+            console.log(this.womenForm)
+            this.sharedService.setterWomen(this.womenForm);
+            
+          },
+          (err: any) => {
+            if (err.status === undefined) {
+              this.initForm();
+
+            } else {
+              alert(err.status);
+              console.error(err);
+            }
+          }
+        );
+      }
+    });
+    
+  }
 
   onSubmit(){
 
@@ -74,7 +117,8 @@ export class WomenComponent {
       this.womenForm.mere.detailsDeces.causes  = ''
       this.womenForm.mere.detailsDeces.lieu  = ''
     }
-    //console.log(this.womenForm);
+
+    console.log(this.womenForm)
     this.sharedService.setterWomen(this.womenForm);
   }
 

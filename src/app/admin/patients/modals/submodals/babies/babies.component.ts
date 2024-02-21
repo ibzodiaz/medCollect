@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EvolutionService } from 'src/app/_services/evolution.service';
 import { SharedService } from 'src/app/_services/shared.service';
 
 @Component({
@@ -9,28 +11,67 @@ import { SharedService } from 'src/app/_services/shared.service';
 export class BabiesComponent {
 
   constructor(
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    private route:ActivatedRoute,
+    private evolutionService:EvolutionService
   ){}
 
-  babiesForm:any = {
-    enfant:{
-      evolutionBebe: {
-          mortNes: false,
-          faiblePoidsNaissance: false,
-          prematurite: false,
-          poidsNaissance: 0,
-          alimentationNaissance: '',
-          poids3Mois: 0,
-          alimentation3Mois: '',
-          poids6Mois: 0,
-          alimentation6Mois: '',
-          poids12Mois: 0,
-          alimentation12Mois: ''
+  PatientId:string='';
+  babiesForm:any ={};
+
+  initForm(){
+    this.babiesForm= {
+      enfant:{
+        evolutionBebe: {
+            mortNes: false,
+            faiblePoidsNaissance: false,
+            prematurite: false,
+            poidsNaissance: 0,
+            alimentationNaissance: '',
+            poids3Mois: 0,
+            alimentation3Mois: '',
+            poids6Mois: 0,
+            alimentation6Mois: '',
+            poids12Mois: 0,
+            alimentation12Mois: ''
+        }
       }
     }
   }
 
-  ngOnInit():void{}
+  ngOnInit():void{
+    this.initForm();
+    this.updateFormWithPatientData();
+  }
+
+  updateFormWithPatientData(){
+    this.route.queryParamMap.subscribe((queryParams:any) => {
+ 
+      if (queryParams.has('patientId')) {
+        this.PatientId = queryParams.get('patientId');
+
+        this.evolutionService.getEvolutionByPatientId(this.PatientId).subscribe(
+          (babies: any) => {
+
+            this.babiesForm = {...babies};
+            console.log(this.babiesForm)
+            this.sharedService.setterBabies(this.babiesForm);
+            
+          },
+          (err: any) => {
+            if (err.status === undefined) {
+              this.initForm();
+
+            } else {
+              alert(err.status);
+              console.error(err);
+            }
+          }
+        );
+      }
+    });
+    
+  }
   
   onSubmit(){
    
