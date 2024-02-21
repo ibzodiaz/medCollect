@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { SharedService } from 'src/app/_services/shared.service';
 
 @Component({
   selector: 'app-deces',
@@ -6,16 +7,31 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./deces.component.css']
 })
 export class DecesComponent {
-  decesCanceled: boolean = false;
-  
-  @Output() emittedEvent =  new EventEmitter<boolean>();
 
-  closeModal(modalId: string): void {
+  decesForm:any={
+    detailsDeces: {
+      date: '',
+      causes: '',
+      lieu: ''
+    }
+  }
+
+  constructor(
+    private sharedService:SharedService
+  ){}
+
+  ngOnInit():void{}
+
+  onSubmit(){
+    //alert(JSON.stringify(this.decesForm));
+    this.sharedService.setterDeces(this.decesForm);
+  }
+
+  closeModal(modalId: string,e:Event): void {
+    e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";
-      this.decesCanceled = true;
-      this.emittedEvent.emit(this.decesCanceled);
     }
   }
 

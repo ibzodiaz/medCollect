@@ -15,6 +15,9 @@ export class SharedService {
   ecg:any;
   ett:any;
   evolution:any;
+  deces:any;
+  women:any;
+  babies:any;
 
   setterATCD(atcd:any){
     this.atcd = atcd;
@@ -79,5 +82,29 @@ export class SharedService {
 
   getterEvolution():any{
     return this.evolution;
+  }
+  
+  setterDeces(deces:any){
+    this.deces = deces;
+  }
+
+  getterDeces():any{
+    return this.deces;
+  }
+
+  setterWomen(women:any){
+    this.women = women;
+  }
+
+  getterWomen():any{
+    return this.women;
+  } 
+
+  setterBabies(babies:any){
+    this.babies = babies;
+  }
+
+  getterBabies():any{
+    return this.babies;
   }
 }

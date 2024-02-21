@@ -1,37 +1,114 @@
 <div id="modal17" class="modal">
     <div class="modal-content">
-        <h5 class="text-center">Bébés</h5>
-        <div class="row border border-primary p-3 rounded-3 mb-3">
-            <div class="col text-center">
-                <label for="evolutionSortie">Évolution après la sortie:</label>
-                <select id="evolutionSortie" name="evolutionSortie">
-                    <option value="init">Poids du bébé à la naissance</option>
-                    <option value="3mois">3 mois</option>
-                    <option value="6mois">6 mois</option>
-                    <option value="12mois">12 mois</option>
-                </select>
-            </div>
-        </div>
+        <form name="babies" (ngSubmit)="onSubmit()">
+            <h5 class="text-center">Enfant</h5>
 
-        <div class="row border border-primary p-3 rounded-3 mb-3">
-            <div class="col mb-3" *ngFor="let option of ['Mort nés', 'faible poids de naissance', 'Prématurité']">
-                <label> {{ option }}</label>
-                <input type="checkbox" [value]="option" (change)="onCheckboxChange($event)">
+            <div class="row border border-primary p-3 rounded-3 mb-3">
+                <div class="col mb-3">
+                    <label>Mort nés</label>
+                    <div class="row">
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="mortNes" [(ngModel)]="babiesForm.enfant.evolutionBebe.mortNes" [value]="true">OUI
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="mortNes" [(ngModel)]="babiesForm.enfant.evolutionBebe.mortNes" [value]="false">NON
+                            </label>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="col mb-3">
+                    <label>faible poids de naissance</label>
+                    <div class="row">
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="faiblePoidsNaissance" [(ngModel)]="babiesForm.enfant.evolutionBebe.faiblePoidsNaissance" [value]="true">OUI
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="faiblePoidsNaissance" [(ngModel)]="babiesForm.enfant.evolutionBebe.faiblePoidsNaissance" [value]="false">NON
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-3">
+                    <label>Prématurité</label>
+                    <div class="row">
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="prematurite" [(ngModel)]="babiesForm.enfant.evolutionBebe.prematurite" [value]="true">OUI
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="prematurite" [(ngModel)]="babiesForm.enfant.evolutionBebe.prematurite" [value]="false">NON
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
-
             
-        </div>
+            <div *ngIf="!babiesForm.enfant.evolutionBebe.mortNes" class="row border border-primary p-3 rounded-3 mb-3">
+                <div class="col">
+                    <label for="evolutionSortie">Évolution après la sortie:</label>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Poids naissance</label>
+                            <input type="number" name="poidsNaissance" [(ngModel)]="babiesForm.enfant.evolutionBebe.poidsNaissance">
+                        </div>
+                        <div class="col">
+                            <label>Alimentation Naissance</label>
+                            <input type="text" name="alimentationNaissance" [(ngModel)]="babiesForm.enfant.evolutionBebe.alimentationNaissance">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Poids 3 mois</label>
+                            <input type="number" name="poids3Mois" [(ngModel)]="babiesForm.enfant.evolutionBebe.poids3Mois">
+                        </div>
+                        <div class="col">
+                            <label>Alimentation 3 mois</label>
+                            <input type="text" name="alimentation3Mois" [(ngModel)]="babiesForm.enfant.evolutionBebe.alimentation3Mois">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Poids 6 mois</label>
+                            <input type="number" name="poids6Mois" [(ngModel)]="babiesForm.enfant.evolutionBebe.poids6Mois">
+                        </div>
+                        <div class="col">
+                            <label>Alimentation 6 mois</label>
+                            <input type="text" name="alimentation6Mois" [(ngModel)]="babiesForm.enfant.evolutionBebe.alimentation6Mois">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Poids 12 mois</label>
+                            <input type="number" name="poids12Mois" [(ngModel)]="babiesForm.enfant.evolutionBebe.poids12Mois">
+                        </div>
+                        <div class="col">
+                            <label>Alimentation 12 mois</label>
+                            <input type="text" name="alimentation12Mois" [(ngModel)]="babiesForm.enfant.evolutionBebe.alimentation12Mois">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-md-3">
-                <!-- Bouton Enregistrer -->
-                <button type="submit"><span>Modifier</span></button>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-md-3">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><span>Enregistrer</span></button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal17',$event)">Fermer</button>
+                </div>
+                <div class="col"></div>
             </div>
-            <div class="col-md-3">
-                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal17')">Fermer</button>
-            </div>
-            <div class="col"></div>
-        </div>
+        </form>
     </div>
 </div>

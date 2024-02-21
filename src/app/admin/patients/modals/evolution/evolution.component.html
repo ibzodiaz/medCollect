@@ -4,7 +4,7 @@
         <h4>Évolution</h4>
 
         <!-- Formulaire -->
-        <form id="evolutionForm" data-modal-id="3">
+        <form id="evolutionForm" (ngSubmit)="onSubmit()" data-modal-id="3">
             <div class="row text-center">
                 <div class="col">
                     <div class="border border-primary rounded-3">
@@ -12,26 +12,40 @@
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <input type="radio" [value]="true" name="women">OUI
+                                    <input type="radio" [value]="true" name="women" [(ngModel)]="evolutionForm.mere.presente">OUI
                                 </label>
                             </div>
                             <div class="col">
                                 <label>
-                                    <input type="radio" [value]="false" name="women">NON
+                                    <input type="radio" [value]="false" name="women" [(ngModel)]="evolutionForm.mere.presente">NON
                                 </label>
                             </div>
-                            <div class="col">
-                                <button (click)="openModal('modal16')" >Open</button>
+                            <div class="col" *ngIf="evolutionForm.mere.presente">
+                                <button class="c-button" (click)="openModal('modal16',$event)" ><i class="fa-regular fa-pen-to-square"></i></button>
                             </div>
                         </div>
-                        <app-women (emittedEvent)="checkboxState($event)"></app-women>
+                        <app-women></app-women>
                     </div>
                 </div>
                 <div class="col">
                     <div class="border border-primary rounded-3">
                         <label for="baby">Enfant</label>
-                        <input type="checkbox" (click)="openModal('modal17')" id="baby" name="baby">
-                        <app-babies (emittedEvent)="checkboxState($event)"></app-babies>
+                        <div class="row">
+                            <div class="col">
+                                <label>
+                                    <input type="radio" [value]="true" name="baby" [(ngModel)]="evolutionForm.enfant.presente">OUI
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>
+                                    <input type="radio" [value]="false" name="baby" [(ngModel)]="evolutionForm.enfant.presente">NON
+                                </label>
+                            </div>
+                            <div class="col" *ngIf="evolutionForm.enfant.presente">
+                                <button class="c-button" (click)="openModal('modal17',$event)" ><i class="fa-regular fa-pen-to-square"></i></button>
+                            </div>
+                        </div>
+                        <app-babies></app-babies>
                     </div>
                 </div>
             </div>
@@ -43,7 +57,7 @@
                     <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
                 </div>
                 <div class="col">
-                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal6')"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal6',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
                 </div>
                 <div class="col"></div>
             </div>

@@ -1,33 +1,39 @@
 <div id="modal18" class="modal">
     <div class="modal-content">
-        <div class="row">
-            <div class="col text-center">
-                <label for="dateDeces">Date de décès:</label>
-                <input type="date" id="dateDeces" name="dateDeces">                           
+        <form name="deces" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col text-center">
+                    <label for="dateDeces">Date de décès:</label>
+                    <input type="date" id="dateDeces" name="dateDeces" [(ngModel)]="decesForm.detailsDeces.date">                           
+                </div>
+                    
+                <div class="col text-center">
+                    <label for="causesDeces">Causes du décès:</label>
+                    <input type="text" id="causesDeces" name="causesDeces" [(ngModel)]="decesForm.detailsDeces.causes">
+                    
+                </div>
+                <div class="col text-center">
+                    <label for="lieuDeces">Lieu du décès:</label>
+                    <select id="lieuDeces" name="lieuDeces" [(ngModel)]="decesForm.detailsDeces.lieu">
+                        <option value=""></option>
+                        <option value="hopital">hopital</option>
+                        <option value="domicile">domicile</option>
+                    </select>
+                </div>
             </div>
-                
-            <div class="col text-center">
-                <label for="causesDeces">Causes du décès:</label>
-                <input type="text" id="causesDeces" name="causesDeces">
-                
-            </div>
-            <div class="col text-center">
-                <label for="lieuDeces">Lieu du décès:</label>
-                <input type="text" id="lieuDeces" name="lieuDeces">
-            </div>
-        </div>
 
 
-        <div class="row mt-3">
-            <div class="col"></div>
-            <div class="col-md-3">
-                <!-- Bouton Enregistrer -->
-                <button type="submit"><span>Modifier</span></button>
+            <div class="row mt-3">
+                <div class="col"></div>
+                <div class="col-md-3">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><span>Enregistrer</span></button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal18',$event)">Fermer</button>
+                </div>
+                <div class="col"></div>
             </div>
-            <div class="col-md-3">
-                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal18')">Fermer</button>
-            </div>
-            <div class="col"></div>
-        </div>
+        </form>
     </div>
 </div>

@@ -1,232 +1,244 @@
 <div id="modal16" class="modal">
+
     <div class="modal-content">
-        <h5 class="text-center">Mère</h5>
+        <form name="women" (ngSubmit)="onSubmit()">
+            <h5 class="text-center">Mère</h5>
 
-        <div class="row mb-3">
-            <div class="col-md-4 border border-primary p-3 rounded-3 text-center">
-                <div class="row mt-5">
-                    <div class="col">
-                        <label for="evolutionSortie">Évolution après la sortie:</label>
-                        <select id="evolutionSortie" name="evolutionSortie">
-                            <option value=""></option>
-                            <option value="3mois">3 mois</option>
-                            <option value="6mois">6 mois</option>
-                            <option value="9mois">9 mois</option>
-                            <option value="12mois">12 mois</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            &nbsp;&nbsp;
-            <div class="col">
-                
-                <div class="row border border-primary p-3 rounded-3">
-                    <h6 class="text-center">Classe NYHA:</h6>
-                    <div class="col-md-7 mb-3">
-                        <label for="recuperation">Choisir une option :</label>
-                        <select id="recuperation" class="form-select">
-                        <option *ngFor="let option of options" [value]="option">{{ option }}</option>
-                        </select>
-                    </div>
-
-                    <div class="col text-center">
-                        <label for="deces">Décès:</label>
-                        <div class="row">
-                            <div class="col">
-                                <label>
-                                    <input type="radio" [value]="true" name="deces">OUI
-                                </label>
-                            </div>
-                            <div class="col">
-                                <label>
-                                    <input type="radio" [value]="false" name="deces">NON
-                                </label>
-                            </div>
-                            <div class="col">
-                                <button (click)="openModal('modal18')">Open</button>
-                            </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="row border border-primary p-3 rounded-3">
+                        <div class="col">
+                            <label for="evolutionSortie">Évolution après la sortie:</label>
+                            <select id="evolutionSortie" name="evolutionSortie" [(ngModel)]="womenForm.mere.evolutionApresSortie">
+                                <option value=""></option>
+                                <option value="3mois">3 mois</option>
+                                <option value="6mois">6 mois</option>
+                                <option value="9mois">9 mois</option>
+                                <option value="12mois">12 mois</option>
+                            </select>
                         </div>
-                        <app-deces (emittedEvent)="checkboxState($event)"></app-deces>
                     </div>
                 </div>
-            
-            </div>
-        </div>
+                &nbsp;&nbsp;
+                <div class="col">
+                    
+                    <div class="row border border-primary p-3 rounded-3">
+                        <div class="col-md-7 mb-3">
+                            <label>Classe NYHA:</label>
+                            <select class="form-select" name="mere.classeNYHA" [(ngModel)]="womenForm.mere.classeNYHA">
+                                <option value=""></option>
+                                <option value="recuperation_totale">Récupération totale</option>
+                                <option value="recuperation_partielle">Récupération partielle</option>
+                                <option value="etat_stationnaire">État stationnaire</option>
+                                <option value="degradation_qualite_vie">Dégradation de la qualité de vie</option>
+                            </select>
+                        </div>
 
-
-        <div class="row border border-primary p-3 rounded-3 mb-3">
-        
-            <div class="col text-center">  
-                <label>Observance Thérapeutique:</label>
-                <div class="row">
-                    <div class="col">
-                        <label>
-                            <input type="radio" [value]="true" name="observanceTherapeutique">OUI
-                        </label>
+                        <div class="col text-center">
+                            <label for="deces">Décès:</label>
+                            <div class="row">
+                                <div class="col">
+                                    <label>
+                                        <input type="radio" [value]="true" name="deces" [(ngModel)]="womenForm.mere.detailsDeces.presente">OUI
+                                    </label>
+                                </div>
+                                <div class="col">
+                                    <label>
+                                        <input type="radio" [value]="false" name="deces" [(ngModel)]="womenForm.mere.detailsDeces.presente">NON
+                                    </label>
+                                </div>
+                                <div class="col" *ngIf="womenForm.mere.detailsDeces.presente">
+                                    <button class="c-button" (click)="openModal('modal18',$event)"><i class="fa-regular fa-pen-to-square"></i></button>
+                                </div>
+                            </div>
+                            <app-deces></app-deces>
+                        </div>
                     </div>
-                    <div class="col">
-                        <label>
-                            <input type="radio" [value]="false" name="observanceTherapeutique">NON
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="col text-center">
-                <label for="nombreRehospitalisations">Nombre de Réhospitalisations:</label>
-                <input type="number" id="nombreRehospitalisations" name="nombreRehospitalisations">                 
-            </div>
-        </div>
-
-        <div class="row border border-primary p-3 rounded-3 mb-3">
-            <div class="col text-center">
-                <div class="row">
-                    <label for="facteursDecompensation">Facteurs de Décompensation:</label>
-                    <div class="col-md-3" *ngFor="let option of ['Anémie', 'Infections', 'Virales', 'Bactériennes', 'Dénutrition','Ruptures Thérapeutiques']">
-                        <label>{{option}}</label>
-                        <input type="checkbox" name="facteursDecompensation" [value]="option" (change)="onCheckboxChange($event)">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row border border-primary p-3 rounded-3 mb-3">
-            <h5 class="text-center">ETT</h5>
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <label for="ett.dtdvg">DTDVG:</label>
-                        <input type="text" id="ett.dtdvg" name="ett.dtdvg">
-                    </div>
-                    <div class="col">
-                        <label for="ett.dtsvg">DTSVG:</label>
-                        <input type="text" id="ett.dtsvg" name="ett.dtsvg">
-                    </div>
-                    <div class="col">
-                        <label for="ett.fevg">FEVG:</label>
-                        <input type="text" id="ett.fevg" name="ett.fevg">                
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <label for="ett.fr">FR:</label>
-                        <input type="text" id="ett.fr" name="ett.fr">
-                    </div>
-                    <div class="col">
-                        <label for="ett.e">E:</label>
-                        <input type="text" id="ett.e" name="ett.e">
-                    </div>
-                    <div class="col">
-                        <label for="ett.a">A:</label>
-                        <input type="text" id="ett.a" name="ett.a">                
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <label for="ett.td">TD:</label>
-                        <input type="text" id="ett.td" name="ett.td">                
-                    </div>
-
-                    <div class="col">
-                                                
-                        <label for="ett.ee">E/E’:</label>
-                        <input type="text" id="ett.ee" name="ett.ee">
-
-                    </div>
-                    <div class="col">
-                        <label for="ett.tapse">TAPSE:</label>
-                        <input type="text" id="ett.tapse" name="ett.tapse">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="ett.dtog">DTOG:</label>
-                        <input type="text" id="ett.dtog" name="ett.dtog">                
-                    </div>
-
-                    <div class="col"></div>
-                    <div class="col"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row border border-primary p-3 rounded-3 mb-3">
-            <h5 class="text-center">Biologie</h5>
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <label for="hemoglobinemie">Hémoglobinémie:</label>
-                        <input type="text" id="hemoglobinemie" name="hemoglobinemie" [(ngModel)]="womenForm.biologie.hemoglobinemie">
-                    </div>
-                    <div class="col">
-                        <label for="gb">GB:</label>
-                        <input type="text" id="gb" name="gb" [(ngModel)]="womenForm.biologie.gb">                
-                    </div>
-                    <div class="col">
-                        <label for="plaquettes">Plaquettes:</label>
-                        <input type="text" id="plaquettes" name="plaquettes" [(ngModel)]="womenForm.biologie.plaquettes">                
-                    </div>
-                   
                 
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col">
-                                                
-                        <label for="vgm">VGM:</label>
-                        <input type="text" id="vgm" name="vgm" [(ngModel)]="womenForm.biologie.vgm">
 
-                    </div>
-                    <div class="col">
-                        <label for="ccmh">CCMH:</label>
-                        <input type="text" id="ccmh" name="ccmh" [(ngModel)]="womenForm.biologie.ccmh">
-                    </div>
-                    <div class="col">
-                        <label for="tcmh">TCMH:</label>
-                        <input type="text" id="tcmh" name="tcmh" [(ngModel)]="womenForm.biologie.tcmh">                
-                    </div>
-                   
+            <div class="row border border-primary p-3 rounded-3 mb-3">
+            
+                <div class="col text-center">  
+                    <label>Observance Thérapeutique:</label>
+                    <input type="checkbox" name="bonneObservanceTherapeutique" [(ngModel)]="womenForm.mere.bonneObservanceTherapeutique">
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="crp">CRP:</label>
-                        <input type="text" id="crp" name="crp" [(ngModel)]="womenForm.biologie.crp">                
-                    </div>
-                    <div class="col">
-                        <label for="uree">Urée:</label>
-                        <input type="text" id="uree" name="uree" [(ngModel)]="womenForm.biologie.uree">                
-                    </div>
-                    <div class="col">
-                        <label for="creatininemie">Créatininémie:</label>
-                        <input type="text" id="creatininemie" name="creatininemie" [(ngModel)]="womenForm.biologie.creatininemie">                
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <label for="ntProBNP">NT pro BNP:</label>
-                        <input type="text" id="ntProBNP" name="ntProBNP" [(ngModel)]="womenForm.biologie.ntProBNP">                
-                    </div>
-                    <div class="col">
-                        <label for="prolactine">Prolactine:</label>
-                        <input type="text" id="prolactine" name="prolactine" [(ngModel)]="womenForm.biologie.prolactine">                
-                    </div>
-                    <div class="col"></div>
+                <div class="col text-center">
+                    <label for="nombreRehospitalisations">Nombre de Réhospitalisations:</label>
+                    <input type="number" id="nombreRehospitalisations" name="nombreRehospitalisations" [(ngModel)]="womenForm.mere.nombreRehospitalisations">                 
                 </div>
             </div>
-        </div>
 
-        <div class="row mt-3">
-            <div class="col"></div>
-            <div class="col-md-3">
-                <!-- Bouton Enregistrer -->
-                <button type="submit"><span>Enregistrer</span></button>
+            <div class="row border border-primary p-3 rounded-3 mb-3">
+                <div class="col text-center">
+                    <div class="row">
+                        <h5 class="text-center">Facteurs de Décompensation:</h5>
+                        <div class="col-md-3">
+                            <label>anemie</label>
+                            <input type="checkbox" name="facteursDecompensation.anemie" [(ngModel)]="womenForm.mere.facteursDecompensation.anemie">
+                        </div>
+                        <div class="col-md-3">
+                            <label>infectionsVirales</label>
+                            <input type="checkbox" name="facteursDecompensation.infectionsVirales" [(ngModel)]="womenForm.mere.facteursDecompensation.infectionsVirales">
+                        </div>
+                        <div class="col-md-3">
+                            <label>infectionsBacteriennes</label>
+                            <input type="checkbox" name="facteursDecompensation.infectionsBacteriennes" [(ngModel)]="womenForm.mere.facteursDecompensation.infectionsBacteriennes">
+                        </div>
+                        <div class="col-md-3">
+                            <label>denutrition</label>
+                            <input type="checkbox" name="facteursDecompensation.denutrition" [(ngModel)]="womenForm.mere.facteursDecompensation.denutrition">
+                        </div>
+                        <div class="col-md-3">
+                            <label>ruptures Therapeutiques</label>
+                            <input type="checkbox" name="facteursDecompensation.rupturesTherapeutiques" [(ngModel)]="womenForm.mere.facteursDecompensation.rupturesTherapeutiques">
+                        </div>
+                    </div>
+                </div>                
             </div>
-            <div class="col-md-3">
-                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal16')">Fermer</button>
+
+            <div class="row border border-primary p-3 rounded-3 mb-3">
+                <h5 class="text-center">ETT</h5>
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label for="echocardiographie.dtdvg">DTDVG:</label>
+                            <input type="text" id="echocardiographie.dtdvg" name="echocardiographie.dtdvg" [(ngModel)]="womenForm.mere.echocardiographie.dtdvg">
+                        </div>
+                        <div class="col">
+                            <label for="echocardiographie.dtsvg">DTSVG:</label>
+                            <input type="text" id="echocardiographie.dtsvg" name="echocardiographie.dtsvg" [(ngModel)]="womenForm.mere.echocardiographie.dtsvg">
+                        </div>
+                        <div class="col">
+                            <label for="echocardiographie.fevg">FEVG:</label>
+                            <input type="text" id="echocardiographie.fevg" name="echocardiographie.fevg" [(ngModel)]="womenForm.mere.echocardiographie.fevg">                
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="echocardiographie.fr">FR:</label>
+                            <input type="text" id="echocardiographie.fr" name="echocardiographie.fr" [(ngModel)]="womenForm.mere.echocardiographie.fr">
+                        </div>
+                        <div class="col">
+                            <label for="echocardiographie.e">E:</label>
+                            <input type="text" id="echocardiographie.e" name="echocardiographie.e" [(ngModel)]="womenForm.mere.echocardiographie.e">
+                        </div>
+                        <div class="col">
+                            <label for="echocardiographie.a">A:</label>
+                            <input type="text" id="echocardiographie.a" name="echocardiographie.a" [(ngModel)]="womenForm.mere.echocardiographie.a">                
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="echocardiographie.td">TD:</label>
+                            <input type="text" id="echocardiographie.td" name="echocardiographie.td" [(ngModel)]="womenForm.mere.echocardiographie.td">                
+                        </div>
+
+                        <div class="col">
+                                                    
+                            <label for="echocardiographie.ee">E/E’:</label>
+                            <input type="text" id="echocardiographie.ee" name="echocardiographie.ee" [(ngModel)]="womenForm.mere.echocardiographie.ee">
+
+                        </div>
+                        <div class="col">
+                            <label for="echocardiographie.tapse">TAPSE:</label>
+                            <input type="text" id="echocardiographie.tapse" name="echocardiographie.tapse" [(ngModel)]="womenForm.mere.echocardiographie.tapse">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="echocardiographie.dtog">DTOG:</label>
+                            <input type="text" id="echocardiographie.dtog" name="echocardiographie.dtog" [(ngModel)]="womenForm.mere.echocardiographie.dtog">                
+                        </div>
+
+                        <div class="col"></div>
+                        <div class="col"></div>
+                    </div>
+                </div>
             </div>
-            <div class="col"></div>
-        </div>
+
+            <div class="row border border-primary p-3 rounded-3 mb-3">
+                <h5 class="text-center">Biologie</h5>
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label for="hemoglobinemie">Hémoglobinémie:</label>
+                            <input type="text" id="hemoglobinemie" name="hemoglobinemie" [(ngModel)]="womenForm.mere.biologie.hemoglobinemie">
+                        </div>
+                        <div class="col">
+                            <label for="gb">GB:</label>
+                            <input type="text" id="gb" name="gb" [(ngModel)]="womenForm.mere.biologie.gb">                
+                        </div>
+                        <div class="col">
+                            <label for="plaquettes">Plaquettes:</label>
+                            <input type="text" id="plaquettes" name="plaquettes" [(ngModel)]="womenForm.mere.biologie.plaquettes">                
+                        </div>
+                    
+                    
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                                                    
+                            <label for="vgm">VGM:</label>
+                            <input type="text" id="vgm" name="vgm" [(ngModel)]="womenForm.mere.biologie.vgm">
+
+                        </div>
+                        <div class="col">
+                            <label for="ccmh">CCMH:</label>
+                            <input type="text" id="ccmh" name="ccmh" [(ngModel)]="womenForm.mere.biologie.ccmh">
+                        </div>
+                        <div class="col">
+                            <label for="tcmh">TCMH:</label>
+                            <input type="text" id="tcmh" name="tcmh" [(ngModel)]="womenForm.mere.biologie.tcmh">                
+                        </div>
+                    
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="crp">CRP:</label>
+                            <input type="text" id="crp" name="crp" [(ngModel)]="womenForm.mere.biologie.crp">                
+                        </div>
+                        <div class="col">
+                            <label for="uree">Urée:</label>
+                            <input type="text" id="uree" name="uree" [(ngModel)]="womenForm.mere.biologie.uree">                
+                        </div>
+                        <div class="col">
+                            <label for="creatininemie">Créatininémie:</label>
+                            <input type="text" id="creatininemie" name="creatininemie" [(ngModel)]="womenForm.mere.biologie.creatininemie">                
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="ntProBNP">NT pro BNP:</label>
+                            <input type="text" id="ntProBNP" name="ntProBNP" [(ngModel)]="womenForm.mere.biologie.ntProBNP">                
+                        </div>
+                        <div class="col">
+                            <label for="prolactine">Prolactine:</label>
+                            <input type="text" id="prolactine" name="prolactine" [(ngModel)]="womenForm.mere.biologie.prolactine">                
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col"></div>
+                <div class="col-md-3">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><span>Enregistrer</span></button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal16')">Fermer</button>
+                </div>
+                <div class="col"></div>
+            </div>
+        </form>
     </div>
+
 </div>

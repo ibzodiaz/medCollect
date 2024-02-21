@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { SharedService } from 'src/app/_services/shared.service';
 
 @Component({
   selector: 'app-babies',
@@ -6,16 +7,53 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./babies.component.css']
 })
 export class BabiesComponent {
-  babiesCanceled: boolean = false;
-  
-  @Output() emittedEvent =  new EventEmitter<boolean>();
 
-  closeModal(modalId: string): void {
+  constructor(
+    private sharedService:SharedService
+  ){}
+
+  babiesForm:any = {
+    enfant:{
+      evolutionBebe: {
+          mortNes: false,
+          faiblePoidsNaissance: false,
+          prematurite: false,
+          poidsNaissance: 0,
+          alimentationNaissance: '',
+          poids3Mois: 0,
+          alimentation3Mois: '',
+          poids6Mois: 0,
+          alimentation6Mois: '',
+          poids12Mois: 0,
+          alimentation12Mois: ''
+      }
+    }
+  }
+
+  ngOnInit():void{}
+  
+  onSubmit(){
+   
+    if(this.babiesForm.enfant.evolutionBebe.mortNes){
+      this.babiesForm.enfant.evolutionBebe.poidsNaissance = 0;
+      this.babiesForm.enfant.evolutionBebe.alimentationNaissance = '';
+      this.babiesForm.enfant.evolutionBebe.poids3Mois = 0;
+      this.babiesForm.enfant.evolutionBebe.alimentation3Mois = '';
+      this.babiesForm.enfant.evolutionBebe.poids6Mois = 0;
+      this.babiesForm.enfant.evolutionBebe.alimentation6Mois = '';
+      this.babiesForm.enfant.evolutionBebe.poids12Mois = 0;
+      this.babiesForm.enfant.evolutionBebe.alimentation12Mois = '';
+    }
+    //alert(JSON.stringify(this.babiesForm));
+    this.sharedService.setterBabies(this.babiesForm);
+  }
+  
+
+  closeModal(modalId: string,e:Event): void {
+    e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";
-      this.babiesCanceled = true;
-      this.emittedEvent.emit(this.babiesCanceled);
     }
   }
 
