@@ -16,13 +16,13 @@ export class CliniquesService {
     return this.http.post<Cliniques>(this.url,clinicSigns).pipe(catchError(this.errorHandler));
   }
 
-  updateClinicSigns(patientId:string,clinicSigns:Cliniques): Observable<Cliniques>{
-    return this.http.patch<Cliniques>(this.url+'/'+patientId,clinicSigns).pipe(catchError(this.errorHandler));
+  updateClinicSigns(patientId:string,consultationId:string,clinicSigns:Cliniques): Observable<Cliniques>{
+    return this.http.patch<Cliniques>(this.url+'/'+patientId+'/'+consultationId,clinicSigns).pipe(catchError(this.errorHandler));
   }
 
   
-  getClinicSignsByPatientId(patientId:string):Observable<Cliniques>{
-    return this.http.get<Cliniques>(this.url+'/one/'+patientId).pipe(catchError(this.errorHandler));
+  getClinicSignsByPatientId(patientId:string,consultationId:string):Observable<Cliniques>{
+    return this.http.get<Cliniques>(this.url+'/'+patientId+'/'+consultationId).pipe(catchError(this.errorHandler));
   }
 
 

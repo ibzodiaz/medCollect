@@ -28,23 +28,19 @@
 
 
         <a [routerLink]="['patients/dossiers']" routerLinkActive="active" class="dashboard-nav-item">
-            <i class="fa-regular fa-folder-open"></i>&nbsp;Dossiers Patients
+            <i class="fa-regular fa-folder-open"></i>&nbsp;Créer Dossier
         </a>
         <a [routerLink]="['assistants']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-solid fa-handshake-angle"></i>&nbsp;Assistants
         </a>
 
-        <a [routerLink]="['doctor']" routerLinkActive="active" class="dashboard-nav-item">
-            <i class="fa-solid fa-file-signature"></i> Consultations
-        </a>
-
-        <a [routerLink]="['prescription']" routerLinkActive="active" class="dashboard-nav-item">
+        <a [routerLink]="['ordonnances']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-solid fa-prescription-bottle-medical"></i> Ordonnances
         </a>
         
-        <a [routerLink]="['parametres']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-hourglass-half"></i> Salles d'attente </a>
+        <a [routerLink]="['attente']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-hourglass-half"></i> Salles d'attente </a>
           
-        <a [routerLink]="['help']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-circle-info"></i> Aide ? </a>
+        <a [routerLink]="['aide']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-circle-info"></i> Aide ? </a>
           
         </nav>
     </div>

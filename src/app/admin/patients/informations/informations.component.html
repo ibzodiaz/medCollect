@@ -19,20 +19,20 @@
                 <table class="fl-table">
                     <thead>
                         <tr>
-                            <th scope="col"><i class="fa-solid fa-fire-flame-curved"></i> Prénom :</th>
-                            <th scope="col"><i class="fa-solid fa-fire-flame-curved"></i> Nom :</th>
-                            <th scope="col"><i class="fa-solid fa-fire-flame-curved"></i> Adresse :</th>
-                            <th scope="col"><i class="fa-solid fa-fire-flame-curved"></i> Téléphone :</th>
+                            <th scope="col"><i class="fa-solid fa-circle-user"></i> Prénom :</th>
+                            <th scope="col"><i class="fa-solid fa-circle-user"></i> Nom :</th>
+                            <th scope="col"><i class="fa-solid fa-location-dot"></i> Adresse :</th>
+                            <th scope="col"><i class="fa-solid fa-phone-flip"></i> Téléphone :</th>
                         </tr>
                     </thead>
                     <tbody>
             
                     
                         <tr *ngFor="let patient of filterPatients" [routerLink]="'../details/' + patient._id">
-                            <td><i class="fa-solid fa-fire-flame-curved"></i> {{patient.prenom}}</td>
-                            <td><i class="fa-solid fa-fire-flame-curved"></i> {{patient.nom}}</td>
-                            <td><i class="fa-solid fa-fire-flame-curved"></i> {{patient.adresse}}</td>
-                            <td><i class="fa-solid fa-fire-flame-curved"></i> {{patient.telephone}}</td>
+                            <td>{{patient.prenom}}</td>
+                            <td>{{patient.nom}}</td>
+                            <td>{{patient.adresse}}</td>
+                            <td>{{patient.telephone}}</td>
                         </tr>
             
                     </tbody>

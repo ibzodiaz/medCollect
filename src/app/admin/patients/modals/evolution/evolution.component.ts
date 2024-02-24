@@ -19,9 +19,16 @@ export class EvolutionComponent {
 
   evolutionForm:any = {}
 
+  PatientAntecedantId:any;
+  consultationId:any;
+
+  patientId:string = '';
+  patientExists:boolean = false;
+
   private initForm():Evolution{
     return {
-      patientId: null,
+      patientId: this.route.snapshot.paramMap.get('patientId'),
+      consultationId: this.route.snapshot.paramMap.get('consultationId'),
 
       mere:{
          presente: false,
@@ -88,51 +95,40 @@ export class EvolutionComponent {
     }
   }
 
-  patientId:string = '';
-  patientExists:boolean = false;
-
-  getIdPatient(){
-    this.route.queryParamMap.subscribe((queryParams: any) => {
-      if (queryParams.has('patientId')) {
-        this.patientId = queryParams.get('patientId');
-        this.evolutionForm.patientId = this.patientId;
-      }
-    });
-  }
-
-    
   getPatientEvolution(): void {
-    this.route.queryParamMap.subscribe((queryParams: any) => {
-      if (queryParams.has('patientId')) {
-        this.patientId = queryParams.get('patientId');
-        this.evolutionService.getEvolutionByPatientId(this.patientId).subscribe(
-          (evolution: any) => {
-            this.evolutionForm = { ...evolution, patientId: this.patientId };
-            //console.log(this.evolutionForm);
-            this.patientExists = true;
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.evolutionForm = this.initForm();
-              this.patientExists = false;
-            } else {
-              console.error(err);
-            }
-          }
-        );
-      }
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
+
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
+
+            this.evolutionService.getEvolutionByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (evolution: any) => {
+                this.evolutionForm = evolution;
+                this.patientExists = true;
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.evolutionForm = this.initForm();
+                  this.patientExists = false;
+                } else {
+                  console.error(err);
+                }
+              }
+            );
+        }
     });
-  
   }
+
 
   ngOnInit(): void {
-    this.getIdPatient();
-    //this.evolutionForm = this.initForm();
+    this.evolutionForm = this.initForm();
     this.getPatientEvolution();
   }
 
   onSubmit(){
-    this.getIdPatient();
 
     if(this.evolutionForm.mere.presente){
       this.evolutionForm.mere.evolutionApresSortie = this.sharedService.getterWomen().mere.evolutionApresSortie;
@@ -159,11 +155,8 @@ export class EvolutionComponent {
       this.evolutionForm.enfant = this.initForm().enfant;
     }
 
-    // console.log("test Evolution")
-    // console.log(JSON.stringify(this.evolutionForm));
-
     if(this.patientExists){
-      this.evolutionService.updateEvolution(this.patientId,this.evolutionForm).subscribe(
+      this.evolutionService.updateEvolution(this.PatientAntecedantId,this.consultationId,this.evolutionForm).subscribe(
         (success:any)=>{
           alert("Modification réussie!");
         },

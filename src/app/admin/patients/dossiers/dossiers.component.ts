@@ -55,10 +55,13 @@ export class DossiersComponent implements OnInit {
 
     this.patientsService.getPatients().subscribe(
       (patients: any) => {
-        this.patientsService.setPatientsList(patients);
-        this.patientsList = patients;
+        if(patients){
+          this.patientsService.setPatientsList(patients);
+          this.patientsList = patients;
+  
+          this.isLoading = false;
+        }
 
-        this.isLoading = false;
       },
       (err:any) => console.error(err)
     );

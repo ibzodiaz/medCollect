@@ -1,5 +1,6 @@
 export interface Cliniques {
     patientId: string | null;
+    consultationId: string | null;
 
     dyspneeEffort: {
         presente: boolean;

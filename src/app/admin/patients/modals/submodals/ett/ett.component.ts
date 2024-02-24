@@ -12,6 +12,9 @@ export class EttComponent {
 
   ettForm:any = {}
 
+  PatientAntecedantId :any;
+  consultationId :any;
+
   initForm(){
     this.ettForm = {
       dtdvg: '',
@@ -42,33 +45,36 @@ export class EttComponent {
     this.updateFormWithPatientData();
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientId = queryParams.get('patientId');
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
 
-        this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientId).subscribe(
-          (ett: any) => {
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
 
-            this.ettForm = {...ett.ett};
-            this.sharedService.setterEtt(this.ettForm);
-            
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
+            this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (ett: any) => {
 
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
+                this.ettForm = {...ett.ett};
+                this.sharedService.setterEtt(this.ettForm);
+                
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.initForm();
     
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
+    });
   }
+
 
   onSubmitEtt(){
     this.sharedService.setterEtt(this.ettForm);

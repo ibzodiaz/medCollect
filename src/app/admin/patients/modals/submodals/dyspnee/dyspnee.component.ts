@@ -16,7 +16,8 @@ export class DyspneeComponent {
 
   dyspneeForm:any ={ }
 
-  PatientId:string='';
+  patientId : any;
+  consultationId : any;
 
   initForm(){
     this.dyspneeForm ={
@@ -41,34 +42,36 @@ export class DyspneeComponent {
     this.updateFormWithPatientData();
   }
 
-  
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientId = queryParams.get('patientId');
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
 
-        this.cliniquesService.getClinicSignsByPatientId(this.PatientId).subscribe(
-          (dyspnee: any) => {
+        if (patientId && consultationId) {
+            this.patientId = patientId;
+            this.consultationId = consultationId;
 
-            this.dyspneeForm = {...dyspnee};
-            this.sharedService.setterDyspnee(this.dyspneeForm);
-            
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
+            this.cliniquesService.getClinicSignsByPatientId(this.patientId,this.consultationId).subscribe(
+              (dyspnee: any) => {
 
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
+                this.dyspneeForm = {...dyspnee};
+                this.sharedService.setterDyspnee(this.dyspneeForm);
+                
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.initForm();
     
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
+    });
   }
+
 
   onSubmit(){
     this.sharedService.setterDyspnee(this.dyspneeForm);

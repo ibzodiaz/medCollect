@@ -1,5 +1,6 @@
 export interface Evolution {
    patientId: string | null,
+   consultationId: string | null,
 
    mere:{
       presente: Boolean,

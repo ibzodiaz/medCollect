@@ -1,0 +1,78 @@
+<form name="consultation" (ngSubmit)="onSubmit()">
+    <div class="row mb-3 mt-3">
+        <div class="col-md-2">
+            <label>Date</label>
+            <input type="date" class="form-control rounded-0" name="date" [(ngModel)]="consultation.date">
+        </div>
+        <div class="col-md-2">
+            <label>Motif</label>
+            <select name="motif" class="form-control rounded-0" [(ngModel)]="consultation.motif">
+            <option value=""></option>
+            <option value="Radiographie">Radiographie</option>
+            <option value="Echo">Echo</option>
+            <option value="Scanner">Scanner</option>
+            <option value="Dialyse">Dialyse</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class="btn btn-success rounded-0" type="submit"><i class="fa-solid fa-circle-plus"></i>&nbsp;Ajouter</button>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+            <label>Afficher&nbsp;<i class="fa-regular fa-eye"></i></label>
+            <div class="row">
+                <div class="col-md-9">
+                    <select name="show" [(ngModel)]="rowsPerPage" class="form-control rounded-0">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                        <option>25</option>
+                        <option>30</option>
+                        <option>35</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label>Recherche&nbsp;<i class="fa-solid fa-magnifying-glass"></i> :</label>
+            <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Date ou motif.." class="form-control rounded-0">
+        </div>
+    </div>
+</form>
+
+<table class="table">
+<thead>
+    <tr>
+        <th>Date :</th>
+        <th>Motif :</th>
+        <th>Signes cliniques :</th>
+        <th>Signes paracliniques :</th>
+        <th>Evolution :</th>
+        <th>Fiche :</th>
+        <th>Fichiers :</th>
+        <th>Terminé :</th>
+    </tr>
+</thead>
+<tbody>
+    <tr class="text-center" *ngFor="let consultation of filteredPatients">
+        <td>{{ consultation.date | date:'dd/MM/yyyy' }}</td>
+        <td>{{consultation.motif}}</td>
+        <!-- <td><span (click)="openModal('modal2',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td> -->
+        <td><span (click)="openModal('modal3',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+        <td><span (click)="openModal('modal4',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+        <td><span (click)="openModal('modal6',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+        <td><span><i (click)="openModal('modal5',patientId,consultation._id)" class="fa-regular fa-folder"></i></span></td>
+        <td><span><i (click)="openModal('modal20',patientId,consultation._id)" class='bx bx-cloud-upload'></i></span></td>
+        <td><input type="checkbox" name="complet"></td>
+    </tr>
+</tbody>
+</table>
+
+<app-antecedents></app-antecedents>
+<app-cliniques></app-cliniques>
+<app-paracliniques></app-paracliniques>
+<app-fichepatient></app-fichepatient>
+<app-evolution></app-evolution>
+<app-uploadfiles></app-uploadfiles>

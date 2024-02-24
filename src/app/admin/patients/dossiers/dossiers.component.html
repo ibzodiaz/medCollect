@@ -2,8 +2,8 @@
     <div class="col">
         <div class="float-end">
             <button (click)="openModal('modal0','')" class="btn custom-btn-color"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau&nbsp;<i class="fa-regular fa-user"></i></button>
-            &nbsp;&nbsp;&nbsp;
-            <a [routerLink]="['../../patients/historiques']" class="btn custom-btn-color-2"><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;Historiques&nbsp;<i class="fa-regular fa-user"></i></a>
+            <!-- &nbsp;&nbsp;&nbsp; -->
+            <!-- <a [routerLink]="['../../patients/historiques']" class="btn custom-btn-color-2"><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;Historiques&nbsp;<i class="fa-regular fa-user"></i></a> -->
         </div>
     </div>
 </div>
@@ -43,26 +43,30 @@
         <table class="fl-table">
             <thead>
                 <tr class="text-center">
+                    <th scope="col">Date de création :</th>
+                    <th scope="col">Date de modification :</th>
                     <th scope="col">Prénom :</th>
                     <th scope="col">Nom :</th>
                     <th scope="col">Socio-Démographiques :</th>
                     <th scope="col">Antécédents :</th>
-                    <th scope="col">Signes cliniques :</th>
+                    <!-- <th scope="col">Signes cliniques :</th>
                     <th scope="col">Signes paracliniques :</th>
                     <th scope="col">Evolution :</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Actions</th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let patient of filteredPatients" class="text-center">
-                    <td>{{ patient.prenom }}</td>
-                    <td>{{ patient.nom }}</td>
-                    <td><span (click)="openModal('modal1',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-                    <td><span (click)="openModal('modal2',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-                    <td><span (click)="openModal('modal3',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-                    <td><span (click)="openModal('modal4',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-                    <td><span (click)="openModal('modal6',patient._id)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-                    <td><i (click)="openModal('modal5',patient._id)" class="fa-regular fa-folder"></i>&nbsp;<i class="fa-solid fa-file-medical"></i>&nbsp;<i (click)="openModal('modal20',patient._id)" class='bx bx-cloud-upload'></i></td>
+                    <td>{{ (patient?.createdAt | date:'dd/MM/yyyy') || '' }}</td>
+                    <td>{{ (patient?.updatedAt | date:'dd/MM/yyyy')|| ''}}</td>
+                    <td>{{ patient?.prenom || ''}}</td>
+                    <td>{{ patient?.nom || ''}}</td>
+                    <td><span (click)="openModal('modal1',patient?._id || null)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><span (click)="openModal('modal2',patient?._id || null)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <!-- <td><span (click)="openModal('modal3',patient?._id || null)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><span (click)="openModal('modal4',patient?._id || null)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><span (click)="openModal('modal6',patient?._id || null)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                    <td><i (click)="openModal('modal5',patient?._id || null)" class="fa-regular fa-folder"></i>&nbsp;<i class="fa-solid fa-file-medical"></i>&nbsp;<i (click)="openModal('modal20',patient?._id || null)" class='bx bx-cloud-upload'></i></td> -->
                 </tr>
             </tbody>
         </table>

@@ -16,6 +16,9 @@ export class CliniquesComponent {
   patientExists:boolean = false;
   patientId:any;
 
+  PatientAntecedantId:any;
+  consultationId:any;
+
   constructor(
     private route:ActivatedRoute,
     private sharedService:SharedService,
@@ -29,7 +32,8 @@ export class CliniquesComponent {
 
   private initializeCliniquesForm(): Cliniques {
     return {
-      patientId: this.route.snapshot.queryParamMap.get('patientId'),
+      patientId: this.route.snapshot.paramMap.get('patientId'),
+      consultationId: this.route.snapshot.paramMap.get('consultationId'),
       dyspneeEffort: {
         presente: false,
         typeNYHA: ''
@@ -72,27 +76,32 @@ export class CliniquesComponent {
   }
 
   getPatientClinicSigns(): void {
-    this.route.queryParamMap.subscribe((queryParams: any) => {
-      if (queryParams.has('patientId')) {
-        this.patientId = queryParams.get('patientId');
-        this.cliniquesService.getClinicSignsByPatientId(this.patientId).subscribe(
-          (clinicSigns: any) => {
-            this.cliniquesForm = { ...clinicSigns, patientId: this.patientId };
-            this.patientExists = true;
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.cliniquesForm = this.initializeCliniquesForm();
-              this.patientExists = false;
-            } else {
-              console.error(err);
-            }
-          }
-        );
-      }
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
+
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
+
+            this.cliniquesService.getClinicSignsByPatientId(patientId, consultationId).subscribe(
+              (clinicSigns: any) => {
+                this.cliniquesForm = { ...clinicSigns, patientId: this.patientId };
+                this.patientExists = true;
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.cliniquesForm = this.initializeCliniquesForm();
+                  this.patientExists = false;
+                } else {
+                  console.error(err);
+                }
+              }
+            );
+        }
     });
-  
   }
+
 
   calculateIMC() {
     if (this.cliniquesForm.constantes.poids && this.cliniquesForm.constantes.taille) {
@@ -126,7 +135,7 @@ export class CliniquesComponent {
 
     if(this.patientExists){
 
-      this.cliniquesService.updateClinicSigns(this.patientId,this.cliniquesForm).subscribe(
+      this.cliniquesService.updateClinicSigns(this.PatientAntecedantId,this.consultationId,this.cliniquesForm).subscribe(
         (success:any)=>{
           alert("modification réussie!");
         },

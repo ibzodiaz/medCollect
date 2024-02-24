@@ -6,6 +6,9 @@ import { ParametresComponent } from './parametres/parametres.component';
 import { MeetsComponent } from './meets/meets.component';
 import { AssistantComponent } from './assistant/assistant.component';
 import { PlanningComponent } from './planning/planning.component';
+import { OrdonnancesComponent } from './ordonnances/ordonnances.component';
+import { AttenteComponent } from './attente/attente.component';
+import { HelpComponent } from './help/help.component';
 
 const routes: Routes = [
   {  path: '', component:AlayoutComponent,children:[
@@ -17,6 +20,9 @@ const routes: Routes = [
       {path:'meetings', component:MeetsComponent},
       {path:'planning', component:PlanningComponent},
       {path:'assistants', component:AssistantComponent},
+      {path:'ordonnances', component:OrdonnancesComponent},
+      {path:'attente', component:AttenteComponent},
+      {path:'aide', component:HelpComponent},
       {
         path:'user', loadChildren: ()=> import('./user/user.module')
                                         .then(m => m.UserModule)

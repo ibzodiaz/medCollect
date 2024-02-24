@@ -20,12 +20,14 @@
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
+    min-height: 210px;
+    height: auto;
     width: 40%;
     animation: openDialog 0.4s ease-in-out;
 }
 
 
-form{
+.upload{
     position: relative; 
     border: 2px dashed #007BFF;
     border-radius: 10px;

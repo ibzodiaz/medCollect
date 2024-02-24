@@ -16,8 +16,10 @@ export class HospitalisationsComponent {
   @Output() emittedEventH =  new EventEmitter<boolean>();
   @Output() emittedHospitalisationForm =  new EventEmitter<any>();
 
+
   PatientAntecedantId:any;
-      
+  consultationId:any;
+
   hospitalisationForm: Antecedents = {}
   
   
@@ -39,32 +41,34 @@ export class HospitalisationsComponent {
     }
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientAntecedantId = queryParams.get('patientId');
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        //const consultationId = params.get('consultationId');
 
-        this.antecedantsService.getAntecedantByPatientId(this.PatientAntecedantId).subscribe(
-          (antecedants: any) => {
+        if (patientId) {
+            this.PatientAntecedantId = patientId;
+            //this.consultationId = consultationId;
 
-            this.hospitalisationForm = {...antecedants};
-            this.sharedService.setterHospitalisation(this.hospitalisationForm);
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-
-              this.initForm();
-
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
+            this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
+              (antecedants: any) => {
+  
+                this.hospitalisationForm = {...antecedants};
+                this.sharedService.setterHospitalisation(this.hospitalisationForm);
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+        
+                  this.initForm();
+        
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
     });
-    
   }
 
 

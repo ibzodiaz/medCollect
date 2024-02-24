@@ -19,6 +19,9 @@ export class BabiesComponent {
   PatientId:string='';
   babiesForm:any ={};
 
+  PatientAntecedantId:any;
+  consultationId:any;
+
   initForm(){
     this.babiesForm= {
       enfant:{
@@ -44,34 +47,39 @@ export class BabiesComponent {
     this.updateFormWithPatientData();
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientId = queryParams.get('patientId');
-
-        this.evolutionService.getEvolutionByPatientId(this.PatientId).subscribe(
-          (babies: any) => {
-
-            this.babiesForm = {...babies};
-            console.log(this.babiesForm)
-            this.sharedService.setterBabies(this.babiesForm);
-            
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
-
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
     
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
+
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
+
+            this.evolutionService.getEvolutionByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (babies: any) => {
+    
+                this.babiesForm = {...babies};
+                console.log(this.babiesForm)
+                this.sharedService.setterBabies(this.babiesForm);
+                
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.initForm();
+    
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
+    });
   }
+
+
   
   onSubmit(){
    

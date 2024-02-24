@@ -13,6 +13,8 @@ export class TelecoeurComponent {
   telecoeurForm :any ={ };
 
   PatientId:string='';
+  PatientAntecedantId :any;
+  consultationId :any;
 
   constructor(
     private sharedService:SharedService,
@@ -32,36 +34,40 @@ export class TelecoeurComponent {
     };
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientId = queryParams.get('patientId');
+  
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
 
-        this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientId).subscribe(
-          (telecoeur: any) => {
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
 
-            //console.log(telecoeur.telecoeur);
-            this.telecoeurForm = {...telecoeur.telecoeur};
-            this.sharedService.setterTelecoeur(this.telecoeurForm);
-            
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
+            this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (telecoeur: any) => {
 
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
+                //console.log(telecoeur.telecoeur);
+                this.telecoeurForm = {...telecoeur.telecoeur};
+                this.sharedService.setterTelecoeur(this.telecoeurForm);
+                
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.initForm();
     
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
+    });
   }
 
   onSubmitTelecoeur(){
+    console.log(this.telecoeurForm);
     this.sharedService.setterTelecoeur(this.telecoeurForm);
   }
 

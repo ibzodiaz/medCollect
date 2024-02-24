@@ -20,11 +20,15 @@ export class ParacliniquesComponent {
   paracliniquesForm: Paracliniques = this.initializeCliniquesForm();
   patientId:string='';
 
+  PatientAntecedantId:any;
+  consultationId:any;
+
   patientExists:boolean = false;
   
   private initializeCliniquesForm():Paracliniques {
     return {
-      patientId: null,
+      patientId: this.route.snapshot.paramMap.get('patientId'),
+      consultationId: this.route.snapshot.paramMap.get('consultationId'),
       biologie: {
         hemoglobinemie: 0,
         gb: 0,
@@ -86,39 +90,34 @@ export class ParacliniquesComponent {
     }
   }
 
-  
-  getPatientClinicSigns(): void {
-    this.route.queryParamMap.subscribe((queryParams: any) => {
-      if (queryParams.has('patientId')) {
-        this.patientId = queryParams.get('patientId');
-        this.paracliniquesService.getParaClinicSignsByPatientId(this.patientId).subscribe(
-          (paraclinicSigns: any) => {
-            this.paracliniquesForm = { ...paraclinicSigns, patientId: this.patientId };
-            //console.log(this.paracliniquesForm);
-            this.patientExists = true;
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.paracliniquesForm = this.initializeCliniquesForm();
-              this.patientExists = false;
-            } else {
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
-  
-  }
-  
-  getIdPatient(){
-    this.route.queryParamMap.subscribe((queryParams: any) => {
-      if (queryParams.has('patientId')) {
-        this.patientId = queryParams.get('patientId');
-        this.paracliniquesForm.patientId = this.patientId;
-      }
+  getPatientParaClinicSigns(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
+
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
+
+            this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (paraclinicSigns: any) => {
+                this.paracliniquesForm = paraclinicSigns;
+                //console.log(this.paracliniquesForm);
+                this.patientExists = true;
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.paracliniquesForm = this.initializeCliniquesForm();
+                  this.patientExists = false;
+                } else {
+                  console.error(err);
+                }
+              }
+            );
+        }
     });
   }
+  
 
   updateData(){
     
@@ -178,17 +177,16 @@ export class ParacliniquesComponent {
   }
 
   ngOnInit(): void {
-    this.getIdPatient();
-    //this.paracliniquesForm = this.initializeCliniquesForm();
-    this.getPatientClinicSigns();
+    this.paracliniquesForm = this.initializeCliniquesForm();
+    this.getPatientParaClinicSigns();
   }
 
   onSubmit(){
-    this.getIdPatient();
+
     this.updateData();
 
     if(this.patientExists){
-      this.paracliniquesService.updateParaClinicSigns(this.patientId,this.paracliniquesForm).subscribe(
+      this.paracliniquesService.updateParaClinicSigns(this.PatientAntecedantId,this.consultationId,this.paracliniquesForm).subscribe(
         (success:any)=>{
           alert("Modification réussie!");
         },

@@ -1,6 +1,7 @@
 export interface Paracliniques {
 
     patientId: string | null,
+    consultationId: string | null,
      biologie: {
         hemoglobinemie: Number,
         gb: Number,

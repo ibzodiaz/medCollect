@@ -16,13 +16,13 @@ export class ParacliniquesService {
     return this.http.post<Paracliniques>(this.url,ParaclinicSigns).pipe(catchError(this.errorHandler));
   }
 
-  updateParaClinicSigns(patientId:string,ParaclinicSigns:Paracliniques): Observable<Paracliniques>{
-    return this.http.patch<Paracliniques>(this.url+'/'+patientId,ParaclinicSigns).pipe(catchError(this.errorHandler));
+  updateParaClinicSigns(patientId:string,consultationId:string,ParaclinicSigns:Paracliniques): Observable<Paracliniques>{
+    return this.http.patch<Paracliniques>(this.url+'/'+patientId+'/'+consultationId,ParaclinicSigns).pipe(catchError(this.errorHandler));
   }
 
   
-  getParaClinicSignsByPatientId(patientId:string):Observable<Paracliniques>{
-    return this.http.get<Paracliniques>(this.url+'/one/'+patientId).pipe(catchError(this.errorHandler));
+  getParaClinicSignsByPatientId(patientId:string,consultationId:string):Observable<Paracliniques>{
+    return this.http.get<Paracliniques>(this.url+'/'+patientId+'/'+consultationId).pipe(catchError(this.errorHandler));
   }
 
 

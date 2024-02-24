@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FunctionsService {
 
-  constructor() { }
+  constructor(
+    private route:ActivatedRoute
+  ) { }
 
   getRandomColor() {
     return '#' + Math.floor(Math.random()*16777215).toString(16);
@@ -31,30 +36,31 @@ export class FunctionsService {
 
 
   isAvailable(planningList: any[], meetingForm: any, busyDays: any[]): boolean {
-    // Vérification de la disponibilité dans la liste des plannings
-    if(planningList.length != 0){
-      for (let planning of planningList) {
-          if (planning.date === meetingForm.date) {
-              if (!(meetingForm.hourEnd < planning.hourStart || meetingForm.hourStart > planning.hourEnd)) {
-                return false; // La période chevauche un créneau existant, donc elle est indisponible
-              }
-          }
-      }
+    // Vérification de la disponibilité dans la liste des plannings ou des jours déjà occupés
+    for (let planning of planningList) {
+        if (planning.date === meetingForm.date && !(meetingForm.hourEnd < planning.hourStart || meetingForm.hourStart > planning.hourEnd)) {
+            // La période chevauche un créneau existant, donc elle est indisponible
+            return false;
+        }
+    }
+    for (let busy of busyDays) {
+        if (busy.date === meetingForm.date && !(meetingForm.hourEnd < busy.hourStart || meetingForm.hourStart > busy.hourEnd)) {
+            // La période chevauche un créneau existant, donc elle est indisponible
+            return false;
+        }
     }
 
-    // Vérification de la disponibilité dans les jours déjà occupés
-    if(busyDays.length != 0){
-      for (let busy of busyDays) {
-          if (busy.date === meetingForm.date) {
-              // Vérification si le rendez-vous chevauche un créneau existant
-              if (!(meetingForm.hourEnd < busy.hourStart || meetingForm.hourStart > busy.hourEnd)) {
-                  return false; // La période chevauche un créneau existant, donc elle est indisponible
-              }
-          }
-      }
-    }
 
-    // Si la date n'est pas trouvée dans les jours déjà occupés ou si elle ne chevauche aucun créneau existant, elle est disponible
+    // Si aucune date n'a été trouvée dans les jours déjà occupés ou les plannings existants, la période est disponible
     return true;
   }
+
+  observeParamIdChanges(id:string): Observable<string> {
+    return this.route.paramMap.pipe(
+        map((params: ParamMap) => params.get(id) || '')
+    );
+}
+
+
+
 }

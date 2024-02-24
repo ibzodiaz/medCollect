@@ -3,6 +3,7 @@ import { Antecedents } from 'src/app/_interfaces/antecedants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AntecedantsService } from 'src/app/_services/antecedants.service';
 import { SharedService } from 'src/app/_services/shared.service';
+import { FunctionsService } from 'src/app/_services/functions.service';
 
 @Component({
   selector: 'app-antecedents',
@@ -12,6 +13,8 @@ import { SharedService } from 'src/app/_services/shared.service';
 export class AntecedentsComponent {
 
   PatientAntecedantId:any;
+  consultationId:any;
+
   patientExists: boolean =false;
 
   hospitalisationForm:any;
@@ -23,8 +26,9 @@ export class AntecedentsComponent {
   initForm():void{
       
     this.antecedantForm = {
-      patientId: '',
-    
+
+      patientId: this.route.snapshot.queryParamMap.get("patientId"),
+
       htaGravidique: false,
       diabete_gestionnelle: false,
       pre_eclampsie: false,
@@ -34,7 +38,7 @@ export class AntecedentsComponent {
       gestite: 0,
       parite: 0,
       grossessesGemellaires: false,
-      tocolyseProlongee: '',
+      tocolyseProlongee: false,
 
       atcdDecompensation: false,
       nombreAtcdDecompensation:0,
@@ -51,7 +55,8 @@ export class AntecedentsComponent {
     private router:Router,
     private route: ActivatedRoute, 
     private antecedantsService:AntecedantsService,
-    private sharedService:SharedService
+    private sharedService:SharedService,
+    private functionsService:FunctionsService
     ) {}
 
   ngOnInit(): void {
@@ -61,27 +66,32 @@ export class AntecedentsComponent {
 
 
   getPatientAntecedant(): void {
-    this.route.queryParamMap.subscribe((queryParams: any) => {
-      if (queryParams.has('patientId')) {
-        this.PatientAntecedantId = queryParams.get('patientId');
-        this.antecedantsService.getAntecedantByPatientId(this.PatientAntecedantId).subscribe(
-          (antecedants: any) => {
-            this.antecedantForm = { ...antecedants, patientId: this.PatientAntecedantId };
-            this.patientExists = true;
-            console.log(this.antecedantForm);
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
-              this.patientExists = false;
-            } else {
-              console.error(err);
-            }
-          }
-        );
-      }
+    this.route.queryParamMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        //const consultationId = params.get('consultationId');
+
+        if (patientId) {
+            this.PatientAntecedantId = patientId;
+            //this.consultationId = consultationId;
+
+            this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
+                (antecedants: any) => {
+                    this.antecedantForm = antecedants;
+                    this.patientExists = true;
+                },
+                (err: any) => {
+                    if (err.status === undefined) {
+                        this.initForm();
+                        this.patientExists = false;
+                    } else {
+                        console.error(err);
+                    }
+                }
+            );
+        }
     });
   }
+
 
   
   initATCD(){
@@ -123,6 +133,7 @@ export class AntecedentsComponent {
   }
 
   onSubmitAntecedant(): void {
+   
 
     if(!this.antecedantForm.atcdDecompensation){
       this.initATCD();
@@ -143,14 +154,15 @@ export class AntecedentsComponent {
       this.antecedantForm.hospitalisationsAnterieures = this.sharedService.getterhospitalisation().hospitalisationsAnterieures;
       this.antecedantForm.nombreHospitalisations = this.sharedService.getterhospitalisation().nombreHospitalisations;  
     }
+
+    //console.log(JSON.stringify(this.PatientAntecedantId));
     
     if (this.patientExists) {
       
-      this.updateAntecedant(this.PatientAntecedantId, this.antecedantForm);
+      this.updateAntecedant(this.PatientAntecedantId,this.antecedantForm);
  
     } else {
       
-      this.antecedantForm.patientId = this.PatientAntecedantId;
       this.createNewAntecedant(this.antecedantForm);
 
     }
@@ -169,7 +181,7 @@ export class AntecedentsComponent {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";
-      this.router.navigate([], { queryParams: { patientId: null } });
+      this.router.navigate([], { queryParams: { patientId: null ,consultationId: null} });
     }
   }
 

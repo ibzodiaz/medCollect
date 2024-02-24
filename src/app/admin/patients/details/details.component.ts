@@ -26,17 +26,22 @@ export class DetailsComponent {
 
     this.patientsService.getPatientById(this.patientId).subscribe(
       (patient:any)=>{
-        this.patient = patient;
+        if(patient){
+          this.patient = patient;
+        }
+      
       },
-      (err:any)=>console.log(err.message())
+      (err:any)=>console.log(err.message)
     );
 
-    this.antecedantService.getAntecedantByPatientId(this.patientId).subscribe(
-      (antecedants:any)=>{
-        this.antecedants = antecedants;
-        console.log(antecedants);
-      },
-      (err:any)=>console.log(err.message())
-    );
+    // this.antecedantService.getAntecedantByPatientId(this.patientId).subscribe(
+    //   (antecedants:any)=>{
+    //     this.antecedants = antecedants;
+    //     console.log(antecedants);
+    //   },
+    //   (err:any)=>console.log(err.message)
+    // );
   }
+
+
 }

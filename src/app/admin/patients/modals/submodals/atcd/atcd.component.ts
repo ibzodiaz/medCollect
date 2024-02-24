@@ -16,7 +16,9 @@ export class AtcdComponent {
   @Output() emittedEventA =  new EventEmitter<boolean>();
   @Output() emittedAtcdForm =  new EventEmitter<any>();
 
+
   PatientAntecedantId:any;
+  consultationId:any;
     
   atcdForm: Antecedents = { }
 
@@ -39,33 +41,36 @@ export class AtcdComponent {
     this.updateFormWithPatientData();
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientAntecedantId = queryParams.get('patientId');
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        //const consultationId = params.get('consultationId');
 
-        this.antecedantsService.getAntecedantByPatientId(this.PatientAntecedantId).subscribe(
-          (antecedants: any) => {
+        if (patientId) {
+            this.PatientAntecedantId = patientId;
+            //this.consultationId = consultationId;
 
-            this.atcdForm = {...antecedants};
-            this.sharedService.setterATCD(this.atcdForm);
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-
-              this.initForm();
-
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
+            this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
+              (antecedants: any) => {
+  
+                this.atcdForm = {...antecedants};
+                this.sharedService.setterATCD(this.atcdForm);
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+        
+                  this.initForm();
+        
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
     });
-    
   }
+
 
 
   openModal(modalId: string): void {

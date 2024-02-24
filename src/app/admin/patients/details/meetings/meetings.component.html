@@ -1,0 +1,24 @@
+
+<div class="row mb-3 mt-3">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Date :</td>
+                    <td>Docteur :</td>
+                    <td>Hôpitale :</td>
+                    <td>Lieu :</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let meet of meetsPatientList">
+                    <td>{{meet.date | date:'dd/MM/yyyy'}}</td>
+                    <td>Dr. {{meet.userId.prenom}} {{meet.userId.nom}}</td>
+                    <td>{{meet.hospitalId.Nom}}</td>
+                    <td>{{meet.hospitalId.Lieu}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

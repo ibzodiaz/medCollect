@@ -13,6 +13,8 @@ export class DecesComponent {
   decesForm:any={ }
 
   PatientId:string='';
+  PatientAntecedantId :any;
+  consultationId :any;
 
   constructor(
     private sharedService:SharedService,
@@ -35,33 +37,35 @@ export class DecesComponent {
     }
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientId = queryParams.get('patientId');
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
 
-        this.evolutionService.getEvolutionByPatientId(this.PatientId).subscribe(
-          (deces: any) => {
-            if(deces.mere.detailsDeces.presente){
-              this.decesForm = {...deces.mere};
-              this.sharedService.setterDeces(this.decesForm);
-            }
-            
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
 
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
+            this.evolutionService.getEvolutionByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (deces: any) => {
+                if(deces.mere.detailsDeces.presente){
+                  this.decesForm = {...deces.mere};
+                  this.sharedService.setterDeces(this.decesForm);
+                }
+                
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.initForm();
     
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
+    });
   }
 
   onSubmit(){

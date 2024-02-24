@@ -388,9 +388,10 @@ export class MeetsComponent {
 
       let available = this.functionsService.isAvailable(this.planningList,this.meetingForm, this.busyDays);
 
-      console.log(this.planningList);
-      console.log(this.busyDays);
-      console.log(available);
+      // console.log(this.planningList);
+      // console.log(this.busyDays);
+      // console.log(this.meetingForm);
+      // console.log(available);
 
       if(available){
         this.updateMeet(this.meetingId,this.meetingForm);
@@ -428,6 +429,9 @@ export class MeetsComponent {
       let available = this.functionsService.isAvailable(this.planningList,this.meetingForm, this.busyDays);
 
       if(available){
+        //console.log("Id hopital",this.hospitalId);
+        this.meetingForm.hospitalId = this.hospitalId;
+        //console.log(this.meetingForm)
         this.addMeeting(this.meetingForm);
       }
       else

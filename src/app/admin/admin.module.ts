@@ -17,6 +17,9 @@ import { AssistantComponent } from './assistant/assistant.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FormsModule } from '@angular/forms';
 import { PlanningComponent } from './planning/planning.component';
+import { OrdonnancesComponent } from './ordonnances/ordonnances.component';
+import { AttenteComponent } from './attente/attente.component';
+import { HelpComponent } from './help/help.component';
 
 
 
@@ -34,7 +37,10 @@ import { PlanningComponent } from './planning/planning.component';
     LanguagesComponent,
     MeetsComponent,
     AssistantComponent,
-    PlanningComponent
+    PlanningComponent,
+    OrdonnancesComponent,
+    AttenteComponent,
+    HelpComponent
   ],
   imports: [
     CommonModule,

@@ -16,6 +16,15 @@ export class AntecedantsService {
     return this.http.post<Antecedents>(this.url,patient).pipe(catchError(this.errorHandler));
   }
 
+  // updatePatient(patientId:string,consultationId:string,patient:Antecedents): Observable<Antecedents>{
+  //   return this.http.patch<Antecedents>(this.url+'/'+patientId+'/'+consultationId,patient).pipe(catchError(this.errorHandler));
+  // }
+
+  
+  // getAntecedantByPatientId(patientId:string,consultationId:string):Observable<Antecedents>{
+  //   return this.http.get<Antecedents>(this.url+'/'+patientId+'/'+consultationId).pipe(catchError(this.errorHandler));
+  // }
+
   updatePatient(patientId:string,patient:Antecedents): Observable<Antecedents>{
     return this.http.patch<Antecedents>(this.url+'/'+patientId,patient).pipe(catchError(this.errorHandler));
   }
@@ -27,7 +36,7 @@ export class AntecedantsService {
 
 
   private errorHandler(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
  }
 }

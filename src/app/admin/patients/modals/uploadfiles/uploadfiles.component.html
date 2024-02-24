@@ -3,25 +3,23 @@
     <div class="modal-content text-center">
 
             
-            <form>
-                <input type="file" id="fileInput" multiple (change)="onFileSelected($event)">
-                <label for="fileInput">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                </label>
-            </form>
-            <div *ngFor="let name of fileName">
-                <h6>{{name}}</h6>
-            </div>            
+    <form name="files">
+        <div class="upload">
+            <input type="file" id="fileInput" multiple (change)="onFileSelected($event)">
+            <label for="fileInput">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </label>
+        </div>
+        <div *ngFor="let name of fileName">
+            <h6>{{name}}</h6>
+        </div>            
 
         <div class="row text-center mt-3">
             <div class="col">
-                <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal20')"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                <button class="btn btn-secondary rounded-0 w-50" (click)="closeModal('modal20')"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
             </div>
         </div>
-        
+    </form>
   
     </div>
 </div>

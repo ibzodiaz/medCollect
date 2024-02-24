@@ -15,21 +15,21 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="doctor">Docteur</label>
-                    <select id="doctor" class="form-control" [(ngModel)]="meetingForm.userId" name="doctor">
+                    <select id="doctor" class="form-control rounded-0" [(ngModel)]="meetingForm.userId" name="doctor">
                         <option *ngFor="let user of usersList" [value]="user._id">{{user.prenom}}-{{user.nom}}</option>
                     </select>
                 </div>
       
                 <div class="col">
                     <label for="patient">Patient</label>
-                    <select id="patient" class="form-control" [(ngModel)]="meetingForm.patientId" name="patient">
+                    <select id="patient" class="form-control rounded-0" [(ngModel)]="meetingForm.patientId" name="patient">
                         <option *ngFor="let patient of patientsList" [value]="patient._id">{{patient.prenom}}-{{patient.nom}}-{{patient.telephone}}</option>
                     </select>  
                 </div>
 
                 <div class="col">
                     <label for="meeting">Date du rendez-vous</label>
-                    <input type="date" id="meeting" class="form-control" [(ngModel)]="meetingForm.date" name="date">
+                    <input type="date" id="meeting" class="form-control rounded-0" [(ngModel)]="meetingForm.date" name="date">
                 </div>
 
              
@@ -37,17 +37,17 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="hourStart">Début du rendez-vous</label>
-                    <input type="time" id="hourStart" class="form-control" step="1" [(ngModel)]="meetingForm.hourStart" name="hourStart">
+                    <input type="time" id="hourStart" class="form-control rounded-0" step="1" [(ngModel)]="meetingForm.hourStart" name="hourStart">
                 </div>
 
                 <div class="col">
                     <label for="hourEnd">Fin du rendez-vous</label>
-                    <input type="time" id="hourEnd" class="form-control" step="1" [(ngModel)]="meetingForm.hourEnd" name="hourEnd">
+                    <input type="time" id="hourEnd" class="form-control rounded-0" step="1" [(ngModel)]="meetingForm.hourEnd" name="hourEnd">
                 </div>
       
                 <div class="col">
-                    <label for="subject">Sujet</label>
-                    <textarea id="subject" class="form-control" [(ngModel)]="meetingForm.subject" name="subject"></textarea>
+                    <label for="subject">Objet du rendez-vous</label>
+                    <textarea id="subject" class="form-control rounded-0" [(ngModel)]="meetingForm.subject" name="subject"></textarea>
                 </div>
             </div>
         </form>

@@ -9,7 +9,7 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="../../../../assets/images/profil-doc.avif" alt="Admin" class="rounded-circle">
                     <div class="mt-3">
-                      <h4>Dr. {{user.prenom}} {{user.nom}}</h4>
+                      <h4>Dr. {{user?.prenom}} {{user?.nom}}</h4>
                       <p class="text-secondary mb-1"><i class="fa-solid fa-fire-flame-curved"></i>&nbsp;<i class="fa-solid fa-fire-flame-curved"></i>&nbsp;<i class="fa-solid fa-fire-flame-curved"></i>&nbsp;<i class="fa-solid fa-fire-flame-curved"></i>&nbsp;<i class="fa-solid fa-fire-flame-curved"></i>&nbsp;</p>
                       <button class="btn btn-customized"><i class="fa-solid fa-cloud-arrow-up"></i>&nbsp;Modifier le profil</button>
                     </div>
@@ -27,7 +27,7 @@
                       <p class="mb-0">Nom</p>
                     </div>
                     <div class="col text-secondary">
-                      {{user.nom}}
+                      {{user?.nom}}
                     </div>
                   </div>
                   <div class="line"></div>
@@ -36,7 +36,7 @@
                       <p class="mb-0">Prénom</p>
                     </div>
                     <div class="col text-secondary">
-                      {{user.prenom}}
+                      {{user?.prenom}}
                     </div>
                   </div>
                   <div class="line"></div>
@@ -45,7 +45,7 @@
                       <p class="mb-0">Email</p>
                     </div>
                     <div class="col text-secondary">
-                      {{user.email}}
+                      {{user?.email}}
                     </div>
                   </div>
                   
@@ -55,7 +55,7 @@
                       <p class="mb-0">Pseudo</p>
                     </div>
                     <div class="col text-secondary">
-                      {{user.pseudo}}
+                      {{user?.pseudo}}
                     </div>
                   </div>
 
@@ -73,7 +73,7 @@
                       <p class="mb-0">Lieu</p>
                     </div>
                     <div class="col text-secondary">
-                      {{user.hopitalId.Lieu}}
+                      {{user?.hopitalId.Lieu}}
                     </div>
                   </div>
                   <div class="line"></div>
@@ -82,7 +82,7 @@
                       <p class="mb-0">Hôpital</p>
                     </div>
                     <div class="col text-secondary">
-                      {{user.hopitalId.Nom}}
+                      {{user?.hopitalId.Nom}}
                     </div>
                   </div>
                   <div class="line"></div>
@@ -91,7 +91,7 @@
                       <p class="mb-0">Service</p>
                     </div>
                     <div class="col text-secondary">
-                      {{user.service}}
+                      {{user?.service}}
                     </div>
                   </div>
 
@@ -101,7 +101,7 @@
                       <p class="mb-0">Spécialitée</p>
                     </div>
                     <div class="col text-secondary">
-                      {{user.speciality}}
+                      {{user?.speciality}}
                     </div>
                   </div>
 
@@ -136,13 +136,13 @@
                   </thead>
                       <tbody>
                           <tr *ngFor="let user of usersList" class="text-center">
-                              <td>{{ user.prenom }}</td>
-                              <td>{{ user.nom }}</td>
-                              <td>{{ user.email }}</td>
-                              <td>{{ user.createdAt | date:'dd/mm/yyyy' }}</td>
-                              <td>{{ user.updatedAt | date:'dd/mm/yyyy' }}</td>
+                              <td>{{ user?.prenom }}</td>
+                              <td>{{ user?.nom }}</td>
+                              <td>{{ user?.email }}</td>
+                              <td>{{ user?.createdAt | date:'dd/mm/yyyy' }}</td>
+                              <td>{{ user?.updatedAt | date:'dd/mm/yyyy' }}</td>
                               <td>Editeur</td>
-                              <td><a class="vue" [routerLink]="['edit',user._id]">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></a></td>
+                              <td><a class="vue" [routerLink]="['edit',user?._id]">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></a></td>
                           </tr>
 
                       </tbody>

@@ -1,6 +1,14 @@
 <div class="container">
     <div class="main-body">
     
+        <div class="row mb-3">
+            <div class="col">
+                <button [routerLink]="['/admin/patients/informations']" class="btn btn-primary rounded-0"><i class="fa-solid fa-arrow-left"></i>&nbsp;Retour</button>
+            </div>
+            <div class="col"></div>
+            <div class="col-md-3"><h3><i class="fa-regular fa-address-card"></i>&nbsp;Profil patient</h3></div>
+        </div>
+
         <div class="row gutters-sm">
             <div class="col-md-2 mb-3">
                 <div class="card">
@@ -11,249 +19,114 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-column align-items-center text-center">
-                                    
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="float-start"><i class="fa-solid fa-folder-open"></i>&nbsp;Documents</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="float-start"><i class="fa-regular fa-handshake"></i>&nbsp;Rendez-vous</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="float-start"><i class="fa-solid fa-prescription-bottle-medical"></i>&nbsp;Ordonnances</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="float-start"><i class="fa-solid fa-file-signature"></i>&nbsp;Consultation</p>
-                                        </div>
-                                    </div>
-
-                                  
-                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
             
             <div class="col">
                 <div class="row">
                     <div class="col">
                         <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="mb-5 text-center"><span>Informations du patient</span></h5>
-            
+                            <div class="card-body h-t">
+                           
                                 <div class="row mb-3">
                                     <div class="col">
                                         <p class="mb-0"><strong>Nom:</strong></p>
                                     </div>
                                     <div class="col text-secondary">
-                                        {{patient.nom}}
+                                        {{patient?.nom || ""}}
                                     </div>
                                     <div class="col">
                                         <p class="mb-0"><strong>Prénom:</strong></p>
                                     </div>
                                     <div class="col text-secondary">
-                                        {{patient.prenom}}
+                                        {{patient?.prenom || ""}}
                                     </div>
                                    
                                 </div>
-                                <div class="line"></div>
+                               
                                 
                                 <div class="row mb-3">
                                     <div class="col">
                                         <p class="mb-0"><strong>Age:</strong></p>
                                     </div>
                                     <div class="col text-secondary">
-                                        {{patient.age}}
+                                        {{patient?.age || 0}}
                                     </div>
 
                                     <div class="col">
                                         <p class="mb-0"><strong>Téléphone:</strong></p>
                                     </div>
                                     <div class="col text-secondary">
-                                        {{patient.telephone}}
+                                        {{patient?.telephone || ""}}
                                     </div>
                                 
                                 </div>
 
-                                <div class="line"></div>
+                               
                                 <div class="row mb-3">
                                     <div class="col">
                                         <p class="mb-0"><strong>Statut matrimonial:</strong></p>
                                     </div>
                                     <div class="col text-secondary">
-                                        {{patient.statut}}
+                                        {{patient?.statut || ""}}
                                     </div>
                                     <div class="col">
                                         <p class="mb-0"><strong>Profession:</strong></p>
                                     </div>
                                     <div class="col text-secondary">
-                                        {{patient.profession}}
+                                        {{patient?.profession || ""}}
                                     </div>
                    
                                 </div>
-                                <div class="line"></div>
+                               
                                 <div class="row mb-3">
                 
                                     <div class="col-md-3">
                                         <p class="mb-0"><strong>Niveau socio-économique:</strong></p>
                                     </div>
                                     <div class="col text-secondary">
-                                        {{patient.niveau_socioeconomique}}
+                                        {{patient?.niveau_socioeconomique || ""}}
                                     </div>
                                 </div>
-                                <div class="line"></div>
+                               
             
                             </div>
                           </div>
                     </div>
                 </div>
-              <div class="card mb-3">
-                
-                <div class="card-body">
-                    <h5 class="mb-5 text-center"><span>Antécédants</span></h5>
-                    <h6>Médicaux</h6>
-                    <div class="line"></div>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">HTA Gravidique:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{ antecedants.htaGravidique ? "OUI" : "NON" }}
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"> Diabète Gestationnelle:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{ antecedants.diabete_gestionnelle ? "OUI" : "NON" }}
-                    </div>
-                  </div>
-              
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Pré-éclampsie:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{ antecedants.pre_eclampsie ? "OUI" : "NON" }}
-                    </div>
-                  </div>
-                  
-       
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Autres:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{antecedants.autres}}
-                    </div>
-                  </div>
-                  <div class="line"></div>
 
-                  <h6>Gyneco-Obstetricaux</h6>
-
-                  <div class="line"></div>
-
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Menarche:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{antecedants.menarche}}
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Gestite:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                       {{antecedants.gestite}}
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Parite:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                       {{antecedants.parite}}
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">GrossessesGemellaires:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                       {{antecedants.grossessesGemellaires ? "OUI":"NON"}}
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">TocolyseProlongee:</p>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                       {{antecedants.tocolyseProlongee}}
-                    </div>
-                  </div>
-                  <div class="line"></div>
-                  
-                  <h6>ATCD Decompensation:</h6>
-                  <div class="line"></div>
-                  <div class="row">
-
-                    <div class="col-sm-2 text-secondary">
-                       {{antecedants.atcdDecompensation ? "OUI":"NON"}}
-                    </div>
-                    <div class="col-sm-2">
-                        Nombre: {{antecedants.nombreAtcdDecompensation}}
-                    </div>
-                    <div class="col-sm-5">
-                        Type Insuffisance Cardiaque: {{antecedants.typeInsuffisanceCardiaque}}
-                    </div>
-                  </div>
-
-                  <div class="line"></div>
-                  <h6>Hospitalisations Anterieures</h6>
-                  <div class="line"></div>
-                  <div class="row">
-          
-                    <div class="col-sm-2 text-secondary">
-                        {{antecedants.hospitalisationsAnterieures ? "OUI":"NON"}}
-                    </div>
-                    <div class="col-sm-2 text-secondary">
-                        Nombre: {{antecedants.nombreHospitalisations}}
-                    </div>
-                  </div>
-                  <div class="line"></div>
-
-                </div>
-              </div>
             </div>
   
 
-          </div>
+        </div>
 
+        <div class="row">
+          <div class="col">                            
+              <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <button class="nav-link active" id="nav-consultation-tab" data-bs-toggle="tab" data-bs-target="#nav-consultation" type="button" role="tab" aria-controls="nav-consultation" aria-selected="true"><i class="fa-solid fa-file-signature"></i>&nbsp;Consultation</button>
+                  <button class="nav-link" id="nav-documents-tab" data-bs-toggle="tab" data-bs-target="#nav-documents" type="button" role="tab" aria-controls="nav-documents" aria-selected="false"><i class="fa-solid fa-folder-open"></i>&nbsp;Documents</button>
+                  <button class="nav-link" id="nav-meetings-tab" data-bs-toggle="tab" data-bs-target="#nav-meetings" type="button" role="tab" aria-controls="nav-meetings" aria-selected="false"><i class="fa-regular fa-handshake"></i>&nbsp;Rendez-vous</button>
+                  <button class="nav-link" id="nav-ordonnances-tab" data-bs-toggle="tab" data-bs-target="#nav-ordonnances" type="button" role="tab" aria-controls="nav-ordonnances" aria-selected="false"><i class="fa-solid fa-prescription-bottle-medical"></i>&nbsp;Ordonnances</button>
+                </div>
+              </nav>
+              <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-consultation" role="tabpanel" aria-labelledby="nav-consultation-tab" tabindex="0">
+                    <app-consultations></app-consultations>
+                  </div>
+
+                  <div class="tab-pane fade" id="nav-documents" role="tabpanel" aria-labelledby="nav-documents-tab" tabindex="0">
+                    <app-documents></app-documents>
+                  </div>
+
+                  <div class="tab-pane fade" id="nav-meetings" role="tabpanel" aria-labelledby="nav-meetings-tab" tabindex="0">
+                    <app-meetings></app-meetings>
+                  </div>
+
+                  <div class="tab-pane fade" id="nav-ordonnances" role="tabpanel" aria-labelledby="nav-ordonnances-tab" tabindex="0">
+                    <app-ordonnances></app-ordonnances>
+                  </div>
+              </div>
+          </div>
+        </div>
     </div>
 </div>

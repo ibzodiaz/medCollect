@@ -27,6 +27,10 @@ import { DecesComponent } from './modals/submodals/deces/deces.component';
 import { UploadfilesComponent } from './modals/uploadfiles/uploadfiles.component';
 import { InformationsComponent } from './informations/informations.component';
 import { DetailsComponent } from './details/details.component';
+import { ConsultationsComponent } from './details/consultations/consultations.component';
+import { DocumentsComponent } from './details/documents/documents.component';
+import { MeetingsComponent } from './details/meetings/meetings.component';
+import { OrdonnancesComponent } from './details/ordonnances/ordonnances.component';
 
 
 @NgModule({
@@ -54,7 +58,11 @@ import { DetailsComponent } from './details/details.component';
     DecesComponent,
     UploadfilesComponent,
     InformationsComponent,
-    DetailsComponent
+    DetailsComponent,
+    ConsultationsComponent,
+    DocumentsComponent,
+    MeetingsComponent,
+    OrdonnancesComponent
   ],
   imports: [
     CommonModule,

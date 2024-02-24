@@ -20,6 +20,9 @@ export class EcgComponent {
 
   PatientId:string = '';
 
+  PatientAntecedantId :any;
+  consultationId :any;
+
   ngOnInit(){
     this.initForm();
     this.updateFormWithPatientData();
@@ -32,33 +35,37 @@ export class EcgComponent {
     }
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientId = queryParams.get('patientId');
 
-        this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientId).subscribe(
-          (ecg: any) => {
-            this.ecgForm = {...ecg.ecg};
-            this.sharedService.setterTelecoeur(this.ecgForm);
-            // alert(JSON.stringify(ecg.ecg))
-            
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
 
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
+
+            this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (ecg: any) => {
+                this.ecgForm = {...ecg.ecg};
+                this.sharedService.setterEcg(this.ecgForm);
+                // alert(JSON.stringify(ecg.ecg))
+                
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.initForm();
     
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
+    });
   }
+
 
   onSubmitEcg(){
     this.sharedService.setterEcg(this.ecgForm);

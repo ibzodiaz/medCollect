@@ -20,8 +20,12 @@ export class MeetsService {
     return this.http.get<Meets>(this.url).pipe(catchError(this.errorHandler));;
   }
 
-  getMeetsByDoctorId(id:any):Observable<Meets>{
-    return this.http.get<Meets>(this.url+'/'+id).pipe(catchError(this.errorHandler));
+  getMeetsByDoctorId(doctorId:any):Observable<Meets>{
+    return this.http.get<Meets>(this.url+'/'+doctorId).pipe(catchError(this.errorHandler));
+  }
+
+  getMeetsByPatientId(patientId:any):Observable<Meets>{
+    return this.http.get<Meets>(this.url+'/meetingsbypatient/'+patientId).pipe(catchError(this.errorHandler));
   }
 
   getMeetsByHospitalId(hostipalId:any):Observable<Meets>{

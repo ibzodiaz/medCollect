@@ -13,6 +13,9 @@ export class ModaliteevolutionComponent {
   modeliteevolutionForm:any = { }
   PatientId:string = '';
 
+  PatientAntecedantId :any;
+  consultationId :any;
+
   constructor(
     private sharedService:SharedService,
     private route:ActivatedRoute,
@@ -50,35 +53,38 @@ export class ModaliteevolutionComponent {
     }
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientId = queryParams.get('patientId');
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
 
-        this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientId).subscribe(
-          (evolution: any) => {
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
 
-            this.modeliteevolutionForm = {...evolution.modaliteEvolutiveHospitalisation};
-            this.sharedService.setterEvolution(this.modeliteevolutionForm);
+            this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (evolution: any) => {
 
-            //alert(JSON.stringify(evolution.modaliteEvolutiveHospitalisation))
-            
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
-
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
+                this.modeliteevolutionForm = {...evolution.modaliteEvolutiveHospitalisation};
+                this.sharedService.setterEvolution(this.modeliteevolutionForm);
     
+                //alert(JSON.stringify(evolution.modaliteEvolutiveHospitalisation))
+                
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.initForm();
+    
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
+    });
   }
+
 
   closeModal(modalId: string): void {
     const modal = document.getElementById(modalId);

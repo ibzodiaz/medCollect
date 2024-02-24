@@ -14,7 +14,9 @@
         </div>
         
         <h2 class="text-center mb-5 mt-3">Fiche patient</h2>
+
         <div class="border rounded-3">
+            <h6 class="text-center">Socio-Démographie</h6>
             <div class="row">
                 <div class="col-md-3">
                     <img src="../../../../../assets/images/thepatient.png" class="img-fiche">
@@ -22,43 +24,37 @@
                 <div class="col">
                     <table>
                         <tr>
-                            <td colspan="2"><h6>Informations du patient</h6></td>
-                        </tr>
-                        <tr>
                             <td><span>Nom:</span></td>
-                            <td>Sylva</td>
+                            <td>{{ patient?.nom || "" }}</td>
                         </tr>
                         <tr>
                             <td><span>Prénom:</span></td>
-                            <td>Sylvia</td>
+                            <td>{{patient?.prenom || ""}}</td>
                         </tr>
                         <tr>
                             <td><span>Age:</span></td>
-                            <td>26</td>
+                            <td>{{patient?.age || ""}}</td>
                         </tr>
                         
                         <tr>
                             <td><span>Téléphone:</span></td>
-                            <td>+221 77 000 22 22</td>
+                            <td>{{patient?.telephone || ""}}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="col">
                     <table>
                         <tr>
-                            <td colspan="2"><h6>Socio-Démographie</h6></td>
-                        </tr>
-                        <tr>
                             <td><span>Adresse:</span></td>
-                            <td>zone magique</td>
+                            <td>{{patient?.adresse || ""}}</td>
                         </tr>
                         <tr>
                             <td><span>Statut matrimonial:</span></td>
-                            <td>Célibataire</td>
+                            <td>{{patient?.statut || ""}}</td>
                         </tr>
                         <tr>
                             <td><span>Niveau socio-économique:</span></td>
-                            <td>Moyen</td>
+                            <td>{{patient?.niveau_socioeconomique || ""}}</td>
                         </tr>
                         
                     </table>
@@ -66,227 +62,363 @@
             </div>
         </div>
 
-        <div class="border rounded-3 mt-5">
+        <div class="border rounded-3 mt-3">
+            <h6 class="text-center">Antécédents</h6>
             <div class="row">
                 <div class="col">
                     <table>
                         <tr>
-                            <td colspan="2"><h6>Antécédents</h6></td>
+                            <td><span>HTA-gravidique:</span> {{antecedant?.htaGravidique ? 'OUI' : 'NON'}}</td>
+                            
+                            <td><span>Diabète Gestationnelle:</span> {{antecedant?.diabete_gestionnelle ? 'OUI' : 'NON'}}</td>
+                            
+                            <td><span>Pré-éclampsie:</span> {{antecedant?.pre_eclampsie ? 'OUI' : 'NON'}}</td>
+                            
+                            <td><span>Autres:</span> {{antecedant?.autres || ""}}</td>
                         </tr>
-                        <tr>
-                            <td><span>HTA-gravidique:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Diabète Gestationnelle:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Pré-éclampsie:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Autres:</span></td>
-                            <td>...</td>
-                        </tr>
+                    </table>
+                    <p class="text-center">Gyneco-Obstetricaux</p>
+                    <table>
                         <!-- Gyneco-Obstetricaux -->
                         <tr>
-                            <td colspan="2"><p class="text-center">Gyneco-Obstetricaux</p></td>
+                            <td><span>Menarche:</span> {{antecedant?.menarche || 0 }}</td>
+                            
+                            <td><span>Gestite:</span> {{antecedant?.gestite || 0}}</td>
+                            
+                            <td><span>Parite:</span> {{antecedant?.parite || 0}}</td>
+                            
+                            <td><span>grossesses Gemellaires:</span> {{antecedant?.grossessesGemellaires ? 'OUI' : 'NON'}}</td>
                         </tr>
                         <tr>
-                            <td><span>Menarche:</span></td>
-                            <td>Non</td>
+                            <td><span>tocolyse Prolongee:</span> {{antecedant?.tocolyseProlongee ? 'OUI' : 'NON'}}</td>
+                            
+                            <td><span>ATCD Decompensation:</span> {{antecedant?.atcdDecompensation ? 'OUI' : 'NON'}}</td>
+                            
+                            <td><span>Nombre:</span> {{antecedant?.nombreAtcdDecompensation || 0}}</td>
+                            
+                            <td><span>Type Insuffisance Cardiaque:</span> {{antecedant?.typeInsuffisanceCardiaque || ""}}</td>
                         </tr>
                         <tr>
-                            <td><span>Gestite:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Parite:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>ATCD Decompensation:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Nombre:</span></td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td><span>Type Insuffisance Cardiaque:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Hospitalisations Anterieures:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Nombre:</span></td>
-                            <td>0</td>
+                            <td><span>Hospitalisations Anterieures:</span> {{antecedant?.hospitalisationsAnterieures ? 'OUI' : 'NON'}}</td>
+                            
+                            <td><span>Nombre:</span> {{antecedant?.nombreHospitalisations || 0}}</td>
                         </tr>
                     </table>
                 </div>
+            </div>
+        </div>
 
+        <div class="border rounded-3 mt-3">
+            <h6 class="text-center">Signes Cliniques</h6>
+            <div class="row">
                 <div class="col">
                     <table>
                         <tr>
-                            <td colspan="2"><h6 class="text-center">Signes Cliniques</h6></td>
+                            <td><span>Dyspnée d'Effort:</span> {{cliniques?.dyspneeEffort?.presente ? 'OUI' : 'NON'}}</td>
+                            
+                            <td><span>Type NYHA:</span> {{cliniques?.dyspneeEffort?.typeNYHA}}</td>
+                            
+                            <td><span>Œdème Aigu du Poumon:</span> {{cliniques?.oedemeAiguPoumon?.presente ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Toux:</span> {{cliniques?.toux?.presente ? 'OUI':'NON'}}</td>
                         </tr>
                         <tr>
-                            <td><span>Dyspnée d'Effort:</span></td>
-                            <td>Non</td>
+                            <td><span>Palpitations:</span> {{cliniques?.palpitations?.presente ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>OMI:</span> {{cliniques?.omi?.presente ? 'OUI':'NON'}}</td>
                         </tr>
-                        <tr>
-                            <td><span>Type NYHA:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Œdème Aigu du Poumon:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Toux:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Palpitations:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>OMI:</span></td>
-                            <td>Non</td>
-                        </tr>
+                    </table>
+
+                    <p class="text-center">Constantes</p>
+                    <table>
                         <!-- Constantes -->
                         <tr>
-                            <td colspan="2"><p class="text-center">Constantes</p></td>
+                            <td><span>TA Systolique:</span> {{cliniques?.constantes?.ta?.systolique || 0}}</td>
+                            
+                            <td><span>TA Diastolique:</span> {{cliniques?.constantes?.ta?.diastolique || 0}}</td>
+                            
+                            <td><span>FC:</span> {{cliniques?.constantes?.fc || 0}}</td>
+                            
+                            <td><span>FR:</span> {{cliniques?.constantes?.fr || 0}}</td>
                         </tr>
                         <tr>
-                            <td><span>TA Systolique:</span></td>
-                            <td>Non</td>
+                            <td><span>Température:</span> {{cliniques?.constantes?.temperature || 0}} °C</td>
+                            
+                            <td><span>Poids:</span> {{cliniques?.constantes?.poids || 0}} kg</td>
+                            
+                            <td><span>Taille:</span> {{cliniques?.constantes?.taille || 0}} cm</td>
+                            
+                            <td><span>IMC:</span> {{cliniques?.constantes?.imc || 0}}</td>
                         </tr>
                         <tr>
-                            <td><span>TA Diastolique:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>FC:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>FR:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Température:</span></td>
-                            <td>37°C</td>
-                        </tr>
-                        <tr>
-                            <td><span>Poids:</span></td>
-                            <td>70 kg</td>
-                        </tr>
-                        <tr>
-                            <td><span>Taille:</span></td>
-                            <td>1.89 m</td>
-                        </tr>
-                        <tr>
-                            <td><span>IMC:</span></td>
-                            <td>19.59</td>
-                        </tr>
-                        <tr>
-                            <td><span>Souffle Cardiaque:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Type Souffle:</span></td>
-                            <td>IM</td>
-                        </tr>
-                        <tr>
-                            <td><span>TSVJ:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Hépatomégalie:</span></td>
-                            <td>Non</td>
+                            <td><span>Souffle Cardiaque:</span> {{cliniques?.souffleCardique?.presente ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Type Souffle:</span> {{cliniques?.souffleCardique?.typeSouffle || ''}}</td>
+                            
+                            <td><span>TSVJ:</span> {{cliniques?.tsvj?.presente ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Hépatomégalie:</span> {{cliniques?.hepatomegalie?.presente ? 'OUI':'NON'}}</td>
                         </tr>
                     </table>
                 </div>
+            </div>
+        </div>
 
+        <div class="border rounded-3 mt-3">
+            <h6 class="text-center">Signes Paracliniques</h6>
+            <div class="row">
                 <div class="col">
+                    <p class="text-center">Biologie</p>
                     <table>
                         <tr>
-                            <td colspan="2"><h6 class="text-center">Signes Paracliniques</h6></td>
+                            <td><span>Hemoglobinemie:</span> {{paracliniques?.biologie?.hemoglobinemie || ''}}</td>
+                            
+                            <td><span>GB:</span> {{paracliniques?.biologie?.gb || ''}}</td>
+                            
+                            <td><span>Plaquettes:</span> {{paracliniques?.biologie?.plaquettes || ''}}</td>
+                            
+                            <td><span>VGM:</span> {{paracliniques?.biologie?.vgm || ''}}</td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <p class="text-center">Biologie</p>
-                            </td>
+                            <td><span>CCMH:</span> {{paracliniques?.biologie?.ccmh || ''}}</td>
+                            
+                            <td><span>TMCH:</span> {{paracliniques?.biologie?.tmch || ''}}</td>
+                            
+                            <td><span>CRP:</span> {{paracliniques?.biologie?.crp || ''}}</td>
+                            
+                            <td><span>Urée:</span> {{paracliniques?.biologie?.uree || ''}}</td>
                         </tr>
                         <tr>
-                            <td><span>Hépatomégalie:</span></td>
-                            <td>"***"</td>
+                            <td><span>Créatininémie:</span> {{paracliniques?.biologie?.creatininemie || ''}}</td>
+                            
+                            <td><span>NT pro BNP:</span> {{paracliniques?.biologie?.ntProBNP || ''}}</td>
+                            
+                            <td><span>Prolactine:</span> {{paracliniques?.biologie?.prolactine || ''}}</td>
+                            
+                            <td><span>Télécoeur:</span> {{paracliniques?.telecoeur?.presente ? 'OUI':'NON'}}</td>
                         </tr>
                         <tr>
-                            <td><span>GB:</span></td>
-                            <td>"***"</td>
+                            <td><span>Index cardiothoracique (%):</span> {{paracliniques?.telecoeur?.indexCardiothoracique || 0}}</td>
+                            
+                            <td><span>Autres Signes:</span> {{paracliniques?.telecoeur?.autresSignes || ''}}</td>
+                            
+                            <td><span>ECG:</span> {{paracliniques?.ecg?.presente ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Rythme Cardiaque:</span> {{paracliniques?.ecg?.rythmeCardiaque || ''}}</td>
                         </tr>
                         <tr>
-                            <td><span>Plaquettes:</span></td>
-                            <td>"***"</td>
+                            <td><span>Autres:</span> {{paracliniques?.ecg?.autres || ''}}</td>
+                            
+                            <td><span>ETT:</span> {{paracliniques?.ett?.presente ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>epanchement Pericardique:</span> {{paracliniques?.ett?.epanchementPericardique?.presente ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Type de fuite valvulaire:</span> {{paracliniques?.ett?.fuiteValculaire?.typeFuite || ''}}</td>
                         </tr>
                         <tr>
-                            <td><span>VGM:</span></td>
-                            <td>"***"</td>
-                        </tr>
-                        <tr>
-                            <td><span>CCMH:</span></td>
-                            <td>"***"</td>
-                        </tr>
-                        <tr>
-                            <td><span>TMCH:</span></td>
-                            <td>"***"</td>
-                        </tr>
-                        <tr>
-                            <td><span>CRP:</span></td>
-                            <td>"***"</td>
-                        </tr>
-                        <tr>
-                            <td><span>Urée:</span></td>
-                            <td>"***"</td>
-                        </tr>
-                        <tr>
-                            <td><span>Créatininémie:</span></td>
-                            <td>"***"</td>
-                        </tr>
-                        <tr>
-                            <td><span>NT pro BNP:</span></td>
-                            <td>"***"</td>
-                        </tr>
-                        <tr>
-                            <td><span>Prolactine:</span></td>
-                            <td>"***"</td>
-                        </tr>
-                        <tr>
-                            <td><span>Télécoeur:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Index cardiothoracique (%):</span></td>
-                            <td>12%</td>
-                        </tr>
-                        <tr>
-                            <td><span>Autres Signes:</span></td>
-                            <td>"*********"</td>
-                        </tr>
-                        <tr>
-                            <td><span>ECG:</span></td>
-                            <td>Non</td>
-                        </tr>
-                        <tr>
-                            <td><span>Rythme Cardiaque:</span></td>
-                            <td>Normal</td>
+                            <td><span>Type de stenose valvulaire:</span> {{paracliniques?.ett?.stenoseValculaire?.typeStenose || ''}}</td>
+                            
+                            <td><span>DTDVG:</span> {{paracliniques?.ett?.dtdvg}}</td>
+                            
+                            <td><span>DTSVG:</span> {{paracliniques?.ett?.dtsvg || ''}}</td>
+                            
+                            <td><span>FEVG:</span> {{paracliniques?.ett?.fevg || ''}}</td>
                         </tr>
                     </table>
+
+                    <p class="text-center">TRAITEMENT:</p>
+                    <table>
+                        <tr>
+                            <td><span>Diuretique:</span> {{paracliniques?.traitement?.diuretique ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>IEC:</span> {{paracliniques?.traitement?.iec ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Tonicardiaque:</span> {{paracliniques?.traitement?.tonicardiaque ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Bromocriptine:</span> {{paracliniques?.traitement?.bromocriptine ? 'OUI':'NON'}}</td>
+                        </tr>
+                        <tr>
+                            <td><span>Anticoagulants:</span> {{paracliniques?.traitement?.anticoagulants ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Betabloquants:</span> {{paracliniques?.traitement?.betabloquants ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Contraception:</span> {{paracliniques?.traitement?.contraception ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Autres:</span> {{paracliniques?.traitement?.autres || ''}}</td>
+                        </tr>
+                    </table>
+                    
+                    <p class="text-center">Modalité évolutive en hospitalisation</p>
+                    <table>
+                        <tr>
+                            <td><span>Aspects défavorbales:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.presente ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Complications:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.aspectsDefavorables?.complications ? 'OUI':'NON'}}</td>
+                            
+                            <td>
+                                <span>Types de complications:</span>
+                                <span class="complication" *ngFor="let complication of paracliniques?.modaliteEvolutiveHospitalisation?.typeComplications">
+                                    {{ complication }};&nbsp;
+                                </span>
+                            </td>
+
+                            <td><span>Autres:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.autres || ''}}</td>
+                            
+                        </tr>
+                        <tr>
+                     
+                            <td><span>Décès:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.aspectsDefavorables?.deces ? 'OUI':'NON'}}</td>
+                            
+                            <td><span>Délais de décès:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.delaiDeces || 0}} jour(s)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="evolution?.mere?.presente || evolution?.enfant?.presente" class="border rounded-3 mt-3">
+            <h6 class="text-center">Evolution après la sortie</h6>
+
+            <div class="row" *ngIf="evolution?.mere?.presente">
+                <div class="col">
+                    <p class="text-center">Mère</p>
+                    <div class="border border-primary rounded-3 fonce">
+                       
+                        <table>
+                            <tr>
+                                <td><span>Evolution après la sortie:</span> {{evolution?.mere?.evolutionApresSortie || ''}}</td>
+                                
+                                <td><span>Classe NYHA:</span> {{evolution?.mere?.classeNYHA || ''}}</td>
+                                
+                                <td><span>Décès:</span> {{evolution?.mere?.detailsDeces?.presente ? 'OUI':'NON'}}</td>
+                                
+                                <td><span>Date du décès:</span> {{(evolution?.mere?.detailsDeces?.date | date:'dd/MM/yyyy')|| ''}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>Causes du décès:</span> {{evolution?.mere?.detailsDeces?.causes || ''}}</td>
+                                
+                                <td><span>Lieu du décès:</span> {{evolution?.mere?.detailsDeces?.lieu || ''}}</td>
+                                
+                                <td><span>Observance Thérapeutique:</span> {{evolution?.mere?.bonneObservanceTherapeutique ? 'OUI':'NON'}}</td>
+                                
+                                <td><span>Nombre de Réhospitalisations:</span> {{evolution?.mere?.nombreRehospitalisation || 0}}</td>
+                            </tr>
+                        </table>
+
+                        <p class="text-center">Facteurs de Décompensation:</p>
+                        <table>
+                            <tr>
+                                <td><span>anemie:</span> {{evolution?.mere?.facteursDecompensation?.anemie ? 'OUI':'NON'}}</td>
+                                
+                                <td><span>infections Virales:</span> {{evolution?.mere?.facteursDecompensation?.infectionsVirales ? 'OUI':'NON'}}</td>
+                                
+                                <td><span>infections Bacteriennes:</span> {{evolution?.mere?.facteursDecompensation?.infectionsBacteriennes ? 'OUI':'NON'}}</td>
+                                
+                                <td><span>denutrition:</span> {{evolution?.mere?.facteursDecompensation?.denutrition ? 'OUI':'NON'}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>ruptures Therapeutiques:</span> {{evolution?.mere?.facteursDecompensation?.rupturesTherapeutiques ? 'OUI':'NON'}}</td>
+
+                            </tr>
+                        </table>
+
+                        <p class="text-center">ETT:</p>
+                        <table>
+                            <tr>
+                                <td><span>DTDVG:</span> {{evolution?.mere?.echocardiographie?.dtdvg || ''}}</td>
+                                
+                                <td><span>DTSVG:</span> {{evolution?.mere?.echocardiographie?.dtsvg || ''}}</td>
+                                
+                                <td><span>FEVG:</span> {{evolution?.mere?.echocardiographie?.fevg || ''}}</td>
+                                
+                                <td><span>FR:</span> {{evolution?.mere?.echocardiographie?.fr || ''}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>E:</span> {{evolution?.mere?.echocardiographie?.e || ''}}</td>
+                                
+                                <td><span>A:</span> {{evolution?.mere?.echocardiographie?.a || ''}}</td>
+                                
+                                <td><span>TD:</span> {{evolution?.mere?.echocardiographie?.td || ''}}</td>
+                                
+                                <td><span>E/E':</span> {{evolution?.mere?.echocardiographie?.ee || ''}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>TAPSE:</span> {{evolution?.mere?.echocardiographie?.tapse || ''}}</td>
+                                
+                                <td><span>DTOG:</span> {{evolution?.mere?.echocardiographie?.dtog || ''}}</td>
+                            </tr>
+                        </table>
+
+                        <p class="text-center">Biologie:</p>
+                        <table>
+                            <tr>
+                                <td><span>Hémoglobinémie:</span> {{evolution?.mere?.biologie?.hemoglobinemie || ''}}</td>
+                                
+                                <td><span>GB:</span> {{evolution?.mere?.biologie?.gb || ''}}</td>
+                                
+                                <td><span>Plaquettes:</span> {{evolution?.mere?.biologie?.plaquettes || ''}}</td>
+                                
+                                <td><span>VGM:</span> {{evolution?.mere?.biologie?.vgm || ''}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>CCMH:</span> {{evolution?.mere?.biologie?.hemoglobinemie || ''}}</td>
+                                
+                                <td><span>TCMH:</span> {{evolution?.mere?.biologie?.gb || ''}}</td>
+                                
+                                <td><span>CRP:</span> {{evolution?.mere?.biologie?.plaquettes || ''}}</td>
+                                
+                                <td><span>Urée:</span> {{evolution?.mere?.biologie?.vgm || ''}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>Créatininémie:</span> {{evolution?.mere?.biologie?.hemoglobinemie || ''}}</td>
+                                
+                                <td><span>NT pro BNP:</span> {{evolution?.mere?.biologie?.gb || ''}}</td>
+
+                                <td><span>Prolactine:</span> {{evolution?.mere?.biologie?.hemoglobinemie || ''}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3" *ngIf="evolution?.enfant?.presente">
+                <div class="col">
+                    <p class="text-center">Enfant</p>
+                    <div class="border border-primary rounded-3 fonce">
+                        
+                        <table>
+                            <tr>
+                                <td><span>Mort né:</span> {{evolution?.enfant?.evolutionBebe?.mortNes ? 'OUI':'NON'}}</td>
+                                
+                                <td><span>faible poids de naissance:</span> {{evolution?.enfant?.evolutionBebe?.faiblePoidsNaissance ? 'OUI':'NON'}}</td>
+                                
+                                <td><span>Prématurité:</span> {{evolution?.enfant?.evolutionBebe?.prematurite ? 'OUI':'NON'}}</td>
+        
+                            </tr>
+                        </table>
+
+                        <p class="text-center">Évolution après la sortie:</p>
+                        <table>
+                            <tr>
+                                <td><span>Poids naissance:</span> {{evolution?.enfant?.evolutionBebe?.poidsNaissance || ''}}</td>
+                                
+                                <td><span>Alimentation Naissance:</span> {{evolution?.enfant?.evolutionBebe?.alimentationNaissance || ''}}</td>
+                                
+                                <td><span>Poids 3 mois:</span> {{evolution?.enfant?.evolutionBebe?.poids3Mois || ''}}</td>
+                                
+                                <td><span>Alimentation 3 mois:</span> {{evolution?.enfant?.evolutionBebe?.alimentation3Mois || ''}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>Poids 6 mois:</span> {{evolution?.enfant?.evolutionBebe?.poids6Mois || ''}}</td>
+                                
+                                <td><span>Alimentation 6 mois:</span> {{evolution?.enfant?.evolutionBebe?.alimentation6Mois || ''}}</td>
+                                
+                                <td><span>Poids 12 mois:</span> {{evolution?.enfant?.evolutionBebe?.poids12Mois || ''}}</td>
+                                
+                                <td><span>Alimentation 12 mois:</span> {{evolution?.enfant?.evolutionBebe?.alimentation12Mois || ''}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

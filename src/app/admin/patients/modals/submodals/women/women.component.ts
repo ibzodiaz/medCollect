@@ -18,6 +18,9 @@ export class WomenComponent {
 
   PatientId:string='';
 
+  PatientAntecedantId :any;
+  consultationId :any;
+
   womenForm:any = {};
 
   initForm(){
@@ -75,33 +78,36 @@ export class WomenComponent {
     this.updateFormWithPatientData();
   }
 
-  updateFormWithPatientData(){
-    this.route.queryParamMap.subscribe((queryParams:any) => {
- 
-      if (queryParams.has('patientId')) {
-        this.PatientId = queryParams.get('patientId');
 
-        this.evolutionService.getEvolutionByPatientId(this.PatientId).subscribe(
-          (women: any) => {
+  updateFormWithPatientData(): void {
+    this.route.paramMap.subscribe((params: any) => {
+        const patientId = params.get('patientId');
+        const consultationId = params.get('consultationId');
 
-            this.womenForm = {...women};
-            console.log(this.womenForm)
-            this.sharedService.setterWomen(this.womenForm);
-            
-          },
-          (err: any) => {
-            if (err.status === undefined) {
-              this.initForm();
+        if (patientId && consultationId) {
+            this.PatientAntecedantId = patientId;
+            this.consultationId = consultationId;
 
-            } else {
-              alert(err.status);
-              console.error(err);
-            }
-          }
-        );
-      }
-    });
+            this.evolutionService.getEvolutionByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
+              (women: any) => {
+
+                this.womenForm = {...women};
+                console.log(this.womenForm)
+                this.sharedService.setterWomen(this.womenForm);
+                
+              },
+              (err: any) => {
+                if (err.status === undefined) {
+                  this.initForm();
     
+                } else {
+                  alert(err.status);
+                  console.error(err);
+                }
+              }
+            );
+        }
+    });
   }
 
   onSubmit(){
