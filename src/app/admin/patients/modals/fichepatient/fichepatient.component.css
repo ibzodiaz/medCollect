@@ -113,3 +113,18 @@ td{
 .fonce{
   background-color: #d6d4d4;
 }
+
+.alert{
+  color: rgb(236, 81, 9);
+  font-weight: 400;
+}
+
+.normal{
+  color: green;
+  font-weight: 400;
+}
+
+.danger{
+  color: red;
+  font-weight: 400;
+}

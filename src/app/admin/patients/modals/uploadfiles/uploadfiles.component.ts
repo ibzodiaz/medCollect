@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Uploadfiles } from 'src/app/_interfaces/uploadfiles';
+import { TokenService } from 'src/app/_services/token.service';
 import { UploadfilesService } from 'src/app/_services/uploadfiles.service';
 
 @Component({
@@ -9,11 +12,24 @@ import { UploadfilesService } from 'src/app/_services/uploadfiles.service';
 export class UploadfilesComponent {
 
   constructor(
-    private uploadfilesService:UploadfilesService
+    private uploadfilesService:UploadfilesService,
+    private route:ActivatedRoute,
+    private tokenService:TokenService
   ){}
 
-  files:any;
-  fileName:any = [];
+  fileForm:Uploadfiles = {
+    userId: this.tokenService.getUserIdFromToken(),
+    patientId: this.route.snapshot.paramMap.get('patientId'),
+    fileName: '',
+    fileSize: '',
+    filePath: '',
+    fileType: '',
+    fileCategory:''
+  }
+
+  ngOnInit():void{
+    this.fileForm;
+  }
 
   closeModal(modalId: string): void {
     const modal = document.getElementById(modalId);
@@ -23,16 +39,10 @@ export class UploadfilesComponent {
   }
 
   onFileSelected(event: any) {
-    // const files: FileList = event.target.files;
-    // this.files = {...files};
-    // for(let i = 0 ; i < files.length; i++){
-    //   console.log(this.files[i].name);
-    //   this.fileName = [...this.fileName, this.files[i].name];
-    // }
 
     const file: File = event.target.files[0];
 
-    this.uploadfilesService.addFile(file).subscribe(
+    this.uploadfilesService.addFile(file,this.fileForm).subscribe(
       response => {
         console.log('File uploaded successfully:', response);
         alert('File uploaded successfully:')

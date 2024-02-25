@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AntecedantsService } from 'src/app/_services/antecedants.service';
 import { PatientsService } from 'src/app/_services/patients.service';
 
 @Component({
@@ -12,8 +11,7 @@ export class DetailsComponent {
 
   constructor(
     private route:ActivatedRoute,
-    private patientsService:PatientsService,
-    private antecedantService:AntecedantsService
+    private patientsService:PatientsService
     ){}
 
   patientId:any;
@@ -34,13 +32,6 @@ export class DetailsComponent {
       (err:any)=>console.log(err.message)
     );
 
-    // this.antecedantService.getAntecedantByPatientId(this.patientId).subscribe(
-    //   (antecedants:any)=>{
-    //     this.antecedants = antecedants;
-    //     console.log(antecedants);
-    //   },
-    //   (err:any)=>console.log(err.message)
-    // );
   }
 
 

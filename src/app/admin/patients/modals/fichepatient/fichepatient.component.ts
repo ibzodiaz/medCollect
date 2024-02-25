@@ -95,8 +95,7 @@ export class FichepatientComponent {
         }
     });
   }
-
-
+  
   getPatientClinicSigns(): void {
     this.route.paramMap.subscribe((params: any) => {
         const patientId = params.get('patientId');
@@ -110,7 +109,8 @@ export class FichepatientComponent {
               (clinicSigns: any) => {
                 if(clinicSigns){
                   this.cliniques = clinicSigns;
-                  //alert(JSON.stringify(this.cliniques));
+                  //console.log(this.cliniques);
+    
                 }
               },
               (err: any) => {

@@ -8,6 +8,7 @@
                     <td>Docteur :</td>
                     <td>Hôpitale :</td>
                     <td>Lieu :</td>
+                    <td>Statut</td>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,9 @@
                     <td>Dr. {{meet.userId.prenom}} {{meet.userId.nom}}</td>
                     <td>{{meet.hospitalId.Nom}}</td>
                     <td>{{meet.hospitalId.Lieu}}</td>
+                    <td style="color:blue;" *ngIf="meet.date > getDateActuelleFormatted()">Ultérieure&nbsp;<i class="fa-solid fa-arrow-up"></i></td>
+                    <td style="color:red;" *ngIf="meet.date < getDateActuelleFormatted()">Passé&nbsp;<i class="fa-solid fa-arrow-down"></i></td>
+                    <td style="color:green;" *ngIf="meet.date == getDateActuelleFormatted()">Aujourd'hui&nbsp;<i class="fa-solid fa-arrow-right"></i></td>
                 </tr>
 
             </tbody>

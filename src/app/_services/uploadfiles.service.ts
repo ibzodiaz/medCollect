@@ -13,10 +13,20 @@ export class UploadfilesService {
 
   constructor(private http: HttpClient) { }
 
-  addFile(file:File): Observable<Uploadfiles>{
+  addFile(file:File,uploadfiles:Uploadfiles): Observable<Uploadfiles>{
     const formData = new FormData();
+    const fileName = Date.now() + "_" +file.name;
     formData.append('file', file);
+    formData.append('fileName', fileName);
+    formData.append('fileSize', file.size.toString());
+    formData.append('fileType', file.type);
+    formData.append('filePath', 'data/'+fileName);
+    formData.append('fileCategory', uploadfiles.fileCategory);
+    formData.append('userId', uploadfiles.userId);
+    formData.append('patientId', uploadfiles.patientId);
 
+
+    //alert(JSON.stringify(data))
     return this.http.post<Uploadfiles>(this.url,formData).pipe(catchError(this.errorHandler));
   }
 
@@ -25,8 +35,8 @@ export class UploadfilesService {
   }
 
   
-  getFilesByPatientId(patientId:string):Observable<Uploadfiles>{
-    return this.http.get<Uploadfiles>(this.url+'/one/'+patientId).pipe(catchError(this.errorHandler));
+  getFilesByPatientId(patientId:string,userId:string):Observable<Uploadfiles>{
+    return this.http.get<Uploadfiles>(this.url+'/'+patientId+'/'+userId).pipe(catchError(this.errorHandler));
   }
 
   deleteFileById(id:string):Observable<Uploadfiles>{

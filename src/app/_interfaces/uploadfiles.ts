@@ -1,8 +1,9 @@
 export interface Uploadfiles {
-    userId: string | null,
-    patientId: string | null,
+    userId: any,
+    patientId: any,
     fileName: string,
     filePath: string,
-    fileSize: number,
-    fileType: string
+    fileSize: string,
+    fileType: string,
+    fileCategory:string
 }

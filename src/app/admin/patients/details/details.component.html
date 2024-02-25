@@ -26,69 +26,73 @@
                     <div class="col">
                         <div class="card mb-3">
                             <div class="card-body h-t">
-                           
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <p class="mb-0"><strong>Nom:</strong></p>
-                                    </div>
-                                    <div class="col text-secondary">
-                                        {{patient?.nom || ""}}
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-0"><strong>Prénom:</strong></p>
-                                    </div>
-                                    <div class="col text-secondary">
-                                        {{patient?.prenom || ""}}
-                                    </div>
-                                   
-                                </div>
-                               
-                                
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <p class="mb-0"><strong>Age:</strong></p>
-                                    </div>
-                                    <div class="col text-secondary">
-                                        {{patient?.age || 0}}
-                                    </div>
 
-                                    <div class="col">
-                                        <p class="mb-0"><strong>Téléphone:</strong></p>
-                                    </div>
-                                    <div class="col text-secondary">
-                                        {{patient?.telephone || ""}}
-                                    </div>
+                                <table>
+                            
+                                    <tr>
+                                        <td>
+                                            <p class="mb-0">Nom:</p>
+                                        </td>
+                                        <td>
+                                            &nbsp;&nbsp;<i class="fa-solid fa-fire-flame-curved"></i>&nbsp;<span class="text-secondary">{{patient?.nom || ""}}</span>
+                                        </td>
+                                        <td class="spacer"></td>
+                                        <td>
+                                            <p class="mb-0">Prénom:</p>
+                                        </td>
+                                        <td>
+                                            &nbsp;&nbsp;<i class="fa-solid fa-fire-flame-curved"></i>&nbsp;<span class="text-secondary">{{patient?.prenom || ""}}</span>
+                                        </td>
+                                    
+                                    </tr>
                                 
-                                </div>
+                                    
+                                    <tr>
+                                        <td>
+                                            <p class="mb-0">Age:</p>
+                                        </td>
+                                        <td>
+                                            &nbsp;&nbsp;<i class="fa-solid fa-baby-carriage"></i>&nbsp;<span class="text-secondary">{{patient?.age || 0}} an(s)</span>
+                                        </td>
+                                        <td class="spacer"></td>
+                                        <td>
+                                            <p class="mb-0">Téléphone:</p>
+                                        </td>
+                                        <td>
+                                            &nbsp;&nbsp;<i class="fa-solid fa-phone"></i>&nbsp;<span class="text-secondary">{{patient?.telephone || ""}}</span>
+                                        </td>
+                                    
+                                    </tr>
 
-                               
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <p class="mb-0"><strong>Statut matrimonial:</strong></p>
-                                    </div>
-                                    <div class="col text-secondary">
-                                        {{patient?.statut || ""}}
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-0"><strong>Profession:</strong></p>
-                                    </div>
-                                    <div class="col text-secondary">
-                                        {{patient?.profession || ""}}
-                                    </div>
-                   
-                                </div>
-                               
-                                <div class="row mb-3">
-                
-                                    <div class="col-md-3">
-                                        <p class="mb-0"><strong>Niveau socio-économique:</strong></p>
-                                    </div>
-                                    <div class="col text-secondary">
-                                        {{patient?.niveau_socioeconomique || ""}}
-                                    </div>
-                                </div>
-                               
-            
+                                
+                                    <tr>
+                                        <td>
+                                            <p class="mb-0">Statut matrimonial:</p>
+                                        </td>
+                                        <td>
+                                            &nbsp;&nbsp;<i class="fa-solid fa-person"></i>&nbsp;<span class="text-secondary">{{patient?.statut || ""}}</span>
+                                        </td>
+                                        <td class="spacer"></td>
+                                        <td>
+                                            <p class="mb-0">Profession:</p>
+                                        </td>
+                                        <td>
+                                            &nbsp;&nbsp;<i class="fa-solid fa-briefcase"></i>&nbsp;<span class="text-secondary">{{patient?.profession || ""}}</span>
+                                        </td>
+                    
+                                    </tr>
+                                
+                                    <tr>
+                    
+                                        <td>
+                                            <p class="mb-0">Niveau socio-économique:</p>
+                                        </td>
+                                        <td>
+                                            &nbsp;&nbsp;<i class="fa-solid fa-scale-balanced"></i>&nbsp;<span class="text-secondary">{{patient?.niveau_socioeconomique || ""}}</span>
+                                        </td>
+                                    </tr>
+                                
+                                </table>
                             </div>
                           </div>
                     </div>
@@ -103,10 +107,10 @@
           <div class="col">                            
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <button class="nav-link active" id="nav-consultation-tab" data-bs-toggle="tab" data-bs-target="#nav-consultation" type="button" role="tab" aria-controls="nav-consultation" aria-selected="true"><i class="fa-solid fa-file-signature"></i>&nbsp;Consultation</button>
-                  <button class="nav-link" id="nav-documents-tab" data-bs-toggle="tab" data-bs-target="#nav-documents" type="button" role="tab" aria-controls="nav-documents" aria-selected="false"><i class="fa-solid fa-folder-open"></i>&nbsp;Documents</button>
-                  <button class="nav-link" id="nav-meetings-tab" data-bs-toggle="tab" data-bs-target="#nav-meetings" type="button" role="tab" aria-controls="nav-meetings" aria-selected="false"><i class="fa-regular fa-handshake"></i>&nbsp;Rendez-vous</button>
-                  <button class="nav-link" id="nav-ordonnances-tab" data-bs-toggle="tab" data-bs-target="#nav-ordonnances" type="button" role="tab" aria-controls="nav-ordonnances" aria-selected="false"><i class="fa-solid fa-prescription-bottle-medical"></i>&nbsp;Ordonnances</button>
+                  <button class="nav-link rounded-0 active" id="nav-consultation-tab" data-bs-toggle="tab" data-bs-target="#nav-consultation" type="button" role="tab" aria-controls="nav-consultation" aria-selected="true"><i class="fa-solid fa-file-signature"></i>&nbsp;Consultation</button>
+                  <button class="nav-link rounded-0" id="nav-documents-tab" data-bs-toggle="tab" data-bs-target="#nav-documents" type="button" role="tab" aria-controls="nav-documents" aria-selected="false"><i class="fa-solid fa-folder-open"></i>&nbsp;Documents</button>
+                  <button class="nav-link rounded-0" id="nav-meetings-tab" data-bs-toggle="tab" data-bs-target="#nav-meetings" type="button" role="tab" aria-controls="nav-meetings" aria-selected="false"><i class="fa-regular fa-handshake"></i>&nbsp;Rendez-vous</button>
+                  <button class="nav-link rounded-0" id="nav-ordonnances-tab" data-bs-toggle="tab" data-bs-target="#nav-ordonnances" type="button" role="tab" aria-controls="nav-ordonnances" aria-selected="false"><i class="fa-solid fa-prescription-bottle-medical"></i>&nbsp;Ordonnances</button>
                 </div>
               </nav>
               <div class="tab-content" id="nav-tabContent">

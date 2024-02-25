@@ -1,0 +1,9 @@
+.right{
+    position: relative;
+    float: right;
+}
+
+.left{
+    position: relative;
+    float: left;
+}

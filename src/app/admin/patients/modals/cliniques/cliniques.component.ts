@@ -102,15 +102,16 @@ export class CliniquesComponent {
     });
   }
 
-
   calculateIMC() {
     if (this.cliniquesForm.constantes.poids && this.cliniquesForm.constantes.taille) {
       const poids = this.cliniquesForm.constantes.poids;
       const taille = this.cliniquesForm.constantes.taille / 100; // Convertir en mètres
       const imc = poids / (taille * taille);
-      this.cliniquesForm.constantes.imc = imc;
+      this.cliniquesForm.constantes.imc = +imc.toFixed(2);
     }
   }
+  
+  
   
 
   onSubmit():void{

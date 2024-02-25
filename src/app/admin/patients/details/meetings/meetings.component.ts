@@ -16,6 +16,24 @@ export class MeetingsComponent {
   ){}
 
   meetsPatientList: any[]=[];
+  
+  getDateActuelleFormatted(): string {
+    const dateActuelle: Date = new Date();
+    return this.formatDate(dateActuelle);
+  }
+
+  // Fonction pour formater la date
+  private formatDate(date: Date): string {
+    const day: string = this.addZero(date.getDate());
+    const month: string = this.addZero(date.getMonth() + 1);
+    const year: number = date.getFullYear();
+    return `${year}-${month}-${day}`;
+  }
+
+  // Fonction pour ajouter un zéro devant si nécessaire
+  private addZero(num: number): string {
+    return num < 10 ? '0' + num : '' + num;
+  }
 
   ngOnInit():void{
     let patientId = this.route.snapshot.paramMap.get('patientId');
@@ -26,6 +44,7 @@ export class MeetingsComponent {
       },
       (err:any)=>console.log(err.message)
     );
+
   }
 
   openModal(modalId: string): void {

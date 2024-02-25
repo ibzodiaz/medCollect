@@ -110,7 +110,11 @@ h5 span{
 
 i{
     font-size: 18px;
-    color: rgb(190, 190, 16);
+    color: #007BFF
+}
+
+.h-t i{
+    opacity: 0.4;
 }
 
 .float-start{
@@ -119,4 +123,33 @@ i{
 
 .fa-address-card{
     font-size: 30px;
+}
+
+.fa-arrow-left{
+    color: white;
+}
+
+.spacer{
+    width: 150px;
+}
+
+tr{
+    height: 40px;
+}
+
+.tab-pane{
+    background-color: #fff;
+    padding: 10px;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.nav-link {
+    border-top: 2px solid transparent;
+    transition: border-top-color 0.3s ease;
+    color: #007BFF;
+}
+
+.nav-link.active {
+    border-top-color: #007BFF;
+    color: #007BFF;
 }

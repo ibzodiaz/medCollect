@@ -2,7 +2,7 @@
     <div class="row mb-3 mt-3">
         <div class="col-md-2">
             <label>Date</label>
-            <input type="date" class="form-control rounded-0" name="date" [(ngModel)]="consultation.date">
+            <input type="date" class="form-control rounded-0" name="date" [(ngModel)]="dateActuelle" readonly>
         </div>
         <div class="col-md-2">
             <label>Motif</label>
@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-3">
             <label>Recherche&nbsp;<i class="fa-solid fa-magnifying-glass"></i> :</label>
-            <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Date ou motif.." class="form-control rounded-0">
+            <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="recherche par motif.." class="form-control rounded-0">
         </div>
     </div>
 </form>
@@ -45,19 +45,19 @@
 <table class="table">
 <thead>
     <tr>
-        <th>Date :</th>
-        <th>Motif :</th>
-        <th>Signes cliniques :</th>
-        <th>Signes paracliniques :</th>
-        <th>Evolution :</th>
-        <th>Fiche :</th>
-        <th>Fichiers :</th>
-        <th>Terminé :</th>
+        <td class="text-center">Date :</td>
+        <td class="text-center">Motif :</td>
+        <td class="text-center">Signes cliniques :</td>
+        <td class="text-center">Signes paracliniques :</td>
+        <td class="text-center">Evolution :</td>
+        <td class="text-center">Fiche :</td>
+        <td class="text-center">Fichiers :</td>
+        <td class="text-center">Terminé :</td>
     </tr>
 </thead>
 <tbody>
     <tr class="text-center" *ngFor="let consultation of filteredPatients">
-        <td>{{ consultation.date | date:'dd/MM/yyyy' }}</td>
+        <td>{{ consultation.createdAt | date:'dd/MM/yyyy' }}</td>
         <td>{{consultation.motif}}</td>
         <!-- <td><span (click)="openModal('modal2',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td> -->
         <td><span (click)="openModal('modal3',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>

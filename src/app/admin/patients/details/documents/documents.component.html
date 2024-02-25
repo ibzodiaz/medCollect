@@ -11,20 +11,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>12/01/2024</td>
-            <td>ecg.xml</td>
-            <td>520 ko</td>
-            <td>ECG</td>
-            <td><a href="#">télécharger</a></td>
-        </tr>
-        <tr>
-        <tr>
-            <td>12/02/2024</td>
-            <td>ecg.xml</td>
-            <td>423 ko</td>
-            <td>Scanner</td>
-            <td><a href="#">télécharger</a></td>
+        <tr *ngFor="let file of filesList">
+            <td>{{file.createdAt | date: 'dd/MM/yyyy'}}</td>
+            <td><a [href]="['http://localhost:3000/data/'+file.fileName]" target="_blank">{{file.fileName}}</a></td>
+            <td>{{file.fileSizeFormatted}}</td>
+            <td>{{file.fileCategory}}</td>
+            <td><a (click)="downloadFile(file.fileName)">télécharger&nbsp;<i class="fa-solid fa-circle-down"></i></a></td>
         </tr>
     </tbody>
 </table>

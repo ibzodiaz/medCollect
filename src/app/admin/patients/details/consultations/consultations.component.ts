@@ -12,13 +12,17 @@ import { TokenService } from 'src/app/_services/token.service';
 })
 export class ConsultationsComponent {
 
+  dateActuelle: string;
+
   constructor(
     private route:ActivatedRoute,
     private router:Router,
     private patientService:PatientsService,
     private tokenService:TokenService,
     private consultationService:ConsultationService
-  ){}
+  ){
+    this.dateActuelle = new Date().toISOString().substring(0, 10);
+  }
 
   patientId:any ='';
   userId:any = this.tokenService.getUserIdFromToken();
@@ -29,7 +33,6 @@ export class ConsultationsComponent {
   consultation: Consultation = {
     userId: this.userId,
     patientId: this.route.snapshot.paramMap.get('patientId'),
-    date: '',
     motif: '',
     complet: false
   }
@@ -114,7 +117,6 @@ export class ConsultationsComponent {
     }
     // Sinon, filtrez les patients par nom ou prénom
     return this.consultationList.filter((patient:any) =>
-      patient.date.includes(this.searchTerm.toLowerCase()) ||
       patient.motif.toLowerCase().includes(this.searchTerm.toLowerCase())
     ).slice(this.startIndex, this.endIndex + 1);
   }
