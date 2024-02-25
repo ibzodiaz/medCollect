@@ -7,3 +7,12 @@
     position: relative;
     float: left;
 }
+
+.table tr td:hover{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.spacer{
+    width: 40px;
+}
