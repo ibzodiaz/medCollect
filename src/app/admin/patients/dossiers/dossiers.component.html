@@ -43,10 +43,10 @@
         <table class="fl-table">
             <thead>
                 <tr class="text-center">
-                    <th scope="col">Date de création :</th>
-                    <th scope="col">Date de modification :</th>
                     <th scope="col">Prénom :</th>
                     <th scope="col">Nom :</th>
+                    <th scope="col">Date de création :</th>
+                    <th scope="col">Date de modification :</th>
                     <th scope="col">Socio-Démographiques :</th>
                     <th scope="col">Antécédents :</th>
                     <!-- <th scope="col">Signes cliniques :</th>
@@ -57,10 +57,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let patient of filteredPatients" class="text-center">
-                    <td>{{ (patient?.createdAt | date:'dd/MM/yyyy') || '' }}</td>
-                    <td>{{ (patient?.updatedAt | date:'dd/MM/yyyy')|| ''}}</td>
                     <td>{{ patient?.prenom || ''}}</td>
                     <td>{{ patient?.nom || ''}}</td>
+                    <td>{{ (patient?.createdAt | date:'dd/MM/yyyy') || '' }}</td>
+                    <td>{{ (patient?.updatedAt | date:'dd/MM/yyyy')|| ''}}</td>
                     <td><span (click)="openModal('modal1',patient?._id || null)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
                     <td><span (click)="openModal('modal2',patient?._id || null)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
                     <!-- <td><span (click)="openModal('modal3',patient?._id || null)" class="vue">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>

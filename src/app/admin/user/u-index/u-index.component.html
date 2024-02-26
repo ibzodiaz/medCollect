@@ -139,8 +139,8 @@
                               <td>{{ user?.prenom }}</td>
                               <td>{{ user?.nom }}</td>
                               <td>{{ user?.email }}</td>
-                              <td>{{ user?.createdAt | date:'dd/mm/yyyy' }}</td>
-                              <td>{{ user?.updatedAt | date:'dd/mm/yyyy' }}</td>
+                              <td>{{ user?.createdAt | date:'dd/MM/yyyy' }}</td>
+                              <td>{{ user?.updatedAt | date:'dd/MM/yyyy' }}</td>
                               <td>Editeur</td>
                               <td><a class="vue" [routerLink]="['edit',user?._id]">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></a></td>
                           </tr>

@@ -106,8 +106,10 @@ export class EvolutionComponent {
 
             this.evolutionService.getEvolutionByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (evolution: any) => {
-                this.evolutionForm = evolution;
-                this.patientExists = true;
+                if(evolution){
+                  this.evolutionForm = evolution;
+                  this.patientExists = true;
+                }
               },
               (err: any) => {
                 if (err.status === undefined) {

@@ -2,5 +2,9 @@ export interface Users {
     prenom: string,
     nom: string,
     email: string,
-    password: string
+    pseudo:string,
+    password: string,
+    service: string,
+    speciality: string,
+    status: 'A' | 'B'
 }

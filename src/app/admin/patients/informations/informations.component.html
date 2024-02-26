@@ -28,7 +28,7 @@
                     <tbody>
             
                     
-                        <tr *ngFor="let patient of filterPatients" [routerLink]="'../details/' + patient._id">
+                        <tr *ngFor="let patient of filterPatients" [routerLink]="'../details/' + patient._id+'/'+ patient._id">
                             <td>{{patient.prenom}}</td>
                             <td>{{patient.nom}}</td>
                             <td>{{patient.adresse}}</td>

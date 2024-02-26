@@ -20,6 +20,7 @@ import { PlanningComponent } from './planning/planning.component';
 import { OrdonnancesComponent } from './ordonnances/ordonnances.component';
 import { AttenteComponent } from './attente/attente.component';
 import { HelpComponent } from './help/help.component';
+import { AjoutassistantComponent } from './assistant/ajoutassistant/ajoutassistant.component';
 
 
 
@@ -40,7 +41,8 @@ import { HelpComponent } from './help/help.component';
     PlanningComponent,
     OrdonnancesComponent,
     AttenteComponent,
-    HelpComponent
+    HelpComponent,
+    AjoutassistantComponent
   ],
   imports: [
     CommonModule,

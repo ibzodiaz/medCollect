@@ -20,7 +20,7 @@
         </div>
         <div class="col"></div>
         <div class="col">
-            <label>Afficher&nbsp;<i class="fa-regular fa-eye"></i></label>
+            <label>Filtrer&nbsp;<i class="fa-regular fa-eye"></i></label>
             <div class="row">
                 <div class="col-md-9">
                     <select name="show" [(ngModel)]="rowsPerPage" class="form-control rounded-0">
@@ -42,33 +42,35 @@
     </div>
 </form>
 
-<table class="table">
-<thead>
-    <tr>
-        <td class="text-center">Date :</td>
-        <td class="text-center">Motif :</td>
-        <td class="text-center">Signes cliniques :</td>
-        <td class="text-center">Signes paracliniques :</td>
-        <td class="text-center">Evolution :</td>
-        <td class="text-center">Fiche :</td>
-        <td class="text-center">Fichiers :</td>
-        <td class="text-center">Terminé :</td>
-    </tr>
-</thead>
-<tbody>
-    <tr class="text-center" *ngFor="let consultation of filteredPatients">
-        <td>{{ consultation.createdAt | date:'dd/MM/yyyy' }}</td>
-        <td>{{consultation.motif}}</td>
-        <!-- <td><span (click)="openModal('modal2',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td> -->
-        <td><span (click)="openModal('modal3',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-        <td><span (click)="openModal('modal4',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-        <td><span (click)="openModal('modal6',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-        <td><span><i (click)="openModal('modal5',patientId,consultation._id)" class="fa-regular fa-folder"></i></span></td>
-        <td><span><i (click)="openModal('modal20',patientId,consultation._id)" class='bx bx-cloud-upload'></i></span></td>
-        <td><input type="checkbox" name="complet"></td>
-    </tr>
-</tbody>
-</table>
+<div class="table-wrapper">
+    <table class="fl-table">
+    <thead>
+        <tr>
+            <th class="text-center">Date :</th>
+            <th class="text-center">Motif :</th>
+            <th class="text-center">Signes cliniques :</th>
+            <th class="text-center">Signes paracliniques :</th>
+            <th class="text-center">Evolution :</th>
+            <th class="text-center">Fiche :</th>
+            <th class="text-center">Fichiers :</th>
+            <!-- <th class="text-center">Terminé :</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center" *ngFor="let consultation of filteredPatients">
+            <td>{{ consultation.createdAt | date:'dd/MM/yyyy' }}</td>
+            <td>{{consultation.motif}}</td>
+            <!-- <td><span (click)="openModal('modal2',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td> -->
+            <td><span (click)="openModal('modal3',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+            <td><span (click)="openModal('modal4',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+            <td><span (click)="openModal('modal6',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+            <td><span><i style="color: rgb(16, 16, 190);" (click)="openModal('modal5',patientId,consultation._id)" class="fa-regular fa-folder"></i></span></td>
+            <td><span><i style="color:rgb(121, 21, 21); font-size: 28px;" (click)="openModal('modal20',patientId,consultation._id)" class='bx bx-cloud-upload'></i></span></td>
+            <!-- <td><input type="checkbox" name="complet"></td> -->
+        </tr>
+    </tbody>
+    </table>
+</div>
 
 <app-antecedents></app-antecedents>
 <app-cliniques></app-cliniques>

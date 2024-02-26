@@ -11,8 +11,13 @@ export class UserService {
 
   url = "http://localhost:3000/api/users";
 
+  
+  createNewUser(user:Users):Observable<Users>{
+    return this.http.put<Users>(this.url,user).pipe(catchError(this.errorHandler));
+  }
+
   getUsers():Observable<Users>{
-    return this.http.get<Users>(this.url).pipe(catchError(this.errorHandler));;
+    return this.http.get<Users>(this.url).pipe(catchError(this.errorHandler));
   }
 
   getUserById(id:any):Observable<Users>{
@@ -24,7 +29,7 @@ export class UserService {
   }
 
   private errorHandler(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.log('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
  }
 }

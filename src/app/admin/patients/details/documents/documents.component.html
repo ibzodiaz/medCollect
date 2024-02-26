@@ -16,14 +16,7 @@
             <td><a [href]="['http://localhost:3000/data/'+file.fileName]" target="_blank">{{file.fileName}}</a></td>
             <td>{{file.fileSizeFormatted}}</td>
             <td>{{file.fileCategory}}</td>
-            <td><a (click)="downloadFile(file.fileName)">télécharger&nbsp;<i class="fa-solid fa-circle-down"></i></a></td>
+            <td><a style="cursor: pointer;" (click)="downloadFile(file.fileName)">télécharger&nbsp;&nbsp;<i style="color:rgb(121, 21, 21); font-size: 20px;" class="fa-solid fa-circle-down"></i></a></td>
         </tr>
     </tbody>
 </table>
-
-<app-antecedents></app-antecedents>
-<app-cliniques></app-cliniques>
-<app-paracliniques></app-paracliniques>
-<app-fichepatient></app-fichepatient>
-<app-evolution></app-evolution>
-<app-uploadfiles></app-uploadfiles>

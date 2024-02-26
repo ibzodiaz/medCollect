@@ -11,6 +11,13 @@
     color: #515151;
 }
 
+.left{
+    position: absolute;
+    right: 90px;
+    font-size: 18px;
+    color: #fff;
+}
+
 .go-left .dropdown button{
     border-radius: 50%;
     width: 40px;

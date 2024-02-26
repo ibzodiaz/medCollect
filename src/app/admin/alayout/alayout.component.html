@@ -8,7 +8,7 @@
         </header>
 
         
-        <nav class="dashboard-nav-list">
+        <nav class="dashboard-nav-list mt-3">
 
         <a [routerLink]="['dashboard']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-solid fa-gauge-high"></i> Tableau de bord
@@ -18,27 +18,27 @@
             <i class="fa-solid fa-user-clock"></i> Rendez-vous
         </a>
 
-        <a [routerLink]="['planning']" routerLinkActive="active" class="dashboard-nav-item">
+        <a *ngIf="user?.status !== 'A'" [routerLink]="['planning']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-regular fa-calendar-days"></i> Planning
         </a>
-
-        <a [routerLink]="['patients/informations']" routerLinkActive="active" class="dashboard-nav-item">
-            <i class="fa-solid fa-users"></i> Patients
-        </a>
-
 
         <a [routerLink]="['patients/dossiers']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-regular fa-folder-open"></i>&nbsp;Créer Dossier
         </a>
-        <a [routerLink]="['assistants']" routerLinkActive="active" class="dashboard-nav-item">
+
+        <a *ngIf="user?.status !== 'A'" [routerLink]="['patients/informations']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-users"></i> Patients
+        </a>
+
+        <a *ngIf="user?.status !== 'A'" [routerLink]="['assistants']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-solid fa-handshake-angle"></i>&nbsp;Assistants
         </a>
 
-        <a [routerLink]="['ordonnances']" routerLinkActive="active" class="dashboard-nav-item">
+        <a *ngIf="user?.status !== 'A'" [routerLink]="['ordonnances']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-solid fa-prescription-bottle-medical"></i> Ordonnances
         </a>
         
-        <a [routerLink]="['attente']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-hourglass-half"></i> Salles d'attente </a>
+        <!-- <a [routerLink]="['attente']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-hourglass-half"></i> Salles d'attente </a> -->
           
         <a [routerLink]="['aide']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-circle-info"></i> Aide ? </a>
           
@@ -51,8 +51,8 @@
             <a class="menu-toggle">
                 <i class="fas fa-bars"></i>
             </a>
+            <span class="left">{{user?.status !== 'A' ? 'Dr.' : ''}} {{user?.prenom || ""}} {{user?.nom || ""}}</span>
             <div class="go-left">
-
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user-doctor"></i>

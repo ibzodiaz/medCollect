@@ -42,7 +42,7 @@ export class HospitalisationsComponent {
   }
 
   updateFormWithPatientData(): void {
-    this.route.paramMap.subscribe((params: any) => {
+    this.route.queryParamMap.subscribe((params: any) => {
         const patientId = params.get('patientId');
         //const consultationId = params.get('consultationId');
 

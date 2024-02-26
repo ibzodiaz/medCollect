@@ -6,7 +6,7 @@
     <div class="col">
         
         <div class="float-end">
-            <button class="btn btn-success">+ Nouveau</button>&nbsp;&nbsp;
+            <button (click)="openModal('modal32')" class="btn btn-success rounded-0"><i class="fa-solid fa-user-plus"></i> Nouveau</button>&nbsp;&nbsp;
         </div>
     </div>
 </div>
@@ -23,18 +23,22 @@
                     <tr>
                         <th scope="col"><i class="fa-solid fa-street-view"></i> Prénom :</th>
                         <th scope="col"><i class="fa-solid fa-street-view"></i> Nom :</th>
-                        <th scope="col"><i class="fa-solid fa-street-view"></i> pseudo :</th>
-                        <th scope="col"><i class="fa-solid fa-street-view"></i> mot de passe :</th>
+                        <th scope="col"><i class="fa-solid fa-street-view"></i> Pseudo :</th>
+                        <th scope="col"><i class="fa-solid fa-street-view"></i> Email :</th>
+                        <th scope="col"><i class="fa-solid fa-street-view"></i> Status :</th>
+                        <th scope="col"><i class="fa-solid fa-street-view"></i> Date de création :</th>
                     </tr>
                 </thead>
                 <tbody>
         
                 
-                    <tr>
-                        <td><i class="fa-solid fa-street-view"></i> Astou </td>
-                        <td><i class="fa-solid fa-street-view"></i> Dieng</td>
-                        <td><i class="fa-solid fa-unlock"></i> Astou21</td>
-                        <td><i class="fa-solid fa-key"></i> passer2024</td>
+                    <tr *ngFor="let assistant of assistantList">
+                        <td><i class="fa-solid fa-street-view"></i> {{assistant.prenom}} </td>
+                        <td><i class="fa-solid fa-street-view"></i> {{assistant.nom}}</td>
+                        <td><i class="fa-solid fa-unlock"></i> {{assistant.pseudo}}</td>
+                        <td><i class="fa-regular fa-envelope"></i> {{assistant.email}}</td>
+                        <td><i class="fa-solid fa-cubes"></i> {{assistant.status}}</td>
+                        <td>{{assistant.createdAt | date: 'dd/MM/yyyy'}}</td>
                     </tr>
         
                 </tbody>
@@ -43,3 +47,5 @@
     </div>
 </div>
 <!-- </ng-template> -->
+
+<app-ajoutassistant></app-ajoutassistant>

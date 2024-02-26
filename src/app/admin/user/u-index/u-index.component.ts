@@ -23,10 +23,11 @@ export class UIndexComponent {
   ngOnInit():void{
 
     const userId = this.tokenService.getUserIdFromToken();
+    const hospitalId = this.tokenService.getHospitalIdFromToken()?.toString();
 
-    this.userService.getUsers().subscribe(
+    this.userService.getUserByHospital(hospitalId).subscribe(
       (users: any) => {
-        this.usersList = users.data
+        this.usersList = users.data.filter((user:any)=>user.status == 'A');
         console.log(this.usersList)
         this.isLoading = false;
       },

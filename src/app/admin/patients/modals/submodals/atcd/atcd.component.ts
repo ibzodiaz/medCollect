@@ -42,7 +42,7 @@ export class AtcdComponent {
   }
 
   updateFormWithPatientData(): void {
-    this.route.paramMap.subscribe((params: any) => {
+    this.route.queryParamMap.subscribe((params: any) => {
         const patientId = params.get('patientId');
         //const consultationId = params.get('consultationId');
 
@@ -53,7 +53,7 @@ export class AtcdComponent {
             this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
               (antecedants: any) => {
   
-                this.atcdForm = {...antecedants};
+                this.atcdForm = antecedants;
                 this.sharedService.setterATCD(this.atcdForm);
               },
               (err: any) => {
@@ -90,7 +90,6 @@ export class AtcdComponent {
       this.atcdForm.atcdDecompensation = false;
     }
 
-    this.emittedAtcdForm.emit(this.atcdForm);
 
     this.sharedService.setterATCD(this.atcdForm);
   }

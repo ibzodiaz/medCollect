@@ -31,6 +31,8 @@ import { ConsultationsComponent } from './details/consultations/consultations.co
 import { DocumentsComponent } from './details/documents/documents.component';
 import { MeetingsComponent } from './details/meetings/meetings.component';
 import { OrdonnancesComponent } from './details/ordonnances/ordonnances.component';
+import { AjoutordonnanceComponent } from './details/ajoutordonnance/ajoutordonnance.component';
+import { UpdateordonnanceComponent } from './details/updateordonnance/updateordonnance.component';
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import { OrdonnancesComponent } from './details/ordonnances/ordonnances.componen
     ConsultationsComponent,
     DocumentsComponent,
     MeetingsComponent,
-    OrdonnancesComponent
+    OrdonnancesComponent,
+    AjoutordonnanceComponent,
+    UpdateordonnanceComponent
   ],
   imports: [
     CommonModule,

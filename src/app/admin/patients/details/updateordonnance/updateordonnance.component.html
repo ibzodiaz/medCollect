@@ -1,0 +1,29 @@
+<!-- Modal Content -->
+<div id="modal31" class="modal">
+    <div class="modal-content">
+        <h4 class="mb-3">Consultation</h4>
+        <form name="consultation" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+                <div class="col">
+                    <select name="motif" [(ngModel)]="consultationForm.motif">
+                        <option value=""></option>
+                        <option value="Radiographie">Radiographie</option>
+                        <option value="Echo">Echo</option>
+                        <option value="Scanner">Scanner</option>
+                        <option value="Dialyse">Dialyse</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col"></div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary rounded-0">Modifier</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal31',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

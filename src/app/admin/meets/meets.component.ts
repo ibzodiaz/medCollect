@@ -149,8 +149,10 @@ export class MeetsComponent {
   getAllDoctorsFromEachHospital():void{
     this.userService.getUserByHospital(this.hospitalId).subscribe(
       (users: any) => {
-        this.usersList = users.data
-        console.log(this.usersList)
+   
+          this.usersList = users.data.filter((user:any)=>user.status !== 'A')
+          //console.log(this.usersList)
+        
       },
       err => console.error(err)
     );

@@ -1,1 +1,68 @@
-<p>ordonnances works!</p>
+<div class="container">
+    <div class="row mb-3">
+        <div class="col">
+            <div class="row float-start">
+                <div class="col">
+                    <label>Filtrer</label>
+                    <select [(ngModel)]="rowsPerPage">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="35">35</option>
+                        <option value="40">40</option>
+                        <option value="45">45</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Rechercher</label>
+                    <input type="text" [(ngModel)]="searchTerm" placeholder="rechercher.." class="form-control rounded-0">
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <form name="ordonnance" (ngSubmit)="onSubmit()">
+                <div class="row float-end">
+                    <div class="col">
+                        <label>Médicament</label>
+                        <input type="text" name="medicament" [(ngModel)]="ordonnanceForm.medicament" class="form-control rounded-0">
+                    </div>
+                    <div class="col">
+                        <label>Posologie</label>
+                        <input type="text" name="posologie" [(ngModel)]="ordonnanceForm.posologie" class="form-control rounded-0">
+                    </div>
+                    <div class="col">
+                        <br>
+                        <button class="btn btn-success rounded-0"><i class="fa-regular fa-square-plus"></i>&nbsp;Ajouter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="table-wrapper">
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Médicaments :</th>
+                            <th scope="col">Posologie :</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ordonnance of filteredOrdonnances">
+                            <td>{{ordonnance.medicament}}</td>
+                            <td>{{ordonnance.posologie}}</td>
+                            <td><button (click)="delete(ordonnance._id)" class="btn btn-danger rounded-circle"><i style="color:white;" class="fa-regular fa-trash-can"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

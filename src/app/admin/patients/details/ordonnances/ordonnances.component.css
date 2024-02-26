@@ -8,11 +8,55 @@
     float: left;
 }
 
-.table tr td:hover{
+
+.spacer{
+    width: 40px;
+}
+
+/* Table Styles */
+
+.table-wrapper{
+    margin: 10px 0px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.1 );
+}
+
+.fl-table tr:hover{
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.spacer{
-    width: 40px;
+
+.fl-table {
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4b9ef7;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #007BFF;
+}
+
+
+tr.active{
+    background-color: rgba(0, 0, 0, 0.1);
 }

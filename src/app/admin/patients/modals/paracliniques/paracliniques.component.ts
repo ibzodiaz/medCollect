@@ -101,9 +101,11 @@ export class ParacliniquesComponent {
 
             this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (paraclinicSigns: any) => {
-                this.paracliniquesForm = paraclinicSigns;
-                //console.log(this.paracliniquesForm);
-                this.patientExists = true;
+                if(paraclinicSigns){
+                  this.paracliniquesForm = paraclinicSigns;
+                  //console.log(this.paracliniquesForm);
+                  this.patientExists = true;
+                }
               },
               (err: any) => {
                 if (err.status === undefined) {

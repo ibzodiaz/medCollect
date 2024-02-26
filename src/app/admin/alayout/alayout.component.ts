@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TokenService } from 'src/app/_services/token.service';
 import * as $ from 'jquery';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-alayout',
@@ -10,10 +11,24 @@ import * as $ from 'jquery';
 
 export class AlayoutComponent {
 
-    constructor(private tokenService: TokenService) {}
+    constructor(
+        private tokenService: TokenService,
+        private userService:UserService
+        ) {}
+
+    user:any;
 
     ngOnInit(): void {
         this.initJQuery();
+        this.userService.getUserById(this.tokenService.getUserIdFromToken()).subscribe(
+            (user:any)=>{
+                if(user){
+                    this.user = user.data;
+                    //alert(JSON.stringify(this.user))
+                }
+            },
+            (err:any)=> console.log(err.message)
+        );
     }
 
     logout(): void {

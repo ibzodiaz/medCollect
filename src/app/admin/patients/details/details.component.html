@@ -104,33 +104,44 @@
         </div>
 
         <div class="row">
-          <div class="col">                            
-              <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <button class="nav-link rounded-0 active" id="nav-consultation-tab" data-bs-toggle="tab" data-bs-target="#nav-consultation" type="button" role="tab" aria-controls="nav-consultation" aria-selected="true"><i class="fa-solid fa-file-signature"></i>&nbsp;Consultation</button>
-                  <button class="nav-link rounded-0" id="nav-documents-tab" data-bs-toggle="tab" data-bs-target="#nav-documents" type="button" role="tab" aria-controls="nav-documents" aria-selected="false"><i class="fa-solid fa-folder-open"></i>&nbsp;Documents</button>
-                  <button class="nav-link rounded-0" id="nav-meetings-tab" data-bs-toggle="tab" data-bs-target="#nav-meetings" type="button" role="tab" aria-controls="nav-meetings" aria-selected="false"><i class="fa-regular fa-handshake"></i>&nbsp;Rendez-vous</button>
-                  <button class="nav-link rounded-0" id="nav-ordonnances-tab" data-bs-toggle="tab" data-bs-target="#nav-ordonnances" type="button" role="tab" aria-controls="nav-ordonnances" aria-selected="false"><i class="fa-solid fa-prescription-bottle-medical"></i>&nbsp;Ordonnances</button>
-                </div>
-              </nav>
-              <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade show active" id="nav-consultation" role="tabpanel" aria-labelledby="nav-consultation-tab" tabindex="0">
+            
+            <div class="col">                            
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button (click)="detect('1')" class="nav-link rounded-0" [class.active]="activeTab === '1'" id="nav-consultation-tab" data-bs-toggle="tab" data-bs-target="#nav-consultation" type="button" role="tab" aria-controls="nav-consultation" aria-selected="true">
+                          <i class="fa-solid fa-file-signature"></i>&nbsp;Consultation
+                        </button>
+                        <button (click)="detect('2')" class="nav-link rounded-0" [class.active]="activeTab === '2'" id="nav-documents-tab" data-bs-toggle="tab" data-bs-target="#nav-documents" type="button" role="tab" aria-controls="nav-documents" aria-selected="false">
+                          <i class="fa-solid fa-folder-open"></i>&nbsp;Documents
+                        </button>
+                        <button (click)="detect('3')" class="nav-link rounded-0" [class.active]="activeTab === '3'" id="nav-meetings-tab" data-bs-toggle="tab" data-bs-target="#nav-meetings" type="button" role="tab" aria-controls="nav-meetings" aria-selected="false">
+                          <i class="fa-regular fa-handshake"></i>&nbsp;Rendez-vous
+                        </button>
+                        <button (click)="detect('4')" class="nav-link rounded-0" [class.active]="activeTab === '4'" id="nav-ordonnances-tab" data-bs-toggle="tab" data-bs-target="#nav-ordonnances" type="button" role="tab" aria-controls="nav-ordonnances" aria-selected="false">
+                          <i class="fa-solid fa-prescription-bottle-medical"></i>&nbsp;Ordonnances
+                        </button>
+                      </div>                      
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade" [class.show]="activeTab === '1'" [class.active]="activeTab === '1'" id="nav-consultation" role="tabpanel" aria-labelledby="nav-consultation-tab" tabindex="0">
                     <app-consultations></app-consultations>
-                  </div>
+                    </div>
 
-                  <div class="tab-pane fade" id="nav-documents" role="tabpanel" aria-labelledby="nav-documents-tab" tabindex="0">
+                    <div class="tab-pane fade" [class.show]="activeTab === '2'" [class.active]="activeTab === '2'" id="nav-documents" role="tabpanel" aria-labelledby="nav-documents-tab" tabindex="0">
                     <app-documents></app-documents>
-                  </div>
+                    </div>
 
-                  <div class="tab-pane fade" id="nav-meetings" role="tabpanel" aria-labelledby="nav-meetings-tab" tabindex="0">
+                    <div class="tab-pane fade" [class.show]="activeTab === '3'" [class.active]="activeTab === '3'" id="nav-meetings" role="tabpanel" aria-labelledby="nav-meetings-tab" tabindex="0">
                     <app-meetings></app-meetings>
-                  </div>
+                    </div>
 
-                  <div class="tab-pane fade" id="nav-ordonnances" role="tabpanel" aria-labelledby="nav-ordonnances-tab" tabindex="0">
+                    <div class="tab-pane fade" [class.show]="activeTab === '4'" [class.active]="activeTab === '4'" id="nav-ordonnances" role="tabpanel" aria-labelledby="nav-ordonnances-tab" tabindex="0">
                     <app-ordonnances></app-ordonnances>
-                  </div>
-              </div>
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+

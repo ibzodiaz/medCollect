@@ -34,5 +34,10 @@ export class DetailsComponent {
 
   }
 
+  activeTab = '1'; // Définissez l'onglet actif par défaut
+
+  detect(tab: string) {
+    this.activeTab = tab;
+  }
 
 }
