@@ -115,9 +115,9 @@ h1, .h1 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex;
     min-height: 100vh;
     font-size: 14px;
+    overflow-x: hidden;
 }
 
 .dashboard-app {

@@ -1,0 +1,56 @@
+<!-- Modal Content -->
+<div id="modal33" class="modal">
+    <div class="modal-content">
+        <form name="assistant" (ngSubmit)="onSubmit()">
+            <h4 class="mb-3">Modifier assistant</h4>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label>Prénom</label>
+                    <input type="text" [(ngModel)]="assistantForm.prenom" name="prenom" class="form-control rounded-0">
+                </div>
+                <div class="col">
+                    <label>Nom</label>
+                    <input type="text" [(ngModel)]="assistantForm.nom"  name="nom" class="form-control rounded-0">
+                </div>
+            </div>
+
+            
+            <div class="row mb-3">
+                <div class="col">
+                    <label>Pseudo</label>
+                    <input type="text" [(ngModel)]="assistantForm.pseudo"  name="pseudo" class="form-control rounded-0">
+                </div>
+                <div class="col">
+                    <label>Email</label>
+                    <input type="email" [(ngModel)]="assistantForm.email"  name="email" class="form-control rounded-0">
+                </div>
+            </div>
+
+            
+            <div class="row mb-3">
+                <div class="col">
+                    <label>Mot de passe</label>
+                    <input type="password" [(ngModel)]="assistantForm.password"  name="password" class="form-control rounded-0">
+                </div>
+                <div class="col">
+                    <label>Status</label>
+                    <input type="text" [(ngModel)]="assistantForm.status" readonly name="status" class="form-control rounded-0">
+                </div>
+            </div>
+            
+
+            <div class="row text-center">
+                <div class="col"></div>
+                <div class="col">
+                    <!-- Bouton Enregistrer -->
+                    <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Modifier</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal33',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                </div>
+                <div class="col"></div>
+            </div>
+        </form>
+    </div>
+</div>

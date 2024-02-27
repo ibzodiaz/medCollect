@@ -58,7 +58,7 @@
                         <tr *ngFor="let ordonnance of filteredOrdonnances">
                             <td>{{ordonnance.medicament}}</td>
                             <td>{{ordonnance.posologie}}</td>
-                            <td><button (click)="delete(ordonnance._id)" class="btn btn-danger rounded-circle"><i style="color:white;" class="fa-regular fa-trash-can"></i></button></td>
+                            <td class="text-center"><button (click)="delete(ordonnance._id)" class="btn btn-danger rounded-circle"><i style="color:white;" class="fa-regular fa-trash-can"></i></button></td>
                         </tr>
                     </tbody>
                 </table>

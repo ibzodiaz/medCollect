@@ -33,6 +33,7 @@ import { MeetingsComponent } from './details/meetings/meetings.component';
 import { OrdonnancesComponent } from './details/ordonnances/ordonnances.component';
 import { AjoutordonnanceComponent } from './details/ajoutordonnance/ajoutordonnance.component';
 import { UpdateordonnanceComponent } from './details/updateordonnance/updateordonnance.component';
+import { PrintordonnanceComponent } from './details/printordonnance/printordonnance.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { UpdateordonnanceComponent } from './details/updateordonnance/updateordo
     MeetingsComponent,
     OrdonnancesComponent,
     AjoutordonnanceComponent,
-    UpdateordonnanceComponent
+    UpdateordonnanceComponent,
+    PrintordonnanceComponent
   ],
   imports: [
     CommonModule,

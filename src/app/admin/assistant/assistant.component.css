@@ -37,16 +37,7 @@
 /*************CARDS***************/
 
 /**********Table*****************/
-*{
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
-body{
-    font-family: Helvetica;
-    -webkit-font-smoothing: antialiased;
-    background: rgba( 71, 147, 227, 1);
-}
+
 h2{
     text-align: center;
     font-size: 18px;
@@ -58,22 +49,6 @@ h2{
 
 /* Table Styles */
 
-.table-wrapper{
-    margin: 10px 0px 70px;
-    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
-}
-
-.fl-table {
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: normal;
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 100%;
-    white-space: nowrap;
-    background-color: white;
-}
 
 .fl-table td, .fl-table th {
     padding: 8px;
@@ -84,19 +59,18 @@ h2{
     cursor: pointer;
 }
 
-.fl-table tr:hover{
+.fl-table td:hover{
     background-color: rgba( 0, 0, 0, 0.1);
 }
 
 .fl-table #table-title{
     background-color: #fff;
     color: #515151;
-    text-align: center;
     font-weight: 450;
     width: 100%;
 }
 
-.fl-table thead th {
+.fl-table th {
     color: #ffffff;
     background: #007BFF;
 }
@@ -119,10 +93,11 @@ td i{
 
 /* Responsive */
 
-@media (max-width: 767px) {
+
     .fl-table {
         display: block;
         width: 100%;
+        
     }
     .table-wrapper:before{
         content: "Scroll horizontally >";
@@ -145,7 +120,36 @@ td i{
         width: auto;
         position: relative;
         overflow-x: auto;
+        background-color: #fff;
     }
+
+    /* Styles pour la barre de défilement horizontale */
+    /* Utilisation des propriétés spécifiques à WebKit */
+    .fl-table tbody::-webkit-scrollbar {
+        height: 3px; /* Hauteur de la barre de défilement */
+    }
+
+    /* Styles pour la poignée de la barre de défilement */
+    .fl-table tbody::-webkit-scrollbar-thumb {
+        background-color: #888; /* Couleur de la poignée */
+        border-radius: 4px; /* Bordure arrondie */
+    }
+
+    /* Styles pour la piste de la barre de défilement */
+    .fl-table tbody::-webkit-scrollbar-track {
+        background-color: #f1f1f1; /* Couleur de la piste */
+        border-radius: 4px; /* Bordure arrondie */
+    }
+
+    .color-customized{
+        background-color: #79b4f3;
+    }
+
+    .color-customized div{
+       position: relative;
+       top: -10px;
+    }
+
     .fl-table td, .fl-table th {
         padding: 20px .625em .625em .625em;
         height: 60px;
@@ -153,7 +157,7 @@ td i{
         box-sizing: border-box;
         overflow-x: hidden;
         overflow-y: auto;
-        width: 120px;
+        width: 200px;
         font-size: 13px;
         text-overflow: ellipsis;
     }
@@ -170,18 +174,11 @@ td i{
     .fl-table tr:nth-child(even) {
         background: transparent;
     }
-    .fl-table tr td:nth-child(odd) {
-        background: #F8F8F8;
-        border-right: 1px solid #E6E4E4;
-    }
-    .fl-table tr td:nth-child(even) {
-        border-right: 1px solid #E6E4E4;
-    }
+
     .fl-table tbody td {
         display: block;
-        text-align: center;
     }
-}
+
 /**********Table*****************/
 
 /*************Loader*******************/

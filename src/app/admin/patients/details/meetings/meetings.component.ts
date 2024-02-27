@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MeetsService } from 'src/app/_services/meets.service';
+import { TokenService } from 'src/app/_services/token.service';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-meetings',
@@ -12,7 +14,9 @@ export class MeetingsComponent {
 
   constructor(
     private meetsService:MeetsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService:UserService,
+    private tokenService:TokenService
   ){}
 
   meetsPatientList: any[]=[];
@@ -35,15 +39,21 @@ export class MeetingsComponent {
     return num < 10 ? '0' + num : '' + num;
   }
 
+
   ngOnInit():void{
     let patientId = this.route.snapshot.paramMap.get('patientId');
-    this.meetsService.getMeetsByPatientId(patientId).subscribe(
+    let hospitalId:any = this.tokenService.getHospitalIdFromToken()?.toString();
+
+    this.meetsService.getMeetsByPatientId(patientId, hospitalId).subscribe(
       (patient:any)=>{
         this.meetsPatientList = patient;
         //alert(JSON.stringify(this.meetsPatientList))
       },
       (err:any)=>console.log(err.message)
     );
+   
+
+
 
   }
 

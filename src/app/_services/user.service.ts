@@ -16,6 +16,14 @@ export class UserService {
     return this.http.put<Users>(this.url,user).pipe(catchError(this.errorHandler));
   }
 
+  updateUser(userId:string,user:Users):Observable<Users>{
+    return this.http.patch<Users>(this.url+'/'+userId,user).pipe(catchError(this.errorHandler));
+  }
+
+  deleteUser(userId:string):Observable<Users>{
+    return this.http.delete<Users>(this.url+'/'+userId).pipe(catchError(this.errorHandler));
+  }
+
   getUsers():Observable<Users>{
     return this.http.get<Users>(this.url).pipe(catchError(this.errorHandler));
   }

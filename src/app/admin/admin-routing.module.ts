@@ -7,7 +7,6 @@ import { MeetsComponent } from './meets/meets.component';
 import { AssistantComponent } from './assistant/assistant.component';
 import { PlanningComponent } from './planning/planning.component';
 import { OrdonnancesComponent } from './ordonnances/ordonnances.component';
-import { AttenteComponent } from './attente/attente.component';
 import { HelpComponent } from './help/help.component';
 
 const routes: Routes = [
@@ -20,8 +19,8 @@ const routes: Routes = [
       {path:'meetings', component:MeetsComponent},
       {path:'planning', component:PlanningComponent},
       {path:'assistants', component:AssistantComponent},
+      {path:'assistants/:assistantId', component:AssistantComponent},
       {path:'ordonnances', component:OrdonnancesComponent},
-      {path:'attente', component:AttenteComponent},
       {path:'aide', component:HelpComponent},
       {
         path:'user', loadChildren: ()=> import('./user/user.module')

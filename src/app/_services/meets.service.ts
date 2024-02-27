@@ -24,8 +24,8 @@ export class MeetsService {
     return this.http.get<Meets>(this.url+'/'+doctorId).pipe(catchError(this.errorHandler));
   }
 
-  getMeetsByPatientId(patientId:any):Observable<Meets>{
-    return this.http.get<Meets>(this.url+'/meetingsbypatient/'+patientId).pipe(catchError(this.errorHandler));
+  getMeetsByPatientId(patientId:any,hostipalId:string):Observable<Meets>{
+    return this.http.get<Meets>(this.url+'/meetingsbypatient/'+patientId+'/'+hostipalId).pipe(catchError(this.errorHandler));
   }
 
   getMeetsByHospitalId(hostipalId:any):Observable<Meets>{

@@ -7,6 +7,8 @@ import { InitAllService } from 'src/app/_services/init-all.service';
 import { ParacliniquesService } from 'src/app/_services/paracliniques.service';
 import { PatientsService } from 'src/app/_services/patients.service';
 
+declare var html2pdf: any;
+
 @Component({
   selector: 'app-fichepatient',
   templateUrl: './fichepatient.component.html',
@@ -37,6 +39,42 @@ export class FichepatientComponent {
   ) {}
 
 
+  generatePDF() {
+    const options = {
+      margin: 10,
+      filename: 'Fiche.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 5.5 },
+      jsPDF: {
+        unit: 'mm',
+        format: 'a4',
+        orientation: 'portrait',
+        putOnlyUsedFonts: true,
+      },
+    };
+  
+    // Utilisation d'une promesse pour attendre que le contenu soit chargé
+    const promise = new Promise<void>((resolve, reject) => {
+      const element = document.getElementById('content-print');
+      if (element) {
+        resolve();
+      } else {
+        reject(new Error('Contenu non trouvé'));
+      }
+    });
+  
+    // Une fois que la promesse est résolue (c'est-à-dire que le contenu est chargé), générez le PDF
+    promise.then(() => {
+      const element = document.getElementById('content-print');
+      if (element) {
+        html2pdf().from(element).set(options).save();
+      }
+    }).catch((error) => {
+      console.error('Erreur lors de la génération du PDF :', error);
+    });
+  }
+  
+  
   socioDemographique(): void {
     this.route.paramMap.subscribe((params: any) => {
         const patientId = params.get('patientId');
@@ -94,6 +132,10 @@ export class FichepatientComponent {
             );
         }
     });
+  }
+
+  printContent() {
+    window.print();
   }
   
   getPatientClinicSigns(): void {
@@ -214,3 +256,4 @@ export class FichepatientComponent {
   }
 
 }
+

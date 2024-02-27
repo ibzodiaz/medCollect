@@ -15,6 +15,22 @@
 }
 /*************Loader*******************/
 
+
+.custom-file-upload {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #007BFF;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+
 .fa-fire-flame-curved{
     color: orange;
     font-size: 20px;

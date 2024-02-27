@@ -54,10 +54,12 @@ export class ConsultationsComponent {
   }
 
   getAllConsultationByPatient(){
-    this.consultationService.getConsultationByPatientId(this.patientId).subscribe(
+    const userId:any = this.tokenService.getUserIdFromToken();
+    this.consultationService.getConsultationByPatientId(this.patientId,userId).subscribe(
       (consultations:any)=>{
         if(consultations){
           this.consultationList = consultations;
+          //console.log(JSON.stringify(consultations))
           // for(let cons of this.consultationList){
           //   console.log(cons.date)
           // }

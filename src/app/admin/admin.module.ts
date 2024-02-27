@@ -21,6 +21,7 @@ import { OrdonnancesComponent } from './ordonnances/ordonnances.component';
 import { AttenteComponent } from './attente/attente.component';
 import { HelpComponent } from './help/help.component';
 import { AjoutassistantComponent } from './assistant/ajoutassistant/ajoutassistant.component';
+import { UpdateassistantComponent } from './assistant/updateassistant/updateassistant.component';
 
 
 
@@ -42,7 +43,8 @@ import { AjoutassistantComponent } from './assistant/ajoutassistant/ajoutassista
     OrdonnancesComponent,
     AttenteComponent,
     HelpComponent,
-    AjoutassistantComponent
+    AjoutassistantComponent,
+    UpdateassistantComponent
   ],
   imports: [
     CommonModule,

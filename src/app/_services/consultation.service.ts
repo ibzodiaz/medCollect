@@ -21,8 +21,8 @@ export class ConsultationService {
   }
 
   
-  getConsultationByPatientId(id:string):Observable<Consultation>{
-    return this.http.get<Consultation>(this.url+'/one/'+id).pipe(catchError(this.errorHandler));
+  getConsultationByPatientId(patientId:string,userId:string):Observable<Consultation>{
+    return this.http.get<Consultation>(this.url+'/'+patientId+'/'+userId).pipe(catchError(this.errorHandler));
   }
 
   deleteConsultationById(id:string):Observable<Consultation>{

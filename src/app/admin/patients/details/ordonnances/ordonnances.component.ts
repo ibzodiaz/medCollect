@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ConsultationService } from 'src/app/_services/consultation.service';
 import { PrescriptionService } from 'src/app/_services/prescription-service.service';
+import { TokenService } from 'src/app/_services/token.service';
 
 @Component({
   selector: 'app-ordonnances',
@@ -20,7 +21,8 @@ export class OrdonnancesComponent {
     private consultationService:ConsultationService,
     private route:ActivatedRoute,
     private router:Router,
-    private prescriptionService:PrescriptionService
+    private prescriptionService:PrescriptionService,
+    private tokenService:TokenService
   ){}
 
   inactive:any[]=[];
@@ -86,8 +88,8 @@ export class OrdonnancesComponent {
 
   getAllConsultationByPatient(){
     this.patientId = this.route.snapshot.paramMap.get('patientId');
-
-    this.consultationService.getConsultationByPatientId(this.patientId).subscribe(
+    const userId:any = this.tokenService.getUserIdFromToken();
+    this.consultationService.getConsultationByPatientId(this.patientId,userId).subscribe(
       (consultations:any)=>{
         if(consultations){
           this.consultationList = consultations;

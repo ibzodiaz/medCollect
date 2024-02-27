@@ -21,6 +21,7 @@
             <table class="fl-table">
                 <thead>
                     <tr>
+                        <th scope="col"><i class="fa-brands fa-artstation"></i> Actions :</th>
                         <th scope="col"><i class="fa-solid fa-street-view"></i> Prénom :</th>
                         <th scope="col"><i class="fa-solid fa-street-view"></i> Nom :</th>
                         <th scope="col"><i class="fa-solid fa-street-view"></i> Pseudo :</th>
@@ -33,12 +34,19 @@
         
                 
                     <tr *ngFor="let assistant of assistantList">
+                        <td class="text-center color-customized">
+                            <div>
+                                <button (click)="delete(assistant._id)" class="btn btn-danger rounded-circle"><i style="color: white;" class="fa-regular fa-trash-can"></i></button>
+                                &nbsp;
+                                <button (click)="openModal('modal33')" [routerLink]="['/admin/assistants/',assistant._id]" class="btn btn-primary rounded-circle"><i style="color: white;" class="fa-solid fa-pencil"></i></button>
+                            </div>
+                        </td>
                         <td><i class="fa-solid fa-street-view"></i> {{assistant.prenom}} </td>
                         <td><i class="fa-solid fa-street-view"></i> {{assistant.nom}}</td>
-                        <td><i class="fa-solid fa-unlock"></i> {{assistant.pseudo}}</td>
-                        <td><i class="fa-regular fa-envelope"></i> {{assistant.email}}</td>
-                        <td><i class="fa-solid fa-cubes"></i> {{assistant.status}}</td>
-                        <td>{{assistant.createdAt | date: 'dd/MM/yyyy'}}</td>
+                        <td><i class="fa-solid fa-street-view"></i> {{assistant.pseudo}}</td>
+                        <td><i class="fa-solid fa-street-view"></i> {{assistant.email}}</td>
+                        <td><i class="fa-solid fa-street-view"></i> {{assistant.status}}</td>
+                        <td><i class="fa-solid fa-street-view"></i> {{assistant.createdAt | date: 'dd/MM/yyyy'}}</td>
                     </tr>
         
                 </tbody>
@@ -49,3 +57,4 @@
 <!-- </ng-template> -->
 
 <app-ajoutassistant></app-ajoutassistant>
+<app-updateassistant></app-updateassistant>

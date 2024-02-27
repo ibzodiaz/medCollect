@@ -5,20 +5,20 @@
     <div class="row">
         <div class="col">
             <label>Date</label>
-            <input type="date" class="form-control" [(ngModel)]="planningForm.date" name="date">
+            <input type="date" class="form-control rounded-0" [(ngModel)]="planningForm.date" name="date">
         </div>
         <div class="col">
             <label>Début</label>
-            <input type="time" class="form-control" step="1" [(ngModel)]="planningForm.hourStart" name="hourStart">
+            <input type="time" class="form-control rounded-0" step="1" [(ngModel)]="planningForm.hourStart" name="hourStart">
         </div>
         <div class="col">
             <label>Fin</label>
-            <input type="time" class="form-control" step="1" [(ngModel)]="planningForm.hourEnd" name="hourEnd">
+            <input type="time" class="form-control rounded-0" step="1" [(ngModel)]="planningForm.hourEnd" name="hourEnd">
         </div>
 
         <div class="col">
             <br>
-            <button type="submit" class="btn btn-primary w-100"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+            <button type="submit" class="btn btn-primary w-100 rounded-0"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
         </div>
     </div>
 </form>
@@ -42,7 +42,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="handleCloseModal()"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Date : <input type="date" class="form-control" [(ngModel)]="planningForm.date" value="{{ date }}" name="date"></p>
+                            <p>Date : <input type="date" class="form-control rounded-0" [(ngModel)]="planningForm.date" value="{{ date }}" name="date"></p>
                             <p>De <input type="time" step="1" [(ngModel)]="planningForm.hourStart" value="{{ start }}" name="hourStart"> à <input type="time" step="1" [(ngModel)]="planningForm.hourEnd" value="{{ end }}" name="hourEnd"></p>
                         </div>
                         <div class="modal-footer">
