@@ -155,13 +155,22 @@ export class CliniquesComponent {
    
   }
 
-  openModal(modalId: string,e:Event): void {
+  openModal(modalId: string, e: Event): void {
     e.preventDefault();
+    const dyspneeEffort = document.getElementById('dyspneeEffort.presente') as HTMLInputElement;
     const modal = document.getElementById(modalId);
     if (modal) {
-      modal.style.display = "block";
+        modal.style.display = "block";
+        if (dyspneeEffort) {
+            dyspneeEffort.disabled = false;
+        } else {
+            console.error("Element 'dyspneeEffort.presente' not found.");
+        }
+    } else {
+        console.error("Modal with ID '" + modalId + "' not found.");
     }
   }
+
 
   closeModal(modalId: string,e:Event): void {
     e.preventDefault();
