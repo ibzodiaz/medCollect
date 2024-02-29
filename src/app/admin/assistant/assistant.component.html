@@ -1,7 +1,29 @@
-<div class="row">
+<div class="row mb-3">
     <div class="col">
         <h5><i class="fa-solid fa-users"></i>&nbsp;Les assistants</h5>
-        <input type="text" placeholder="Recherche..">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col-md-3">
+                <label class="see">Afficher&nbsp;<i class="fa-regular fa-eye"></i></label>
+                <div class="select-container col-md-8">
+                    <select class="form-control rounded-0" [(ngModel)]="rowsPerPage">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                        <option>25</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Recherche</label>
+                <input type="text" class="form-control rounded-0" [(ngModel)]="searchTerm" placeholder="Recherche..">
+            </div>
+        </div>
     </div>
     <div class="col">
         
@@ -33,7 +55,7 @@
                 <tbody>
         
                 
-                    <tr *ngFor="let assistant of assistantList">
+                    <tr *ngFor="let assistant of filteredPatients">
                         <td class="text-center color-customized">
                             <div>
                                 <button (click)="delete(assistant._id)" class="btn btn-danger rounded-circle"><i style="color: white;" class="fa-regular fa-trash-can"></i></button>

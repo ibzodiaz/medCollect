@@ -1,5 +1,6 @@
 form{
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border: 1px solid #007BFF;
     border-radius: 0px;
     padding: 15px;
 }

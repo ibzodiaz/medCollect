@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Uploadfiles } from 'src/app/_interfaces/uploadfiles';
 import { TokenService } from 'src/app/_services/token.service';
@@ -11,12 +11,6 @@ import { UploadfilesService } from 'src/app/_services/uploadfiles.service';
 })
 export class UploadfilesComponent {
 
-  constructor(
-    private uploadfilesService:UploadfilesService,
-    private route:ActivatedRoute,
-    private tokenService:TokenService
-  ){}
-
   fileForm:Uploadfiles = {
     userId: this.tokenService.getUserIdFromToken(),
     patientId: this.route.snapshot.paramMap.get('patientId'),
@@ -26,6 +20,15 @@ export class UploadfilesComponent {
     fileType: '',
     fileCategory:''
   }
+
+  @Output() emittedEvent =  new EventEmitter<boolean>();
+  uploaded:boolean = false;
+
+  constructor(
+    private uploadfilesService:UploadfilesService,
+    private route:ActivatedRoute,
+    private tokenService:TokenService
+  ){}
 
   ngOnInit():void{
     this.fileForm;
@@ -45,7 +48,9 @@ export class UploadfilesComponent {
     this.uploadfilesService.addFile(file,this.fileForm).subscribe(
       response => {
         console.log('File uploaded successfully:', response);
-        alert('File uploaded successfully:')
+        alert('File uploaded successfully:');
+        this.uploaded = true;
+        this.emittedEvent.emit(this.uploaded);
       },
       error => {
         console.error('Error uploading file:', error);

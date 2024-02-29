@@ -2,9 +2,22 @@
     <div class="col">
         <h5><i class="fa-solid fa-users"></i>&nbsp;Les patients</h5>
     </div>
-    <div class="col">
-        <div class="float-end">
-            <input type="text" placeholder="Recherche.." [(ngModel)]="searchTerm">
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="select-container">
+                    <select class="form-control rounded-0" [(ngModel)]="rowsPerPage">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                        <option>25</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control rounded-0" placeholder="Recherche.." [(ngModel)]="searchTerm">
+            </div>
         </div>
     </div>
 </div>
@@ -28,7 +41,7 @@
                     <tbody>
             
                     
-                        <tr *ngFor="let patient of filterPatients" [routerLink]="'../details/' + patient._id+'/'+ patient._id">
+                        <tr *ngFor="let patient of filteredPatients" [routerLink]="'../details/' + patient._id+'/'+ patient._id">
                             <td>{{patient.prenom}}</td>
                             <td>{{patient.nom}}</td>
                             <td>{{patient.adresse}}</td>

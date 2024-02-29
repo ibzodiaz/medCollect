@@ -47,6 +47,10 @@ export class OrdonnancesComponent {
     // });
 
   }
+
+  actualize(){
+    this.getAllConsultationByPatient();
+  }
   
   selectedConsultation: any;
 

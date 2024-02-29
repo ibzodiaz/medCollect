@@ -32,6 +32,10 @@ export class DocumentsComponent {
   ngOnInit():void{
     const userId:any = this.tokenService.getUserIdFromToken();
     const patientId:any = this.route.snapshot.paramMap.get('patientId');
+    this.getFiles(patientId,userId);
+  }
+
+  getFiles(patientId:string,userId:string){
     this.uploadfilesService.getFilesByPatientId(patientId,userId).subscribe(
       (files:any)=>{
         this.filesList = files.map((file: any) => {
@@ -43,6 +47,12 @@ export class DocumentsComponent {
       },
       (err:any)=>console.log(err.message)
     );
+  }
+
+  actualize() {
+    const userId:any = this.tokenService.getUserIdFromToken();
+    const patientId:any = this.route.snapshot.paramMap.get('patientId');
+    this.getFiles(patientId,userId);
   }
 
   downloadFile(fileName: string): void {

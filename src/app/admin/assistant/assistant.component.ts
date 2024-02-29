@@ -55,5 +55,34 @@ export class AssistantComponent {
 
   }
 
+  
+  searchTerm: string = '';
+  rowsPerPage: number = 5; // Nombre de lignes par page
+  currentPage: number = 1; // Page actuelle
+
+  // Calculer l'index de début et de fin pour afficher les patients sur la page actuelle
+  get startIndex(): number {
+    return (this.currentPage - 1) * this.rowsPerPage;
+  }
+
+  get endIndex(): number {
+    return Math.min(this.startIndex + this.rowsPerPage - 1, this.assistantList.length - 1);
+  }
+
+  // Obtenir les patients filtrés en fonction du terme de recherche
+  get filteredPatients(): any[] {
+    if (!this.searchTerm.trim()) {
+      // Si le champ de recherche est vide, retournez la liste complète des patients
+      return this.assistantList.slice(this.startIndex, this.endIndex + 1);
+    }
+    // Sinon, filtrez les patients par nom ou prénom
+    return this.assistantList.filter((assistant:any) =>
+      assistant.prenom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      assistant.nom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      assistant.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+    ).slice(this.startIndex, this.endIndex + 1);
+  }
+
+
 
 }

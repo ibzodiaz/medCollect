@@ -18,6 +18,10 @@ export class PrintordonnanceComponent {
   patientId:any;
   consultationId:any;
 
+  patientPrenom:string='';
+  patientNom:string='';
+  patientAge:number = 0;
+
   constructor(
     private prescriptionService:PrescriptionService,
     private route:ActivatedRoute,
@@ -46,6 +50,7 @@ export class PrintordonnanceComponent {
       (user:any)=>{
         //alert(JSON.stringify(user.data))
         this.hospital = user.data;
+        console.log(this.hospital)
       },
       (err:any)=>console.log(err.message)
     );
@@ -58,7 +63,7 @@ export class PrintordonnanceComponent {
       margin: 5,
       filename: 'ordonnance.pdf',
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 6 },
+      html2canvas: { scale: 4 },
       jsPDF: {
         unit: 'mm',
         format: 'A5',
@@ -84,7 +89,10 @@ export class PrintordonnanceComponent {
     this.prescriptionService.getPrescriptionByPatient(patientId,consultationId).subscribe(
       (prescription:any)=>{
         this.prescriptionList = prescription;
-        //alert(JSON.stringify(prescription))
+        //console.log(prescription)
+        this.patientNom = prescription[0].patientId.nom;
+        this.patientPrenom = prescription[0].patientId.prenom;
+        this.patientAge = prescription[0].patientId.age;
       },
       (err:any)=>console.log(err.message)
     ); 

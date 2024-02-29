@@ -20,7 +20,6 @@ import { TelecoeurComponent } from './modals/submodals/telecoeur/telecoeur.compo
 import { EcgComponent } from './modals/submodals/ecg/ecg.component';
 import { EttComponent } from './modals/submodals/ett/ett.component';
 import { ModaliteevolutionComponent } from './modals/submodals/modaliteevolution/modaliteevolution.component';
-import { HistoriquesComponent } from './historiques/historiques.component';
 import { WomenComponent } from './modals/submodals/women/women.component';
 import { BabiesComponent } from './modals/submodals/babies/babies.component';
 import { DecesComponent } from './modals/submodals/deces/deces.component';
@@ -55,7 +54,6 @@ import { PrintordonnanceComponent } from './details/printordonnance/printordonna
     EcgComponent,
     EttComponent,
     ModaliteevolutionComponent,
-    HistoriquesComponent,
     WomenComponent,
     BabiesComponent,
     DecesComponent,

@@ -199,9 +199,12 @@ button[type="submit"]:hover {
 }
 
 h5 span{
-    border-bottom: 1px solid #000;
-    width: 160px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    width: 165px;
+    padding: 5px;
 }
+
 
 .fl-table thead th {
     color: #ffffff;

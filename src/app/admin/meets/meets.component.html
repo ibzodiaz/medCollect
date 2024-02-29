@@ -15,16 +15,20 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="doctor">Docteur</label>
-                    <select id="doctor" class="form-control rounded-0" [(ngModel)]="meetingForm.userId" name="doctor">
-                        <option *ngFor="let user of usersList" [value]="user._id">{{user.prenom}} {{user.nom}}</option>
-                    </select>
+                    <div class="select-container">
+                        <select id="doctor" class="form-control rounded-0" [(ngModel)]="meetingForm.userId" name="doctor">
+                            <option *ngFor="let user of usersList" [value]="user._id">{{user.prenom}} {{user.nom}}</option>
+                        </select>
+                    </div>
                 </div>
       
                 <div class="col">
                     <label for="patient">Patient</label>
-                    <select id="patient" class="form-control rounded-0" [(ngModel)]="meetingForm.patientId" name="patient">
-                        <option *ngFor="let patient of patientsList" [value]="patient._id">{{patient.prenom}} {{patient.nom}}-{{patient.telephone}}</option>
-                    </select>  
+                    <div class="select-container">
+                        <select id="patient" class="form-control rounded-0" [(ngModel)]="meetingForm.patientId" name="patient">
+                          <option *ngFor="let patient of patientsList" [value]="patient._id">{{patient.prenom}} {{patient.nom}} {{patient.telephone}}</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="col">

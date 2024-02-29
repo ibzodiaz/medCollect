@@ -42,7 +42,8 @@
 
 @media(min-width:900px){
     form{
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border: 1px solid #007BFF;
         border-radius: 0px;
         padding: 7px;
         width: 100%;
@@ -51,7 +52,8 @@
 
 .back-secondary{
     margin-top: 15px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border: 1px solid #007BFF;
     border-radius: 0px;
     padding: 10px;
     width: 100%;
@@ -73,3 +75,20 @@
     100% { transform: rotate(360deg); }
 }
 /*************Loader*******************/
+
+
+/* Style pour le conteneur du select */
+.select-container {
+  position: relative;
+}
+
+/* Style pour la flèche déroulante */
+.select-container::after {
+  content: '\25BC'; /* flèche déroulante vers le bas */
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+

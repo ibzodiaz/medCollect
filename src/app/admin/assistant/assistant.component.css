@@ -197,3 +197,19 @@ td i{
     100% { transform: rotate(360deg); }
 }
 /*************Loader*******************/
+
+/* Style pour le conteneur du select */
+.select-container {
+    position: relative;
+  }
+  
+  /* Style pour la flèche déroulante */
+  .select-container::after {
+    content: '\25BC'; /* flèche déroulante vers le bas */
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  

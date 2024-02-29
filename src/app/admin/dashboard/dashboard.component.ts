@@ -20,6 +20,9 @@ export class DashboardComponent implements OnInit {
     nombreRv:any;
     nombreIndisponible:any;
 
+    rvList:any;
+    indisponibiliteList:any;
+
     constructor(
         private patientsService:PatientsService,
         private userService:UserService,
@@ -34,6 +37,8 @@ export class DashboardComponent implements OnInit {
         this.countPatients();
         this.countRv();
         this.countPlanning();
+        this.meetList();
+        this.planningList();
         this.chart1();
         this.chart2();
 
@@ -73,6 +78,20 @@ export class DashboardComponent implements OnInit {
         );
     }
 
+    meetList(): void {
+        const doctorId = this.tokenService.getUserIdFromToken();
+        this.meetsService.getMeetsByDoctorId(doctorId).subscribe(
+            (meetings: any) => {
+                const currentDate = new Date();
+                const currentDateString = currentDate.toISOString().slice(0, 10);
+
+                let meets = meetings.filter((meeting:any)=>meeting.date >= currentDateString)
+                this.rvList = meets;
+                //console.log(this.rvList)
+            }
+        );
+    }
+
     countPlanning():void{
         const doctorId = this.tokenService.getUserIdFromToken();
         this.planningService.getPlanningByDoctorId(doctorId).subscribe(
@@ -83,6 +102,20 @@ export class DashboardComponent implements OnInit {
                 let planning = plannings.filter((planning:any)=>planning.date >= currentDateString)
                 this.nombreIndisponible = planning.length;
                 //console.log(this.nombreRv)
+            }
+        );
+    }
+
+    planningList():void{
+        const doctorId = this.tokenService.getUserIdFromToken();
+        this.planningService.getPlanningByDoctorId(doctorId).subscribe(
+            (plannings: any) => {
+                const currentDate = new Date();
+                const currentDateString = currentDate.toISOString().slice(0, 10);
+
+                let planning = plannings.filter((planning:any)=>planning.date >= currentDateString)
+                this.indisponibiliteList = planning;
+                console.log(this.indisponibiliteList)
             }
         );
     }

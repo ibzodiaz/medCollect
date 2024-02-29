@@ -13,6 +13,7 @@ import { TokenService } from 'src/app/_services/token.service';
 export class ConsultationsComponent {
 
   dateActuelle: string;
+  uploaded:boolean = false;
 
   constructor(
     private route:ActivatedRoute,
@@ -41,6 +42,7 @@ export class ConsultationsComponent {
     this.getPatient();
     this.consultation;
     this.getAllConsultationByPatient();
+
   }
 
   getPatient(){
