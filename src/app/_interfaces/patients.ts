@@ -7,6 +7,6 @@ export interface Patients {
     telephone: string,
     statut: string,
     profession: string,
-    niveau_socioeconomique: string
-
+    niveau_socioeconomique: string,
+    sexe: 'M' | 'F'
 }

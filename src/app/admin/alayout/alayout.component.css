@@ -135,6 +135,7 @@ h1, .h1 {
     -ms-flex-positive: 2;
     flex-grow: 2;
     padding-top: 50px;
+    height: 100vh;
     background-color: #fcfafa;
 }
 

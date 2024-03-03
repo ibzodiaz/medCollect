@@ -11,11 +11,7 @@
                 <label class="see">Afficher&nbsp;<i class="fa-regular fa-eye"></i></label>
                 <div class="select-container col-md-8">
                     <select class="form-control rounded-0" [(ngModel)]="rowsPerPage">
-                        <option>5</option>
-                        <option>10</option>
-                        <option>15</option>
-                        <option>20</option>
-                        <option>25</option>
+                        <option *ngFor="let value of showPatient">{{value}}</option>
                     </select>
                 </div>
             </div>
@@ -32,51 +28,51 @@
         </div>
     </div>
 </div>
-<!-- 
+
 <div *ngIf="isLoading; else content">
     <div class="loader"></div>
-</div> -->
-<!-- <ng-template #content> -->
-<div class="row">
-    <div class="col">
-        <div class="table-wrapper">
-            <table class="fl-table">
-                <thead>
-                    <tr>
-                        <th scope="col"><i class="fa-brands fa-artstation"></i> Actions :</th>
-                        <th scope="col"><i class="fa-solid fa-street-view"></i> Prénom :</th>
-                        <th scope="col"><i class="fa-solid fa-street-view"></i> Nom :</th>
-                        <th scope="col"><i class="fa-solid fa-street-view"></i> Pseudo :</th>
-                        <th scope="col"><i class="fa-solid fa-street-view"></i> Email :</th>
-                        <th scope="col"><i class="fa-solid fa-street-view"></i> Status :</th>
-                        <th scope="col"><i class="fa-solid fa-street-view"></i> Date de création :</th>
-                    </tr>
-                </thead>
-                <tbody>
-        
-                
-                    <tr *ngFor="let assistant of filteredPatients">
-                        <td class="text-center color-customized">
-                            <div>
-                                <button (click)="delete(assistant._id)" class="btn btn-danger rounded-circle"><i style="color: white;" class="fa-regular fa-trash-can"></i></button>
-                                &nbsp;
-                                <button (click)="openModal('modal33')" [routerLink]="['/admin/assistants/',assistant._id]" class="btn btn-primary rounded-circle"><i style="color: white;" class="fa-solid fa-pencil"></i></button>
-                            </div>
-                        </td>
-                        <td><i class="fa-solid fa-street-view"></i> {{assistant.prenom}} </td>
-                        <td><i class="fa-solid fa-street-view"></i> {{assistant.nom}}</td>
-                        <td><i class="fa-solid fa-street-view"></i> {{assistant.pseudo}}</td>
-                        <td><i class="fa-solid fa-street-view"></i> {{assistant.email}}</td>
-                        <td><i class="fa-solid fa-street-view"></i> {{assistant.status}}</td>
-                        <td><i class="fa-solid fa-street-view"></i> {{assistant.createdAt | date: 'dd/MM/yyyy'}}</td>
-                    </tr>
-        
-                </tbody>
-            </table>
+</div>
+<ng-template #content>
+    <div class="row">
+        <div class="col">
+            <div class="table-wrapper">
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><i class="fa-brands fa-artstation"></i> Actions :</th>
+                            <th scope="col"><i class="fa-solid fa-street-view"></i> Prénom :</th>
+                            <th scope="col"><i class="fa-solid fa-street-view"></i> Nom :</th>
+                            <th scope="col"><i class="fa-solid fa-street-view"></i> Pseudo :</th>
+                            <th scope="col"><i class="fa-solid fa-street-view"></i> Email :</th>
+                            <th scope="col"><i class="fa-solid fa-street-view"></i> Status :</th>
+                            <th scope="col"><i class="fa-solid fa-street-view"></i> Date de création :</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            
+                    
+                        <tr *ngFor="let assistant of filteredPatients">
+                            <td class="text-center color-customized">
+                                <div>
+                                    <button (click)="delete(assistant._id)" class="btn btn-danger rounded-circle"><i style="color: white;" class="fa-regular fa-trash-can"></i></button>
+                                    &nbsp;
+                                    <button (click)="openModal('modal33')" [routerLink]="['/admin/assistants/',assistant._id]" class="btn btn-primary rounded-circle"><i style="color: white;" class="fa-solid fa-pencil"></i></button>
+                                </div>
+                            </td>
+                            <td><i class="fa-solid fa-street-view"></i> {{assistant.prenom}} </td>
+                            <td><i class="fa-solid fa-street-view"></i> {{assistant.nom}}</td>
+                            <td><i class="fa-solid fa-street-view"></i> {{assistant.pseudo}}</td>
+                            <td><i class="fa-solid fa-street-view"></i> {{assistant.email}}</td>
+                            <td><i class="fa-solid fa-street-view"></i> {{assistant.status}}</td>
+                            <td><i class="fa-solid fa-street-view"></i> {{assistant.createdAt | date: 'dd/MM/yyyy'}}</td>
+                        </tr>
+            
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-<!-- </ng-template> -->
+</ng-template>
 
 <app-ajoutassistant></app-ajoutassistant>
 <app-updateassistant></app-updateassistant>

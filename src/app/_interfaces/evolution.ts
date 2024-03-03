@@ -19,7 +19,8 @@ export interface Evolution {
          infectionsVirales: Boolean,
          infectionsBacteriennes: Boolean,
          denutrition: Boolean,
-         rupturesTherapeutiques: Boolean
+         rupturesTherapeutiques: Boolean,
+         ecartDeRegime: Boolean
       },
       echocardiographie: {
          dtdvg: String,

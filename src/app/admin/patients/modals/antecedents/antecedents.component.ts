@@ -132,10 +132,10 @@ export class AntecedentsComponent {
     );
   }
 
-  onSubmitAntecedant(): void {
+  onSubmitAntecedant(modalId: string,e:Event): void {
    
 
-    if(!this.antecedantForm.atcdDecompensation){
+    if(!this.sharedService.getterATCD().atcdDecompensation){
       this.initATCD();
     }
     else
@@ -146,7 +146,7 @@ export class AntecedentsComponent {
   
     }
 
-    if(!this.antecedantForm.hospitalisationsAnterieures){
+    if(!this.sharedService.getterhospitalisation().hospitalisationsAnterieures){
       this.initHA();
     }
     else
@@ -166,6 +166,7 @@ export class AntecedentsComponent {
       this.createNewAntecedant(this.antecedantForm);
 
     }
+    this.closeModal(modalId,e);
   }
 
   openModal(modalId: string, e:Event): void {

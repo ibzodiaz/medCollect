@@ -28,7 +28,8 @@ export class SociodemoComponent {
     telephone: '',
     statut: '',
     profession: '',
-    niveau_socioeconomique: ''
+    niveau_socioeconomique: '',
+    sexe:'M'
   };
 
   ngOnInit(): void {
@@ -57,14 +58,14 @@ export class SociodemoComponent {
   }
 
  
-  onSubmit(){
+  onSubmit(modalId: string, e: Event){
     
     this.patientsService.updatePatients(this.patientId,this.patientForm).subscribe(
       (patients: any) => {
         
         this.updated = true;
         this.emittedEvent.emit(this.updated);
-
+        this.closeModal(modalId, e);
         this.isLoading = false;
       },
       (err:any) => console.error(err)

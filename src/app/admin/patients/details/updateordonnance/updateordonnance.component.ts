@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute,ParamMap } from '@angular/router';
 import { Consultation } from 'src/app/_interfaces/consultation';
 import { ConsultationService } from 'src/app/_services/consultation.service';
+import { MotifsService } from 'src/app/_services/motifs.service';
 import { TokenService } from 'src/app/_services/token.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class UpdateordonnanceComponent {
   constructor(
     private tokenService:TokenService,
     private route:ActivatedRoute,
-    private consultationService:ConsultationService
+    private consultationService:ConsultationService,
+    private motifsService:MotifsService
   ){}
 
   consultationForm:Consultation={
@@ -22,6 +24,21 @@ export class UpdateordonnanceComponent {
     patientId: this.route.snapshot.paramMap.get('patientId'),
     motif: "",
     complet: false
+  }
+
+  motifsList:any;
+
+  ngOnInit():void{
+    this.motifTable();
+  }
+
+  motifTable(){
+    this.motifsService.getMotif().subscribe(
+      (motifs:any)=>{
+        this.motifsList=motifs;
+      },
+      (err:any)=>console.log(err.message)
+    );
   }
 
   onSubmit(){

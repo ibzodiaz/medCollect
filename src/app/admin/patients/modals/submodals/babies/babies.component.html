@@ -1,6 +1,6 @@
 <div id="modal17" class="modal">
     <div class="modal-content">
-        <form name="babies" (ngSubmit)="onSubmit()">
+        <form name="babies" (ngSubmit)="onSubmit('modal17',$event)">
             <h5 class="text-center">Enfant</h5>
 
             <div class="row border border-primary p-3 rounded-3 mb-3">
@@ -102,12 +102,11 @@
                 <div class="col"></div>
                 <div class="col-md-3">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><span>Enregistrer</span></button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100"><span>Enregistrer</span></button>
                 </div>
                 <div class="col-md-3">
                     <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal17',$event)">Fermer</button>
                 </div>
-                <div class="col"></div>
             </div>
         </form>
     </div>

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Consultation } from 'src/app/_interfaces/consultation';
 import { ConsultationService } from 'src/app/_services/consultation.service';
+import { MotifsService } from 'src/app/_services/motifs.service';
 import { PatientsService } from 'src/app/_services/patients.service';
+import { SharedService } from 'src/app/_services/shared.service';
 import { TokenService } from 'src/app/_services/token.service';
 
 @Component({
@@ -15,12 +17,16 @@ export class ConsultationsComponent {
   dateActuelle: string;
   uploaded:boolean = false;
 
+  isLoading:boolean = false;
+
   constructor(
     private route:ActivatedRoute,
     private router:Router,
     private patientService:PatientsService,
     private tokenService:TokenService,
-    private consultationService:ConsultationService
+    private consultationService:ConsultationService,
+    private motifsService:MotifsService,
+    private sharedService:SharedService
   ){
     this.dateActuelle = new Date().toISOString().substring(0, 10);
   }
@@ -30,6 +36,11 @@ export class ConsultationsComponent {
 
   consultationId:string = '';
   consultationList:any[] = [];
+  showPatient:any = [];
+
+  motifsList:any;
+
+  motifChanged:boolean = false;
 
   consultation: Consultation = {
     userId: this.userId,
@@ -42,7 +53,17 @@ export class ConsultationsComponent {
     this.getPatient();
     this.consultation;
     this.getAllConsultationByPatient();
+    this.motifTable();
 
+  }
+
+  motifUpdated(eventValue:boolean){
+    
+    this.motifChanged = eventValue;
+
+    if(this.motifChanged){
+      this.motifTable();
+    }
   }
 
   getPatient(){
@@ -57,15 +78,15 @@ export class ConsultationsComponent {
 
   getAllConsultationByPatient(){
     const userId:any = this.tokenService.getUserIdFromToken();
+    this.isLoading = true;
     this.consultationService.getConsultationByPatientId(this.patientId,userId).subscribe(
       (consultations:any)=>{
         if(consultations){
           this.consultationList = consultations;
-          //console.log(JSON.stringify(consultations))
-          // for(let cons of this.consultationList){
-          //   console.log(cons.date)
-          // }
-        
+          for (let index = 5; index <= this.consultationList.length + 5;  index += 5) {
+            this.showPatient.push(index);
+          }
+          this.isLoading = false;
         }
       },
       (err:any)=>console.log(err.message)
@@ -99,6 +120,23 @@ export class ConsultationsComponent {
     });
   }
 
+  motifTable(){
+    this.motifsService.getMotif().subscribe(
+      (motifs:any)=>{
+        this.motifsList=motifs;
+      },
+      (err:any)=>console.log(err.message)
+    );
+  }
+
+  
+  openMotifModal(modalId: string): void {
+
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = "block";
+    }
+  }
 
   searchTerm: string = '';
   rowsPerPage: number = 5; // Nombre de lignes par page

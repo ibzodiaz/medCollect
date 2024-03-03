@@ -6,11 +6,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <select name="motif" [(ngModel)]="consultationForm.motif">
-                        <option value=""></option>
-                        <option value="Radiographie">Radiographie</option>
-                        <option value="Echo">Echo</option>
-                        <option value="Scanner">Scanner</option>
-                        <option value="Dialyse">Dialyse</option>
+                        <option *ngFor="let motif of motifsList">{{motif.motif}}</option>
                     </select>
                 </div>
             </div>
@@ -18,7 +14,7 @@
             <div class="row text-center">
                 <div class="col"></div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary rounded-0">Modifier</button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100">Modifier</button>
                 </div>
                 <div class="col">
                     <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal31',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>

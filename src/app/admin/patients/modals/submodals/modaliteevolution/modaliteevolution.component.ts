@@ -27,7 +27,7 @@ export class ModaliteevolutionComponent {
     this.updateFormWithPatientData();
   }
 
-  onSubmitEvolution(){
+  onSubmitEvolution(modalId: string,e:Event){
     
     if(!this.modeliteevolutionForm.aspectsDefavorables.complications){
       this.modeliteevolutionForm.typeComplications = [];
@@ -39,6 +39,7 @@ export class ModaliteevolutionComponent {
     }
 
     this.sharedService.setterEvolution(this.modeliteevolutionForm);
+    this.closeModal(modalId,e);
   }
 
   initForm(){
@@ -86,7 +87,8 @@ export class ModaliteevolutionComponent {
   }
 
 
-  closeModal(modalId: string): void {
+  closeModal(modalId: string,e:Event): void {
+    e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";

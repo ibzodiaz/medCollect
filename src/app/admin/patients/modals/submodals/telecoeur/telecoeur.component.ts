@@ -66,9 +66,10 @@ export class TelecoeurComponent {
     });
   }
 
-  onSubmitTelecoeur(){
-    console.log(this.telecoeurForm);
+  onSubmitTelecoeur(modalId: string,e:Event){
+    //console.log(this.telecoeurForm);
     this.sharedService.setterTelecoeur(this.telecoeurForm);
+    this.closeModal(modalId,e);
   }
 
   closeModal(modalId: string,e:Event): void {

@@ -2,6 +2,57 @@
 <div id="modal30" class="modal">
     <div class="modal-content">
         <h4 class="mb-3">Ordonnances</h4>
+        <div class="row text-center mb-2">
+            <div class="col">
+                <div class="row mb-2">
+                    <div class="col">
+                        <button (click)="showMedicament()" class="btn btn-success rounded-0"><i class="fa-solid fa-prescription-bottle-medical"></i> médicament</button>
+                    </div>
+                </div>
+                <div class="row hide-medi">
+                    <div class="col">
+                        <form (ngSubmit)="saveMedicaments()">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>Nouveau médicament</label>
+                                    <input type="text" name="medicament" [(ngModel)]="medicamentForm.medicament" id="textInput1" (input)="showSave1()">
+                                </div>
+                                <div class="col">
+                                    <div class="tooltip-container">
+                                        <button class="btn btn-primary rounded-circle save-medi"><i class="fa-regular fa-floppy-disk"></i></button>
+                                        <div class="tooltip">Sauvegarder le médicament</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="row mb-2">
+                    <div class="col">
+                        <button (click)="showPosologie()" class="btn btn-success rounded-0"><i class="fa-solid fa-filter"></i> posologie</button>
+                    </div>
+                </div>
+                <div class="row hide-poso">
+                    <form (ngSubmit)="savePosologie()">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label>Nouvelle posologie</label>
+                                <input type="text" name="posologie" [(ngModel)]="posologieForm.posologie" id="textInput2" (input)="showSave2()">
+                            </div>
+                            <div class="col">
+                                <div class="tooltip-container">
+                                    <button class="btn btn-primary rounded-circle save-poso"><i class="fa-regular fa-floppy-disk"></i></button>
+                                    <div class="tooltip">Sauvegarder la posologie</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col">
@@ -21,7 +72,7 @@
                                 <label>Médicamments</label>
                                 <select name="medicament" [(ngModel)]="prescriptionForm.medicament">
                                     <option value=""></option>
-                                    <option *ngFor="let ordonnance of ordonnanceList">{{ordonnance.medicament}}</option>
+                                    <option *ngFor="let medicament of medicamentsList">{{medicament.medicament}}</option>
                                 </select>
                             </div>
                     
@@ -29,7 +80,7 @@
                                 <label>Posologie</label>
                                 <select name="posologie" [(ngModel)]="prescriptionForm.posologie">
                                     <option value=""></option>
-                                    <option *ngFor="let ordonnance of ordonnanceList">{{ordonnance.posologie}}</option>
+                                    <option *ngFor="let posologie of posologieList">{{posologie.posologie}}</option>
                                 </select>
                             </div>
                         </div>

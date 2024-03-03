@@ -4,7 +4,7 @@
         <h4>Évolution</h4>
 
         <!-- Formulaire -->
-        <form id="evolutionForm" (ngSubmit)="onSubmit()" data-modal-id="3">
+        <form id="evolutionForm" (ngSubmit)="onSubmit('modal6',$event)" data-modal-id="3">
             <div class="row text-center">
                 <div class="col">
                     <div class="border border-primary rounded-3">
@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <input type="radio" [value]="true" name="women" [(ngModel)]="evolutionForm.mere.presente">OUI
+                                    <input type="radio" [value]="true" name="women" [(ngModel)]="evolutionForm.mere.presente" (change)="openModal('modal16',$event)">OUI
                                 </label>
                             </div>
                             <div class="col">
@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <input type="radio" [value]="true" name="baby" [(ngModel)]="evolutionForm.enfant.presente">OUI
+                                    <input type="radio" [value]="true" name="baby" [(ngModel)]="evolutionForm.enfant.presente" (change)="openModal('modal17',$event)">OUI
                                 </label>
                             </div>
                             <div class="col">
@@ -51,15 +51,13 @@
             </div>
 
             <div class="row text-center">
-                <div class="col"></div>
                 <div class="col">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
                 </div>
                 <div class="col">
                     <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal6',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
                 </div>
-                <div class="col"></div>
             </div>
             
         </form>

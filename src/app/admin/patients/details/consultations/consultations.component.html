@@ -1,36 +1,21 @@
+<div class="row">
+    <div class="col">
+        <div class="row mb-3">
+            <div class="col">
+                <button class="btn btn-primary rounded-0" (click)="openMotifModal('modal40')"><i class="fa-solid fa-circle-plus"></i>&nbsp;Motif</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <form name="consultation" (ngSubmit)="onSubmit()">
     <div class="row mb-3 mt-3">
-        <div class="col-md-2">
-            <label>Date</label>
-            <input type="date" class="form-control rounded-0" name="date" [(ngModel)]="dateActuelle" readonly>
-        </div>
-        <div class="col-md-2">
-            <label>Motif</label>
-            <select name="motif" class="form-control rounded-0" [(ngModel)]="consultation.motif">
-            <option value=""></option>
-            <option value="Radiographie">Radiographie</option>
-            <option value="Echo">Echo</option>
-            <option value="Scanner">Scanner</option>
-            <option value="Dialyse">Dialyse</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <br>
-            <button class="btn btn-success rounded-0" type="submit"><i class="fa-solid fa-circle-plus"></i>&nbsp;Ajouter</button>
-        </div>
-        <div class="col"></div>
         <div class="col">
-            <label>Filtrer&nbsp;<i class="fa-regular fa-eye"></i></label>
+            <label>Afficher&nbsp;<i class="fa-regular fa-eye"></i></label>
             <div class="row">
-                <div class="col-md-9">
+                <div class="select-container col-md-9">
                     <select name="show" [(ngModel)]="rowsPerPage" class="form-control rounded-0">
-                        <option>5</option>
-                        <option>10</option>
-                        <option>15</option>
-                        <option>20</option>
-                        <option>25</option>
-                        <option>30</option>
-                        <option>35</option>
+                        <option *ngFor="let value of showPatient">{{value}}</option>
                     </select>
                 </div>
             </div>
@@ -39,38 +24,60 @@
             <label>Recherche&nbsp;<i class="fa-solid fa-magnifying-glass"></i> :</label>
             <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="recherche par motif.." class="form-control rounded-0">
         </div>
+        <div class="col"></div>
+        <div class="col-md-2">
+            <label>Date</label>
+            <input type="date" class="form-control rounded-0" name="date" [(ngModel)]="dateActuelle" readonly>
+        </div>
+        <div class="col-md-2">
+            <label>Motif</label>
+            <select name="motif" class="form-control rounded-0" [(ngModel)]="consultation.motif">
+            <option value="" disabled>Choisir un motif</option>
+            <option *ngFor="let motif of motifsList">{{motif.motif}}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <br>
+            <button class="btn btn-success rounded-0" type="submit"><i class="fa-solid fa-circle-plus"></i>&nbsp;Ajouter</button>
+        </div>
     </div>
 </form>
 
-<div class="table-wrapper">
-    <table class="fl-table">
-    <thead>
-        <tr>
-            <th class="text-center">Date :</th>
-            <th class="text-center">Motif :</th>
-            <th class="text-center">Signes cliniques :</th>
-            <th class="text-center">Signes paracliniques :</th>
-            <th class="text-center">Evolution :</th>
-            <th class="text-center">Fiche :</th>
-            <th class="text-center">Fichiers :</th>
-            <!-- <th class="text-center">Terminé :</th> -->
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="text-center" *ngFor="let consultation of filteredPatients">
-            <td>{{ consultation.createdAt | date:'dd/MM/yyyy' }}</td>
-            <td>{{consultation.motif}}</td>
-            <!-- <td><span (click)="openModal('modal2',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td> -->
-            <td><span (click)="openModal('modal3',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-            <td><span (click)="openModal('modal4',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-            <td><span (click)="openModal('modal6',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
-            <td><span><i style="color: rgb(16, 16, 190);" (click)="openModal('modal5',patientId,consultation._id)" class="fa-regular fa-folder"></i></span></td>
-            <td><span><i style="color:rgb(121, 21, 21); font-size: 28px;" (click)="openModal('modal20',patientId,consultation._id)" class='bx bx-cloud-upload'></i></span></td>
-            <!-- <td><input type="checkbox" name="complet"></td> -->
-        </tr>
-    </tbody>
-    </table>
+<div *ngIf="isLoading ; else content">
+    <!-- Afficher le loader ici -->
+    <div class="loader"></div>
 </div>
+<ng-template #content>
+    <div class="table-wrapper">
+        <table class="fl-table">
+        <thead>
+            <tr>
+                <th class="text-center">Date :</th>
+                <th class="text-center">Motif :</th>
+                <th class="text-center">Signes cliniques :</th>
+                <th class="text-center">Signes paracliniques :</th>
+                <th class="text-center">Evolution :</th>
+                <th class="text-center">Fiche :</th>
+                <th class="text-center">Fichiers :</th>
+                <!-- <th class="text-center">Terminé :</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" *ngFor="let consultation of filteredPatients">
+                <td>{{ consultation.createdAt | date:'dd/MM/yyyy' }}</td>
+                <td>{{consultation.motif}}</td>
+                <!-- <td><span (click)="openModal('modal2',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td> -->
+                <td><span (click)="openModal('modal3',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                <td><span (click)="openModal('modal4',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                <td><span (click)="openModal('modal6',patientId,consultation._id)">Editer&nbsp;<i class="fa-regular fa-pen-to-square"></i></span></td>
+                <td><span><i style="color: rgb(19, 19, 63); font-size: 22px;" (click)="openModal('modal5',patientId,consultation._id)" class="fa-solid fa-folder-open"></i></span></td>
+                <td><span><i style="color:rgb(121, 21, 21); font-size: 28px;" (click)="openModal('modal20',patientId,consultation._id)" class='bx bx-cloud-upload'></i></span></td>
+                <!-- <td><input type="checkbox" name="complet"></td> -->
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</ng-template>
 
 <app-antecedents></app-antecedents>
 <app-cliniques></app-cliniques>
@@ -78,3 +85,4 @@
 <app-fichepatient></app-fichepatient>
 <app-evolution></app-evolution>
 <app-uploadfiles></app-uploadfiles>
+<app-motifs (emittedEvent)="motifUpdated($event)"></app-motifs>

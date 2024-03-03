@@ -81,7 +81,7 @@ export class BabiesComponent {
 
 
   
-  onSubmit(){
+  onSubmit(modalId: string,e:Event){
    
     if(this.babiesForm.enfant.evolutionBebe.mortNes){
       this.babiesForm.enfant.evolutionBebe.poidsNaissance = 0;
@@ -95,6 +95,7 @@ export class BabiesComponent {
     }
     //alert(JSON.stringify(this.babiesForm));
     this.sharedService.setterBabies(this.babiesForm);
+    this.closeModal(modalId, e);
   }
   
 

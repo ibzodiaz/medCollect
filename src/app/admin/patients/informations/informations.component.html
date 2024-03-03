@@ -7,11 +7,7 @@
             <div class="col-md-3">
                 <div class="select-container">
                     <select class="form-control rounded-0" [(ngModel)]="rowsPerPage">
-                        <option>5</option>
-                        <option>10</option>
-                        <option>15</option>
-                        <option>20</option>
-                        <option>25</option>
+                        <option *ngFor="let value of showPatient">{{value}}</option>
                     </select>
                 </div>
             </div>

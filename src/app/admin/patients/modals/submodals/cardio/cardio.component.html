@@ -1,7 +1,7 @@
 <div id="modal11" class="modal">
     <div class="modal-content">
         <div class="container">
-            <form name="cardio" (ngSubmit)="onSubmit()">
+            <form name="cardio" (ngSubmit)="onSubmit('modal11',$event)">
                 <h5 class="text-center mb-2">Type de souffle</h5>
                 <div class="row mb-3">
                   <div class="col-md-3" *ngFor="let option of ['IM', 'RM', 'IA', 'RA']">
@@ -19,12 +19,13 @@
                 
               
                 <div class="row">
+                  <div class="col"></div>
                   <div class="col-md-3">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><span>Enregistrer</span></button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100"><span>Enregistrer</span></button>
                   </div>
                   <div class="col-md-3">
-                    <button class="btn btn-secondary rounded-0" (click)="closeModal('modal11',$event)">Fermer</button>
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal11',$event)">Fermer</button>
                   </div>
                 </div>
               </form>

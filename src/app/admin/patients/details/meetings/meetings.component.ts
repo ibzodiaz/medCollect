@@ -20,6 +20,8 @@ export class MeetingsComponent {
   ){}
 
   meetsPatientList: any[]=[];
+
+  isLoading:boolean = true;
   
   getDateActuelleFormatted(): string {
     const dateActuelle: Date = new Date();
@@ -41,20 +43,25 @@ export class MeetingsComponent {
 
 
   ngOnInit():void{
-    let patientId = this.route.snapshot.paramMap.get('patientId');
-    let hospitalId:any = this.tokenService.getHospitalIdFromToken()?.toString();
+    this.meetTable();
+  }
 
-    this.meetsService.getMeetsByPatientId(patientId, hospitalId).subscribe(
+  meetTable(){
+    let patientId = this.route.snapshot.paramMap.get('patientId');
+    let userId:any = this.tokenService.getUserIdFromToken();
+    this.isLoading = true;
+    this.meetsService.getMeetsByPatientIdAndDoctorId(patientId,userId).subscribe(
       (patient:any)=>{
         this.meetsPatientList = patient;
         //alert(JSON.stringify(this.meetsPatientList))
+        this.isLoading = false;
       },
       (err:any)=>console.log(err.message)
     );
-   
+  }
 
-
-
+  actualize(){
+    this.meetTable();
   }
 
   openModal(modalId: string): void {

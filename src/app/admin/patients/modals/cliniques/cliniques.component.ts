@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cliniques } from 'src/app/_interfaces/cliniques';
 import { CliniquesService } from 'src/app/_services/cliniques.service';
@@ -114,7 +114,7 @@ export class CliniquesComponent {
   
   
 
-  onSubmit():void{
+  onSubmit(modalId: string,e:Event):void{
 
     if(this.cliniquesForm.souffleCardiaque.presente){
       this.cliniquesForm.souffleCardiaque.typeSouffle = this.sharedService.getterCardio().souffleCardiaque.typeSouffle;
@@ -152,6 +152,8 @@ export class CliniquesComponent {
         (err:any)=> console.log(err.message)
       );
     }
+
+    this.closeModal(modalId,e);
    
   }
 

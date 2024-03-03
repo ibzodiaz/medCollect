@@ -1,0 +1,70 @@
+<!-- Modal Content -->
+<div id="modal40" class="modal">
+    <div class="modal-content text-center">
+       
+        <h6>Motifs de consultation</h6>
+
+        <div *ngIf="add">
+            <form (ngSubmit)="onSubmit()">
+                <div class="row mb-3 mt-3">
+                    <div class="col">
+                        <input type="text" name="motif" [(ngModel)]="motifForm.motif" placeholder="Ajouter un motif" class="form-control rounded-0 w-100">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-success rounded-circle"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="update">
+            <form (ngSubmit)="onUpdate()">
+                <div class="row mb-3 mt-3">
+                    <div class="col">
+                        <input type="text" name="motif" [(ngModel)]="motifForm.motif" placeholder="Ajouter un motif" class="form-control rounded-0 w-100">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-success rounded-circle"><i class="fa-solid fa-marker"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="scrollable-tbody">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Motifs</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let motif of motifsList">
+                    <td>{{motif.motif}}</td>
+                    <td>
+                        <button (click)="updateEvent(motif._id,motif.motif)" class="btn btn-primary rounded-circle">
+                            <i class="fa-solid fa-marker"></i>
+                        </button>
+                        &nbsp;
+                        <button (click)="delete(motif._id)" class="btn btn-danger rounded-circle">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-3 text-center">
+
+            <div class="col">
+            
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" (click)="closeModal('modal40')"><i class="fa-solid fa-ban"></i>&nbsp;Annuler</button>
+            </div> 
+
+        </div>
+  
+    </div>
+</div>

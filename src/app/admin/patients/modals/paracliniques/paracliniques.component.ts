@@ -183,7 +183,7 @@ export class ParacliniquesComponent {
     this.getPatientParaClinicSigns();
   }
 
-  onSubmit(){
+  onSubmit(modalId: string,e:Event){
 
     this.updateData();
 
@@ -204,7 +204,7 @@ export class ParacliniquesComponent {
         (err:any)=>console.log(err.message)
       );
     }
-
+    this.closeModal(modalId,e);
     //console.log(JSON.stringify(this.paracliniquesForm));
   }
 

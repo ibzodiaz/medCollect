@@ -47,7 +47,8 @@ export class EvolutionComponent {
               infectionsVirales: false,
               infectionsBacteriennes: false,
               denutrition: false,
-              rupturesTherapeutiques: false
+              rupturesTherapeutiques: false,
+              ecartDeRegime: false
           },
          echocardiographie: {
             dtdvg: '',
@@ -130,7 +131,7 @@ export class EvolutionComponent {
     this.getPatientEvolution();
   }
 
-  onSubmit(){
+  onSubmit(modalId: string,e:Event){
 
     if(this.evolutionForm.mere.presente){
       this.evolutionForm.mere.evolutionApresSortie = this.sharedService.getterWomen().mere.evolutionApresSortie;
@@ -174,6 +175,7 @@ export class EvolutionComponent {
         (err:any)=>console.log(err.message)
       );
     }
+    this.closeModal(modalId,e);
   }
 
   

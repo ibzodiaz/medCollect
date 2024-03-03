@@ -76,11 +76,13 @@ export class EttComponent {
   }
 
 
-  onSubmitEtt(){
+  onSubmitEtt(modalId: string,e:Event){
     this.sharedService.setterEtt(this.ettForm);
+    this.closeModal(modalId,e);
   }
 
-  closeModal(modalId: string): void {
+  closeModal(modalId: string,e:Event): void {
+    e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";

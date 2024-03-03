@@ -79,7 +79,6 @@
                                         <td>
                                             &nbsp;&nbsp;<i class="fa-solid fa-briefcase"></i>&nbsp;<span class="text-secondary">{{patient?.profession || ""}}</span>
                                         </td>
-                    
                                     </tr>
                                 
                                     <tr>
@@ -90,6 +89,14 @@
                                         <td>
                                             &nbsp;&nbsp;<i class="fa-solid fa-scale-balanced"></i>&nbsp;<span class="text-secondary">{{patient?.niveau_socioeconomique || ""}}</span>
                                         </td>
+                                        <td class="spacer"></td>
+                                        <td>
+                                            <p class="mb-0">Sexe:</p>
+                                        </td>
+                                        <td>
+                                            &nbsp;&nbsp;<i class="fa-solid fa-genderless"></i>&nbsp;<span class="text-secondary">{{patient?.sexe == 'M' ? 'MASCULIN' : 'FEMININ'}}</span>
+                                        </td>
+                                
                                     </tr>
                                 
                                 </table>

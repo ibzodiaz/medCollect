@@ -1,6 +1,6 @@
 <div id="modal7" class="modal">
     <div class="modal-content">
-        <form name="atcdForm" #f="ngForm" (ngSubmit)="onSubmit()">
+        <form name="atcdForm" #f="ngForm" (ngSubmit)="onSubmit('modal7',$event)">
             <div class="row mb-3">
                 <div class="col">
                     <label for="nombreAtcdDecompensation">Nombre:</label>
@@ -23,15 +23,13 @@
             </div>
 
             <div class="row">
-                <div class="col"></div>
-                <div class="col-md-3">
+                <div class="col">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><span>Enregistrer</span></button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100">Enregistrer</button>
                 </div>
-                <div class="col-md-3">
+                <div class="col">
                     <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal7',$event)">Fermer</button>
                 </div>
-                <div class="col"></div>
             </div>
         </form>
     </div>

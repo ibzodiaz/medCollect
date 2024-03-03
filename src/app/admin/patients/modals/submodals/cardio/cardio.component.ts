@@ -39,8 +39,9 @@ export class CardioComponent {
     };
   }
 
-  onSubmit(){
+  onSubmit(modalId: string,e:Event){
     this.sharedService.setterCardio(this.cardioForm);
+    this.closeModal(modalId,e);
   }
 
   updateFormWithPatientData(): void {

@@ -53,8 +53,8 @@
     border-radius: 5px;
     color: #007BFF;
     width: 50%;
-    text-align: center;
-    margin-left: 250px;
+    position: relative;
+    margin: 0px auto;
   }
 
 
@@ -65,16 +65,18 @@
     text-align: center;
     border-radius: 10px;
     padding: 10px;
+    position: relative;
+    margin: 0px auto;
   }
 
   h6{
     border: 1px solid #007BFF;
     color: #007BFF;
-    text-align: center;
     border-radius: 10px;
     padding: 10px;
     width: 50%;
-    margin-left: 250px;
+    position: relative;
+    margin: 0px auto;
   }
 
   .modal-content{
@@ -143,3 +145,20 @@ td{
     height: 100%;
   }
 }
+
+/*************Loader*******************/
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007BFF;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/*************Loader*******************/

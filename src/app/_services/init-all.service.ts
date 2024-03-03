@@ -21,7 +21,8 @@ export class InitAllService {
       telephone: '',
       statut: '',
       profession: '',
-      niveau_socioeconomique: ''
+      niveau_socioeconomique: '',
+      sexe:'M'
     };
   }
 
@@ -181,7 +182,8 @@ export class InitAllService {
               infectionsVirales: false,
               infectionsBacteriennes: false,
               denutrition: false,
-              rupturesTherapeutiques: false
+              rupturesTherapeutiques: false,
+              ecartDeRegime: false
           },
          echocardiographie: {
             dtdvg: '',

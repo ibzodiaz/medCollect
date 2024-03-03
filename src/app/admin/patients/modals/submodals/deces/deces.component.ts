@@ -68,9 +68,10 @@ export class DecesComponent {
     });
   }
 
-  onSubmit(){
+  onSubmit(modalId: string,e:Event){
     //alert(JSON.stringify(this.decesForm));
     this.sharedService.setterDeces(this.decesForm);
+    this.closeModal(modalId,e);
   }
 
   closeModal(modalId: string,e:Event): void {

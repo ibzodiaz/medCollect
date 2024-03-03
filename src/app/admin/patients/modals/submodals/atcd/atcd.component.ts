@@ -17,61 +17,60 @@ export class AtcdComponent {
   @Output() emittedAtcdForm =  new EventEmitter<any>();
 
 
-  PatientAntecedantId:any;
-  consultationId:any;
+  PatientAntecedantId: any;
+  consultationId: any;
     
-  atcdForm: Antecedents = { }
+  atcdForm: Antecedents = {};
 
-  initForm():void{
+  // Variable pour stocker les valeurs précédentes
+  previousAtcdForm: Antecedents = {};
+
+  initForm(): void {
     this.atcdForm = {
       atcdDecompensation: false,
-      nombreAtcdDecompensation:0,
+      nombreAtcdDecompensation: 0,
       typeInsuffisanceCardiaque: ''
-    }
+    };
   }
 
   constructor(
-              private antecedantsService:AntecedantsService, 
-              private route: ActivatedRoute,
-              private sharedService:SharedService
-              ){}
+    private antecedantsService: AntecedantsService, 
+    private route: ActivatedRoute,
+    private sharedService: SharedService
+  ) {}
 
-  ngOnInit():void{
+  ngOnInit(): void {
     this.initForm();
     this.updateFormWithPatientData();
   }
 
   updateFormWithPatientData(): void {
     this.route.queryParamMap.subscribe((params: any) => {
-        const patientId = params.get('patientId');
-        //const consultationId = params.get('consultationId');
+      const patientId = params.get('patientId');
 
-        if (patientId) {
-            this.PatientAntecedantId = patientId;
-            //this.consultationId = consultationId;
+      if (patientId) {
+        this.PatientAntecedantId = patientId;
 
-            this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
-              (antecedants: any) => {
-  
-                this.atcdForm = antecedants;
-                this.sharedService.setterATCD(this.atcdForm);
-              },
-              (err: any) => {
-                if (err.status === undefined) {
-        
-                  this.initForm();
-        
-                } else {
-                  alert(err.status);
-                  console.error(err);
-                }
-              }
-            );
-        }
+        this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
+          (antecedants: any) => {
+            // Sauvegarde des valeurs précédentes dès la récupération
+            this.previousAtcdForm = { ...antecedants };
+
+            this.atcdForm = antecedants || {}; // Assurez-vous que antecedants n'est pas undefined
+            //this.sharedService.setterATCD(this.atcdForm);
+          },
+          (err: any) => {
+            if (err.status === undefined) {
+              this.initForm();
+            } else {
+              alert(err.status);
+              console.error(err);
+            }
+          }
+        );
+      }
     });
   }
-
-
 
   openModal(modalId: string): void {
     const modal = document.getElementById(modalId);
@@ -80,25 +79,30 @@ export class AtcdComponent {
     }
   }
 
-  onSubmit():void {
-
-    if(this.atcdForm.nombreAtcdDecompensation != 0 || this.atcdForm.typeInsuffisanceCardiaque != ''){
+  onSubmit(modalId: string, e: Event): void {
+    if (this.atcdForm && (this.atcdForm.nombreAtcdDecompensation != 0 || this.atcdForm.typeInsuffisanceCardiaque != '')) {
       this.atcdForm.atcdDecompensation = true;
-      
-    }
-    else{
+    } else if (this.atcdForm) {
       this.atcdForm.atcdDecompensation = false;
     }
 
-
     this.sharedService.setterATCD(this.atcdForm);
+    this.closeModal(modalId, e);
   }
 
-  closeModal(modalId: string,e:Event): void {
+  closeModal(modalId: string, e: Event): void {
     e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";
+
+      // Rétablissement des valeurs précédentes uniquement si aucune modification n'a été enregistrée
+      if (JSON.stringify(this.atcdForm) === JSON.stringify(this.previousAtcdForm)) {
+        this.atcdForm = { ...this.previousAtcdForm };
+        this.sharedService.setterATCD(this.atcdForm);
+      } else {
+        // Si des modifications ont été enregistrées, ne faites rien
+      }
     }
   }
 

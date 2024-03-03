@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ConsultationService } from 'src/app/_services/consultation.service';
 import { PrescriptionService } from 'src/app/_services/prescription-service.service';
@@ -16,6 +16,7 @@ export class OrdonnancesComponent {
   consultationId:any;
 
   prescriptionList:any;
+  isLoading:boolean = true;
 
   constructor(
     private consultationService:ConsultationService,
@@ -50,6 +51,14 @@ export class OrdonnancesComponent {
 
   actualize(){
     this.getAllConsultationByPatient();
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const consultationId = params.get('consultationId');
+      const patientId = params.get('patientId');
+
+      if(patientId && consultationId){
+        this.prescriptionTable(patientId,consultationId);
+      }
+    });
   }
   
   selectedConsultation: any;
@@ -74,6 +83,7 @@ export class OrdonnancesComponent {
   }
 
   selectedOrdonnace:any;
+  showPatient:any = [];
 
   theSelectedOrdonnace(ordonnance:any):void{
     this.selectedOrdonnace = ordonnance;
@@ -91,16 +101,19 @@ export class OrdonnancesComponent {
   }
 
   getAllConsultationByPatient(){
+    this.isLoading = true;
     this.patientId = this.route.snapshot.paramMap.get('patientId');
     const userId:any = this.tokenService.getUserIdFromToken();
     this.consultationService.getConsultationByPatientId(this.patientId,userId).subscribe(
       (consultations:any)=>{
         if(consultations){
           this.consultationList = consultations;
-          // for(let cons of this.consultationList){
-          //   console.log(cons.date)
-          // }
-        
+          if(this.consultationList){
+            for (let index = 5; index <= this.consultationList.length + 5;  index += 5) {
+              this.showPatient.push(index);
+            }
+          }
+          this.isLoading = false;
         }
       },
       (err:any)=>console.log(err.message)

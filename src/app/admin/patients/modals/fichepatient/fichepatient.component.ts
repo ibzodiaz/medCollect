@@ -6,6 +6,7 @@ import { EvolutionService } from 'src/app/_services/evolution.service';
 import { InitAllService } from 'src/app/_services/init-all.service';
 import { ParacliniquesService } from 'src/app/_services/paracliniques.service';
 import { PatientsService } from 'src/app/_services/patients.service';
+import { SharedService } from 'src/app/_services/shared.service';
 
 declare var html2pdf: any;
 
@@ -35,7 +36,8 @@ export class FichepatientComponent {
     private cliniquesService:CliniquesService,
     private paracliniquesService:ParacliniquesService,
     private evolutionService:EvolutionService,
-    private initAllService:InitAllService
+    private initAllService:InitAllService,
+    private sharedService:SharedService
   ) {}
 
 
@@ -44,10 +46,10 @@ export class FichepatientComponent {
       margin: 10,
       filename: 'Fiche.pdf',
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 5.5 },
+      html2canvas: { scale: 4 },
       jsPDF: {
         unit: 'mm',
-        format: 'a4',
+        format: 'a3',
         orientation: 'portrait',
         putOnlyUsedFonts: true,
       },
@@ -88,7 +90,6 @@ export class FichepatientComponent {
               (patient: any) => {
                 if(patient){
                   this.patient = patient;
-                  this.isLoading = false;
                 }
                 //alert(JSON.stringify(this.patient))
               },
@@ -134,9 +135,6 @@ export class FichepatientComponent {
     });
   }
 
-  printContent() {
-    window.print();
-  }
   
   getPatientClinicSigns(): void {
     this.route.paramMap.subscribe((params: any) => {
@@ -226,6 +224,7 @@ export class FichepatientComponent {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     //Init
     this.patient = this.initAllService.initPatient();
     this.antecedant = this.initAllService.initAntecedant();
@@ -239,14 +238,24 @@ export class FichepatientComponent {
     this.getPatientClinicSigns();
     this.getPatientParaClinicSigns();
     this.getPatientEvolution();
+    setInterval(()=>{
+      this.isLoading = false;
+    },2000)
+
   }
 
-  openModal(modalId: string): void {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.style.display = "block";
-    }
+  actualize(){
+    this.isLoading = true;
+    this.socioDemographique();
+    this.getPatientAntecedant();
+    this.getPatientClinicSigns();
+    this.getPatientParaClinicSigns();
+    this.getPatientEvolution();
+    setInterval(()=>{
+      this.isLoading = false;
+    },2000)
   }
+
 
   closeModal(modalId: string): void {
     const modal = document.getElementById(modalId);

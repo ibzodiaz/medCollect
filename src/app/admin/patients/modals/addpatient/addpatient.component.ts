@@ -24,7 +24,8 @@ export class AddpatientComponent {
     telephone: '',
     statut: '',
     profession: '',
-    niveau_socioeconomique: ''
+    niveau_socioeconomique: '',
+    sexe:'M'
   };
 
   patientsList: any = [];

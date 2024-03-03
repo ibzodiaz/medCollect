@@ -72,7 +72,7 @@ export class HospitalisationsComponent {
   }
 
 
-  onSubmit():void{
+  onSubmit(modalId: string,e:Event):void{
     if(this.hospitalisationForm.nombreHospitalisations != 0){
       
       this.hospitalisationForm.hospitalisationsAnterieures = true;
@@ -85,6 +85,7 @@ export class HospitalisationsComponent {
     this.emittedHospitalisationForm.emit(this.hospitalisationForm);
 
     this.sharedService.setterHospitalisation(this.hospitalisationForm);
+    this.closeModal(modalId,e);
     
   }
 
@@ -95,7 +96,8 @@ export class HospitalisationsComponent {
     }
   }
 
-  closeModal(modalId: string): void {
+  closeModal(modalId: string,e:Event): void {
+    e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";

@@ -28,6 +28,10 @@ export class MeetsService {
     return this.http.get<Meets>(this.url+'/meetingsbypatient/'+patientId+'/'+hostipalId).pipe(catchError(this.errorHandler));
   }
 
+  getMeetsByPatientIdAndDoctorId(patientId:any,doctorId:string):Observable<Meets>{
+    return this.http.get<Meets>(this.url+'/meetingsbydoctorandpatient/'+patientId+'/'+doctorId).pipe(catchError(this.errorHandler));
+  }
+
   getMeetsByHospitalId(hostipalId:any):Observable<Meets>{
     return this.http.get<Meets>(this.url+'/meetingbyhospital/'+hostipalId).pipe(catchError(this.errorHandler));
   }

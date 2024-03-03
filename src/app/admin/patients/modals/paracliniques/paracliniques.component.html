@@ -4,7 +4,7 @@
         <h4>Signes Paracliniques</h4>
 
         <!-- Formulaire -->
-        <form id="signesParacliniquesForm" (ngSubmit)="onSubmit()" data-modal-id="3">
+        <form id="signesParacliniquesForm" (ngSubmit)="onSubmit('modal4',$event)" data-modal-id="3">
             
             <div class="border p-3 rounded-3 border-primary">
                 <div class="row">
@@ -84,7 +84,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label>
-                                        <input type="radio" name="telecoeur.presente" [value]="true" [(ngModel)]="paracliniquesForm.telecoeur.presente">OUI
+                                        <input type="radio" name="telecoeur.presente" [value]="true" [(ngModel)]="paracliniquesForm.telecoeur.presente" (change)="openModal('modal12',$event)">OUI
                                     </label>
                                 </div>
                                 <div class="col">
@@ -106,7 +106,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <input type="radio" name="ecg.presente" [value]="true" [(ngModel)]="paracliniquesForm.ecg.presente">OUI
+                                    <input type="radio" name="ecg.presente" [value]="true" [(ngModel)]="paracliniquesForm.ecg.presente" (change)="openModal('modal13',$event)">OUI
                                 </label>
                             </div>
                             <div class="col">
@@ -127,7 +127,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <input type="radio" name="ett.presente" [value]="true" [(ngModel)]="paracliniquesForm.ett.presente">OUI
+                                    <input type="radio" name="ett.presente" [value]="true" [(ngModel)]="paracliniquesForm.ett.presente" (change)="openModal('modal14',$event)">OUI
                                 </label>
                             </div>
                             <div class="col">
@@ -198,7 +198,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <input type="radio" name="modaliteEvolutiveHospitalisation.presente" [value]="true" [(ngModel)]="paracliniquesForm.modaliteEvolutiveHospitalisation.presente">OUI
+                                    <input type="radio" name="modaliteEvolutiveHospitalisation.presente" [value]="true" [(ngModel)]="paracliniquesForm.modaliteEvolutiveHospitalisation.presente" (change)="openModal('modal15',$event)">OUI
                                 </label>
                             </div>
                             <div class="col">
@@ -217,11 +217,11 @@
 
             <div class="row text-center">
                 <div class="col"></div>
-                <div class="col">
+                <div class="col-md-5">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
                 </div>
-                <div class="col">
+                <div class="col-md-5">
                     <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal4',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
                 </div>
                 <div class="col"></div>

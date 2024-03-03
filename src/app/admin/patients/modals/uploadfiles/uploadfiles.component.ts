@@ -34,14 +34,15 @@ export class UploadfilesComponent {
     this.fileForm;
   }
 
-  closeModal(modalId: string): void {
+  closeModal(modalId: string,e:Event): void {
+    e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";
     }
   }
 
-  onFileSelected(event: any) {
+  onFileSelected(modalId: string,event: any) {
 
     const file: File = event.target.files[0];
 
@@ -51,6 +52,8 @@ export class UploadfilesComponent {
         alert('File uploaded successfully:');
         this.uploaded = true;
         this.emittedEvent.emit(this.uploaded);
+        
+        this.closeModal(modalId,event);
       },
       error => {
         console.error('Error uploading file:', error);

@@ -20,14 +20,22 @@ export class AssistantComponent {
   ){}
   
   assistantList:any;
+  nombreAssistant:any;
+  showPatient:any = [];
+
+  isLoading:boolean = true;
 
   usersTable(){
     const hospitalId = this.tokenService.getHospitalIdFromToken()?.toString();
-
+    this.isLoading = true;
     this.userService.getUserByHospital(hospitalId).subscribe(
       (users:any)=>{
         this.assistantList = users.data.filter((user:any)=>user.status == 'A');
-        //console.log(this.assistantList)
+        this.nombreAssistant = this.assistantList.length;
+        for (let index = 5; index <= this.nombreAssistant + 5;  index += 5) {
+          this.showPatient.push(index);
+        }
+        this.isLoading = false;
       }
     );
   }

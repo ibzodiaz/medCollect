@@ -3,7 +3,7 @@
         <h4>Signes Cliniques</h4>
 
         <!-- Formulaire -->
-        <form id="signesCliniquesForm" #f="ngForm" (ngSubmit)="onSubmit()" data-modal-id="2">
+        <form id="signesCliniquesForm" #f="ngForm" (ngSubmit)="onSubmit('modal3',$event)" data-modal-id="2">
             <!-- Groupe Dyspnée d'Effort -->
             <div class="border border-primary rounded-3 p-3">
                 <div class="row mb-3">
@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <input type="radio" id="dyspneeEffort.presente" [(ngModel)]="cliniquesForm.dyspneeEffort.presente" [value]="true" name="dyspneeEffort.presente">OUI
+                                    <input type="radio" id="dyspneeEffort.presente" [(ngModel)]="cliniquesForm.dyspneeEffort.presente" [value]="true" name="dyspneeEffort.presente" (change)="openModal('modal10',$event)">OUI
                                 </label>
                             </div>
                             <div class="col">
@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>
-                                    <input type="radio" [(ngModel)]="cliniquesForm.souffleCardiaque.presente" [value]="true" name="souffleCardiaque.presente">OUI
+                                    <input type="radio" [(ngModel)]="cliniquesForm.souffleCardiaque.presente" [value]="true" name="souffleCardiaque.presente" (change)="openModal('modal11',$event)">OUI
                                 </label>
                             </div>
                             <div class="col">
@@ -132,11 +132,11 @@
 
             <div class="row text-center">
                 <div class="col"></div>
-                <div class="col">
+                <div class="col-md-5">
                     <!-- Bouton Enregistrer -->
                     <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
                 </div>
-                <div class="col">
+                <div class="col-md-5">
                     <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal3',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
                 </div>
                 <div class="col"></div>

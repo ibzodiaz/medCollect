@@ -17,6 +17,8 @@ export class DossiersComponent implements OnInit {
 
   patientsList: any = [];
   isLoading: boolean = true;
+  nombrePatient:any;
+  showPatient:any = [];
 
   inserted: boolean = false;
   updated:boolean =false;
@@ -58,7 +60,10 @@ export class DossiersComponent implements OnInit {
         if(patients){
           this.patientsService.setPatientsList(patients);
           this.patientsList = patients;
-  
+          this.nombrePatient = patients.length;
+          for (let index = 5; index <= this.nombrePatient + 5;  index += 5) {
+            this.showPatient.push(index);
+          }
           this.isLoading = false;
         }
 

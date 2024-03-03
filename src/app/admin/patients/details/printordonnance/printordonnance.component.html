@@ -2,6 +2,13 @@
 <div id="modal34" class="modal">
     <div class="modal-content">
         <div id="content-print-2">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-md-3">
+                    <p>Dr. {{hospital.prenom}} {{hospital.nom}}</p>
+                </div>
+            </div>
+            <hr>
             <div class="row mb-5">
                 <div class="col">
                     <div class="row mb-2">
@@ -20,8 +27,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3"></div>
-                <div class="col">
+                
+                <div class="col-md-5">
                     <div class="row mb-2">
                         <div class="col">
                             <strong>Date : </strong> {{dateActuelle | date: 'dd/MM/yyyy'}}
@@ -49,8 +56,8 @@
                 <span>Ordonnance</span>
             </h5>
 
-            <div class="row mb-5">
-                <div class="col text-center">
+            <div class="row mb-5 text-center">
+                <div class="col">
                     <div class="row mb-2" *ngFor="let medicament of prescriptionList">
                         <div class="col">
                             {{medicament.medicament}}
@@ -64,14 +71,18 @@
                     </div>
                 </div>
             </div>
-            <br><br>
-            <div class="divider mt-5"></div>
-            <p>Dr. {{hospital.prenom}} {{hospital.nom}}</p>
+ 
         </div>
 
         <div class="row mt-5 text-center">
             <div class="col">
-                <button (click)="generatePDF()" class="btn btn-primary rounded-0"><i class="fa-solid fa-print"></i>&nbsp;Imprimer</button>
+                <div class="tooltip-container">
+                    <button class="btn btn-primary rounded-circle" (click)="actualize()" ><i class="fa-solid fa-arrows-rotate"></i></button>
+                    <div class="tooltip">Actualiser l'ordonnance</div>
+                </div>
+            </div>
+            <div class="col">
+                <button (click)="generatePDF()" class="btn btn-primary rounded-0 w-100"><i class="fa-solid fa-print"></i>&nbsp;Imprimer</button>
             </div>
             <div class="col">
                 <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal34',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>

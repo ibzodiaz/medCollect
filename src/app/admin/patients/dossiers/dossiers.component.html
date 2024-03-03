@@ -23,11 +23,7 @@
             <div class="float-end">
                 <label class="see">Afficher&nbsp;<i class="fa-regular fa-eye"></i></label>
                 <select [(ngModel)]="rowsPerPage">
-                    <option>5</option>
-                    <option>10</option>
-                    <option>15</option>
-                    <option>20</option>
-                    <option>25</option>
+                    <option *ngFor="let value of showPatient">{{value}}</option>
                 </select>
             </div>
         </div>

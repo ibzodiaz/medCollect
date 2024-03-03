@@ -1,6 +1,6 @@
 <div id="modal8" class="modal">
     <div class="modal-content">
-        <form name="hospitalisation" #f="ngForm" (ngSubmit)="onSubmit()">
+        <form name="hospitalisation" #f="ngForm" (ngSubmit)="onSubmit('modal8',$event)">
             <div class="row mb-3">
                 <div class="col">
                     <label for="nombreHospitalisations">Nombre:</label>
@@ -11,15 +11,13 @@
             </div>
 
             <div class="row">
-                <div class="col"></div>
-                <div class="col-md-3">
+                <div class="col">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><span>Enregistrer</span></button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100"><span>Enregistrer</span></button>
                 </div>
-                <div class="col-md-3">
-                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal8')">Fermer</button>
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal8',$event)">Fermer</button>
                 </div>
-                <div class="col"></div>
             </div>
         </form>
     </div>

@@ -7,7 +7,7 @@
         <div class="row" *ngIf="fileForm.fileCategory">
             <div class="col">
                 <div class="upload">
-                    <input type="file" id="fileInput" name="fileInput" (change)="onFileSelected($event)">
+                    <input type="file" id="fileInput" name="fileInput" (change)="onFileSelected('modal20',$event)">
                     <label for="fileInput">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
                     </label>
@@ -46,7 +46,7 @@
 
         <div class="row text-center mt-3">
             <div class="col">
-                <button class="btn btn-secondary rounded-0 w-50" (click)="closeModal('modal20')"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                <button class="btn btn-secondary rounded-0 w-50" (click)="closeModal('modal20',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
             </div>
         </div>
     </form>

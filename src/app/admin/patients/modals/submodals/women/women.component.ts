@@ -42,7 +42,8 @@ export class WomenComponent {
           infectionsVirales: false,
           infectionsBacteriennes: false,
           denutrition: false,
-          rupturesTherapeutiques: false
+          rupturesTherapeutiques: false,
+          ecartDeRegime: false
         },
         echocardiographie: {
           dtdvg: '',
@@ -110,7 +111,7 @@ export class WomenComponent {
     });
   }
 
-  onSubmit(){
+  onSubmit(modalId: string,e:Event){
 
     if(this.womenForm.mere.detailsDeces.presente){
       this.womenForm.mere.detailsDeces.date  = this.sharedService.getterDeces().detailsDeces.date
@@ -124,12 +125,14 @@ export class WomenComponent {
       this.womenForm.mere.detailsDeces.lieu  = ''
     }
 
-    console.log(this.womenForm)
+    //console.log(this.womenForm)
     this.sharedService.setterWomen(this.womenForm);
+    this.closeModal(modalId,e);
   }
 
 
-  closeModal(modalId: string): void {
+  closeModal(modalId: string,e:Event): void {
+    e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";

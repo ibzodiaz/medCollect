@@ -1,24 +1,31 @@
+<div class="tooltip-container">
+    <button class="btn btn-primary rounded-circle" (click)="actualize()" ><i class="fa-solid fa-arrows-rotate"></i></button>
+    <div class="tooltip">Actualiser la table des fichiers</div>
+</div>
 
-<div class="mb-3">
-    <button class="btn btn-primary rounded-circle" (click)="actualize()"><i class="fa-solid fa-arrows-rotate"></i></button>
-</div> 
-<table class="table mt-3">
-    <thead>
-        <tr>
-            <th>Date :</th>
-            <th>Fichier :</th>
-            <th>Taille :</th>
-            <th>Catégorie :</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let file of filesList">
-            <td>{{file.createdAt | date: 'dd/MM/yyyy'}}</td>
-            <td><a [href]="['http://localhost:3000/data/'+file.fileName]" target="_blank">{{file.fileName}}</a></td>
-            <td>{{file.fileSizeFormatted}}</td>
-            <td>{{file.fileCategory}}</td>
-            <td><a style="cursor: pointer;" (click)="downloadFile(file.fileName)">télécharger&nbsp;&nbsp;<i style="color:rgb(121, 21, 21); font-size: 20px;" class="fa-solid fa-circle-down"></i></a></td>
-        </tr>
-    </tbody>
-</table>
+<div *ngIf="isLoading ; else content">
+    <!-- Afficher le loader ici -->
+    <div class="loader"></div>
+</div>
+<ng-template #content>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Date :</th>
+                <th>Fichier :</th>
+                <th>Taille :</th>
+                <th>Catégorie :</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let file of filesList">
+                <td>{{file.createdAt | date: 'dd/MM/yyyy'}}</td>
+                <td><a [href]="['http://localhost:3000/data/'+file.fileName]" target="_blank">{{file.fileName}}</a></td>
+                <td>{{file.fileSizeFormatted}}</td>
+                <td>{{file.fileCategory}}</td>
+                <td><a style="cursor: pointer;" (click)="downloadFile(file.fileName)">télécharger&nbsp;&nbsp;<i style="color:rgb(121, 21, 21); font-size: 20px;" class="fa-solid fa-circle-down"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+</ng-template>

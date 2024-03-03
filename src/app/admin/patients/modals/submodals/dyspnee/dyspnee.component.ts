@@ -73,9 +73,10 @@ export class DyspneeComponent {
   }
 
 
-  onSubmit(){
+  onSubmit(modalId: string,e:Event){
     this.sharedService.setterDyspnee(this.dyspneeForm);
     //alert(JSON.stringify(this.dyspneeForm))
+    this.closeModal(modalId,e);
   }
 
   closeModal(modalId: string,e:Event): void {

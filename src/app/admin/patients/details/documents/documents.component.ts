@@ -19,6 +19,8 @@ export class DocumentsComponent {
   filesList:any[] = [];
   fileSize:string='';
 
+  isLoading:boolean = true;
+
   formatFileSize(fileSize: number): string {
     if (fileSize === 0) return '0 octets';
 
@@ -36,6 +38,7 @@ export class DocumentsComponent {
   }
 
   getFiles(patientId:string,userId:string){
+    this.isLoading = true;
     this.uploadfilesService.getFilesByPatientId(patientId,userId).subscribe(
       (files:any)=>{
         this.filesList = files.map((file: any) => {
@@ -44,6 +47,9 @@ export class DocumentsComponent {
             fileSizeFormatted: this.formatFileSize(file.fileSize)
           };
         });
+        setInterval(()=>{
+          this.isLoading = false;
+        },2000)
       },
       (err:any)=>console.log(err.message)
     );

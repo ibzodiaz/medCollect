@@ -15,6 +15,8 @@ export class InformationsComponent {
   ) {}
 
   patientList: any = [];
+  nombrePatient:any;
+  showPatient:any=[];
 
   isLoading:boolean = false;
 
@@ -23,8 +25,12 @@ export class InformationsComponent {
     this.isLoading = true;
     this.patientsService.getPatients().subscribe(
       (patients:any)=>{
-        console.log(patients);
+        //console.log(patients);
         this.patientList = patients;
+        this.nombrePatient = patients.length;
+        for (let index = 5; index <= this.nombrePatient + 5;  index += 5) {
+          this.showPatient.push(index);
+        }
         this.isLoading = false;
       },
       (err:any)=>console.log(err.message)

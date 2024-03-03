@@ -3,22 +3,22 @@
 
 /* Pour la barre de défilement principale */
 ::-webkit-scrollbar {
-    width: 1px;
+    width: 12px;
   }
   
   /* Pour le track (le fond) de la barre de défilement */
   ::-webkit-scrollbar-track {
-    background: #007BFF;
+    background: #ffffff;
   }
   
   /* Pour la poignée de la barre de défilement */
   ::-webkit-scrollbar-thumb {
-    background: #007BFF;
+    background: #cdcfd1;
     border-radius: 10px;
   }
   
   /* Pour la poignée de la barre de défilement au survol */
   ::-webkit-scrollbar-thumb:hover {
-    background: #007BFF;
+    background: #b1b2b3;
   }
   

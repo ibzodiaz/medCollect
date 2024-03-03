@@ -1,6 +1,6 @@
 <div id="modal15" class="modal">
     <div class="modal-content">
-        <form name="evolution" (ngSubmit)="onSubmitEvolution()">
+        <form name="evolution" (ngSubmit)="onSubmitEvolution('modal15',$event)">
 
             <h5 class="text-center">Aspects Défavorables:</h5>
             <div class="row">
@@ -53,7 +53,7 @@
 
 
             <div *ngIf="modeliteevolutionForm.aspectsDefavorables.deces" class="row mb-3 border border-primary p-3 rounded-3">
-                <h5 class="text-center">Délai de Décès (en jours):</h5>
+                <h5 class="text-center">Délai en jours:</h5>
                 <div class="col-md-3"></div>
                 <div class="col">
                     <input type="number" id="delaiDeces" name="delaiDeces" [(ngModel)]="modeliteevolutionForm.delaiDeces">
@@ -65,12 +65,11 @@
                 <div class="col"></div>
                 <div class="col-md-3">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><span>Enregistrer</span></button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100"><span>Enregistrer</span></button>
                 </div>
                 <div class="col-md-3">
-                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal15')">Fermer</button>
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal15',$event)">Fermer</button>
                 </div>
-                <div class="col"></div>
             </div>
         </form>
     </div>

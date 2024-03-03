@@ -1,7 +1,7 @@
 <div id="modal16" class="modal">
 
     <div class="modal-content">
-        <form name="women" (ngSubmit)="onSubmit()">
+        <form name="women" (ngSubmit)="onSubmit('modal16',$event)">
             <h5 class="text-center">Mère</h5>
 
             <div class="row mb-3">
@@ -25,7 +25,7 @@
                     <div class="row border border-primary p-3 rounded-3">
                         <div class="col-md-7 mb-3">
                             <label>Classe NYHA:</label>
-                            <select class="form-select" name="mere.classeNYHA" [(ngModel)]="womenForm.mere.classeNYHA">
+                            <select name="mere.classeNYHA" [(ngModel)]="womenForm.mere.classeNYHA">
                                 <option value=""></option>
                                 <option value="recuperation_totale">Récupération totale</option>
                                 <option value="recuperation_partielle">Récupération partielle</option>
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label>
-                                        <input type="radio" [value]="true" name="deces" [(ngModel)]="womenForm.mere.detailsDeces.presente">OUI
+                                        <input type="radio" [value]="true" name="deces" [(ngModel)]="womenForm.mere.detailsDeces.presente" (change)="openModal('modal18',$event)">OUI
                                     </label>
                                 </div>
                                 <div class="col">
@@ -94,6 +94,10 @@
                         <div class="col-md-3">
                             <label>ruptures Therapeutiques</label>
                             <input type="checkbox" name="facteursDecompensation.rupturesTherapeutiques" [(ngModel)]="womenForm.mere.facteursDecompensation.rupturesTherapeutiques">
+                        </div>
+                        <div class="col-md-3">
+                            <label>ecart de regime</label>
+                            <input type="checkbox" name="facteursDecompensation.ecartDeRegime" [(ngModel)]="womenForm.mere.facteursDecompensation.ecartDeRegime">
                         </div>
                     </div>
                 </div>                
@@ -231,12 +235,11 @@
                 <div class="col"></div>
                 <div class="col-md-3">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><span>Enregistrer</span></button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100"><span>Enregistrer</span></button>
                 </div>
                 <div class="col-md-3">
-                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal16')">Fermer</button>
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal16',$event)">Fermer</button>
                 </div>
-                <div class="col"></div>
             </div>
         </form>
     </div>
