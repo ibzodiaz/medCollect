@@ -72,7 +72,7 @@ export class PrintordonnanceComponent {
         html2canvas: { scale: 4 },
         jsPDF: {
             unit: 'mm',
-            format: 'a4',
+            format: 'a5',
             orientation: 'portrait',
             putOnlyUsedFonts: true,
         }

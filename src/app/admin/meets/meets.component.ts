@@ -66,6 +66,8 @@ export class MeetsComponent {
     subject:''
   }
 
+  user:any;
+
   constructor(
     private meetsService: MeetsService,
     private patientsService:PatientsService,
@@ -78,24 +80,15 @@ export class MeetsComponent {
 
   ngOnInit(): void {
 
-    this.dateInput = document.getElementById('meeting') as HTMLInputElement;
-    const dateToMark = new Date('2024-02-17');
-
-    this.dateInput.addEventListener('change', (event:any) => {
-      if (event && event.target) { 
-        const selectedDate = new Date(event.target.value); 
-        const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() - 1);
-
-        if (selectedDate <= currentDate) {
-          this.dateInput.style.color = 'red';
-        } else if (selectedDate.getTime() === dateToMark.getTime()) {
-          this.dateInput.style.color = 'red';
-        } else {
-          this.dateInput.style.color = 'green';
-        }
-      }
-    });
+    this.userService.getUserById(this.tokenService.getUserIdFromToken()).subscribe(
+      (user:any)=>{
+          if(user){
+              this.user = user.data;
+              //alert(JSON.stringify(this.user))
+          }
+      },
+      (err:any)=> console.log(err.message)
+    );
 
 
     this.getAllPatient();
@@ -121,21 +114,6 @@ export class MeetsComponent {
       events: this.Events
     };
 
-  }
-
-  getDoctorPlanning(doctorId:string):void{
-    this.planningService.getPlanningByDoctorId(doctorId).subscribe(
-      (plannings: any) => {
-        this.planningList = plannings.map((planning:any)=>(
-                                                            {
-                                                            date:planning.date,
-                                                            hourStart:planning.hourStart,
-                                                            hourEnd:planning.hourEnd
-                                                          }));
-        
-      },
-      (err: any) => console.log(err.message())
-  );
   }
 
   getAllPatient():void{
@@ -213,43 +191,6 @@ export class MeetsComponent {
     );
   }
 
-  getMeetingByDoctor(doctorId:any):void{
-    this.meetsService.getMeetsByDoctorId(doctorId).subscribe(
-      (events: any) => {
-        this.Events = events.map((event: any) => ({ 
-                                                    title: event.subject, 
-                                                    start: new Date(event.date + "T" + event.hourStart),
-                                                    end: new Date(event.date + "T" + event.hourEnd),
-                                                    color: this.functionsService.getRandomColor(), 
-                                                    extendedProps: {
-                                                      patientId: event.patientId,
-                                                      userId: event.userId,
-                                                      meetingId: event._id
-                                                    }
-                                                  }));
-        this.busyDays = events.map((busy:any)=>(
-                                                  {
-                                                  date:busy.date,
-                                                  hourStart:busy.hourStart,
-                                                  hourEnd:busy.hourEnd
-                                                }));
-
-        this.userService.getUserById(doctorId).subscribe(
-          (doctor:any)=>{
-            this.prenomDoctor = doctor.data.prenom;
-            this.nomDoctor = doctor.data.nom;
-            this.userId = doctor.data._id;
-          },
-          (err:any)=>console.log(err.message)
-        );
-
-        this.calendarOptions.events = this.Events;
-        this.isLoading = false;
-        
-      },
-      (err: any) => console.log(err.message())
-    );
-  }
 
   handleCloseModal() {
     const modal = document.getElementById('eventModal');
@@ -320,11 +261,8 @@ export class MeetsComponent {
   
     }
 
-    this.getDoctorPlanning(this.meetingForm.userId);
-    this.getMeetingByDoctor(this.meetingForm.userId);
-
- 
-    //alert(JSON.stringify(this.meetingForm))
+    // this.getDoctorPlanning(this.meetingForm.userId);
+    // this.getMeetingByDoctor(this.meetingForm.userId);
 
   }
 
@@ -390,20 +328,54 @@ export class MeetsComponent {
         alert("L'heure de fin doit être postérieure à l'heure de début.");
     } else {
 
-      let available = this.functionsService.isAvailable(this.planningList,this.meetingForm, this.busyDays);
+      this.meetsService.getMeetsByDoctorId(this.meetingForm.userId).subscribe(
+        (events: any) => {
+          this.Events = events.map((event: any) => ({ 
+                                                      title: event.subject, 
+                                                      start: new Date(event.date + "T" + event.hourStart),
+                                                      end: new Date(event.date + "T" + event.hourEnd),
+                                                      color: this.functionsService.getRandomColor(), 
+                                                      extendedProps: {
+                                                        patientId: event.patientId,
+                                                        userId: event.userId,
+                                                        meetingId: event._id
+                                                      }
+                                                    }));
+          this.busyDays = events.map((busy:any)=>(
+                                                    {
+                                                    date:busy.date,
+                                                    hourStart:busy.hourStart,
+                                                    hourEnd:busy.hourEnd
+                                                  }));
+          
+          this.planningService.getPlanningByDoctorId(this.meetingForm.userId).subscribe(
+            (plannings: any) => {
+              this.planningList = plannings.map((planning:any)=>(
+                                                                  {
+                                                                  date:planning.date,
+                                                                  hourStart:planning.hourStart,
+                                                                  hourEnd:planning.hourEnd
+                                                                }));
+      
+       
+              let available = this.functionsService.isAvailable(this.planningList,this.meetingForm, this.busyDays);
 
-      // console.log(this.planningList);
-      // console.log(this.busyDays);
-      // console.log(this.meetingForm);
-      // console.log(available);
+              if(available){
+                this.updateMeet(this.meetingId,this.meetingForm);
+              }
+              else
+              {
+                alert("Non dispo!"+JSON.stringify(this.planningList))
+              }
+            },
+            (err: any) => console.log(err.message)
+          );
 
-      if(available){
-        this.updateMeet(this.meetingId,this.meetingForm);
-      }
-      else
-      {
-        alert("Non dispo!"+JSON.stringify(this.planningList))
-      }
+          this.isLoading = false;
+          
+        },
+        (err: any) => console.log(err.message())
+      ); 
  
       
     }
@@ -412,10 +384,6 @@ export class MeetsComponent {
   
   
   onSubmit():void{
-
-    this.getDoctorPlanning(this.meetingForm.userId);
-    this.getMeetingByDoctor(this.meetingForm.userId);
-
 
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() - 1);
@@ -429,20 +397,57 @@ export class MeetsComponent {
     } else if (this.meetingForm.hourEnd <= this.meetingForm.hourStart) {
         alert("L'heure de fin doit être postérieure à l'heure de début.");
     } else {
+    
+      this.meetsService.getMeetsByDoctorId(this.meetingForm.userId).subscribe(
+        (events: any) => {
+          this.Events = events.map((event: any) => ({ 
+                                                      title: event.subject, 
+                                                      start: new Date(event.date + "T" + event.hourStart),
+                                                      end: new Date(event.date + "T" + event.hourEnd),
+                                                      color: this.functionsService.getRandomColor(), 
+                                                      extendedProps: {
+                                                        patientId: event.patientId,
+                                                        userId: event.userId,
+                                                        meetingId: event._id
+                                                      }
+                                                    }));
+          this.busyDays = events.map((busy:any)=>(
+                                                    {
+                                                    date:busy.date,
+                                                    hourStart:busy.hourStart,
+                                                    hourEnd:busy.hourEnd
+                                                  }));
+          
+          this.planningService.getPlanningByDoctorId(this.meetingForm.userId).subscribe(
+            (plannings: any) => {
+              this.planningList = plannings.map((planning:any)=>(
+                                                                  {
+                                                                  date:planning.date,
+                                                                  hourStart:planning.hourStart,
+                                                                  hourEnd:planning.hourEnd
+                                                                }));
+      
+              let available = this.functionsService.isAvailable(this.planningList,this.meetingForm, this.busyDays);
+        
+              if(available){
+                //console.log("Id hopital",this.hospitalId);
+                this.meetingForm.hospitalId = this.hospitalId;
+                //console.log(this.meetingForm)
+                this.addMeeting(this.meetingForm);
+              }
+              else
+              {
+                alert("Non dispo!"+JSON.stringify(this.planningList))
+              }
+            },
+            (err: any) => console.log(err.message)
+          );
 
-      let available = this.functionsService.isAvailable(this.planningList,this.meetingForm, this.busyDays);
-
-      if(available){
-        //console.log("Id hopital",this.hospitalId);
-        this.meetingForm.hospitalId = this.hospitalId;
-        //console.log(this.meetingForm)
-        this.addMeeting(this.meetingForm);
-      }
-      else
-      {
-        alert("Non dispo!"+JSON.stringify(this.planningList))
-      }
- 
+          this.isLoading = false;
+          
+        },
+        (err: any) => console.log(err.message())
+      ); 
       
     }
 
