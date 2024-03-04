@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Antecedents } from 'src/app/_interfaces/antecedants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AntecedantsService } from 'src/app/_services/antecedants.service';
@@ -20,6 +20,9 @@ export class AntecedentsComponent {
   hospitalisationForm:any;
   atcdForm:any;
 
+  inserted:boolean = false;
+    
+  @Output() emittedEvent =  new EventEmitter<boolean>();
   
   antecedantForm: Antecedents = {};
 
@@ -57,7 +60,8 @@ export class AntecedentsComponent {
     private antecedantsService:AntecedantsService,
     private sharedService:SharedService,
     private functionsService:FunctionsService
-    ) {}
+  ) {}
+
 
   ngOnInit(): void {
     this.initForm();
@@ -111,11 +115,10 @@ export class AntecedentsComponent {
   createNewAntecedant(antecedants:Antecedents):void{
     this.antecedantsService.addPatient(antecedants).subscribe(
       (antecedants: any) => {
-        alert("Insertion réussie!");
       },
       (err: any) => {
         console.error(err);
-        alert("Une erreur s'est produite lors de l'insertion.");
+        //alert("Une erreur s'est produite lors de l'insertion.");
       }
     );
   }
@@ -123,11 +126,11 @@ export class AntecedentsComponent {
   updateAntecedant(patientId:string,antecedants:Antecedents):void{
     this.antecedantsService.updatePatient(patientId, antecedants).subscribe(
       (antecedants: any) => {
-        alert("Modification réussie!");
+
       },
       (err: any) => {
         console.error(err);
-        alert("Une erreur s'est produite lors de la modification.");
+        //alert("Une erreur s'est produite lors de la modification.");
       }
     );
   }
@@ -135,7 +138,7 @@ export class AntecedentsComponent {
   onSubmitAntecedant(modalId: string,e:Event): void {
    
 
-    if(!this.sharedService.getterATCD().atcdDecompensation){
+    if(!this.antecedantForm.atcdDecompensation){
       this.initATCD();
     }
     else
@@ -146,7 +149,7 @@ export class AntecedentsComponent {
   
     }
 
-    if(!this.sharedService.getterhospitalisation().hospitalisationsAnterieures){
+    if(!this.antecedantForm.hospitalisationsAnterieures){
       this.initHA();
     }
     else
@@ -167,6 +170,8 @@ export class AntecedentsComponent {
 
     }
     this.closeModal(modalId,e);
+    this.inserted = true;
+    this.emittedEvent.emit(this.inserted);
   }
 
   openModal(modalId: string, e:Event): void {

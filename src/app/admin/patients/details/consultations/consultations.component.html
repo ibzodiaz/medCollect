@@ -79,10 +79,17 @@
     </div>
 </ng-template>
 
-<app-antecedents></app-antecedents>
-<app-cliniques></app-cliniques>
-<app-paracliniques></app-paracliniques>
+<app-cliniques (emittedEvent)="insertState($event)"></app-cliniques>
+<app-paracliniques (emittedEvent)="insertState($event)"></app-paracliniques>
 <app-fichepatient></app-fichepatient>
-<app-evolution></app-evolution>
-<app-uploadfiles></app-uploadfiles>
+<app-evolution (emittedEvent)="insertState($event)"></app-evolution>
+<app-uploadfiles (emittedEvent)="insertState($event)"></app-uploadfiles>
 <app-motifs (emittedEvent)="motifUpdated($event)"></app-motifs>
+
+<div class="message-dialog" [class.open]="isDialogOpen">
+    <div class="message-content">
+        <h4 style="color:green;">{{ messageTitle }}&nbsp;<i class="fa-solid fa-check"></i></h4>
+        <p>{{ messageContent }}</p>
+        <button class="btn btn-primary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+    </div>
+</div>

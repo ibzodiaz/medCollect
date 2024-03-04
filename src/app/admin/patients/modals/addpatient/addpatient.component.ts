@@ -31,6 +31,16 @@ export class AddpatientComponent {
   patientsList: any = [];
   isLoading: boolean = true;
 
+        
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
+
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
+  }
+
   onSubmit(){
     this.patientsService.addPatient(this.patientForm).subscribe(
       (patients: any) => {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Paracliniques } from 'src/app/_interfaces/paracliniques';
 import { ParacliniquesService } from 'src/app/_services/paracliniques.service';
@@ -89,6 +89,9 @@ export class ParacliniquesComponent {
       }
     }
   }
+
+  @Output() emittedEvent =  new EventEmitter<boolean>();
+  inserted:boolean = false;
 
   getPatientParaClinicSigns(): void {
     this.route.paramMap.subscribe((params: any) => {
@@ -190,7 +193,7 @@ export class ParacliniquesComponent {
     if(this.patientExists){
       this.paracliniquesService.updateParaClinicSigns(this.PatientAntecedantId,this.consultationId,this.paracliniquesForm).subscribe(
         (success:any)=>{
-          alert("Modification réussie!");
+          //alert("Modification réussie!");
         },
         (err:any)=>console.log(err.message)
       );
@@ -199,12 +202,14 @@ export class ParacliniquesComponent {
     {
       this.paracliniquesService.addParaClinicSigns(this.paracliniquesForm).subscribe(
         (success:any)=>{
-          alert("Insertion réussie!");
+          //alert("Insertion réussie!");
         },
         (err:any)=>console.log(err.message)
       );
     }
     this.closeModal(modalId,e);
+    this.inserted = true;
+    this.emittedEvent.emit(this.inserted);
     //console.log(JSON.stringify(this.paracliniquesForm));
   }
 

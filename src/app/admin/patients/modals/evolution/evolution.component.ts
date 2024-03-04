@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Evolution } from 'src/app/_interfaces/evolution';
 import { EvolutionService } from 'src/app/_services/evolution.service';
@@ -96,6 +96,9 @@ export class EvolutionComponent {
     }
   }
 
+  @Output() emittedEvent =  new EventEmitter<boolean>();
+  inserted:boolean = false;
+
   getPatientEvolution(): void {
     this.route.paramMap.subscribe((params: any) => {
         const patientId = params.get('patientId');
@@ -161,7 +164,7 @@ export class EvolutionComponent {
     if(this.patientExists){
       this.evolutionService.updateEvolution(this.PatientAntecedantId,this.consultationId,this.evolutionForm).subscribe(
         (success:any)=>{
-          alert("Modification réussie!");
+          //alert("Modification réussie!");
         },
         (err:any)=>console.log(err.message)
       );
@@ -170,12 +173,14 @@ export class EvolutionComponent {
     {
       this.evolutionService.addEvolution(this.evolutionForm).subscribe(
         (success:any)=>{
-          alert("Insertion réussie!");
+          //alert("Insertion réussie!");
         },
         (err:any)=>console.log(err.message)
       );
     }
     this.closeModal(modalId,e);
+    this.inserted = true;
+    this.emittedEvent.emit(this.inserted);
   }
 
   

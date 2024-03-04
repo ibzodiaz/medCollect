@@ -71,11 +71,15 @@
 
     <app-addpatient (emittedEvent)="insertState($event)"></app-addpatient>
     <app-sociodemo (emittedEvent)="updateState($event)"></app-sociodemo>
-    <app-confirmation (confirmed)="deletionConfirmed = $event; delete(patientIdToDelete)"></app-confirmation>
-    <app-uploadfiles></app-uploadfiles>
-    <app-antecedents></app-antecedents>
-    <app-cliniques></app-cliniques>
-    <app-paracliniques></app-paracliniques>
-    <app-fichepatient></app-fichepatient>
-    <app-evolution></app-evolution>
+    <!-- <app-confirmation (confirmed)="deletionConfirmed = $event; delete(patientIdToDelete)"></app-confirmation> -->
+    <app-antecedents (emittedEvent)="insertState($event)"></app-antecedents>
+
 </ng-template>
+
+<div class="message-dialog" [class.open]="isDialogOpen">
+    <div class="message-content">
+        <h4 style="color:green;">{{ messageTitle }}&nbsp;<i class="fa-solid fa-check"></i></h4>
+        <p>{{ messageContent }}</p>
+        <button class="btn btn-primary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+    </div>
+</div>

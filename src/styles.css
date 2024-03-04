@@ -22,20 +22,36 @@
     background: #b1b2b3;
   }
   
+/* parent-component.component.css */
 
-  /* parent-component.component.css */
 .message-dialog {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   background-color: white;
-  border: 1px solid #ccc;
+  min-width: 300px;
+  width: auto; /* Réglez la largeur sur auto */
+  margin-top: -60px; /* Demi-hauteur de la boîte de dialogue */
+  margin-left: -150px; /* Demi-largeur de la boîte de dialogue */
+  min-height: 120px;
   padding: 20px;
+  border: 1px solid #ccc;
   z-index: 9999;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  animation: openDialog 0.1s ease-in-out;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
 }
+
+@keyframes openDialog {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 
 .message-dialog.open {
   display: block;
@@ -51,4 +67,11 @@
 
 .message-content button {
   margin-top: 10px;
+}
+
+
+.fa-triangle-exclamation{
+  font-size: 50px;
+  color: rgb(51, 201, 228);
+  opacity: 0.5;
 }

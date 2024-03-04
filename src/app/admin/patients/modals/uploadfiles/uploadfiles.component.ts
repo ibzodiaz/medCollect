@@ -22,7 +22,7 @@ export class UploadfilesComponent {
   }
 
   @Output() emittedEvent =  new EventEmitter<boolean>();
-  uploaded:boolean = false;
+  inserted:boolean = false;
 
   constructor(
     private uploadfilesService:UploadfilesService,
@@ -48,16 +48,16 @@ export class UploadfilesComponent {
 
     this.uploadfilesService.addFile(file,this.fileForm).subscribe(
       response => {
-        console.log('File uploaded successfully:', response);
-        alert('File uploaded successfully:');
-        this.uploaded = true;
-        this.emittedEvent.emit(this.uploaded);
+        //console.log('File uploaded successfully:', response);
+        //alert('File uploaded successfully:');
+        this.inserted = true;
+        this.emittedEvent.emit(this.inserted);
         
         this.closeModal(modalId,event);
       },
       error => {
         console.error('Error uploading file:', error);
-        alert('Error uploading file:')
+        //alert('Error uploading file:')
       }
     );
     

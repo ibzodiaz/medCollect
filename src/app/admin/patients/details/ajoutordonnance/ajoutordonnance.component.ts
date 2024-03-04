@@ -124,7 +124,7 @@ export class AjoutordonnanceComponent {
   savePosologie(){
     this.posologieService.addPosologie(this.posologieForm).subscribe(
       (success:any)=>{
-        alert("posologie ajoutée!");
+        //alert("posologie ajoutée!");
         this.posologie();
         //console.log(JSON.stringify(ordonnance))
       },
@@ -136,7 +136,7 @@ export class AjoutordonnanceComponent {
   saveMedicaments(){
     this.medicamentsService.addMedicaments(this.medicamentForm).subscribe(
       (success:any)=>{
-        alert("medicament ajouté!");
+        //alert("medicament ajouté!");
         this.medicaments();
         //console.log(JSON.stringify(ordonnance))
       },
@@ -170,7 +170,7 @@ export class AjoutordonnanceComponent {
 
     this.prescriptionService.addPrescription(this.prescriptionForm).subscribe(
       (success:any)=>{
-        alert("Ajouté!")
+        //alert("Ajouté!")
         if(this.prescriptionForm.patientId && this.prescriptionForm.consultationId){
           this.prescriptionTable(this.prescriptionForm.patientId,this.prescriptionForm.consultationId);
         }
@@ -185,7 +185,7 @@ export class AjoutordonnanceComponent {
 
     this.prescriptionService.deletePrescriptionById(id).subscribe(
       (success)=>{
-        alert("supprimé!");
+        //alert("supprimé!");
         if(this.prescriptionForm.patientId && this.prescriptionForm.consultationId){
           this.prescriptionTable(this.prescriptionForm.patientId,this.prescriptionForm.consultationId);
         }

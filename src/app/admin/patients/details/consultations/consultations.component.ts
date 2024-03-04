@@ -49,6 +49,35 @@ export class ConsultationsComponent {
     complet: false
   }
 
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
+
+  inserted:boolean = false;
+
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
+  }
+
+  insertState($event: boolean){
+    this.inserted = $event;
+    
+    if (this.inserted) {
+      
+      this.getPatient();
+      this.getAllConsultationByPatient();
+      this.motifTable();
+
+      this.isDialogOpen = true;
+      this.messageTitle = 'Enregistré';
+      this.messageContent = '';
+      this.isLoading = true;
+
+    }
+
+  }
+
   ngOnInit():void{
     this.getPatient();
     this.consultation;
@@ -99,7 +128,7 @@ export class ConsultationsComponent {
     //console.log(JSON.stringify(this.consultation));
     this.consultationService.addConsultation(this.consultation).subscribe(
       (patient:any)=>{
-        alert("succès!");
+        //alert("succès!");
         this.getAllConsultationByPatient();
       },
       (err:any)=>console.log(err.message)

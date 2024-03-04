@@ -43,7 +43,7 @@
                     <tbody>
                         <tr *ngFor="let medicament of filteredMedicaments">
                             <td>{{medicament.medicament}}</td>
-                            <td class="text-center"><button (click)="deleteMedicament(medicament._id)" class="btn btn-danger rounded-circle"><i style="color:white;" class="fa-regular fa-trash-can"></i></button></td>
+                            <td class="text-center"><button (click)="openDialog1(medicament._id)" class="btn btn-danger rounded-circle"><i style="color:white;" class="fa-regular fa-trash-can"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -62,11 +62,41 @@
                     <tbody>
                         <tr *ngFor="let posologie of filteredPosologie">
                             <td>{{posologie.posologie}}</td>
-                            <td class="text-center"><button (click)="deletePosologie(posologie._id)" class="btn btn-danger rounded-circle"><i style="color:white;" class="fa-regular fa-trash-can"></i></button></td>
+                            <td class="text-center"><button (click)="openDialog2(posologie._id)" class="btn btn-danger rounded-circle"><i style="color:white;" class="fa-regular fa-trash-can"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="message-dialog" [class.open]="isDialogOpen1">
+    <div class="message-content">
+    <h5 style="color:red;">Etes-vous sûr de vouloir supprimer ?</h5>
+    <span class="text-center"><i class="fa-solid fa-triangle-exclamation"></i></span>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary rounded-0" (click)="deleteMedicament()">Confirmer</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="message-dialog" [class.open]="isDialogOpen2">
+    <div class="message-content">
+    <h5 style="color:red;">Etes-vous sûr de vouloir supprimer ?</h5>
+    <span class="text-center"><i class="fa-solid fa-triangle-exclamation"></i></span>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary rounded-0" (click)="deletePosologie()">Confirmer</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+        </div>
+    </div>
     </div>
 </div>

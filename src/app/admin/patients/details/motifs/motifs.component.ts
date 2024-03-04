@@ -53,7 +53,7 @@ export class MotifsComponent {
   onUpdate(){
     this.motifsService.updateMotif(this.id,this.motifForm).subscribe(
       (success:any)=>{
-        alert('Modifié');
+        //alert('Modifié');
         this.update = false;
         this.add = true;
         this.motifTable();
@@ -65,7 +65,7 @@ export class MotifsComponent {
   delete(id:string){
     this.motifsService.deleteMotifById(id).subscribe(
       (success:any)=>{
-        alert("supprimé!");
+        //alert("supprimé!");
         this.motifTable();
       }
     );

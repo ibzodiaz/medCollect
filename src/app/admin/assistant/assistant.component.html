@@ -54,7 +54,7 @@
                         <tr *ngFor="let assistant of filteredPatients">
                             <td class="text-center color-customized">
                                 <div>
-                                    <button (click)="delete(assistant._id)" class="btn btn-danger rounded-circle"><i style="color: white;" class="fa-regular fa-trash-can"></i></button>
+                                    <button (click)="openDialog(assistant._id)" class="btn btn-danger rounded-circle"><i style="color: white;" class="fa-regular fa-trash-can"></i></button>
                                     &nbsp;
                                     <button (click)="openModal('modal33')" [routerLink]="['/admin/assistants/',assistant._id]" class="btn btn-primary rounded-circle"><i style="color: white;" class="fa-solid fa-pencil"></i></button>
                                 </div>
@@ -76,3 +76,18 @@
 
 <app-ajoutassistant></app-ajoutassistant>
 <app-updateassistant></app-updateassistant>
+
+<div class="message-dialog" [class.open]="isDialogOpen">
+    <div class="message-content">
+    <h5 style="color:red;">Etes-vous sûr de vouloir supprimer ?</h5>
+    <span class="text-center"><i class="fa-solid fa-triangle-exclamation"></i></span>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary rounded-0" (click)="delete()">Confirmer</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+        </div>
+    </div>
+    </div>
+</div>

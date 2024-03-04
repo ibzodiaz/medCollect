@@ -25,6 +25,23 @@ export class AssistantComponent {
 
   isLoading:boolean = true;
 
+  
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
+
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
+  }
+
+  userId:string = '';
+
+  openDialog(id:string){
+    this.userId = id;
+    this.isDialogOpen = true;
+  }
+
   usersTable(){
     const hospitalId = this.tokenService.getHospitalIdFromToken()?.toString();
     this.isLoading = true;
@@ -44,14 +61,18 @@ export class AssistantComponent {
     this.usersTable();
   }
 
-  delete(userId:string){
-    this.userService.deleteUser(userId).subscribe(
-      (success:any)=>{
-        alert("Supprimé");
-        this.usersTable();
-      },
-      (err:any)=>console.log(err.message)
-    );
+  delete(){
+    if(this.userId){
+      this.userService.deleteUser(this.userId).subscribe(
+        (success:any)=>{
+          //alert("Supprimé");
+          this.closeMessageDialog();
+          this.usersTable();
+        },
+        (err:any)=>console.log(err.message)
+      );
+    }
+
   }
 
   openModal(modalId: string): void {

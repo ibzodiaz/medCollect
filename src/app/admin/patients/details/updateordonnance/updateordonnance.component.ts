@@ -41,14 +41,15 @@ export class UpdateordonnanceComponent {
     );
   }
 
-  onSubmit(){
+  onSubmit(modalId: string,e:Event){
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       const consultationId = params.get('consultationId');
       if(consultationId){
         this.consultationService.updateConsultation(consultationId,this.consultationForm).subscribe(
           (success:any)=>{
-            alert("Modifié");
+            //alert("Modifié");
+            this.closeModal(modalId,e);
           },
           (err:any)=>console.log(err.message)
         );

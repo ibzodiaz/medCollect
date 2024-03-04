@@ -36,17 +36,20 @@ export class OrdonnancesComponent {
         element.disabled = true;
     });
 
-    // this.prescriptionList = []
+  }
 
-    // this.route.paramMap.subscribe((params: ParamMap) => {
-    //   const consultationId = params.get('consultationId');
-    //   const patientId = params.get('patientId');
 
-    //   if(patientId && consultationId){
-    //     this.prescriptionTable(patientId,consultationId);
-    //   }
-    // });
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
 
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
+  }
+
+  openDialog(){
+    this.isDialogOpen = true;
   }
 
   actualize(){
@@ -124,8 +127,9 @@ export class OrdonnancesComponent {
   delete(patientId:string,consultationId:string){
     this.prescriptionService.deletePrescriptionByConsultation(patientId,consultationId).subscribe(
       (success:any)=>{
-        alert('Supprimé!')
+        //alert('Supprimé!')
             
+        this.closeMessageDialog();
         if(patientId && consultationId){
           this.prescriptionTable(patientId,consultationId);
         }

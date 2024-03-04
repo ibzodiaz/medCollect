@@ -35,6 +35,29 @@ export class OrdonnancesComponent {
 
   showMedical:any = [];
 
+  isDialogOpen1: boolean = false;
+  isDialogOpen2: boolean = false;
+
+  closeMessageDialog(): void {
+    this.isDialogOpen1 = false;
+    this.isDialogOpen2 = false;
+  }
+
+  posoId:string = '';
+  mediId:string = '';
+
+  openDialog1(id:string){
+    this.mediId = id;
+    this.isDialogOpen1 = true;
+  }
+
+  
+  openDialog2(id:string){
+    this.posoId = id;
+    this.isDialogOpen2 = true;
+  }
+
+
   updateMedicamentTable(){
     this.medicamentsService.getAllMedicaments().subscribe(
       (medicament:any)=>{
@@ -117,23 +140,30 @@ export class OrdonnancesComponent {
       ).slice(this.startIndexP, this.endIndexp + 1);
     }
 
-  deleteMedicament(id:any){
-    this.medicamentsService.deleteMedicamentsById(id).subscribe(
-      (success:any)=>{
-        alert("Supprimé");
-        this.updateMedicamentTable();
-      },
-      (err:any)=>console.log(err.message)
-    );
+  deleteMedicament(){
+    if(this.mediId){
+      this.medicamentsService.deleteMedicamentsById(this.mediId).subscribe(
+        (success:any)=>{
+          //alert("Supprimé");
+          this.closeMessageDialog();
+          this.updateMedicamentTable();
+        },
+        (err:any)=>console.log(err.message)
+      );
+    }
+
   }
 
-  deletePosologie(id:any){
-    this.posologieService.deletePosologieById(id).subscribe(
-      (success:any)=>{
-        alert("Supprimé");
-        this.updatePosologieTable();
-      },
-      (err:any)=>console.log(err.message)
-    );
+  deletePosologie(){
+
+    if(this.posoId){
+      this.posologieService.deletePosologieById(this.posoId).subscribe(
+        (success:any)=>{
+          this.closeMessageDialog();
+          this.updatePosologieTable();
+        },
+        (err:any)=>console.log(err.message)
+      );
+    }
   }
 }

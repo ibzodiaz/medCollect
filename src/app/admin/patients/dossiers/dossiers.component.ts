@@ -22,6 +22,15 @@ export class DossiersComponent implements OnInit {
 
   inserted: boolean = false;
   updated:boolean =false;
+      
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
+
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
+  }
 
   ngOnInit(): void {
 
@@ -29,12 +38,16 @@ export class DossiersComponent implements OnInit {
 
   }
 
+
   insertState($event: boolean){
     this.inserted = $event;
     
     if (this.inserted) {
 
       this.updatedTable();
+      this.isDialogOpen = true;
+      this.messageTitle = 'Enregistré';
+      this.messageContent = '';
       this.isLoading = true;
 
     }
@@ -47,6 +60,9 @@ export class DossiersComponent implements OnInit {
     if (this.updated) {
 
       this.updatedTable();
+      this.isDialogOpen = true;
+      this.messageTitle = 'Modifié';
+      this.messageContent = '';
       this.isLoading = true;
 
     }

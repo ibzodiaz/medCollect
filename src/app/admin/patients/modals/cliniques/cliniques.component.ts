@@ -19,6 +19,9 @@ export class CliniquesComponent {
   PatientAntecedantId:any;
   consultationId:any;
 
+  @Output() emittedEvent =  new EventEmitter<boolean>();
+  inserted:boolean = false;
+
   constructor(
     private route:ActivatedRoute,
     private sharedService:SharedService,
@@ -138,7 +141,7 @@ export class CliniquesComponent {
 
       this.cliniquesService.updateClinicSigns(this.PatientAntecedantId,this.consultationId,this.cliniquesForm).subscribe(
         (success:any)=>{
-          alert("modification réussie!");
+          //alert("modification réussie!");
         },
         (err:any)=> console.log(err.message)
       );
@@ -147,13 +150,15 @@ export class CliniquesComponent {
     { 
       this.cliniquesService.addClinicSigns(this.cliniquesForm).subscribe(
         (success:any)=>{
-          alert("insertion réussie!");
+          //alert("insertion réussie!");
         },
         (err:any)=> console.log(err.message)
       );
     }
 
     this.closeModal(modalId,e);
+    this.inserted = true;
+    this.emittedEvent.emit(this.inserted);
    
   }
 
