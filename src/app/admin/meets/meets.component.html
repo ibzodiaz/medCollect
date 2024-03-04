@@ -167,3 +167,16 @@
 </div>
 
 
+<div class="message-dialog" [class.open]="isDialogOpen">
+  <div class="message-content">
+    <h4 style="color:red;">{{ messageTitle }}&nbsp;<i class="fa-regular fa-circle-xmark"></i></h4>
+    <p>{{ messageContent }}</p>
+    <table>
+        <tr *ngFor="let plan of planningList">
+            <td class="text-center">{{plan.date | date: 'dd/MM/yyyy'}}</td>
+            <td><i style="color:red; font-size: 12px;" class="fa-solid fa-xmark"></i></td>
+        </tr>
+    </table>
+    <button class="btn btn-primary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+  </div>
+</div>

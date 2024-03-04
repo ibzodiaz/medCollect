@@ -64,3 +64,13 @@
         </ng-template>
     </div>
 </div>
+
+
+<div class="message-dialog" [class.open]="isDialogOpen">
+    <div class="message-content">
+      <h4 style="color:red;">{{ messageTitle }}&nbsp;<i class="fa-regular fa-circle-xmark"></i></h4>
+      <p>{{ messageContent }}</p>
+      <button class="btn btn-primary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+    </div>
+</div>
+  

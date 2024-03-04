@@ -299,13 +299,13 @@ export class MeetsComponent {
     this.meetsService.updateMeetById(meetingId,meetingForm).subscribe(
       (meets:any)=>{
         
-        console.log(meets);
+        //console.log(meets);
 
         const modal = document.getElementById("eventModal");
         if(modal){
           this.getAllMeetingByHospital();
           modal.style.display ="none";
-          alert("modifié");
+          //alert("modifié");
         }
       },
       (err:any)=>console.log(err.message())
@@ -318,14 +318,22 @@ export class MeetsComponent {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() - 1);
 
+    const currentDateMeet = new Date();
+
     const dateToCompare = new Date(this.meetingForm.date);
 
     if (isNaN(dateToCompare.getTime())) {
-        alert("La date saisie est invalide.");
+      this.isDialogOpen = true;
+      this.messageTitle = 'La date saisie est invalide.';
+      this.messageContent = '';
     } else if (currentDate > dateToCompare) {
-        alert("Choisissez une date supérieure ou égale à la date actuelle!");
+        this.isDialogOpen = true;
+        this.messageTitle = 'Choisissez une date supérieure ou égale à la date actuelle!';
+        this.messageContent = '';
     } else if (this.meetingForm.hourEnd <= this.meetingForm.hourStart) {
-        alert("L'heure de fin doit être postérieure à l'heure de début.");
+        this.isDialogOpen = true;
+        this.messageTitle = 'L\'heure de fin doit être postérieure à l\'heure de début.';
+        this.messageContent = '';
     } else {
 
       this.meetsService.getMeetsByDoctorId(this.meetingForm.userId).subscribe(
@@ -341,21 +349,27 @@ export class MeetsComponent {
                                                         meetingId: event._id
                                                       }
                                                     }));
-          this.busyDays = events.map((busy:any)=>(
-                                                    {
-                                                    date:busy.date,
-                                                    hourStart:busy.hourStart,
-                                                    hourEnd:busy.hourEnd
-                                                  }));
+
+            this.busyDays = events.filter((meet: any) => {
+                                                      return new Date(meet.date) >= currentDateMeet;
+                                                    }).map((busy:any)=>(
+                                                      {
+                                                      date:busy.date,
+                                                      hourStart:busy.hourStart,
+                                                      hourEnd:busy.hourEnd
+                                                    }));
           
           this.planningService.getPlanningByDoctorId(this.meetingForm.userId).subscribe(
             (plannings: any) => {
-              this.planningList = plannings.map((planning:any)=>(
-                                                                  {
-                                                                  date:planning.date,
-                                                                  hourStart:planning.hourStart,
-                                                                  hourEnd:planning.hourEnd
-                                                                }));
+              this.planningList = plannings
+              .filter((plan: any) => {
+                return new Date(plan.date) >= currentDateMeet;
+              })
+              .map((planning: any) => ({
+                date: planning.date,
+                hourStart: planning.hourStart,
+                hourEnd: planning.hourEnd
+              }));
       
        
               let available = this.functionsService.isAvailable(this.planningList,this.meetingForm, this.busyDays);
@@ -365,7 +379,9 @@ export class MeetsComponent {
               }
               else
               {
-                alert("Non dispo!"+JSON.stringify(this.planningList))
+                this.isDialogOpen = true;
+                this.messageTitle = 'Indisponible';
+                this.messageContent = 'Ce médecin est déjà pris pour ces dates:';
               }
             },
             (err: any) => console.log(err.message)
@@ -388,14 +404,22 @@ export class MeetsComponent {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() - 1);
 
+    const currentDateMeet = new Date();
+
     const dateToCompare = new Date(this.meetingForm.date);
 
     if (isNaN(dateToCompare.getTime())) {
-        alert("La date saisie est invalide.");
+        this.isDialogOpen = true;
+        this.messageTitle = 'La date saisie est invalide.';
+        this.messageContent = '';
     } else if (currentDate > dateToCompare) {
-        alert("Choisissez une date supérieure ou égale à la date actuelle!");
+        this.isDialogOpen = true;
+        this.messageTitle = 'Choisissez une date supérieure ou égale à la date actuelle!';
+        this.messageContent = '';
     } else if (this.meetingForm.hourEnd <= this.meetingForm.hourStart) {
-        alert("L'heure de fin doit être postérieure à l'heure de début.");
+        this.isDialogOpen = true;
+        this.messageTitle = 'L\'heure de fin doit être postérieure à l\'heure de début.';
+        this.messageContent = '';
     } else {
     
       this.meetsService.getMeetsByDoctorId(this.meetingForm.userId).subscribe(
@@ -411,7 +435,10 @@ export class MeetsComponent {
                                                         meetingId: event._id
                                                       }
                                                     }));
-          this.busyDays = events.map((busy:any)=>(
+
+          this.busyDays = events.filter((meet: any) => {
+                                                    return new Date(meet.date) >= currentDateMeet;
+                                                  }).map((busy:any)=>(
                                                     {
                                                     date:busy.date,
                                                     hourStart:busy.hourStart,
@@ -420,12 +447,16 @@ export class MeetsComponent {
           
           this.planningService.getPlanningByDoctorId(this.meetingForm.userId).subscribe(
             (plannings: any) => {
-              this.planningList = plannings.map((planning:any)=>(
-                                                                  {
-                                                                  date:planning.date,
-                                                                  hourStart:planning.hourStart,
-                                                                  hourEnd:planning.hourEnd
-                                                                }));
+
+              this.planningList = plannings
+              .filter((plan: any) => {
+                return new Date(plan.date) >= currentDateMeet;
+              })
+              .map((planning: any) => ({
+                date: planning.date,
+                hourStart: planning.hourStart,
+                hourEnd: planning.hourEnd
+              }));            
       
               let available = this.functionsService.isAvailable(this.planningList,this.meetingForm, this.busyDays);
         
@@ -437,7 +468,10 @@ export class MeetsComponent {
               }
               else
               {
-                alert("Non dispo!"+JSON.stringify(this.planningList))
+                //alert("Non dispo!"+JSON.stringify(this.planningList))
+                this.isDialogOpen = true;
+                this.messageTitle = 'Indisponible';
+                this.messageContent = 'Ce médecin est déjà pris pour ces dates:';
               }
             },
             (err: any) => console.log(err.message)
@@ -453,5 +487,14 @@ export class MeetsComponent {
 
   }
 
+
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
+
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
+  }
 
 }

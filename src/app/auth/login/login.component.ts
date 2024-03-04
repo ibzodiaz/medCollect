@@ -40,7 +40,7 @@ export class LoginComponent {
   onSubmit(){
     this.authService.login(this.form).subscribe(
       data => {
-        console.log(data.access_token);
+        //console.log(data.access_token);
         this.tokenService.saveToken(data.access_token.toString());
       },
       err => console.log(err)

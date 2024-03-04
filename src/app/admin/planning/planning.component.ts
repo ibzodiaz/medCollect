@@ -52,6 +52,16 @@ export class PlanningComponent {
     private meetsService:MeetsService
     ){}
 
+    
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
+
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
+  }
+
   getAllPlanning():void{
     this.planningService.getPlanningByDoctorId(this.tokenService.getUserIdFromToken()).subscribe(
       (events: any) => {
@@ -148,11 +158,17 @@ export class PlanningComponent {
     this.planningForm.userId = this.tokenService.getUserIdFromToken();
 
     if (isNaN(dateToCompare.getTime())) {
-        alert("La date saisie est invalide.");
+      this.isDialogOpen = true;
+      this.messageTitle = 'La date saisie est invalide.';
+      this.messageContent = '';
     } else if (currentDate > dateToCompare) {
-        alert("Choisissez une date supérieure ou égale à la date actuelle!");
+        this.isDialogOpen = true;
+        this.messageTitle = 'Choisissez une date supérieure ou égale à la date actuelle!';
+        this.messageContent = '';
     } else if (this.planningForm.hourEnd <= this.planningForm.hourStart) {
-        alert("L'heure de fin doit être postérieure à l'heure de début.");
+        this.isDialogOpen = true;
+        this.messageTitle = 'L\'heure de fin doit être postérieure à l\'heure de début.';
+        this.messageContent = '';
     } else {
 
       let available = this.functionsService.isAvailable(this.planningList,this.planningForm, this.meetingList);
@@ -167,7 +183,9 @@ export class PlanningComponent {
       }
       else
       {
-        alert("Non disponible!");
+        this.isDialogOpen = true;
+        this.messageTitle = 'Non disponible!';
+        this.messageContent = '';
       }
 
     }
@@ -184,11 +202,17 @@ export class PlanningComponent {
     this.planningForm.userId = this.tokenService.getUserIdFromToken();
 
     if (isNaN(dateToCompare.getTime())) {
-        alert("La date saisie est invalide.");
+      this.isDialogOpen = true;
+      this.messageTitle = 'La date saisie est invalide.';
+      this.messageContent = '';
     } else if (currentDate > dateToCompare) {
-        alert("Choisissez une date supérieure ou égale à la date actuelle!");
+        this.isDialogOpen = true;
+        this.messageTitle = 'Choisissez une date supérieure ou égale à la date actuelle!';
+        this.messageContent = '';
     } else if (this.planningForm.hourEnd <= this.planningForm.hourStart) {
-        alert("L'heure de fin doit être postérieure à l'heure de début.");
+        this.isDialogOpen = true;
+        this.messageTitle = 'L\'heure de fin doit être postérieure à l\'heure de début.';
+        this.messageContent = '';
     } else {
 
       let available = this.functionsService.isAvailable(this.planningList,this.planningForm, this.meetingList);
@@ -208,7 +232,10 @@ export class PlanningComponent {
       }
       else
       {
-        alert("Déjà occupé!");
+            
+        this.isDialogOpen = true;
+        this.messageTitle = 'Déjà occupé!';
+        this.messageContent = '';
       }
 
     }
