@@ -17,9 +17,9 @@ export class EttComponent {
 
   initForm(){
     this.ettForm = {
-      dtdvg: '',
-      dtsvg: '',
-      fevg: '',
+      dtdvg: 0,
+      dtsvg: 0,
+      fevg: 0,
       epanchementPericardique: {
         presente: false
       },

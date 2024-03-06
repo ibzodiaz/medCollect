@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { Users } from '../_interfaces/users';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,19 @@ import { Users } from '../_interfaces/users';
 export class UserService {
   constructor(private http: HttpClient){}
 
-  url = "http://localhost:3000/api/users";
+  url = `${environment.apiURL}/users`;
 
   
   createNewUser(user:Users):Observable<Users>{
     return this.http.put<Users>(this.url,user).pipe(catchError(this.errorHandler));
   }
 
-  updateUser(userId:string,user:Users):Observable<Users>{
+  updateUser(userId:string | null,user:any):Observable<Users>{
     return this.http.patch<Users>(this.url+'/'+userId,user).pipe(catchError(this.errorHandler));
+  }
+
+  updatePassword(userId:string | null,user:any):Observable<Users>{
+    return this.http.patch<Users>(this.url+'/changePassword/'+userId,user).pipe(catchError(this.errorHandler));
   }
 
   deleteUser(userId:string):Observable<Users>{

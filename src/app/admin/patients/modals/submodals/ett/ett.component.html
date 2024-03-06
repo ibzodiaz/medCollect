@@ -4,17 +4,17 @@
             <div class="row mb-3 border border-primary p-3 rounded-3">
                 <div class="col">
                     <label for="dtdvg">DTDVG:</label>
-                    <input type="text" id="dtdvg" name="dtdvg" [(ngModel)]="ettForm.dtdvg">
+                    <input type="number" id="dtdvg" min="30" max="80" name="dtdvg" [(ngModel)]="ettForm.dtdvg">
                 </div>
     
                 <div class="col">
                     <label for="dtsvg">DTSVG:</label>
-                    <input type="text" id="dtsvg" name="dtsvg" [(ngModel)]="ettForm.dtsvg">
+                    <input type="number" id="dtsvg" min="20" max="70" name="dtsvg" [(ngModel)]="ettForm.dtsvg">
                 </div>
 
                 <div class="col">
                     <label for="fevg">FEVG:</label>
-                    <input type="text" id="fevg" name="fevg" [(ngModel)]="ettForm.fevg">
+                    <input type="number" id="fevg" min="10" max="80" name="fevg" [(ngModel)]="ettForm.fevg">
                 </div>
             </div>
 

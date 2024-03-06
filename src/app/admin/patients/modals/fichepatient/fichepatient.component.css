@@ -108,8 +108,9 @@ td{
   width: 250px;
 }
 
-.complication{
+.weight{
   font-weight: 400;
+  word-break: break-all;
 }
 
 .fonce{
@@ -162,3 +163,6 @@ td{
   100% { transform: rotate(360deg); }
 }
 /*************Loader*******************/
+
+
+

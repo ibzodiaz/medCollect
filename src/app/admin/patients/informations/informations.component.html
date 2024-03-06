@@ -28,6 +28,7 @@
                 <table class="fl-table">
                     <thead>
                         <tr>
+                            <th scope="col"><i class="fa-regular fa-clock"></i> Date d'enregistrement :</th>
                             <th scope="col"><i class="fa-solid fa-circle-user"></i> Prénom :</th>
                             <th scope="col"><i class="fa-solid fa-circle-user"></i> Nom :</th>
                             <th scope="col"><i class="fa-solid fa-location-dot"></i> Adresse :</th>
@@ -38,6 +39,7 @@
             
                     
                         <tr *ngFor="let patient of filteredPatients" [routerLink]="'../details/' + patient._id+'/'+ patient._id">
+                            <td>{{patient.createdAt | date:'dd/MM/yyyy'}}</td>
                             <td>{{patient.prenom}}</td>
                             <td>{{patient.nom}}</td>
                             <td>{{patient.adresse}}</td>

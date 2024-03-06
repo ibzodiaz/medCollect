@@ -1,0 +1,131 @@
+        
+<div class="container">
+    <div class="row mb-5">
+        <div class="col card-share">
+            <div class="row mb-3">
+                <div class="col">
+                    <form name="files">
+                        <div class="row" *ngIf="fileForm.fileCategory">
+                            <div class="col">
+                                <div class="upload">
+                                    <input type="file" id="fileInput" name="fileInput" (change)="onFileSelected('modal20',$event)">
+                                    <label for="fileInput" class="text-center">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col">
+                    <div class="select-category">       
+                        <select class="form-control" name="fileCategory" [(ngModel)]="fileForm.fileCategory">
+                            <option value="" disabled selected hidden>Choisissez une catégorie</option>
+                            <option value="ECG">ECG</option>
+                            <option value="ETT">ETT</option>
+                            <option value="Radiographie">Radiographie</option>
+                            <option value="Tomodensitométrie (CT)">Tomodensitométrie (CT)</option>
+                            <option value="Imagerie par résonance magnétique (IRM)">Imagerie par résonance magnétique (IRM)</option>
+                            <option value="Échographie">Échographie</option>
+                            <option value="Mammographie">Mammographie</option>
+                            <option value="Endoscopie">Endoscopie</option>
+                            <option value="Scintigraphie">Scintigraphie</option>
+                            <option value="Angiographie">Angiographie</option>
+                            <option value="Électroencéphalogramme (EEG)">Électroencéphalogramme (EEG)</option>
+                            <option value="Ponction lombaire (PL)">Ponction lombaire (PL)</option>
+                            <option value="Tests de fonction pulmonaire">Tests de fonction pulmonaire</option>
+                            <option value="Bilans sanguins et d'urine">Bilans sanguins et d'urine</option>
+                            <option value="Rapports d'imagerie médicale avancée">Rapports d'imagerie médicale avancée</option>
+                            <option value="Cartes d'implants médicaux">Cartes d'implants médicaux</option>
+                            <option value="Rapports opératoires">Rapports opératoires</option>
+                        </select> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h6>Les fichiers partagés : <i class="fa-solid fa-list-check"></i></h6>
+        </div>
+        <div class="col"></div>
+        <div class="col-md-3">
+            <input type="text" class="form-control rounded-0" placeholder="Recherche.." [(ngModel)]="searchTerm">
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col">
+                        
+            <div *ngIf="isLoading ; else content">
+                <!-- Afficher le loader ici -->
+                <div class="loader"></div>
+            </div>
+            <ng-template #content>
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th>Date :</th>
+                            <th>Fichier :</th>
+                            <th>Taille :</th>
+                            <th>Catégorie :</th>
+                            <th>Modifier</th>
+                            <th>Télécharger</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let file of filteredfiles">
+                            <td>{{file.createdAt | date: 'dd/MM/yyyy'}}</td>
+                            <td><a [href]="readFile(file.fileName)" target="_blank">{{file.fileName.length > 50 ? file.fileName.substr(0,50)+'..': file.fileName}}</a></td>
+                            <td>{{file.fileSizeFormatted}}</td>
+                            <td>{{file.fileCategory}}</td>
+                            <td><button (click)="openDialog(file._id)" style="width: 30px; height: 30px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); padding: 3px;" class="btn btn-primary rounded-circle"><i class="fa-regular fa-pen-to-square"></i></button></td>
+                            <td><a style="cursor: pointer;" (click)="downloadFile(file.fileName)">télécharger&nbsp;&nbsp;<i style="color:rgb(121, 21, 21); font-size: 20px;" class="fa-solid fa-circle-down"></i></a></td>
+                         </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+
+        </div>
+    </div>
+</div>
+
+<div class="message-dialog" [class.open]="isDialogOpen">
+    <div class="message-content">
+    <h5 class="mb-3">Modifier la catégorie</h5>
+    <div class="row mb-3">
+        <div class="col">
+            <select class="form-control" name="fileCategory" [(ngModel)]="fileForm.fileCategory">
+                <option value="" disabled selected hidden>Choisissez une catégorie</option>
+                <option value="ECG">ECG</option>
+                <option value="ETT">ETT</option>
+                <option value="Radiographie">Radiographie</option>
+                <option value="Tomodensitométrie (CT)">Tomodensitométrie (CT)</option>
+                <option value="Imagerie par résonance magnétique (IRM)">Imagerie par résonance magnétique (IRM)</option>
+                <option value="Échographie">Échographie</option>
+                <option value="Mammographie">Mammographie</option>
+                <option value="Endoscopie">Endoscopie</option>
+                <option value="Scintigraphie">Scintigraphie</option>
+                <option value="Angiographie">Angiographie</option>
+                <option value="Électroencéphalogramme (EEG)">Électroencéphalogramme (EEG)</option>
+                <option value="Ponction lombaire (PL)">Ponction lombaire (PL)</option>
+                <option value="Tests de fonction pulmonaire">Tests de fonction pulmonaire</option>
+                <option value="Bilans sanguins et d'urine">Bilans sanguins et d'urine</option>
+                <option value="Rapports d'imagerie médicale avancée">Rapports d'imagerie médicale avancée</option>
+                <option value="Cartes d'implants médicaux">Cartes d'implants médicaux</option>
+                <option value="Rapports opératoires">Rapports opératoires</option>
+            </select> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary rounded-0" (click)="updateFileCategory()">Modifier</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+        </div>
+    </div>
+    </div>
+</div>

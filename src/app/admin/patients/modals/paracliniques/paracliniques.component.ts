@@ -54,9 +54,9 @@ export class ParacliniquesComponent {
       },
       ett: {
         presente: false,
-        dtdvg: '',
-        dtsvg: '',
-        fevg: '',
+        dtdvg: 0,
+        dtsvg: 0,
+        fevg: 0,
         epanchementPericardique: {
           presente: false
         },
@@ -156,9 +156,9 @@ export class ParacliniquesComponent {
     }
     else
     {
-      this.paracliniquesForm.ett.dtdvg = '';
-      this.paracliniquesForm.ett.dtsvg = '';
-      this.paracliniquesForm.ett.fevg = '';
+      this.paracliniquesForm.ett.dtdvg = 0;
+      this.paracliniquesForm.ett.dtsvg = 0;
+      this.paracliniquesForm.ett.fevg = 0;
       this.paracliniquesForm.ett.epanchementPericardique.presente = false;
       this.paracliniquesForm.ett.fuiteValvulaire.typeFuite = [];
       this.paracliniquesForm.ett.stenoseValvulaire.typeStenose = [];

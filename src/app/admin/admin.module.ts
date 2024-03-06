@@ -22,6 +22,7 @@ import { AttenteComponent } from './attente/attente.component';
 import { HelpComponent } from './help/help.component';
 import { AjoutassistantComponent } from './assistant/ajoutassistant/ajoutassistant.component';
 import { UpdateassistantComponent } from './assistant/updateassistant/updateassistant.component';
+import { ShareFilesComponent } from './share-files/share-files.component';
 
 
 
@@ -44,7 +45,8 @@ import { UpdateassistantComponent } from './assistant/updateassistant/updateassi
     AttenteComponent,
     HelpComponent,
     AjoutassistantComponent,
-    UpdateassistantComponent
+    UpdateassistantComponent,
+    ShareFilesComponent
   ],
   imports: [
     CommonModule,

@@ -8,7 +8,7 @@
         </header>
 
         
-        <nav class="dashboard-nav-list mt-3">
+        <nav class="dashboard-nav-list mt-1">
 
         <a [routerLink]="['dashboard']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-solid fa-gauge-high"></i> Tableau de bord
@@ -36,6 +36,11 @@
 
         <a *ngIf="user?.status !== 'A'" [routerLink]="['ordonnances']" routerLinkActive="active" class="dashboard-nav-item">
             <i class="fa-solid fa-prescription-bottle-medical"></i> Index médicaments
+        </a>
+
+        
+        <a [routerLink]="['partage']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Partage de fichier
         </a>
         
         <!-- <a [routerLink]="['attente']" routerLinkActive="active" class="dashboard-nav-item"><i class="fa-solid fa-hourglass-half"></i> Salles d'attente </a> -->

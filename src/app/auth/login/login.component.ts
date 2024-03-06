@@ -18,6 +18,8 @@ export class LoginComponent {
 
   constructor(private authService:AuthService, private tokenService: TokenService){}
 
+  message:string = '';
+
   ngOnInit(): void{ this.activeComponent(); }
 
   activeComponent(){
@@ -42,8 +44,12 @@ export class LoginComponent {
       data => {
         //console.log(data.access_token);
         this.tokenService.saveToken(data.access_token.toString());
+       
       },
-      err => console.log(err)
+      err => {
+        this.message = "Identifiants incorrects!";
+        //alert(err.message)
+      }
     )
   }
 }

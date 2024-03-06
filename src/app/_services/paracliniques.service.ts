@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Paracliniques } from '../_interfaces/paracliniques';
 import { Observable, catchError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParacliniquesService {
 
-  private url = 'http://localhost:3000/api/patients/signesparacliniques';
+  private url = `${environment.apiURL}/patients/signesparacliniques`;
 
   constructor(private http: HttpClient) { }
 

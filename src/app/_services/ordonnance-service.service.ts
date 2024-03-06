@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 
 import {Ordonnance} from '../_interfaces/ordonnance';
 import { Observable, catchError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdonnanceService {
-  private url = 'http://localhost:3000/api/ordonnances'
+  private url = `${environment.apiURL}/ordonnances`
 
   constructor(private http: HttpClient) { }
 

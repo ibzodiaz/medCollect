@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Motif } from '../_interfaces/motif';
 import { Observable, catchError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MotifsService {
-  private url = 'http://localhost:3000/api/motifs'
+  private url = `${environment.apiURL}/motifs`
 
   constructor(private http: HttpClient) { }
 

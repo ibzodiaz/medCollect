@@ -27,9 +27,9 @@ export interface Paracliniques {
       },
      ett: {
         presente: boolean,
-        dtdvg: String,
-        dtsvg: String,
-        fevg: String,
+        dtdvg: number,
+        dtsvg: number,
+        fevg: number,
         epanchementPericardique: {
             presente: boolean
          },

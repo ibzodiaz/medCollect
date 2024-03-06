@@ -11,6 +11,7 @@
 		<form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" class="log-in" autocomplete="off"> 
 		<h4><span class="text-center">Connexion</span></h4>
 		<p>Connectez-vous rapidement pour participer à l'avancé de la science.</p>
+		<h6 style="color: red; margin-left: 55px; margin-bottom: 15px;" *ngIf="message !== ''">{{message}}</h6>
 		<div class="floating-label">
 			<input placeholder="Email.." [(ngModel)]="form.email" #email="ngModel" required type="email" name="email" id="email" autocomplete="off">
 			<div class="form_error" *ngIf="email.errors && f.submitted">
@@ -32,8 +33,8 @@
 		<div class="floating-label">
 			<input placeholder="Mot de passe.." [(ngModel)]="form.password" #password="ngModel" required minlength="5" type="password" name="password" id="password" autocomplete="off">
 			<div class="form_error" *ngIf="password.errors && f.submitted">
-			<div *ngIf="password.errors['required']"><small>Mot de passe est requis!</small></div>
-			<div *ngIf="password.errors['minlength']"><small>Mot de passe doit être au moins 5 caractères!</small></div>
+			<div *ngIf="password.errors['required']"><small>Le mot de passe est requis!</small></div>
+			<div *ngIf="password.errors['minlength']"><small>Le mot de passe doit avoir au moins 5 caractères!</small></div>
 			</div>
 			<label for="password">Mot de passe:</label>
 			<div class="icon">

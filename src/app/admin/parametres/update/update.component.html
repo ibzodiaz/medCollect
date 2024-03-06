@@ -4,68 +4,62 @@
             <div class="col-lg-8 offset-md-2">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Nom</h6>
+                        <form (ngSubmit)="onSubmit()">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Nom</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="nom" [(ngModel)]="doctorForm.nom">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" value="Doe">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Prénom</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="prenom" [(ngModel)]="doctorForm.prenom">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Prénom</h6>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="email" name="email" [(ngModel)]="doctorForm.email">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" value="John">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Pseudo</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="pseudo" [(ngModel)]="doctorForm.pseudo">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Email</h6>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Service</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="service" [(ngModel)]="doctorForm.service">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" value="johnDoe@gmail.com">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Spécialité</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="speciality" [(ngModel)]="doctorForm.speciality">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Adresse</h6>
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9 text-secondary">
+                                    <button class="btn btn-primary rounded-0 w-50">Sauvegarder</button>
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" value="Dakar plateau">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Service</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" value="Neurologie">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Spécialité</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" value="Dontologie; neurologie; etc..">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Expérience</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" value="20 ans">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-9 text-secondary">
-                                <button class="btn btn-customized">Sauvegarder</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
 

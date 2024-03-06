@@ -8,6 +8,7 @@ import { AssistantComponent } from './assistant/assistant.component';
 import { PlanningComponent } from './planning/planning.component';
 import { OrdonnancesComponent } from './ordonnances/ordonnances.component';
 import { HelpComponent } from './help/help.component';
+import { ShareFilesComponent } from './share-files/share-files.component';
 
 const routes: Routes = [
   {  path: '', component:AlayoutComponent,children:[
@@ -21,6 +22,7 @@ const routes: Routes = [
       {path:'assistants', component:AssistantComponent},
       {path:'assistants/:assistantId', component:AssistantComponent},
       {path:'ordonnances', component:OrdonnancesComponent},
+      {path:'partage', component:ShareFilesComponent},
       {path:'aide', component:HelpComponent},
       {
         path:'user', loadChildren: ()=> import('./user/user.module')

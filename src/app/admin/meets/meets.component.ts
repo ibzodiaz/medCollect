@@ -90,7 +90,6 @@ export class MeetsComponent {
       (err:any)=> console.log(err.message)
     );
 
-
     this.getAllPatient();
     this.getAllDoctorsFromEachHospital();
 

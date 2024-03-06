@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Meets } from '../_interfaces/meets';
 import { Observable, catchError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeetsService {
-  private url = "http://localhost:3000/api/meetings";
+  private url = `${environment.apiURL}/meetings`;
 
   constructor(private http: HttpClient) { }
 

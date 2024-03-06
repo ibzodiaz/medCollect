@@ -46,25 +46,29 @@
                             <div class="col-md-3">
                                 <img src="../../../../../assets/images/thepatient.png" class="img-fiche">
                             </div>
-                            <div class="col">
+                            <div class="col-md-4">
                                 <table>
                                     <tr>
                                         <td><span>Nom:</span></td>
                                         <td>{{ patient?.nom || "" }}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Prénom:</span></td>
                                         <td>{{patient?.prenom || ""}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Age:</span></td>
                                         <td>{{patient?.age || ""}}</td>
                                     </tr>
+                                    <br>
                                     
                                     <tr>
                                         <td><span>Téléphone:</span></td>
                                         <td>{{patient?.telephone || ""}}</td>
                                     </tr>
+                                    <br>
                                 </table>
                             </div>
                             <div class="col">
@@ -73,13 +77,20 @@
                                         <td><span>Adresse:</span></td>
                                         <td>{{patient?.adresse || ""}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Statut matrimonial:</span></td>
                                         <td>{{patient?.statut || ""}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Niveau socio-économique:</span></td>
                                         <td>{{patient?.niveau_socioeconomique || ""}}</td>
+                                    </tr>
+                                    <br>
+                                    <tr>
+                                        <td><span>Sexe:</span></td>
+                                        <td>{{patient?.sexe == 'M' ? 'MASCULIN' : 'FEMININ'}}</td>
                                     </tr>
                                     
                                 </table>
@@ -101,6 +112,7 @@
                                         
                                         <td><span>Autres:</span> {{antecedant?.autres || ""}}</td>
                                     </tr>
+                                    <br>
                                 </table>
                                 <p class="text-center">Gyneco-Obstetricaux</p>
                                 <table>
@@ -114,6 +126,7 @@
                                         
                                         <td><span>grossesses Gemellaires:</span> {{antecedant?.grossessesGemellaires ? 'OUI' : 'NON'}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>tocolyse Prolongee:</span> {{antecedant?.tocolyseProlongee ? 'OUI' : 'NON'}}</td>
                                         
@@ -123,11 +136,13 @@
                                         
                                         <td><span>Type Insuffisance Cardiaque:</span> {{antecedant?.typeInsuffisanceCardiaque || ""}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Hospitalisations Anterieures:</span> {{antecedant?.hospitalisationsAnterieures ? 'OUI' : 'NON'}}</td>
                                         
                                         <td><span>Nombre:</span> {{antecedant?.nombreHospitalisations || 0}}</td>
                                     </tr>
+                                    <br>
                                 </table>
                             </div>
                         </div>
@@ -147,11 +162,13 @@
                                         
                                         <td><span>Toux:</span> {{cliniques?.toux?.presente ? 'OUI':'NON'}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Palpitations:</span> {{cliniques?.palpitations?.presente ? 'OUI':'NON'}}</td>
                                         
                                         <td><span>OMI:</span> {{cliniques?.omi?.presente ? 'OUI':'NON'}}</td>
                                     </tr>
+                                    <br>
                                 </table>
 
                                 <p class="text-center">Constantes</p>
@@ -166,6 +183,7 @@
                                         
                                         <td><span>FR:</span> {{cliniques?.constantes?.fr || 0}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Température:</span> {{cliniques?.constantes?.temperature || 0}} °C</td>
                                         
@@ -189,20 +207,20 @@
                                             </span>
                                         </td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Souffle Cardiaque:</span> {{cliniques?.souffleCardiaque?.presente ? 'OUI':'NON'}}</td>
                                         
                                         <td>
                                             <span>Type Souffle:</span>
-                                            <span class="complication" *ngFor="let type of cliniques?.souffleCardiaque?.typeSouffle">
-                                                {{type}}
-                                            </span>
+                                            {{cliniques?.souffleCardiaque?.typeSouffle || ''}}
                                         </td>
                                         
                                         <td><span>TSVJ:</span> {{cliniques?.tsvj?.presente ? 'OUI':'NON'}}</td>
                                         
                                         <td><span>Hépatomégalie:</span> {{cliniques?.hepatomegalie?.presente ? 'OUI':'NON'}}</td>
                                     </tr>
+                                    <br>
                                 </table>
                             </div>
                         </div>
@@ -223,6 +241,7 @@
                                         
                                         <td><span>VGM:</span> {{paracliniques?.biologie?.vgm || ''}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>CCMH:</span> {{paracliniques?.biologie?.ccmh || ''}}</td>
                                         
@@ -232,6 +251,7 @@
                                         
                                         <td><span>Urée:</span> {{paracliniques?.biologie?.uree || ''}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Créatininémie:</span> {{paracliniques?.biologie?.creatininemie || ''}}</td>
                                         
@@ -241,6 +261,7 @@
                                         
                                         <td><span>Télécoeur:</span> {{paracliniques?.telecoeur?.presente ? 'OUI':'NON'}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Index cardiothoracique (%):</span> {{paracliniques?.telecoeur?.indexCardiothoracique || 0}}</td>
                                         
@@ -250,6 +271,7 @@
                                         
                                         <td><span>Rythme Cardiaque:</span> {{paracliniques?.ecg?.rythmeCardiaque || ''}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Autres:</span> {{paracliniques?.ecg?.autres || ''}}</td>
                                         
@@ -257,17 +279,19 @@
                                         
                                         <td><span>epanchement Pericardique:</span> {{paracliniques?.ett?.epanchementPericardique?.presente ? 'OUI':'NON'}}</td>
                                         
-                                        <td><span>Type de fuite valvulaire:</span> {{paracliniques?.ett?.fuiteValculaire?.typeFuite || ''}}</td>
+                                        <td><span>Type de fuite valvulaire:</span> {{paracliniques?.ett?.fuiteValvulaire?.typeFuite || ''}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
-                                        <td><span>Type de stenose valvulaire:</span> {{paracliniques?.ett?.stenoseValculaire?.typeStenose || ''}}</td>
+                                        <td  style="max-width: 180px;"><span>Type stenose valvulaire:</span><span class="weight">{{paracliniques?.ett?.stenoseValvulaire?.typeStenose || ''}}</span></td>
                                         
-                                        <td><span>DTDVG:</span> {{paracliniques?.ett?.dtdvg}}</td>
+                                        <td><span>DTDVG:</span> {{paracliniques?.ett?.dtdvg || ''}} mm</td>
                                         
-                                        <td><span>DTSVG:</span> {{paracliniques?.ett?.dtsvg || ''}}</td>
+                                        <td><span>DTSVG:</span> {{paracliniques?.ett?.dtsvg || ''}} mm</td>
                                         
-                                        <td><span>FEVG:</span> {{paracliniques?.ett?.fevg || ''}}</td>
+                                        <td><span>FEVG:</span> {{paracliniques?.ett?.fevg || ''}} %</td>
                                     </tr>
+                                    <br>
                                 </table>
 
                                 <p class="text-center">TRAITEMENT:</p>
@@ -281,6 +305,7 @@
                                         
                                         <td><span>Bromocriptine:</span> {{paracliniques?.traitement?.bromocriptine ? 'OUI':'NON'}}</td>
                                     </tr>
+                                    <br>
                                     <tr>
                                         <td><span>Anticoagulants:</span> {{paracliniques?.traitement?.anticoagulants ? 'OUI':'NON'}}</td>
                                         
@@ -290,6 +315,7 @@
                                         
                                         <td><span>Autres:</span> {{paracliniques?.traitement?.autres || ''}}</td>
                                     </tr>
+                                    <br>
                                 </table>
                                 
                                 <p class="text-center">Modalité évolutive en hospitalisation</p>
@@ -301,20 +327,20 @@
                                         
                                         <td>
                                             <span>Types de complications:</span>
-                                            <span class="complication" *ngFor="let complication of paracliniques?.modaliteEvolutiveHospitalisation?.typeComplications">
-                                                {{ complication }};&nbsp;
-                                            </span>
+                                            {{paracliniques?.modaliteEvolutiveHospitalisation?.typeComplications || ''}}
                                         </td>
 
                                         <td><span>Autres:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.autres || ''}}</td>
                                         
                                     </tr>
+                                    <br>
                                     <tr>
                                 
                                         <td><span>Décès:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.aspectsDefavorables?.deces ? 'OUI':'NON'}}</td>
                                         
-                                        <td><span>Délais de décès:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.delaiDeces || 0}} jour(s)</td>
+                                        <td><span>Délais:</span> {{paracliniques?.modaliteEvolutiveHospitalisation?.delaiDeces || 0}} jour(s)</td>
                                     </tr>
+                                    <br>
                                 </table>
                             </div>
                         </div>
@@ -326,7 +352,7 @@
                         <div class="row" *ngIf="evolution?.mere?.presente">
                             <div class="col">
                                 <p class="text-center">Mère</p>
-                                <div class="border border-primary rounded-3 fonce">
+                                <div class="border border-primary rounded-3 fonce mt-3">
                                 
                                     <table>
                                         <tr>
@@ -338,6 +364,7 @@
                                             
                                             <td><span>Date du décès:</span> {{(evolution?.mere?.detailsDeces?.date | date:'dd/MM/yyyy')|| ''}}</td>
                                         </tr>
+                                        <br>
                                         <tr>
                                             <td><span>Causes du décès:</span> {{evolution?.mere?.detailsDeces?.causes || ''}}</td>
                                             
@@ -347,6 +374,7 @@
                                             
                                             <td><span>Nombre de Réhospitalisations:</span> {{evolution?.mere?.nombreRehospitalisation || 0}}</td>
                                         </tr>
+                                        <br>
                                     </table>
 
                                     <p class="text-center">Facteurs de Décompensation:</p>
@@ -360,10 +388,12 @@
                                             
                                             <td><span>denutrition:</span> {{evolution?.mere?.facteursDecompensation?.denutrition ? 'OUI':'NON'}}</td>
                                         </tr>
+                                        <br>
                                         <tr>
                                             <td><span>ruptures Therapeutiques:</span> {{evolution?.mere?.facteursDecompensation?.rupturesTherapeutiques ? 'OUI':'NON'}}</td>
                                             <td><span>ecart De Regime:</span> {{evolution?.mere?.facteursDecompensation?.ecartDeRegime ? 'OUI':'NON'}}</td>
                                         </tr>
+                                        <br>
                                     </table>
 
                                     <p class="text-center">ETT:</p>
@@ -377,6 +407,7 @@
                                             
                                             <td><span>FR:</span> {{evolution?.mere?.echocardiographie?.fr || ''}}</td>
                                         </tr>
+                                        <br>
                                         <tr>
                                             <td><span>E:</span> {{evolution?.mere?.echocardiographie?.e || ''}}</td>
                                             
@@ -386,11 +417,13 @@
                                             
                                             <td><span>E/E':</span> {{evolution?.mere?.echocardiographie?.ee || ''}}</td>
                                         </tr>
+                                        <br>
                                         <tr>
                                             <td><span>TAPSE:</span> {{evolution?.mere?.echocardiographie?.tapse || ''}}</td>
                                             
                                             <td><span>DTOG:</span> {{evolution?.mere?.echocardiographie?.dtog || ''}}</td>
                                         </tr>
+                                        <br>
                                     </table>
 
                                     <p class="text-center">Biologie:</p>
@@ -404,6 +437,7 @@
                                             
                                             <td><span>VGM:</span> {{evolution?.mere?.biologie?.vgm || ''}}</td>
                                         </tr>
+                                        <br>
                                         <tr>
                                             <td><span>CCMH:</span> {{evolution?.mere?.biologie?.hemoglobinemie || ''}}</td>
                                             
@@ -413,6 +447,7 @@
                                             
                                             <td><span>Urée:</span> {{evolution?.mere?.biologie?.vgm || ''}}</td>
                                         </tr>
+                                        <br>
                                         <tr>
                                             <td><span>Créatininémie:</span> {{evolution?.mere?.biologie?.hemoglobinemie || ''}}</td>
                                             
@@ -420,6 +455,7 @@
 
                                             <td><span>Prolactine:</span> {{evolution?.mere?.biologie?.hemoglobinemie || ''}}</td>
                                         </tr>
+                                        <br>
                                     </table>
                                 </div>
                             </div>
@@ -427,7 +463,7 @@
 
                         <div class="row mt-3" *ngIf="evolution?.enfant?.presente">
                             <div class="col">
-                                <p class="text-center">Enfant</p>
+                                <p class="text-center mb-3">Enfant</p>
                                 <div class="border border-primary rounded-3 fonce">
                                     
                                     <table>
@@ -439,6 +475,7 @@
                                             <td><span>Prématurité:</span> {{evolution?.enfant?.evolutionBebe?.prematurite ? 'OUI':'NON'}}</td>
                     
                                         </tr>
+                                        <br>
                                     </table>
 
                                     <p class="text-center">Évolution après la sortie:</p>
@@ -452,6 +489,7 @@
                                             
                                             <td><span>Alimentation 3 mois:</span> {{evolution?.enfant?.evolutionBebe?.alimentation3Mois || ''}}</td>
                                         </tr>
+                                        <br>
                                         <tr>
                                             <td><span>Poids 6 mois:</span> {{evolution?.enfant?.evolutionBebe?.poids6Mois || ''}}</td>
                                             
@@ -461,6 +499,7 @@
                                             
                                             <td><span>Alimentation 12 mois:</span> {{evolution?.enfant?.evolutionBebe?.alimentation12Mois || ''}}</td>
                                         </tr>
+                                        <br>
                                     </table>
                                 </div>
                             </div>

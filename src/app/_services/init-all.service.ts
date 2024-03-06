@@ -125,9 +125,9 @@ export class InitAllService {
       },
       ett: {
         presente: false,
-        dtdvg: '',
-        dtsvg: '',
-        fevg: '',
+        dtdvg: 0,
+        dtsvg: 0,
+        fevg: 0,
         epanchementPericardique: {
           presente: false
         },

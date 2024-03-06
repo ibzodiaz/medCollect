@@ -137,6 +137,8 @@ export class CliniquesComponent {
       this.cliniquesForm.oedemeAiguPoumon.presente = false;
     }
 
+    //alert(JSON.stringify(this.cliniquesForm.souffleCardiaque.typeSouffle))
+
     if(this.patientExists){
 
       this.cliniquesService.updateClinicSigns(this.PatientAntecedantId,this.consultationId,this.cliniquesForm).subscribe(

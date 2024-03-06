@@ -177,8 +177,8 @@ export class FichepatientComponent {
             this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (paraclinicSigns: any) => {
                 if(paraclinicSigns){
-                  this.paracliniques = { ...paraclinicSigns, patientId: this.patientId };
-                  //alert(JSON.stringify(this.paracliniques.biologie.hemoglobinemie));
+                  this.paracliniques = paraclinicSigns;
+                  //alert(JSON.stringify(this.paracliniques.ett.fuiteValvulaire.typeFuite));
                 }
     
               },

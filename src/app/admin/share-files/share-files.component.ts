@@ -1,27 +1,51 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TokenService } from 'src/app/_services/token.service';
+import { ShareFilesService } from 'src/app/_services/share-files.service';
 import { UploadfilesService } from 'src/app/_services/uploadfiles.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-documents',
-  templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.css']
+  selector: 'app-share-files',
+  templateUrl: './share-files.component.html',
+  styleUrls: ['./share-files.component.css']
 })
-export class DocumentsComponent {
+export class ShareFilesComponent {
 
   fileForm:any = {
+    fileName: '',
+    fileSize: '',
+    filePath: '',
+    fileType: '',
     fileCategory:''
   }
 
-  urlDownload:string = '';
-
   constructor(
-    private uploadfilesService:UploadfilesService,
-    private tokenService:TokenService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private shareFilesService:ShareFilesService
   ){}
+
+  ngOnInit():void{
+    this.fileForm;
+    this.getFiles();
+  }
+
+  onFileSelected(modalId: string,event: any) {
+
+    const file: File = event.target.files[0];
+
+    this.shareFilesService.addFile(file,this.fileForm).subscribe(
+      response => {
+        //console.log('File uploaded successfully:', response);
+        this.getFiles();
+        //alert('File uploaded successfully:');
+      },
+      error => {
+        console.error('Error uploading file:', error);
+        //alert('Error uploading file:')
+      }
+    );
+    
+  }
 
   filesList:any[] = [];
   fileSize:string='';
@@ -37,17 +61,9 @@ export class DocumentsComponent {
     return `${(fileSize / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`;
   }
 
-
-  ngOnInit():void{
-    this.urlDownload = environment.apiURLDownload;
-    const userId:any = this.tokenService.getUserIdFromToken();
-    const patientId:any = this.route.snapshot.paramMap.get('patientId');
-    this.getFiles(patientId,userId);
-  }
-
-  getFiles(patientId:string,userId:string){
+  getFiles(){
     this.isLoading = true;
-    this.uploadfilesService.getFilesByPatientId(patientId,userId).subscribe(
+    this.shareFilesService.getAllFiles().subscribe(
       (files:any)=>{
         this.filesList = files.map((file: any) => {
           return {
@@ -61,12 +77,6 @@ export class DocumentsComponent {
       },
       (err:any)=>console.log(err.message)
     );
-  }
-
-  actualize() {
-    const userId:any = this.tokenService.getUserIdFromToken();
-    const patientId:any = this.route.snapshot.paramMap.get('patientId');
-    this.getFiles(patientId,userId);
   }
 
   downloadFile(fileName: string): void {
@@ -83,18 +93,6 @@ export class DocumentsComponent {
         window.URL.revokeObjectURL(url);
       })
       .catch(error => console.error('Error downloading file:', error));
-  }
-  
-  readFile(fileName:string){
-    return `${environment.apiURLDownload}/data/${fileName}`;
-  }
-
-  openModal(modalId: string): void {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.style.display = "block";
-      
-    }
   }
 
   isDialogOpen: boolean = false;
@@ -114,16 +112,18 @@ export class DocumentsComponent {
   }
 
   updateFileCategory(){
-    this.uploadfilesService.updateFile(this.fileId,this.fileForm).subscribe(
+    this.shareFilesService.updateFile(this.fileId,this.fileForm).subscribe(
       (response:any)=>{
-        const userId:any = this.tokenService.getUserIdFromToken();
-        const patientId:any = this.route.snapshot.paramMap.get('patientId');
-        this.getFiles(patientId,userId);
+        this.getFiles();
         this.isDialogOpen = false;
       }
     );
   }
 
+  readFile(fileName:string){
+    return `${environment.apiURLDownload}/data/${fileName}`;
+  }
+    
   searchTerm: string = '';
 
   get filteredfiles(): any[] {
@@ -135,4 +135,5 @@ export class DocumentsComponent {
             file.fileCategory.toLowerCase().includes(searchTermLowerCase)
     });
   }
+  
 }

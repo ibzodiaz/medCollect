@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { Evolution } from '../_interfaces/evolution';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Evolution } from '../_interfaces/evolution';
 export class EvolutionService {
 
  
-  private url = 'http://localhost:3000/api/patients/evolution';
+  private url = `${environment.apiURL}/patients/evolution`;
 
   constructor(private http: HttpClient) { }
 

@@ -34,7 +34,7 @@ export class CardioComponent {
   initForm(){
     this.cardioForm = {
       souffleCardiaque: {
-        typeSouffle: [] as string[]
+        typeSouffle: []
       }
     };
   }

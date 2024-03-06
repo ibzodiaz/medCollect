@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DossiersComponent } from './dossiers/dossiers.component';
 import { InformationsComponent } from './informations/informations.component';
 import { DetailsComponent } from './details/details.component';
+import { authAssistant } from 'src/app/_helpers/auth.assistant';
 
 
 const routes: Routes = [
