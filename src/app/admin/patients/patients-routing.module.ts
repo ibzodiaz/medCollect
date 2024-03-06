@@ -9,9 +9,9 @@ import { authAssistant } from 'src/app/_helpers/auth.assistant';
 const routes: Routes = [
   {path:'', redirectTo:'dossiers', pathMatch:'full'},
   {path:'dossiers', component:DossiersComponent},
-  {path:'informations', component:InformationsComponent},
-  {path:'details/:patientId/00d9d0b9d50dc435bfbf04cd', component:DetailsComponent},
-  {path:'details/:patientId/:consultationId', component:DetailsComponent}
+  {path:'informations', component:InformationsComponent,canActivate:[authAssistant]},
+  {path:'details/:patientId/00d9d0b9d50dc435bfbf04cd', component:DetailsComponent,canActivate:[authAssistant]},
+  {path:'details/:patientId/:consultationId', component:DetailsComponent,canActivate:[authAssistant]}
 ];
 
 @NgModule({

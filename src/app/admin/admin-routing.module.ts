@@ -9,6 +9,7 @@ import { PlanningComponent } from './planning/planning.component';
 import { OrdonnancesComponent } from './ordonnances/ordonnances.component';
 import { HelpComponent } from './help/help.component';
 import { ShareFilesComponent } from './share-files/share-files.component';
+import { authAssistant } from '../_helpers/auth.assistant';
 
 const routes: Routes = [
   {  path: '', component:AlayoutComponent,children:[
@@ -18,10 +19,10 @@ const routes: Routes = [
       {path:'dashboard', component:DashboardComponent},
       {path:'parametres', component:ParametresComponent},
       {path:'meetings', component:MeetsComponent},
-      {path:'planning', component:PlanningComponent},
-      {path:'assistants', component:AssistantComponent},
-      {path:'assistants/:assistantId', component:AssistantComponent},
-      {path:'ordonnances', component:OrdonnancesComponent},
+      {path:'planning', component:PlanningComponent,canActivate:[authAssistant]},
+      {path:'assistants', component:AssistantComponent,canActivate:[authAssistant]},
+      {path:'assistants/:assistantId', component:AssistantComponent,canActivate:[authAssistant]},
+      {path:'ordonnances', component:OrdonnancesComponent,canActivate:[authAssistant]},
       {path:'partage', component:ShareFilesComponent},
       {path:'aide', component:HelpComponent},
       {
