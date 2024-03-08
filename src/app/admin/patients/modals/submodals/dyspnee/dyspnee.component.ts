@@ -53,9 +53,10 @@ export class DyspneeComponent {
 
             this.cliniquesService.getClinicSignsByPatientId(this.patientId,this.consultationId).subscribe(
               (dyspnee: any) => {
-
-                this.dyspneeForm = {...dyspnee};
-                this.sharedService.setterDyspnee(this.dyspneeForm);
+                if(dyspnee){
+                  this.dyspneeForm = {...dyspnee};
+                  this.sharedService.setterDyspnee(this.dyspneeForm);
+                }
                 
               },
               (err: any) => {

@@ -154,7 +154,7 @@ export class MeetsComponent {
         this.calendarOptions.events = this.Events;
         this.isLoading = false;
       },
-      (err: any) => console.log(err.message())
+      (err: any) => console.log(err.message)
     );
   }
 
@@ -171,8 +171,8 @@ export class MeetsComponent {
                                                     end: new Date(event.date + "T" + event.hourEnd),
                                                     color: this.functionsService.getRandomColor(), 
                                                     extendedProps: {
-                                                      patientId: event.patientId,
-                                                      userId: event.userId,
+                                                      patientId: event.patientId._id,
+                                                      userId: event.userId._id,
                                                       meetingId: event._id
                                                     }
                                                   }));
@@ -201,8 +201,8 @@ export class MeetsComponent {
 
 
   handleEventClick(arg: any) {
-    const patientId = arg.event.extendedProps.patientId;
-    const doctorId = arg.event.extendedProps.userId;
+    this.patientId = arg.event.extendedProps.patientId;
+    this.userId = arg.event.extendedProps.userId;
     this.meetingId = arg.event.extendedProps.meetingId;
 
     this.start = this.functionsService.formatTime(arg.event.start);
@@ -218,6 +218,22 @@ export class MeetsComponent {
     }
 
     
+    this.getUserAndPatient(this.userId,this.patientId);
+
+    this.meetingForm={
+      patientId:this.patientId,
+      userId:this.userId,
+      hospitalId: this.hospitalId,
+      date:this.date,
+      hourStart: this.start,
+      hourEnd: this.end,
+      subject: this.subject
+    }
+
+
+  }
+
+  getUserAndPatient(userId:string,patientId:string){
     this.patientsService.getPatientById(patientId).subscribe(
       (patient:any)=>{
         this.prenomPatient = patient.prenom;
@@ -227,7 +243,7 @@ export class MeetsComponent {
       (err:any)=>console.log(err.message)
     ); 
     
-    this.userService.getUserById(doctorId).subscribe(
+    this.userService.getUserById(userId).subscribe(
       (doctor:any)=>{
         this.prenomDoctor = doctor.data.prenom;
         this.nomDoctor = doctor.data.nom;
@@ -235,33 +251,6 @@ export class MeetsComponent {
       },
       (err:any)=>console.log(err.message)
     );
-
-    if (typeof doctorId === 'object' && doctorId !== null) {
-      this.meetingForm={
-        patientId:patientId,
-        userId:doctorId._id,
-        hospitalId: this.hospitalId,
-        date:this.date,
-        hourStart: this.start,
-        hourEnd: this.end,
-        subject: this.subject
-      }
-  
-    }else{
-      this.meetingForm={
-        patientId:patientId,
-        userId:doctorId,
-        hospitalId: this.hospitalId,
-        date:this.date,
-        hourStart: this.start,
-        hourEnd: this.end,
-        subject: this.subject
-      }
-  
-    }
-
-    // this.getDoctorPlanning(this.meetingForm.userId);
-    // this.getMeetingByDoctor(this.meetingForm.userId);
 
   }
 

@@ -15,6 +15,11 @@
             </div>
         </div>
 
+        <div class="text-center" *ngIf="uploaded">
+            <h5>{{ progress }}%</h5>
+            <progress max="100" [value]="progress" class="w-100"></progress>
+        </div>
+
         <div class="row mt-3">
             <div class="col">
         
@@ -40,13 +45,10 @@
                 </select> 
             </div>
         </div>
-        <!-- <div *ngFor="let name of fileName">
-            <h6>{{name}}</h6>
-        </div>             -->
 
         <div class="row text-center mt-3">
             <div class="col">
-                <button class="btn btn-secondary rounded-0 w-50" (click)="closeModal('modal20',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                <button [disabled]="(uploaded)" class="btn btn-secondary rounded-0 w-50" (click)="closeModal('modal20',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
             </div>
         </div>
     </form>

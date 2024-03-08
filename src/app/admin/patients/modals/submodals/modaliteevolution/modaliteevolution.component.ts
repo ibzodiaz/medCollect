@@ -65,11 +65,12 @@ export class ModaliteevolutionComponent {
 
             this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (evolution: any) => {
-
-                this.modeliteevolutionForm = {...evolution.modaliteEvolutiveHospitalisation};
-                this.sharedService.setterEvolution(this.modeliteevolutionForm);
-    
-                //alert(JSON.stringify(evolution.modaliteEvolutiveHospitalisation))
+                if(evolution){
+                  this.modeliteevolutionForm = {...evolution.modaliteEvolutiveHospitalisation};
+                  this.sharedService.setterEvolution(this.modeliteevolutionForm);
+      
+                  //alert(JSON.stringify(evolution.modaliteEvolutiveHospitalisation))
+                }
                 
               },
               (err: any) => {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PatientsService } from 'src/app/_services/patients.service';
 
 @Component({
@@ -38,6 +39,15 @@ export class DetailsComponent {
 
   detect(tab: string) {
     this.activeTab = tab;
+  }
+
+  dataSubscription: Subscription | undefined;
+  
+  ngOnDestroy(): void {
+    // Arrêter l'abonnement aux données lorsque le composant est détruit
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
+    }
   }
 
 }

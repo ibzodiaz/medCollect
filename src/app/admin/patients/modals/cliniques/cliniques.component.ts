@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Cliniques } from 'src/app/_interfaces/cliniques';
 import { CliniquesService } from 'src/app/_services/cliniques.service';
 import { SharedService } from 'src/app/_services/shared.service';
@@ -89,8 +90,10 @@ export class CliniquesComponent {
 
             this.cliniquesService.getClinicSignsByPatientId(patientId, consultationId).subscribe(
               (clinicSigns: any) => {
-                this.cliniquesForm = { ...clinicSigns, patientId: this.patientId };
-                this.patientExists = true;
+                if(clinicSigns){
+                  this.cliniquesForm = { ...clinicSigns, patientId: this.patientId };
+                  this.patientExists = true;
+                }
               },
               (err: any) => {
                 if (err.status === undefined) {
@@ -186,6 +189,15 @@ export class CliniquesComponent {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";
+    }
+  }
+
+  dataSubscription: Subscription | undefined;
+  
+  ngOnDestroy(): void {
+    // Arrêter l'abonnement aux données lorsque le composant est détruit
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
     }
   }
 

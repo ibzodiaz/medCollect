@@ -1,3 +1,4 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShareFilesService } from 'src/app/_services/share-files.service';
@@ -16,8 +17,11 @@ export class ShareFilesComponent {
     fileSize: '',
     filePath: '',
     fileType: '',
-    fileCategory:''
+    fileCategory:'',
+    annotatedFile: ''
   }
+
+  progress: number = 0;
 
   constructor(
     private route:ActivatedRoute,
@@ -25,27 +29,37 @@ export class ShareFilesComponent {
   ){}
 
   ngOnInit():void{
-    this.fileForm;
     this.getFiles();
   }
 
-  onFileSelected(modalId: string,event: any) {
+  uploaded:boolean = false;
+  message:string = '';
 
+  onFileSelected(modalId: string, event: any) {
     const file: File = event.target.files[0];
-
-    this.shareFilesService.addFile(file,this.fileForm).subscribe(
-      response => {
-        //console.log('File uploaded successfully:', response);
-        this.getFiles();
-        //alert('File uploaded successfully:');
+  
+    this.progress = 0;
+    this.message = '';
+    this.uploaded = true;
+    this.shareFilesService.addFile(file, this.fileForm).subscribe(
+      (event: any) => {
+        if(event){
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round(100 * event.loaded / event.total);
+          } else if (event.type === HttpEventType.Response) {
+            // Le fichier a été téléchargé avec succès
+            this.message = 'Le fichier est chargé avec succès.';
+            this.getFiles();
+          }
+        }
       },
-      error => {
+      (error: any) => {
         console.error('Error uploading file:', error);
         //alert('Error uploading file:')
       }
     );
-    
   }
+  
 
   filesList:any[] = [];
   fileSize:string='';
@@ -127,13 +141,18 @@ export class ShareFilesComponent {
   searchTerm: string = '';
 
   get filteredfiles(): any[] {
-
-    // Sinon, filtrez les files par motif ou date
+    // Convertir le terme de recherche en minuscules pour effectuer une recherche insensible à la casse
     const searchTermLowerCase = this.searchTerm.toLowerCase();
+
+    // Filtrer les fichiers par nom de fichier, catégorie de fichier ou fichier annoté
     return this.filesList.filter((file: any) => {
-      return file.fileName.toLowerCase().includes(searchTermLowerCase) ||
-            file.fileCategory.toLowerCase().includes(searchTermLowerCase)
+      return (
+        file.fileName.toLowerCase().includes(searchTermLowerCase) ||
+        file.fileCategory.toLowerCase().includes(searchTermLowerCase) ||
+        file.annotatedFile.toLowerCase().includes(searchTermLowerCase)
+      );
     });
   }
+
   
 }

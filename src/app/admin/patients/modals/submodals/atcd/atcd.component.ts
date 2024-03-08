@@ -53,11 +53,13 @@ export class AtcdComponent {
 
         this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
           (antecedants: any) => {
-            // Sauvegarde des valeurs précédentes dès la récupération
-            this.previousAtcdForm = { ...antecedants };
+            if(antecedants){
+              // Sauvegarde des valeurs précédentes dès la récupération
+              this.previousAtcdForm = { ...antecedants };
 
-            this.atcdForm = antecedants || {}; // Assurez-vous que antecedants n'est pas undefined
-            //this.sharedService.setterATCD(this.atcdForm);
+              this.atcdForm = antecedants || {}; // Assurez-vous que antecedants n'est pas undefined
+              //this.sharedService.setterATCD(this.atcdForm);
+            }
           },
           (err: any) => {
             if (err.status === undefined) {

@@ -5,7 +5,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <form name="files">
-                        <div class="row" *ngIf="fileForm.fileCategory">
+                        <div class="row" *ngIf="fileForm.fileCategory && fileForm.annotatedFile">
                             <div class="col">
                                 <div class="upload">
                                     <input type="file" id="fileInput" name="fileInput" (change)="onFileSelected('modal20',$event)">
@@ -15,34 +15,53 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row text-center" *ngIf="fileForm.fileCategory && fileForm.annotatedFile && uploaded">
+                            <div class="col">
+                                <h5>{{ progress }}%</h5>
+                                <progress max="100" [value]="progress" class="w-100"></progress>
+                            </div>
+                        </div>
+                        <div class="row text-center" *ngIf="message">
+                            <div class="col">
+                                <h4>{{message}}</h4>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
             <div class="row mb-1">
-                <div class="col">
-                    <div class="select-category">       
-                        <select class="form-control" name="fileCategory" [(ngModel)]="fileForm.fileCategory">
-                            <option value="" disabled selected hidden>Choisissez une catégorie</option>
-                            <option value="ECG">ECG</option>
-                            <option value="ETT">ETT</option>
-                            <option value="Radiographie">Radiographie</option>
-                            <option value="Tomodensitométrie (CT)">Tomodensitométrie (CT)</option>
-                            <option value="Imagerie par résonance magnétique (IRM)">Imagerie par résonance magnétique (IRM)</option>
-                            <option value="Échographie">Échographie</option>
-                            <option value="Mammographie">Mammographie</option>
-                            <option value="Endoscopie">Endoscopie</option>
-                            <option value="Scintigraphie">Scintigraphie</option>
-                            <option value="Angiographie">Angiographie</option>
-                            <option value="Électroencéphalogramme (EEG)">Électroencéphalogramme (EEG)</option>
-                            <option value="Ponction lombaire (PL)">Ponction lombaire (PL)</option>
-                            <option value="Tests de fonction pulmonaire">Tests de fonction pulmonaire</option>
-                            <option value="Bilans sanguins et d'urine">Bilans sanguins et d'urine</option>
-                            <option value="Rapports d'imagerie médicale avancée">Rapports d'imagerie médicale avancée</option>
-                            <option value="Cartes d'implants médicaux">Cartes d'implants médicaux</option>
-                            <option value="Rapports opératoires">Rapports opératoires</option>
-                        </select> 
-                    </div> 
+                <div class="col-md-2"></div>
+                <div class="col">      
+                    <select class="form-control" name="fileCategory" [(ngModel)]="fileForm.fileCategory">
+                        <option value="" disabled selected hidden>Choisissez une catégorie</option>
+                        <option value="ECG">ECG</option>
+                        <option value="ETT">ETT</option>
+                        <option value="Radiographie">Radiographie</option>
+                        <option value="Tomodensitométrie (CT)">Tomodensitométrie (CT)</option>
+                        <option value="Imagerie par résonance magnétique (IRM)">Imagerie par résonance magnétique (IRM)</option>
+                        <option value="Échographie">Échographie</option>
+                        <option value="Mammographie">Mammographie</option>
+                        <option value="Endoscopie">Endoscopie</option>
+                        <option value="Scintigraphie">Scintigraphie</option>
+                        <option value="Angiographie">Angiographie</option>
+                        <option value="Électroencéphalogramme (EEG)">Électroencéphalogramme (EEG)</option>
+                        <option value="Ponction lombaire (PL)">Ponction lombaire (PL)</option>
+                        <option value="Tests de fonction pulmonaire">Tests de fonction pulmonaire</option>
+                        <option value="Bilans sanguins et d'urine">Bilans sanguins et d'urine</option>
+                        <option value="Rapports d'imagerie médicale avancée">Rapports d'imagerie médicale avancée</option>
+                        <option value="Cartes d'implants médicaux">Cartes d'implants médicaux</option>
+                        <option value="Rapports opératoires">Rapports opératoires</option>
+                    </select> 
                 </div>
+                <div class="col">
+                    <select class="form-control" [(ngModel)]="fileForm.annotatedFile">
+                        <option value=""></option>
+                        <option>Annoté</option>
+                        <option>Brut</option>
+                    </select>
+                </div>
+                <div class="col-md-2"></div>
             </div>
         </div>
     </div>
@@ -71,6 +90,7 @@
                             <th>Fichier :</th>
                             <th>Taille :</th>
                             <th>Catégorie :</th>
+                            <th>Etat</th>
                             <th>Modifier</th>
                             <th>Télécharger</th>
                         </tr>
@@ -78,9 +98,10 @@
                     <tbody>
                         <tr *ngFor="let file of filteredfiles">
                             <td>{{file.createdAt | date: 'dd/MM/yyyy'}}</td>
-                            <td><a [href]="readFile(file.fileName)" target="_blank">{{file.fileName.length > 50 ? file.fileName.substr(0,50)+'..': file.fileName}}</a></td>
+                            <td><a [href]="readFile(file.fileName)" target="_blank">{{file.fileName.length > 40 ? file.fileName.substr(0,40)+'..': file.fileName}}</a></td>
                             <td>{{file.fileSizeFormatted}}</td>
                             <td>{{file.fileCategory}}</td>
+                            <td>{{file.annotatedFile}}</td>
                             <td><button (click)="openDialog(file._id)" style="width: 30px; height: 30px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); padding: 3px;" class="btn btn-primary rounded-circle"><i class="fa-regular fa-pen-to-square"></i></button></td>
                             <td><a style="cursor: pointer;" (click)="downloadFile(file.fileName)">télécharger&nbsp;&nbsp;<i style="color:rgb(121, 21, 21); font-size: 20px;" class="fa-solid fa-circle-down"></i></a></td>
                          </tr>
@@ -97,7 +118,7 @@
     <h5 class="mb-3">Modifier la catégorie</h5>
     <div class="row mb-3">
         <div class="col">
-            <select class="form-control" name="fileCategory" [(ngModel)]="fileForm.fileCategory">
+            <select class="form-control rounded-0" name="fileCategory" [(ngModel)]="fileForm.fileCategory">
                 <option value="" disabled selected hidden>Choisissez une catégorie</option>
                 <option value="ECG">ECG</option>
                 <option value="ETT">ETT</option>
@@ -119,6 +140,15 @@
             </select> 
         </div>
     </div>
+    <div class="row mb-3">
+        <div class="col">
+            <select class="form-control rounded-0" [(ngModel)]="fileForm.annotatedFile">
+                <option value=""></option>
+                <option>Annoté</option>
+                <option>Brut</option>
+            </select>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <button class="btn btn-primary rounded-0" (click)="updateFileCategory()">Modifier</button>
@@ -129,3 +159,5 @@
     </div>
     </div>
 </div>
+
+<!-- <app-progress-bar [progress]="progress"></app-progress-bar> -->

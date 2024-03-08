@@ -59,10 +59,11 @@ export class BabiesComponent {
 
             this.evolutionService.getEvolutionByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (babies: any) => {
-    
-                this.babiesForm = {...babies};
-                console.log(this.babiesForm)
-                this.sharedService.setterBabies(this.babiesForm);
+                if(babies){
+                  this.babiesForm = {...babies};
+                  console.log(this.babiesForm)
+                  this.sharedService.setterBabies(this.babiesForm);
+                }
                 
               },
               (err: any) => {

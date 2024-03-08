@@ -30,7 +30,7 @@
         <tbody>
             <tr *ngFor="let file of filteredfiles">
                 <td>{{file.createdAt | date: 'dd/MM/yyyy'}}</td>
-                <td><a [href]="readFile(file.fileName)" target="_blank">{{file.fileName.length > 50 ? file.fileName.substr(0,50)+'..': file.fileName}}</a></td>
+                <td><a [href]="readFile(file.fileName)" target="_blank">{{file.fileName.length > 40 ? file.fileName.substr(0,40)+'..': file.fileName}}</a></td>
                 <td>{{file.fileSizeFormatted}}</td>
                 <td>{{file.fileCategory}}</td>
                 <td><button (click)="openDialog(file._id)" style="width: 30px; height: 30px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); padding: 3px;" class="btn btn-primary rounded-circle"><i class="fa-regular fa-pen-to-square"></i></button></td>

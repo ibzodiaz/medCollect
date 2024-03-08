@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Patients } from 'src/app/_interfaces/patients';
 import { PatientsService } from 'src/app/_services/patients.service';
 
@@ -41,9 +42,11 @@ export class SociodemoComponent {
 
         this.patientsService.getPatientById(this.patientId).subscribe(
           (patient: any) => {
-            this.patient = patient;
-            this.isLoading = false;
-            this.initializeFormWithPatientData();
+            if(patient){
+              this.patient = patient;
+              this.isLoading = false;
+              this.initializeFormWithPatientData();
+            }
           },
           (err:any) => console.error(err)
         );
@@ -54,7 +57,9 @@ export class SociodemoComponent {
   }
 
   initializeFormWithPatientData() {
-    this.patientForm = { ...this.patient };
+    if(this.patient){
+      this.patientForm = { ...this.patient };
+    }
   }
 
  
@@ -62,11 +67,12 @@ export class SociodemoComponent {
     
     this.patientsService.updatePatients(this.patientId,this.patientForm).subscribe(
       (patients: any) => {
-        
-        this.updated = true;
-        this.emittedEvent.emit(this.updated);
-        this.closeModal(modalId, e);
-        this.isLoading = false;
+        if(patients){
+          this.updated = true;
+          this.emittedEvent.emit(this.updated);
+          this.closeModal(modalId, e);
+          this.isLoading = false;
+        }
       },
       (err:any) => console.error(err)
     );
@@ -88,4 +94,12 @@ export class SociodemoComponent {
     }
   }
 
+  dataSubscription: Subscription | undefined;
+  
+  ngOnDestroy(): void {
+    // Arrêter l'abonnement aux données lorsque le composant est détruit
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
+    }
+  }
 }

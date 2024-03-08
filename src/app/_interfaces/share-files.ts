@@ -3,5 +3,6 @@ export interface ShareFiles {
     filePath: string,
     fileSize: string,
     fileType: string,
-    fileCategory:string
+    fileCategory:string,
+    annotatedFile:string
 }

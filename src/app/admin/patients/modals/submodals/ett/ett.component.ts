@@ -56,10 +56,10 @@ export class EttComponent {
 
             this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (ett: any) => {
-
-                this.ettForm = {...ett.ett};
-                this.sharedService.setterEtt(this.ettForm);
-                
+                if(ett){
+                  this.ettForm = {...ett.ett};
+                  this.sharedService.setterEtt(this.ettForm);
+                }
               },
               (err: any) => {
                 if (err.status === undefined) {

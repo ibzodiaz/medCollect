@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ShareFilesService {
+
   private url = `${environment.apiURL}/partage`
 
   constructor(private http: HttpClient) { }
@@ -21,10 +22,13 @@ export class ShareFilesService {
     formData.append('fileType', file.type);
     formData.append('filePath', 'data/'+fileName);
     formData.append('fileCategory', shareFiles.fileCategory);
-
+    formData.append('annotatedFile', shareFiles.annotatedFile);
 
     //alert(JSON.stringify(data))
-    return this.http.post<ShareFiles>(this.url,formData).pipe(catchError(this.errorHandler));
+    return this.http.post<ShareFiles>(this.url,formData, {
+      reportProgress: true,
+      observe: 'events',
+    }).pipe(catchError(this.errorHandler));
   }
 
   updateFile(id:string,file:File): Observable<ShareFiles>{

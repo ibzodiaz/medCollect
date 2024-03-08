@@ -34,12 +34,6 @@ label i{
     animation: moveDown 1s ease-in-out infinite alternate;
 }
 
-.select-category{
-    width: 50%;
-    position: relative;
-    margin: 0 auto;
-}
-
 .card-share{
     border: 1px solid rgba(0, 0, 0, 0.5);
     background-color: rgba(146, 146, 146, 0.5);

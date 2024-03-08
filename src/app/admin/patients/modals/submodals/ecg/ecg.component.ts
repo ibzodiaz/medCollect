@@ -47,9 +47,11 @@ export class EcgComponent {
 
             this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (ecg: any) => {
-                this.ecgForm = {...ecg.ecg};
-                this.sharedService.setterEcg(this.ecgForm);
-                // alert(JSON.stringify(ecg.ecg))
+                if(ecg){
+                  this.ecgForm = {...ecg.ecg};
+                  this.sharedService.setterEcg(this.ecgForm);
+                  // alert(JSON.stringify(ecg.ecg))
+                }
                 
               },
               (err: any) => {

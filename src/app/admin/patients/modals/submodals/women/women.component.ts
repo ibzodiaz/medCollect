@@ -91,10 +91,11 @@ export class WomenComponent {
 
             this.evolutionService.getEvolutionByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (women: any) => {
-
-                this.womenForm = {...women};
-                console.log(this.womenForm)
-                this.sharedService.setterWomen(this.womenForm);
+                if(women){
+                  this.womenForm = {...women};
+                  console.log(this.womenForm)
+                  this.sharedService.setterWomen(this.womenForm);
+                }
                 
               },
               (err: any) => {

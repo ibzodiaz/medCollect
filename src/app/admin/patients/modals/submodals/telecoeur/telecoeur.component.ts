@@ -46,10 +46,11 @@ export class TelecoeurComponent {
 
             this.paracliniquesService.getParaClinicSignsByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (telecoeur: any) => {
-
-                //console.log(telecoeur.telecoeur);
-                this.telecoeurForm = {...telecoeur.telecoeur};
-                this.sharedService.setterTelecoeur(this.telecoeurForm);
+                if(telecoeur){
+                  //console.log(telecoeur.telecoeur);
+                  this.telecoeurForm = {...telecoeur.telecoeur};
+                  this.sharedService.setterTelecoeur(this.telecoeurForm);
+                }
                 
               },
               (err: any) => {

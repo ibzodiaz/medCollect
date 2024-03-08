@@ -1,3 +1,4 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Uploadfiles } from 'src/app/_interfaces/uploadfiles';
@@ -42,20 +43,36 @@ export class UploadfilesComponent {
     }
   }
 
-  onFileSelected(modalId: string,event: any) {
+  progress:number = 0;
+  message:string = '';
+  uploaded:boolean = false;
 
-    const file: File = event.target.files[0];
+  onFileSelected(modalId: string,e: any) {
+
+    const file: File = e.target.files[0];
+    this.progress = 0;
+    this.message = '';
+    this.uploaded = true;
 
     this.uploadfilesService.addFile(file,this.fileForm).subscribe(
-      response => {
-        //console.log('File uploaded successfully:', response);
-        //alert('File uploaded successfully:');
-        this.inserted = true;
-        this.emittedEvent.emit(this.inserted);
-        
-        this.closeModal(modalId,event);
+      (event:any) => {
+
+        if(event){
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round(100 * event.loaded / event.total);
+          } else if (event.type === HttpEventType.Response) {
+            // Le fichier a été téléchargé avec succès
+      
+            this.inserted = true;
+            this.emittedEvent.emit(this.inserted);
+            this.uploaded = false;
+            this.closeModal(modalId,e);
+         
+          }
+        }
+ 
       },
-      error => {
+      (error:any) => {
         console.error('Error uploading file:', error);
         //alert('Error uploading file:')
       }

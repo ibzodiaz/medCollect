@@ -58,9 +58,11 @@
     </div>
     <div class="col-md-3">
         <div class="back-secondary">
-            <div *ngIf="user?.status !== 'A'" class="row mt-3">
+            <div  class="row mt-3">
                 <div class="col">
-                    <button class="btn btn-danger w-100 rounded-0" (click)="getCurrentAccountMeeting()"><i class="fa-regular fa-handshake"></i>&nbsp;Mes rendez-vous</button> 
+                    <button [disabled]="(user?.status === 'A')" class="btn btn-danger w-100 rounded-0" (click)="getCurrentAccountMeeting()">
+                        <i class="fa-regular fa-handshake"></i>&nbsp;Mes rendez-vous
+                    </button>
                 </div>
             </div>
             <div class="row mt-3">
@@ -99,7 +101,7 @@
                                         </td>
                                         <td class="input-w">
                                             <select id="user" class="w-100" [(ngModel)]="meetingForm.userId" name="user">
-                                                <option [ngValue]="userId" [selected]="true">{{prenomDoctor}} {{nomDoctor}}</option>
+                                                <option [ngValue]="meetingForm.userId" [selected]="true">{{prenomDoctor}} {{nomDoctor}}</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -110,7 +112,7 @@
                                         </td>
                                         <td class="input-w">
                                             <select id="patient" class="w-100" [(ngModel)]="meetingForm.patientId" name="patient">
-                                                <option [ngValue]="patientId" [selected]="true">{{prenomPatient}} {{nomPatient}}</option>
+                                                <option [ngValue]="meetingForm.patientId" [selected]="true">{{prenomPatient}} {{nomPatient}}</option>
                                             </select>  
                                         </td>
                                     </tr>

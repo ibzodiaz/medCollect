@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Paracliniques } from 'src/app/_interfaces/paracliniques';
 import { ParacliniquesService } from 'src/app/_services/paracliniques.service';
 import { SharedService } from 'src/app/_services/shared.service';
@@ -226,6 +227,15 @@ export class ParacliniquesComponent {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";
+    }
+  }
+
+  dataSubscription: Subscription | undefined;
+  
+  ngOnDestroy(): void {
+    // Arrêter l'abonnement aux données lorsque le composant est détruit
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
     }
   }
 

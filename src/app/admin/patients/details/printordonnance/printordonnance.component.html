@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col-md-3">
-                    <p>Dr. {{hospital.prenom}} {{hospital.nom}}</p>
+                    <p>Dr. {{hospital?.prenom}} {{hospital?.nom}}</p>
                 </div>
             </div>
             <hr>
@@ -18,12 +18,12 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col">
-                            <strong>Hôpital : </strong>  {{hospital.hopitalId.Nom}}
+                            <strong>Hôpital : </strong>  {{hospital?.hopitalId?.Nom}}
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
-                            <strong>Lieu : </strong> {{hospital.hopitalId.Lieu}}
+                            <strong>Lieu : </strong> {{hospital?.hopitalId?.Lieu}}
                         </div>
                     </div>
                 </div>

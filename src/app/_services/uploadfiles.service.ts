@@ -28,7 +28,10 @@ export class UploadfilesService {
 
 
     //alert(JSON.stringify(data))
-    return this.http.post<Uploadfiles>(this.url,formData).pipe(catchError(this.errorHandler));
+    return this.http.post<Uploadfiles>(this.url,formData,{
+      reportProgress: true,
+      observe: 'events',
+    }).pipe(catchError(this.errorHandler));
   }
 
   updateFile(id:string,file:File): Observable<Uploadfiles>{

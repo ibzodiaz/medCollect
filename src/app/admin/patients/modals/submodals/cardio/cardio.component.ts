@@ -55,9 +55,10 @@ export class CardioComponent {
 
             this.cliniquesService.getClinicSignsByPatientId(this.patientId,this.consultationId).subscribe(
               (cardio: any) => {
-
-                this.cardioForm = cardio;
-                this.sharedService.setterCardio(this.cardioForm);
+                if(cardio){
+                  this.cardioForm = cardio;
+                  this.sharedService.setterCardio(this.cardioForm);
+                }
                 
               },
               (err: any) => {

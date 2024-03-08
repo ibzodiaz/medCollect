@@ -48,7 +48,7 @@ export class DecesComponent {
 
             this.evolutionService.getEvolutionByPatientId(this.PatientAntecedantId,this.consultationId).subscribe(
               (deces: any) => {
-                if(deces.mere.detailsDeces.presente){
+                if(deces && deces.mere.detailsDeces.presente){
                   this.decesForm = {...deces.mere};
                   this.sharedService.setterDeces(this.decesForm);
                 }

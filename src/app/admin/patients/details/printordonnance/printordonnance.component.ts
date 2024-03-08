@@ -42,9 +42,11 @@ export class PrintordonnanceComponent {
     let userId = this.tokenService.getUserIdFromToken();
     this.userService.getUserById(userId).subscribe(
       (user:any)=>{
-        //alert(JSON.stringify(user.data))
-        this.hospital = user.data;
-        //console.log(this.hospital)
+        if(user){
+          //alert(JSON.stringify(user.data))
+          this.hospital = user.data;
+          //console.log(this.hospital)
+        }
       },
       (err:any)=>console.log(err.message)
     );
@@ -93,11 +95,14 @@ export class PrintordonnanceComponent {
 
         this.prescriptionService.getPrescriptionByPatient(patientId,consultationId).subscribe(
           (prescription:any)=>{
-            this.prescriptionList = prescription;
-            //console.log(prescription)
-            this.patientNom = prescription[0].patientId.nom;
-            this.patientPrenom = prescription[0].patientId.prenom;
-            this.patientAge = prescription[0].patientId.age;
+            if(prescription){
+              this.prescriptionList = prescription;
+              //console.log(prescription)
+              this.patientNom = prescription[0]?.patientId?.nom;
+              this.patientPrenom = prescription[0]?.patientId?.prenom;
+              this.patientAge = prescription[0]?.patientId?.age;
+            }
+
           },
           (err:any)=>console.log(err.message)
         ); 

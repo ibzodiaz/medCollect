@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AntecedantsService } from 'src/app/_services/antecedants.service';
 import { SharedService } from 'src/app/_services/shared.service';
 import { FunctionsService } from 'src/app/_services/functions.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-antecedents',
@@ -80,8 +81,10 @@ export class AntecedentsComponent {
 
             this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
                 (antecedants: any) => {
-                    this.antecedantForm = antecedants;
-                    this.patientExists = true;
+                    if(antecedants){
+                      this.antecedantForm = antecedants;
+                      this.patientExists = true;
+                    }
                 },
                 (err: any) => {
                     if (err.status === undefined) {
@@ -186,6 +189,15 @@ export class AntecedentsComponent {
     if (modal) {
       modal.style.display = "none";
       this.router.navigate([], { queryParams: { patientId: null ,consultationId: null} });
+    }
+  }
+
+  dataSubscription: Subscription | undefined;
+  
+  ngOnDestroy(): void {
+    // Arrêter l'abonnement aux données lorsque le composant est détruit
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
     }
   }
 

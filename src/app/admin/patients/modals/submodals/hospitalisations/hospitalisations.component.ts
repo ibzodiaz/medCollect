@@ -52,9 +52,10 @@ export class HospitalisationsComponent {
 
             this.antecedantsService.getAntecedantByPatientId(patientId).subscribe(
               (antecedants: any) => {
-  
-                this.hospitalisationForm = {...antecedants};
-                this.sharedService.setterHospitalisation(this.hospitalisationForm);
+                if(antecedants){
+                  this.hospitalisationForm = {...antecedants};
+                  this.sharedService.setterHospitalisation(this.hospitalisationForm);
+                }
               },
               (err: any) => {
                 if (err.status === undefined) {
