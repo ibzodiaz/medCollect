@@ -40,6 +40,10 @@ export class ShareFilesService {
     return this.http.get<ShareFiles>(this.url).pipe(catchError(this.errorHandler));
   }
 
+  getFileById(id:string | null):Observable<ShareFiles>{
+    return this.http.get<ShareFiles>(this.url+'/'+id).pipe(catchError(this.errorHandler));
+  }
+
   deleteFileById(id:string):Observable<ShareFiles>{
     return this.http.delete<ShareFiles>(this.url+'/'+id).pipe(catchError(this.errorHandler));
   }

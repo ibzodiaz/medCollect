@@ -2,6 +2,7 @@ import { HttpEventType } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Uploadfiles } from 'src/app/_interfaces/uploadfiles';
+import { FileCategoriesService } from 'src/app/_services/file-categories.service';
 import { TokenService } from 'src/app/_services/token.service';
 import { UploadfilesService } from 'src/app/_services/uploadfiles.service';
 
@@ -22,17 +23,31 @@ export class UploadfilesComponent {
     fileCategory:''
   }
 
+  categories:any= [];
+
   @Output() emittedEvent =  new EventEmitter<boolean>();
   inserted:boolean = false;
 
   constructor(
     private uploadfilesService:UploadfilesService,
     private route:ActivatedRoute,
-    private tokenService:TokenService
+    private tokenService:TokenService,
+    private FilecategoriesService:FileCategoriesService
   ){}
 
   ngOnInit():void{
     this.fileForm;
+    this.getCategoriesFile();
+  }
+
+  
+  getCategoriesFile(){
+    this.FilecategoriesService.getAllfileCategories().subscribe(
+      (categories:any)=>{
+        this.categories = categories;
+      },
+      (err:any)=> console.log(err.message)
+    );
   }
 
   closeModal(modalId: string,e:Event): void {

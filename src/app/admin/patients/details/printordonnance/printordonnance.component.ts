@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { HopitalService } from 'src/app/_services/hopital.service';
 import { PrescriptionService } from 'src/app/_services/prescription-service.service';
 import { TokenService } from 'src/app/_services/token.service';
 import { UserService } from 'src/app/_services/user.service';
+import { environment } from 'src/environments/environment';
 
 declare var html2pdf: any;
 
@@ -27,11 +29,14 @@ export class PrintordonnanceComponent {
     private prescriptionService:PrescriptionService,
     private route:ActivatedRoute,
     private userService:UserService,
-    private tokenService:TokenService
+    private tokenService:TokenService,
+    private hopitalService:HopitalService
   ){}
 
   dateActuelle:any;
   hospital:any;
+
+  url:string = `${environment.apiURLDownload}`;
 
   ngOnInit():void{
 
@@ -71,7 +76,7 @@ export class PrintordonnanceComponent {
         margin: 5,
         filename: 'ordonnance.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 4 },
+        html2canvas: { scale: 4,useCORS: true },
         jsPDF: {
             unit: 'mm',
             format: 'a5',
@@ -82,7 +87,7 @@ export class PrintordonnanceComponent {
 
     // Appelez html2canvas après avoir ajusté la hauteur de l'élément
     html2pdf(element, options); 
-}
+  }
 
   
   prescriptionTable(){

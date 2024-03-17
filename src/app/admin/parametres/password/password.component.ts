@@ -20,27 +20,57 @@ export class PasswordComponent {
     newPassword2:""
   }
 
+  showPassword(eye:string,eye_slash:string, password:string){
+    const eye_var = document.getElementById(eye) as HTMLElement;
+    const eye_slash_var = document.getElementById(eye_slash) as HTMLElement;
+    const password_var = document.getElementById(password) as HTMLInputElement;
+    if(eye_slash){
+      password_var.type = 'text';
+      eye_slash_var.style.display = 'block';
+      eye_var.style.display = 'none';
+    }
+  }
+
+  hidePassword(eye:string,eye_slash:string, password:string){
+    const eye_var = document.getElementById(eye) as HTMLElement;
+    const eye_slash_var = document.getElementById(eye_slash) as HTMLElement;
+    const password_var = document.getElementById(password) as HTMLInputElement;
+    if(eye_slash){
+      password_var.type = 'password';
+      eye_slash_var.style.display = 'none';
+      eye_var.style.display = 'block';
+    }
+  }
+
   onSubmit(){
     const userId = this.tokenService.getUserIdFromToken();
 
-    if(this.passwordForm.newPassword1 === this.passwordForm.newPassword2){
-      this.userService.updatePassword(userId,this.passwordForm).subscribe(
-        (response:any)=>{
-          alert(JSON.stringify(response));
-          this.passwordForm.oldPassword = "";
-          this.passwordForm.newPassword1 = "";
-          this.passwordForm.newPassword2 = "";
-        },
-        (err:any)=>{
-          console.log(err.message)
-          alert(err.message)
-        }
-      )
-    }
-    else
-    {
-      alert("unmatch passwords!");
-    }
 
+    this.userService.updatePassword(userId,this.passwordForm).subscribe(
+      (response:any)=>{
+
+        this.isDialogOpen = true;
+        this.messageContent = response.message;
+
+        this.passwordForm.oldPassword = "";
+        this.passwordForm.newPassword1 = "";
+        this.passwordForm.newPassword2 = "";
+      },
+      (err:any)=>{
+        this.messageContent = err;
+      }
+    )
+
+
+  }
+
+  
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
+
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
   }
 }

@@ -1,0 +1,160 @@
+<!-- Modal Content -->
+<div id="modal52" class="modal">
+    <div class="modal-content text-center">
+        <h6 class="mb-5">Nouvel Utilisateur</h6>
+        <form (ngSubmit)="onSubmit($event)">
+            <div class="row mb-5">
+                <div class="col">
+                    <label>PRENOM</label>
+                    <input type="text" placeholder="Prénom" name="prenom" [(ngModel)]="usersForm.prenom" class="form-control rounded-0" required>
+                </div>
+                <div class="col">
+                    <label>NOM</label>
+                    <input type="text" placeholder="Nom" name="nom" [(ngModel)]="usersForm.nom" class="form-control rounded-0" required>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col">
+                    <label>PSEUDO</label>
+                    <input type="text" placeholder="Pseudo" name="pseudo" [(ngModel)]="usersForm.pseudo" class="form-control rounded-0" required>
+                </div>
+                <div class="col">
+                    <label>EMAIL</label>
+                    <input type="email" placeholder="Email" name="email" [(ngModel)]="usersForm.email" class="form-control rounded-0" required>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col">
+                    <label>MOT DE PASSE</label>
+                    <div class="showState">
+                        <i (click)="showPassword('fa-eye-1','fa-eye-slash-1','password')" id="fa-eye-1" class="fa-regular fa-eye"></i> 
+                        <i (click)="hidePassword('fa-eye-1','fa-eye-slash-1','password')" id="fa-eye-slash-1" class="fa-regular fa-eye-slash"></i>
+                    </div>
+                    <input type="password" id="password" placeholder="Mot de passe" name="password" [(ngModel)]="usersForm.password" class="form-control rounded-0" required>
+                </div>
+                <div class="col">
+                    <label>STATUT</label>
+                    <select name="statut" class="form-control rounded-0 mt-statut" [(ngModel)]="usersForm.status" (change)="checkSelect()" required>
+                        <option value="A">Assistant</option>
+                        <option value="D">Docteur</option>
+                    </select>             
+                </div>
+            </div>
+
+            
+            <div *ngIf="usersForm.status != 'A'" class="row mb-5">
+                <div class="col">
+                    <label>SERVICE</label>
+                    <select name="service" class="form-control rounded-0" [(ngModel)]="usersForm.service">
+                        <option></option>
+                        <option>Cardiologie</option>
+                        <option>Neurologie</option>
+                        <option>Pneumologie</option>
+                        <option>Dermatologie</option>
+                        <option>Gastro-entérologie</option>
+                        <option>Endocrinologie</option>
+                        <option>Pédiatrie</option>
+                        <option>Gynécologie</option>
+                        <option>Ophtalmologie</option>
+                        <option>Oto-rhino-laryngologie (ORL)</option>
+                        <option>Urologie</option>
+                        <option>Chirurgie générale</option>
+                        <option>Chirurgie orthopédique</option>
+                        <option>Chirurgie plastique</option>
+                        <option>Chirurgie vasculaire</option>
+                        <option>Anesthésiologie</option>
+                        <option>Radiologie</option>
+                        <option>Oncologie</option>
+                        <option>Néphrologie</option>
+                        <option>Hématologie</option>
+                        <option>Rhumatologie</option>
+                        <option>Allergologie</option>
+                        <option>Médecine interne</option>
+                        <option>Médecine du travail</option>
+                        <option>Médecine du sport</option>
+                        <option>Médecine d'urgence</option>
+                        <option>Médecine physique et réadaptation</option>
+                        <option>Psychiatrie</option>
+                        <option>Psychologie clinique</option>
+                    </select>                
+                </div>
+                <div class="col">
+                    <label>SPECIALITE</label>
+                    <select name="speciality" class="form-control rounded-0" [(ngModel)]="usersForm.speciality">
+                        <option></option>
+                        <option>Allergologie</option>
+                        <option>Anatomie pathologique</option>
+                        <option>Anesthésie-réanimation</option>
+                        <option>Biologie médicale</option>
+                        <option>Cardiologie et maladies vasculaires</option>
+                        <option>Chirurgie cardiaque</option>
+                        <option>Chirurgie générale</option>
+                        <option>Chirurgie maxillo-faciale et stomatologie</option>
+                        <option>Chirurgie orthopédique et traumatologie</option>
+                        <option>Chirurgie infantile</option>
+                        <option>Chirurgie plastique, reconstructrice et esthétique</option>
+                        <option>Chirurgie thoracique et cardio-vasculaire</option>
+                        <option>Chirurgie urologique</option>
+                        <option>Chirurgie vasculaire</option>
+                        <option>Chirurgie viscérale et digestive</option>
+                        <option>Dermatologie et vénérologie</option>
+                        <option>Endocrinologie et métabolisme</option>
+                        <option>Gastro-entérologie et hépatologie</option>
+                        <option>Génétique médicale</option>
+                        <option>Gériatrie</option>
+                        <option>Gynécologie médicale</option>
+                        <option>Gynécologie obstétrique</option>
+                        <option>Hématologie</option>
+                        <option>Gynécologie obstétrique</option>
+                        <option>Hématologie</option>
+                        <option>Immunologie</option>
+                        <option>Médecine générale</option>
+                        <option>Médecine du travail</option>
+                        <option>Médecine interne</option>
+                        <option>Médecine légale</option>
+                        <option>Médecine nucléaire</option>
+                        <option>Médecine physique et réadaptation</option>
+                        <option>Médecine et santé au travail</option>
+                        <option>Médecine d'urgence</option>
+                        <option>Néphrologie</option>
+                        <option>Neurochirurgie</option>
+                        <option>Neurologie</option>
+                        <option>Oncologie médicale</option>
+                        <option>Oncologie radiothérapique</option>
+                        <option>Ophtalmologie</option>
+                        <option>Oto-rhino-laryngologie</option>
+                        <option>Pédiatrie</option>
+                        <option>Pneumologie</option>
+                        <option>Psychiatrie</option>
+                        <option>Psychiatrie de l'enfant et de l'adolescent</option>
+                        <option>Radiothérapie</option>
+                        <option>Rhumatologie</option>
+                        <option>Réanimation médicale</option>
+                        <option>Réanimation chirurgicale</option>
+                        <option>Recherche médicale</option>
+                        <option>Radiologie et imagerie médicale</option>
+                        <option>Stomatologie</option>
+                        <option>Urologie</option>
+                    </select>   
+                </div>
+            </div>
+
+            <div class="row mt-3 text-center">
+
+                <div class="col-md-6">
+                
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0 w-100" type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                </div> 
+                <div class="col">
+                    <button class="btn btn-secondary rounded-0  w-100" (click)="closeModal('modal52',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Annuler</button>
+                </div> 
+
+            </div>
+        </form>
+  
+    </div>
+</div>

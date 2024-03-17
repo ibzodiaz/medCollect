@@ -1,4 +1,5 @@
 export interface Hopital {
-    nom:string,
-    lieu:string
+    Nom:string,
+    Lieu:string,
+    Logo:File | null;
 }

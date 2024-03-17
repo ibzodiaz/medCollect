@@ -39,6 +39,28 @@ export class LoginComponent {
 
   }
 
+  showPassword(eye:string,eye_slash:string, password:string){
+    const eye_var = document.getElementById(eye) as HTMLElement;
+    const eye_slash_var = document.getElementById(eye_slash) as HTMLElement;
+    const password_var = document.getElementById(password) as HTMLInputElement;
+    if(eye_slash){
+      password_var.type = 'text';
+      eye_slash_var.style.display = 'block';
+      eye_var.style.display = 'none';
+    }
+  }
+
+  hidePassword(eye:string,eye_slash:string, password:string){
+    const eye_var = document.getElementById(eye) as HTMLElement;
+    const eye_slash_var = document.getElementById(eye_slash) as HTMLElement;
+    const password_var = document.getElementById(password) as HTMLInputElement;
+    if(eye_slash){
+      password_var.type = 'password';
+      eye_slash_var.style.display = 'none';
+      eye_var.style.display = 'block';
+    }
+  }
+
   onSubmit(){
     this.authService.login(this.form).subscribe(
       data => {

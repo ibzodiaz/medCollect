@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col">
+        <div class="row mb-3">
+            <div class="col">
+                <button class="btn btn-primary rounded-0" (click)="openModal('modal51')"><i class="fa-solid fa-circle-plus"></i>&nbsp;Hôpital</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading ; else content">
+    <!-- Afficher le loader ici -->
+    <div class="loader"></div>
+</div>
+<ng-template #content>
+    <div class="table-wrapper">
+        <table class="fl-table">
+        <thead>
+            <tr>
+                <th class="text-center">Logo des hôpitaux :</th>
+                <th class="text-center">Nom des hôpitaux :</th>
+                <th class="text-center">Lieu des hôpitaux :</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr height="70" class="text-center" *ngFor="let hospital of hospitals" [routerLink]="'../users/' + hospital._id">
+                <td><img *ngIf="hospital.logoPath" [src]="url + '/' + hospital.logoPath" width="70" height="70" class="rounded-circle"></td>
+                <td>{{hospital.Nom}}</td>
+                <td>{{hospital.Lieu}}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</ng-template>
+
+<app-hospital-operations (emittedEvent)="hospitalsUpdated($event)"></app-hospital-operations>
+

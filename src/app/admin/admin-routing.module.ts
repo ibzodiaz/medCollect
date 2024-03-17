@@ -27,7 +27,7 @@ const routes: Routes = [
       {path:'aide', component:HelpComponent},
       {
         path:'user', loadChildren: ()=> import('./user/user.module')
-                                        .then(m => m.UserModule)
+                                        .then(m => m.UserModule),canActivate:[authAssistant]
       },
       {
         path:'patients', loadChildren: ()=> import('./patients/patients.module')

@@ -31,7 +31,11 @@
 			</div>
 		</div>
 		<div class="floating-label">
-			<input placeholder="Mot de passe.." [(ngModel)]="form.password" #password="ngModel" required minlength="5" type="password" name="password" id="password" autocomplete="off">
+			<div class="showState">
+				<i (click)="showPassword('fa-eye-6','fa-eye-slash-6','password6')" id="fa-eye-6" class='bx bx-bullseye'></i> 
+				<i (click)="hidePassword('fa-eye-6','fa-eye-slash-6','password6')" id="fa-eye-slash-6" class='bx bx-low-vision'></i>
+			</div>
+			<input placeholder="Mot de passe.." [(ngModel)]="form.password" #password="ngModel" required minlength="5" type="password" name="password" id="password6" autocomplete="off">
 			<div class="form_error" *ngIf="password.errors && f.submitted">
 			<div *ngIf="password.errors['required']"><small>Le mot de passe est requis!</small></div>
 			<div *ngIf="password.errors['minlength']"><small>Le mot de passe doit avoir au moins 5 caractères!</small></div>
@@ -51,6 +55,7 @@
 			</div>
 		</div>
 		<button type="submit" (click)="onSubmit()">Se connecter</button>
+		<!-- <a [routerLink]="['../superuser/login']" class="discrete">Admin</a> -->
 		<a [routerLink]="['../../home']" class="discrete">Retour</a>
 		</form>
 	</div>

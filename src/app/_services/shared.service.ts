@@ -20,6 +20,7 @@ export class SharedService {
   babies:any;
 
   assistant:any;
+  userId:any;
 
   setterATCD(atcd:any){
     this.atcd = atcd;
@@ -116,5 +117,13 @@ export class SharedService {
 
   getterAssistant():any{
     return this.assistant;
+  }
+
+  setterUserId(userId:any){
+    this.userId = userId;
+  }
+
+  getterUserId():any{
+    return this.userId;
   }
 }

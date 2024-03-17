@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Users } from 'src/app/_interfaces/users';
 import { TokenService } from 'src/app/_services/token.service';
 import { UserService } from 'src/app/_services/user.service';
 
@@ -19,7 +18,8 @@ export class UpdateComponent {
     email: '',
     pseudo: '',
     service: '',
-    speciality: ''
+    speciality: '',
+    status:'A'
   }
 
   constructor(
@@ -49,7 +49,8 @@ export class UpdateComponent {
       email: this.doctor.email,
       pseudo: this.doctor.pseudo,
       service: this.doctor.service,
-      speciality: this.doctor.speciality
+      speciality: this.doctor.speciality,
+      status: this.doctor.status
     }
   }
 
@@ -58,10 +59,21 @@ export class UpdateComponent {
 
     this.userService.updateUser(this.doctorId,this.doctorForm).subscribe(
       (response:any)=>{
-        alert("Modifié");
+        this.isDialogOpen = true;
+        this.messageTitle = "Modifié";
         this.getDoctorInfos();
       },
       (err:any)=>console.log(err.message)
     );
+  }
+
+    
+  isDialogOpen: boolean = false;
+  messageTitle: string = '';
+  messageContent: string = '';
+
+
+  closeMessageDialog(): void {
+    this.isDialogOpen = false;
   }
 }

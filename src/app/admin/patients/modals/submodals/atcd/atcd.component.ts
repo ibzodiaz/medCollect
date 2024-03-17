@@ -58,7 +58,7 @@ export class AtcdComponent {
               this.previousAtcdForm = { ...antecedants };
 
               this.atcdForm = antecedants || {}; // Assurez-vous que antecedants n'est pas undefined
-              //this.sharedService.setterATCD(this.atcdForm);
+        
             }
           },
           (err: any) => {

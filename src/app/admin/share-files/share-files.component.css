@@ -4,7 +4,7 @@
     background-color: #007BFF;
     border-radius: 10px;
     width: 100%;
-    height: 100px;
+    height: 120px;
     display: flex; 
     justify-content: center; 
     align-items: center;
@@ -15,18 +15,13 @@
 }
 
 label{
-    position: absolute; 
-    top: 0; 
-    left: 0;
+    display: flex; /* Utilisez flex pour aligner l'icône au centre */
+    justify-content: center; /* Alignement horizontal au centre */
+    align-items: center; /* Alignement vertical au centre */
+    width: 100%; /* Pour occuper toute la largeur */
+    height: 100%; /* Pour occuper toute la hauteur */
+    cursor: pointer; /* Ajoutez un curseur de type pointer */
 }
-
-label i{
-    cursor: pointer;
-    display: block;
-    width: 499px;
-    height: 75px;
-}
-
 
 .fa-cloud-arrow-up{
     font-size: 70px;
@@ -35,10 +30,11 @@ label i{
 }
 
 .card-share{
-    border: 1px solid rgba(0, 0, 0, 0.5);
     background-color: rgba(146, 146, 146, 0.5);
     border-radius: 0px;
     padding: 20px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
   
@@ -52,7 +48,7 @@ label i{
       transform: translateY(0); /* Déplacement initial, ici l'icône est à sa position d'origine */
     }
     100% {
-      transform: translateY(20px); /* Déplacement final, ici l'icône est déplacée vers le bas de 20 pixels */
+      transform: translateY(10px); /* Déplacement final, ici l'icône est déplacée vers le bas de 20 pixels */
     }
 }  
 
@@ -118,7 +114,6 @@ textarea {
     border: none;
     border-bottom: 1px solid #838181;
     outline: none;
-    transition: border-bottom-width 0.5s ease-in-out, transform 0.5s ease-in-out;
     transform-origin: 50% 100%;
 }
 
@@ -133,12 +128,6 @@ textarea {
         transform: scaleX(1);
         border-bottom: 1.3px solid #007BFF;
     }
-}
-
-/* Applique l'animation uniquement lorsqu'on focus sur l'input */
-input:focus,
-textarea:focus {
-    animation: inputAnimation 0.5s forwards; /* forwards pour conserver l'état final de l'animation */
 }
 
 
@@ -177,6 +166,12 @@ button[type="submit"]:hover {
     height: 50px;
     animation: spin 1s linear infinite;
     margin: 20px auto;
+}
+
+
+.disabled {
+    pointer-events: none; /* Désactiver les événements de souris */
+    opacity: 0.5; /* Optionnel : ajoute une opacité pour indiquer que le contenu est désactivé */
 }
 
 @keyframes spin {

@@ -123,17 +123,17 @@
                             <th scope="col" id="table-title"><strong>Mes rendez-vous</strong></th>
                         </tr>
                         <tr>
+                            <th scope="col">Date</th>
                             <th scope="col">Prénom</th>
                             <th scope="col">Nom</th>
-                            <th scope="col">Date</th>
                             <th scope="col">Statut</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let patient of rvList">
+                            <td>{{patient.date | date: 'dd/MM/yyyy'}}</td>
                             <td>{{patient.patientId.prenom}}</td>
                             <td>{{patient.patientId.nom}}</td>
-                            <td>{{patient.date | date: 'dd/MM/yyyy'}}</td>
                             <td style="color:blue;" *ngIf="patient.date > getDateActuelleFormatted()">Ultérieure&nbsp;<i class="fa-solid fa-arrow-up"></i></td>
                             <td style="color:red;" *ngIf="patient.date < getDateActuelleFormatted()">Passé&nbsp;<i class="fa-solid fa-arrow-down"></i></td>
                             <td style="color:green;" *ngIf="patient.date == getDateActuelleFormatted()">Aujourd'hui&nbsp;<i class="fa-solid fa-arrow-right"></i></td>                   

@@ -63,7 +63,7 @@
                         <i class="fa-solid fa-user-doctor"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" [routerLink]="['user']">Mon profil</a></li>
+                      <li *ngIf="user?.status !== 'A'"><a class="dropdown-item" [routerLink]="['user']">Mon profil</a></li>
                       <li><a class="dropdown-item" [routerLink]="['parametres']">Paramètres</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" (click)="logout()">Déconnexion</a></li>

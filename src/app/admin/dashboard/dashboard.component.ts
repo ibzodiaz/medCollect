@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
                 const currentDate = new Date();
                 const currentDateString = currentDate.toISOString().slice(0, 10);
 
-                let meets = meetings.filter((meeting:any)=>meeting.date >= currentDateString)
+                let meets = meetings.filter((meeting:any)=>meeting.date >= currentDateString).reverse()
                 this.rvList = meets;
                 //console.log(this.rvList)
             }
@@ -115,7 +115,7 @@ export class DashboardComponent implements OnInit {
 
                 let planning = plannings.filter((planning:any)=>planning.date >= currentDateString)
                 this.indisponibiliteList = planning;
-                console.log(this.indisponibiliteList)
+                //console.log(this.indisponibiliteList)
             }
         );
     }

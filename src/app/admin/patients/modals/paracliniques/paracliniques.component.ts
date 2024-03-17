@@ -96,6 +96,8 @@ export class ParacliniquesComponent {
 
   getPatientParaClinicSigns(): void {
     this.route.paramMap.subscribe((params: any) => {
+
+      if(params.has('patientId') && params.has('consultationId')){
         const patientId = params.get('patientId');
         const consultationId = params.get('consultationId');
 
@@ -121,6 +123,8 @@ export class ParacliniquesComponent {
               }
             );
         }
+      }
+
     });
   }
   

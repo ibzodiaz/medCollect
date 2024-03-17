@@ -83,7 +83,6 @@ textarea {
     border: none;
     border-bottom: 1px solid #838181;
     outline: none;
-    transition: border-bottom-width 0.5s ease-in-out, transform 0.5s ease-in-out;
     transform-origin: 50% 100%;
 }
 
@@ -99,13 +98,6 @@ textarea {
         border-bottom: 1.3px solid #007BFF;
     }
 }
-
-/* Applique l'animation uniquement lorsqu'on focus sur l'input */
-input:focus,
-textarea:focus {
-    animation: inputAnimation 0.5s forwards; /* forwards pour conserver l'état final de l'animation */
-}
-
 
 .checkbox-container {
     display: flex;

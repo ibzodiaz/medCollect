@@ -145,8 +145,11 @@ export class AntecedentsComponent {
     else
     {
       //this.antecedantForm.atcdDecompensation = this.sharedService.getterATCD().atcdDecompensation;
-      this.antecedantForm.nombreAtcdDecompensation = this.sharedService.getterATCD().nombreAtcdDecompensation;
-      this.antecedantForm.typeInsuffisanceCardiaque = this.sharedService.getterATCD().typeInsuffisanceCardiaque;
+      if(this.sharedService.getterATCD() && this.sharedService.getterATCD().nombreAtcdDecompensation != 0){
+        this.antecedantForm.nombreAtcdDecompensation = this.sharedService.getterATCD().nombreAtcdDecompensation;
+        this.antecedantForm.typeInsuffisanceCardiaque = this.sharedService.getterATCD().typeInsuffisanceCardiaque;
+      }
+   
   
     }
 
@@ -156,7 +159,9 @@ export class AntecedentsComponent {
     else
     {
       //this.antecedantForm.hospitalisationsAnterieures = this.sharedService.getterhospitalisation().hospitalisationsAnterieures;
-      this.antecedantForm.nombreHospitalisations = this.sharedService.getterhospitalisation().nombreHospitalisations;  
+      if(this.sharedService.getterhospitalisation() && this.sharedService.getterhospitalisation().nombreHospitalisations != 0){
+        this.antecedantForm.nombreHospitalisations = this.sharedService.getterhospitalisation().nombreHospitalisations; 
+      } 
     }
 
     //console.log(JSON.stringify(this.PatientAntecedantId));

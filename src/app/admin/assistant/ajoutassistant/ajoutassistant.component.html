@@ -7,11 +7,11 @@
             <div class="row mb-3">
                 <div class="col">
                     <label>Prénom</label>
-                    <input type="text" [(ngModel)]="assistantForm.prenom" name="prenom" class="form-control rounded-0">
+                    <input type="text" [(ngModel)]="assistantForm.prenom" name="prenom" class="rounded-0">
                 </div>
                 <div class="col">
                     <label>Nom</label>
-                    <input type="text" [(ngModel)]="assistantForm.nom"  name="nom" class="form-control rounded-0">
+                    <input type="text" [(ngModel)]="assistantForm.nom"  name="nom" class="rounded-0">
                 </div>
             </div>
 
@@ -19,11 +19,11 @@
             <div class="row mb-3">
                 <div class="col">
                     <label>Pseudo</label>
-                    <input type="text" [(ngModel)]="assistantForm.pseudo"  name="pseudo" class="form-control rounded-0">
+                    <input type="text" [(ngModel)]="assistantForm.pseudo"  name="pseudo" class="rounded-0">
                 </div>
                 <div class="col">
                     <label>Email</label>
-                    <input type="email" [(ngModel)]="assistantForm.email"  name="email" class="form-control rounded-0">
+                    <input type="email" [(ngModel)]="assistantForm.email"  name="email" class="rounded-0">
                 </div>
             </div>
 
@@ -31,25 +31,24 @@
             <div class="row mb-3">
                 <div class="col">
                     <label>Mot de passe</label>
-                    <input type="password" [(ngModel)]="assistantForm.password"  name="password" class="form-control rounded-0">
+                    <div class="showState">
+                        <i (click)="showPassword('fa-eye-1','fa-eye-slash-1','password')" id="fa-eye-1" class="fa-regular fa-eye"></i> 
+                        <i (click)="hidePassword('fa-eye-1','fa-eye-slash-1','password')" id="fa-eye-slash-1" class="fa-regular fa-eye-slash"></i>
+                    </div>
+                    <input type="password" id="password" [(ngModel)]="assistantForm.password"  name="password" class="rounded-0">
                 </div>
-                <div class="col">
-                    <label>Status</label>
-                    <input type="text" [(ngModel)]="assistantForm.status" readonly name="status" class="form-control rounded-0">
-                </div>
+                <div class="col"></div>
             </div>
             
 
             <div class="row text-center">
-                <div class="col"></div>
                 <div class="col">
                     <!-- Bouton Enregistrer -->
-                    <button type="submit"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+                    <button type="submit" class="btn btn-primary rounded-0 w-100"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Enregistrer</button>
                 </div>
                 <div class="col">
-                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal32')"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
+                    <button class="btn btn-secondary rounded-0 w-100" (click)="closeModal('modal32',$event)"><i class="fa-solid fa-ban"></i>&nbsp;Fermer</button>
                 </div>
-                <div class="col"></div>
             </div>
         </form>
     </div>

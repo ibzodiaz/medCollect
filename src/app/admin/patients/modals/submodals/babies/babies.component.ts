@@ -61,7 +61,6 @@ export class BabiesComponent {
               (babies: any) => {
                 if(babies){
                   this.babiesForm = {...babies};
-                  console.log(this.babiesForm)
                   this.sharedService.setterBabies(this.babiesForm);
                 }
                 
@@ -71,7 +70,6 @@ export class BabiesComponent {
                   this.initForm();
     
                 } else {
-                  alert(err.status);
                   console.error(err);
                 }
               }

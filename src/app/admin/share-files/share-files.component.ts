@@ -1,6 +1,7 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FileCategoriesService } from 'src/app/_services/file-categories.service';
 import { ShareFilesService } from 'src/app/_services/share-files.service';
 import { UploadfilesService } from 'src/app/_services/uploadfiles.service';
 import { environment } from 'src/environments/environment';
@@ -22,14 +23,16 @@ export class ShareFilesComponent {
   }
 
   progress: number = 0;
+  categories:any = [];
 
   constructor(
-    private route:ActivatedRoute,
+    private FilecategoriesService:FileCategoriesService,
     private shareFilesService:ShareFilesService
   ){}
 
   ngOnInit():void{
     this.getFiles();
+    this.getCategoriesFile();
   }
 
   uploaded:boolean = false;
@@ -93,21 +96,96 @@ export class ShareFilesComponent {
     );
   }
 
-  downloadFile(fileName: string): void {
-    const url = `${environment.apiURLDownload}/data/${fileName}`;
-    fetch(url)
-      .then(response => response.blob())
-      .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      })
-      .catch(error => console.error('Error downloading file:', error));
+  fileCategoriesChanged:boolean = false;
+  
+  categoriesUpdated(eventValue:boolean){
+    
+    this.fileCategoriesChanged = eventValue;
+
+    if(this.fileCategoriesChanged){
+      this.getCategoriesFile();
+    }
   }
+
+  getCategoriesFile(){
+    this.FilecategoriesService.getAllfileCategories().subscribe(
+      (categories:any)=>{
+        this.categories = categories;
+      },
+      (err:any)=> console.log(err.message)
+    );
+  }
+
+  openModal(modalId: string): void {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = "block";
+    }
+
+  }
+
+  progression: { [key: string]: number } = {};
+
+
+  downloadFile(id:string,fileName: string): void {
+    const url = `${environment.apiURLDownload}/data/${fileName}`;
+    this.progression[id] = 0;
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('La réponse du serveur n\'est pas valide');
+        }
+  
+        const contentLength = response.headers.get('Content-Length');
+        const total = parseInt(contentLength || '0', 10);
+        let loaded = 0;
+  
+        const reader = response.body!.getReader();
+        const chunks: Uint8Array[] = [];
+  
+        const processResult = (result: any): any => {
+          if (result.done) {
+            //alert('Téléchargement terminé');
+            this.progression[id] = 0;
+  
+            // Concaténer tous les morceaux de données en un seul Uint8Array
+            const blob = new Blob(chunks, { type: 'application/octet-stream' });
+  
+            // Créer l'URL de l'objet Blob
+            const url = window.URL.createObjectURL(blob);
+  
+            // Créer un élément <a> pour télécharger le fichier
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+  
+            // Révoquer l'URL de l'objet Blob après le téléchargement
+            window.URL.revokeObjectURL(url);
+  
+            return;
+          }
+  
+          loaded += result.value.length;
+  
+          // Calculez la progression en pourcentage
+          this.progression[id] = Math.round((loaded / total) * 100);
+          //console.log(`${id} Progression du téléchargement : ${this.progression[id]}%`);
+  
+          // Stocker chaque morceau de données dans le tableau chunks
+          chunks.push(result.value);
+  
+          // Continuez à lire le contenu
+          return reader.read().then(processResult);
+        };
+  
+        // Commencez à lire le contenu
+        return reader.read().then(processResult);
+      })
+      .catch(error => console.error('Erreur lors du téléchargement du fichier :', error));
+  }
+  
 
   isDialogOpen: boolean = false;
   messageTitle: string = '';
@@ -123,6 +201,12 @@ export class ShareFilesComponent {
   openDialog(id:string){
     this.fileId = id;
     this.isDialogOpen = true;
+    this.shareFilesService.getFileById(this.fileId).subscribe(
+      (file:any)=>{
+        this.fileForm.annotatedFile = file.annotatedFile;
+        this.fileForm.fileCategory = file.fileCategory;
+      }
+    );
   }
 
   updateFileCategory(){

@@ -25,6 +25,10 @@ export class UserService {
     return this.http.patch<Users>(this.url+'/changePassword/'+userId,user).pipe(catchError(this.errorHandler));
   }
 
+  updateDirectlyPassword(userId:string | null,user:any):Observable<Users>{
+    return this.http.patch<Users>(this.url+'/changeDirectlyPassword/'+userId,user).pipe(catchError(this.errorHandler));
+  }
+
   deleteUser(userId:string):Observable<Users>{
     return this.http.delete<Users>(this.url+'/'+userId).pipe(catchError(this.errorHandler));
   }

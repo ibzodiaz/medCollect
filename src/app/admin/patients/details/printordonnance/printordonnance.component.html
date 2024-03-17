@@ -3,7 +3,9 @@
     <div class="modal-content">
         <div id="content-print-2">
             <div class="row">
-                <div class="col"></div>
+                <div class="col">
+                    <img *ngIf="hospital?.hopitalId?.logoPath" [src]="url + '/' + hospital?.hopitalId?.logoPath" width="80" height="80">
+                </div>
                 <div class="col-md-3">
                     <p>Dr. {{hospital?.prenom}} {{hospital?.nom}}</p>
                 </div>
@@ -11,11 +13,6 @@
             <hr>
             <div class="row mb-5">
                 <div class="col">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <img src="../../../../../assets/images/dantec.png" width="50" height="50">
-                        </div>
-                    </div>
                     <div class="row mb-2">
                         <div class="col">
                             <strong>Hôpital : </strong>  {{hospital?.hopitalId?.Nom}}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/_services/shared.service';
 import { TokenService } from 'src/app/_services/token.service';
 import { UserService } from 'src/app/_services/user.service';
@@ -16,7 +16,8 @@ export class AssistantComponent {
     private userService:UserService,
     private tokenService:TokenService,
     private sharedService:SharedService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router:Router
   ){}
   
   assistantList:any;
@@ -40,6 +41,10 @@ export class AssistantComponent {
   openDialog(id:string){
     this.userId = id;
     this.isDialogOpen = true;
+  }
+
+  actualize(){
+    this.usersTable();
   }
 
   usersTable(){
@@ -81,6 +86,16 @@ export class AssistantComponent {
     if (modal) {
       modal.style.display = "block";
     }
+
+  }
+
+  openModalAndUpdate(modalId: string,assistantId:any): void {
+    this.router.navigateByUrl(`/admin/assistants/?assistantId=${assistantId}`).then(()=>{
+      const modal = document.getElementById(modalId);
+      if (modal) {
+          modal.style.display = "block";
+      }          
+    });
 
   }
 

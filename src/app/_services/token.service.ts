@@ -46,4 +46,30 @@ export class TokenService {
     this.router.navigate(['/']);
   }
 
+  saveTokenSuperUser(token: string): void{
+    localStorage.setItem('superToken', token);
+    this.router.navigate(['superadmin']);
+  }
+
+  isLoggedSuperUser():boolean{
+    const token = localStorage.getItem('superToken');
+    return !! token;
+  }
+
+  getSuperUserIdFromToken(): string | null {
+    const token = localStorage.getItem('superToken');
+    if (token) {
+      const payloadBase64 = token.split('.')[1];
+      const payload = JSON.parse(atob(payloadBase64));
+      const superUserId = payload.id;
+      return superUserId;
+    }
+    return null;
+  }
+
+  clearTokenSuperUser():void{
+    localStorage.removeItem('superToken');
+    this.router.navigate(['/']);
+  }
+
 }

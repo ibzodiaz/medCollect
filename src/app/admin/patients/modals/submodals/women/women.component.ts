@@ -93,7 +93,6 @@ export class WomenComponent {
               (women: any) => {
                 if(women){
                   this.womenForm = {...women};
-                  console.log(this.womenForm)
                   this.sharedService.setterWomen(this.womenForm);
                 }
                 
@@ -103,7 +102,7 @@ export class WomenComponent {
                   this.initForm();
     
                 } else {
-                  alert(err.status);
+          
                   console.error(err);
                 }
               }
@@ -126,7 +125,6 @@ export class WomenComponent {
       this.womenForm.mere.detailsDeces.lieu  = ''
     }
 
-    //console.log(this.womenForm)
     this.sharedService.setterWomen(this.womenForm);
     this.closeModal(modalId,e);
   }

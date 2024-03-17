@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row mb-3 mt-3">
+        <div class="col">
+            <button [routerLink]="['../../index']" class="btn btn-primary rounded-0"><i class="fa-solid fa-arrow-left"></i>&nbsp;Retour</button>
+        </div>
+        <div class="col">
+            <h4>Docteur(s): {{nombreDocteurs}}</h4>
+        </div>
+        <div class="col">
+            <h4>Assistant(s): {{nombreAssistants}}</h4>
+        </div>
+        <div class="col-md-6">
+            <h4 class="float-end">{{hospital?.Nom}}</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <input type="text" [(ngModel)]="searchTerm" class="form-control rounded-0 w-50" placeholder="Recherche..">
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row mt-2 mb-2 float-end">
+                <div class="col">
+                    <div class="tooltip-container">
+                        <button class="inactive btn btn-success rounded-0 rounded-circle mx-2" (click)="openModal('modal52')"><i class="fa-solid fa-circle-plus"></i></button>
+                        <div class="tooltip">Ajouter un nouvel utilisateur</div>
+                    </div>
+                    <div class="tooltip-container">
+                        <button class="inactive btn btn-primary rounded-0 rounded-circle mx-2" (click)="getOnlyAssitant()"><i class="fa-solid fa-user"></i></button>
+                        <div class="tooltip">Afficher les assistants</div>
+                    </div>
+                    <div class="tooltip-container">
+                        <button class="inactive btn btn-danger rounded-0 rounded-circle mx-2" (click)="getOnlyDoctor()"><i class="fa-solid fa-user-doctor"></i></button>
+                        <div class="tooltip">Afficher les docteurs</div>
+                    </div>
+                    <div class="tooltip-container">
+                        <button class="inactive btn btn-secondary rounded-0 rounded-circle mx-2" (click)="getUsersByHospital()"><i class="fa-solid fa-user-group"></i></button>
+                        <div class="tooltip">Afficher tout</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="isLoading ; else content">
+        <!-- Afficher le loader ici -->
+        <div class="loader"></div>
+    </div>
+    <ng-template #content>
+        <div class="table-wrapper">
+            <table class="fl-table">
+            <thead>
+                <tr>
+                    <th class="text-center">Actions :</th>
+                    <th class="text-center">Prénom :</th>
+                    <th class="text-center">Nom :</th>
+                    <th class="text-center">Email :</th>
+                    <th class="text-center">Statut :</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngFor="let user of filteredUsers">
+                    <td>
+                        <button (click)="openModalAndUpdate('modal53',user._id)" style="width: 30px; height: 30px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); padding: 3px;" class="btn btn-primary rounded-circle"><i class="fa-regular fa-pen-to-square"></i></button>
+                        &nbsp;
+                        <button (click)="openModalAndUpdate('modal54',user._id)" style="width: 30px; height: 30px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); padding: 3px;" class="btn btn-info rounded-circle"><i class="fa-solid fa-lock"></i></button>
+                    </td>
+                    <td>{{user.prenom}}</td>
+                    <td>{{user.nom}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.status == 'A' ? 'Assistant':'Docteur'}}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </ng-template>
+    
+</div>
+
+<app-add-user (eventEmitter)="checkInsertionState($event)"></app-add-user>
+<app-update-user (eventEmitter)="checkUpdateState($event)"></app-update-user>
+<app-password-user (eventEmitter)="checkUpdatePasswordState($event)"></app-password-user>

@@ -11,11 +11,16 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   private url = `${environment.apiURL}/auth/login`;
+  private urlSuperUser = `${environment.apiURL}/auth/superuser/login`;
 
   constructor(private http: HttpClient) { }
 
   login(credentials:Credentials): Observable<Token>{
       return this.http.post<Token>(this.url,credentials).pipe(catchError(this.errorHandler));;
+  }
+
+  loginSuperUser(credentials:Credentials): Observable<Token>{
+    return this.http.post<Token>(this.urlSuperUser,credentials).pipe(catchError(this.errorHandler));;
   }
 
   private errorHandler(error: any): Promise<any> {

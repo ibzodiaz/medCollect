@@ -5,7 +5,18 @@
             <div class="tooltip">Actualiser la table des fichiers</div>
         </div>
     </div>
-    <div class="col"></div>
+    <div class="col">
+        <div *ngFor="let key of progression | keyvalue">
+            <div class="row" *ngIf="key.value != 0">
+                <div class="col-md-8">
+                    Téléchargement en cours : {{ key.value }}%
+                </div>
+                <div class="col">
+                    <progress max="100" [value]="key.value" class="w-100"></progress>
+                </div>
+            </div>
+        </div>                      
+    </div>
     <div class="col-md-3">
         <input type="text" class="form-control rounded-0" placeholder="Recherche.." [(ngModel)]="searchTerm">
     </div>
@@ -30,11 +41,11 @@
         <tbody>
             <tr *ngFor="let file of filteredfiles">
                 <td>{{file.createdAt | date: 'dd/MM/yyyy'}}</td>
-                <td><a [href]="readFile(file.fileName)" target="_blank">{{file.fileName.length > 40 ? file.fileName.substr(0,40)+'..': file.fileName}}</a></td>
+                <td><a [href]="readFile(file.fileName)" target="_blank">{{file.fileName.length > 40 ? file.fileName.substr(14,40)+'..': file.fileName.substr(14,39)}}</a></td>
                 <td>{{file.fileSizeFormatted}}</td>
                 <td>{{file.fileCategory}}</td>
                 <td><button (click)="openDialog(file._id)" style="width: 30px; height: 30px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); padding: 3px;" class="btn btn-primary rounded-circle"><i class="fa-regular fa-pen-to-square"></i></button></td>
-                <td><a style="cursor: pointer;" (click)="downloadFile(file.fileName)">télécharger&nbsp;&nbsp;<i style="color:rgb(121, 21, 21); font-size: 20px;" class="fa-solid fa-circle-down"></i></a></td>
+                <td><a style="cursor: pointer;" (click)="downloadFile(file._id,file.fileName)">télécharger&nbsp;&nbsp;<i style="color:rgb(121, 21, 21); font-size: 20px;" class="fa-solid fa-circle-down"></i></a></td>
             </tr>
         </tbody>
     </table>

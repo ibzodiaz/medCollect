@@ -31,6 +31,10 @@
     height: auto;
 }
 
+img{
+    border-radius: 50%;
+}
+
 
 @keyframes openDialog {
     0% {

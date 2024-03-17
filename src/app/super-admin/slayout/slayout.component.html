@@ -1,0 +1,55 @@
+<div class='dashboard'>
+    <div class="dashboard-nav">
+        <header><a class="menu-toggle"><i class="fas fa-bars"></i></a>
+
+            <h3 class="m-0 text-primary"><i class="fa-solid fa-hand-holding-droplet"></i>&nbsp;MedCollect</h3>
+            
+            <!-- <p class="name-admin">Dr. Joe</p> -->
+        </header>
+
+        
+        <nav class="dashboard-nav-list mt-1">
+
+        <a [routerLink]="['index']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-circle-plus"></i> Ajout médecin
+        </a>
+        
+        <a [routerLink]="['partage']" routerLinkActive="active" class="dashboard-nav-item">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Partage de fichiers
+        </a>
+        
+    
+        </nav>
+    </div>
+
+    
+    <div class='dashboard-app'>
+        <header class='dashboard-toolbar'>
+            <a class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </a>
+            <span class="left">Admin</span>
+            <div class="go-left">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" [routerLink]="['parametres']">Paramètres</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" (click)="logout()">Déconnexion</a></li>
+                    </ul>
+                </div>
+        
+                <!-- <a (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></a> -->
+        
+            </div>
+            
+        </header>
+        <div class='dashboard-content'>
+            <div class='container'>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

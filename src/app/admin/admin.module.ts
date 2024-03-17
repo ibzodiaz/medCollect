@@ -5,11 +5,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AlayoutComponent } from './alayout/alayout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ParametresComponent } from './parametres/parametres.component';
-import { ProfileComponent } from './parametres/profile/profile.component';
 import { UpdateComponent } from './parametres/update/update.component';
 import { PasswordComponent } from './parametres/password/password.component';
-import { AllowsComponent } from './parametres/allows/allows.component';
-import { GeneralComponent } from './parametres/general/general.component';
 import { LanguagesComponent } from './parametres/languages/languages.component';
 import { MeetsComponent } from './meets/meets.component';
 import { AssistantComponent } from './assistant/assistant.component';
@@ -23,6 +20,8 @@ import { HelpComponent } from './help/help.component';
 import { AjoutassistantComponent } from './assistant/ajoutassistant/ajoutassistant.component';
 import { UpdateassistantComponent } from './assistant/updateassistant/updateassistant.component';
 import { ShareFilesComponent } from './share-files/share-files.component';
+import { FilecategoriesComponent } from './filecategories/filecategories.component';
+import { PasswordassistantComponent } from './assistant/passwordassistant/passwordassistant.component';
 
 
 
@@ -32,11 +31,8 @@ import { ShareFilesComponent } from './share-files/share-files.component';
     AlayoutComponent,
     DashboardComponent,
     ParametresComponent,
-    ProfileComponent,
     UpdateComponent,
     PasswordComponent,
-    AllowsComponent,
-    GeneralComponent,
     LanguagesComponent,
     MeetsComponent,
     AssistantComponent,
@@ -46,7 +42,9 @@ import { ShareFilesComponent } from './share-files/share-files.component';
     HelpComponent,
     AjoutassistantComponent,
     UpdateassistantComponent,
-    ShareFilesComponent
+    ShareFilesComponent,
+    FilecategoriesComponent,
+    PasswordassistantComponent
   ],
   imports: [
     CommonModule,

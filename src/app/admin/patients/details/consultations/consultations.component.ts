@@ -34,7 +34,6 @@ export class ConsultationsComponent {
   patientId:any ='';
   userId:any = this.tokenService.getUserIdFromToken();
 
-  consultationId:string = '';
   consultationList:any[] = [];
   showPatient:any = [];
 

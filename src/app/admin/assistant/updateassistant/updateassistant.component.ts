@@ -23,20 +23,22 @@ export class UpdateassistantComponent {
   getAssistant(assistantId:string){
     this.userService.getUserById(assistantId).subscribe(
       (user: any) => {
-        this.user = user.data;
-        this.initializeAssistantForm();
+        this.assistantForm = user.data;
       },
-      (err: any) => console.log(err.message())
+      (err: any) => console.log(err.message)
     );
 
   }
   
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const assistantId = params.get('assistantId');
-      if(assistantId){
-        this.getAssistant(assistantId);
+    this.route.queryParamMap.subscribe((queryParams:any) => {
+ 
+      if (queryParams.has('assistantId')) {
+        const assistantId = queryParams.get('assistantId');
+        if(assistantId){
+          this.getAssistant(assistantId);
+        }
       }
     });
 
@@ -47,34 +49,39 @@ export class UpdateassistantComponent {
   
   initializeAssistantForm(): void {
     this.assistantForm = {
-      hopitalId: this.user.hopitalId._id,
-      prenom: this.user.prenom,
-      nom: this.user.nom,
-      email: this.user.email,
-      pseudo: this.user.pseudo,
-      password: '',
+      hopitalId: this.tokenService.getHospitalIdFromToken(),
+      prenom: '',
+      nom: '',
+      email: '',
+      pseudo: '',
       service: '',
       speciality: '',
-      status: this.user.status
+      status: ''
     };
   }
   
-  onSubmit(){
+  onSubmit(e:Event){
     
     //alert(this.sharedService.getterAssistantId())
     //alert(JSON.stringify(this.assistantForm))
-
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const assistantId = params.get('assistantId');
-      if(assistantId){
-        //alert(assistantId+'*****'+JSON.stringify(this.assistantForm))
-        this.userService.updateUser(assistantId,this.assistantForm).subscribe(
-          (success:any)=>{
-            alert("Modifié!");
-          },
-          (err:any)=>console.log(err.message)
-        );
-  
+    
+    this.route.queryParamMap.subscribe((queryParams:any) => {
+      if (queryParams.has('assistantId')) {
+        const assistantId = queryParams.get('assistantId');
+        if(assistantId){
+          //alert(assistantId+'*****'+JSON.stringify(this.assistantForm))
+          this.userService.updateUser(assistantId,this.assistantForm).subscribe(
+            (response:any)=>{
+              alert(response.message);
+              this.closeModal('modal33',e);
+            },
+            (err:any)=>{
+              alert(err);
+              console.log(err)
+            }
+          );
+    
+        }
       }
     });
 

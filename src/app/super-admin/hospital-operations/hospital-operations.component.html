@@ -1,0 +1,101 @@
+<!-- Modal Content -->
+<div id="modal51" class="modal">
+    <div class="modal-content text-center">
+       
+        <h6>Les hôpitaux</h6>
+
+        <div *ngIf="add">
+            <form (ngSubmit)="onSubmit()">
+                <div class="row mb-3 mt-3">
+                    <div class="col">
+                        <input type="text" name="nom" [(ngModel)]="hospitalsForm.Nom" placeholder="Nom de l'hôpital" class="form-control rounded-0 w-100">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="lieu" [(ngModel)]="hospitalsForm.Lieu" placeholder="Lieu de l'hôpital" class="form-control rounded-0 w-100">
+                    </div>
+                    <div class="col">
+                        <input type="file" name="logo"  [(ngModel)]="hospitalsForm.Logo" (change)="onFileSelected($event)" class="form-control rounded-0 w-100">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-success rounded-circle"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="update">
+            <form (ngSubmit)="onUpdate()">
+                <div class="row mb-3 mt-3">
+                    <div class="col">
+                        <input type="text" name="nom" [(ngModel)]="hospitalsForm.Nom" placeholder="Nom de l'hôpital" class="form-control rounded-0 w-100">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="lieu" [(ngModel)]="hospitalsForm.Lieu" placeholder="Lieu de l'hôpital" class="form-control rounded-0 w-100">
+                    </div>
+                    <div class="col">
+                        <input type="file" name="logo" [(ngModel)]="hospitalsForm.Logo" (change)="onFileSelected($event)" class="form-control rounded-0 w-100">
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-success rounded-circle"><i class="fa-solid fa-marker"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="scrollable-tbody">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Logos</th>
+                    <th scope="col">Hôpitaux</th>
+                    <th scope="col">Lieu</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr height="70" *ngFor="let hospital of hospitalsList">
+                    <td><img *ngIf="hospital.logoPath" [src]="url + '/' + hospital.logoPath" width="70" height="70" class="rounded-circle"></td>
+                    <td>{{hospital.Nom}}</td>
+                    <td>{{hospital.Lieu}}</td>
+                    <td>
+                        <button (click)="updateEvent(hospital._id,hospital)" class="btn btn-primary rounded-circle">
+                            <i class="fa-solid fa-marker"></i>
+                        </button>
+                        <!-- &nbsp;
+                        <button (click)="deleteConfirm()" class="btn btn-danger rounded-circle">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button> -->
+<!-- 
+                        <div class="message-dialog" [class.open]="isDialogOpen">
+                            <div class="message-content">
+                            <h5 style="color:red;">Etes-vous sûr de vouloir supprimer ?</h5>
+                            <span class="text-center"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary rounded-0" (click)="delete(hospital._id)">Confirmer</button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-secondary rounded-0" (click)="closeMessageDialog()">Fermer</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div> -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-3 text-center">
+
+            <div class="col-md-9">
+            
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary rounded-0" (click)="closeModal('modal51')"><i class="fa-solid fa-ban"></i>&nbsp;Annuler</button>
+            </div> 
+
+        </div>
+  
+    </div>
+</div>

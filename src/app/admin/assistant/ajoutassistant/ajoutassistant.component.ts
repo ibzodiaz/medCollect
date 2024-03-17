@@ -28,6 +28,28 @@ export class AjoutassistantComponent {
       (err: any) => console.log(err.message())
     );
   }
+
+  showPassword(eye:string,eye_slash:string, password:string){
+    const eye_var = document.getElementById(eye) as HTMLElement;
+    const eye_slash_var = document.getElementById(eye_slash) as HTMLElement;
+    const password_var = document.getElementById(password) as HTMLInputElement;
+    if(eye_slash){
+      password_var.type = 'text';
+      eye_slash_var.style.display = 'block';
+      eye_var.style.display = 'none';
+    }
+  }
+
+  hidePassword(eye:string,eye_slash:string, password:string){
+    const eye_var = document.getElementById(eye) as HTMLElement;
+    const eye_slash_var = document.getElementById(eye_slash) as HTMLElement;
+    const password_var = document.getElementById(password) as HTMLInputElement;
+    if(eye_slash){
+      password_var.type = 'password';
+      eye_slash_var.style.display = 'none';
+      eye_var.style.display = 'block';
+    }
+  }
   
   initializeAssistantForm(): void {
     this.assistantForm = {
@@ -46,14 +68,18 @@ export class AjoutassistantComponent {
   onSubmit(){
     //alert(JSON.stringify(this.assistantForm))
     this.userService.createNewUser(this.assistantForm).subscribe(
-      (success:any)=>{
-        alert("Créé!");
+      (response:any)=>{
+        alert(response.message);
       },
-      (err:any)=>console.log(err.message)
+      (err:any)=>{
+        alert(err)
+        console.log(err)
+      }
     );
   }
 
-  closeModal(modalId: string): void {
+  closeModal(modalId: string,e:Event): void {
+    e.preventDefault();
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";

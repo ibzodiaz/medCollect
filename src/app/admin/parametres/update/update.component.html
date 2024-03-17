@@ -37,22 +37,110 @@
                                     <input type="text" name="pseudo" [(ngModel)]="doctorForm.pseudo">
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                                
+                            <div class="row mb-3" *ngIf="doctorForm.status != 'A'">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Service</h6>
+                                    <h6 class="mb-0">SERVICE</h6>               
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" name="service" [(ngModel)]="doctorForm.service">
+                                    <select name="service" class="form-control rounded-0" [(ngModel)]="doctorForm.service">
+                                        <option></option>
+                                        <option>Cardiologie</option>
+                                        <option>Neurologie</option>
+                                        <option>Pneumologie</option>
+                                        <option>Dermatologie</option>
+                                        <option>Gastro-entérologie</option>
+                                        <option>Endocrinologie</option>
+                                        <option>Pédiatrie</option>
+                                        <option>Gynécologie</option>
+                                        <option>Ophtalmologie</option>
+                                        <option>Oto-rhino-laryngologie (ORL)</option>
+                                        <option>Urologie</option>
+                                        <option>Chirurgie générale</option>
+                                        <option>Chirurgie orthopédique</option>
+                                        <option>Chirurgie plastique</option>
+                                        <option>Chirurgie vasculaire</option>
+                                        <option>Anesthésiologie</option>
+                                        <option>Radiologie</option>
+                                        <option>Oncologie</option>
+                                        <option>Néphrologie</option>
+                                        <option>Hématologie</option>
+                                        <option>Rhumatologie</option>
+                                        <option>Allergologie</option>
+                                        <option>Médecine interne</option>
+                                        <option>Médecine du travail</option>
+                                        <option>Médecine du sport</option>
+                                        <option>Médecine d'urgence</option>
+                                        <option>Médecine physique et réadaptation</option>
+                                        <option>Psychiatrie</option>
+                                        <option>Psychologie clinique</option>
+                                    </select> 
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-3" *ngIf="doctorForm.status != 'A'">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Spécialité</h6>
+                                    <h6 class="mb-0">SPECIALITE</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" name="speciality" [(ngModel)]="doctorForm.speciality">
+                                    <select name="speciality" class="form-control rounded-0" [(ngModel)]="doctorForm.speciality">
+                                        <option></option>
+                                        <option>Allergologie</option>
+                                        <option>Anatomie pathologique</option>
+                                        <option>Anesthésie-réanimation</option>
+                                        <option>Biologie médicale</option>
+                                        <option>Cardiologie et maladies vasculaires</option>
+                                        <option>Chirurgie cardiaque</option>
+                                        <option>Chirurgie générale</option>
+                                        <option>Chirurgie maxillo-faciale et stomatologie</option>
+                                        <option>Chirurgie orthopédique et traumatologie</option>
+                                        <option>Chirurgie infantile</option>
+                                        <option>Chirurgie plastique, reconstructrice et esthétique</option>
+                                        <option>Chirurgie thoracique et cardio-vasculaire</option>
+                                        <option>Chirurgie urologique</option>
+                                        <option>Chirurgie vasculaire</option>
+                                        <option>Chirurgie viscérale et digestive</option>
+                                        <option>Dermatologie et vénérologie</option>
+                                        <option>Endocrinologie et métabolisme</option>
+                                        <option>Gastro-entérologie et hépatologie</option>
+                                        <option>Génétique médicale</option>
+                                        <option>Gériatrie</option>
+                                        <option>Gynécologie médicale</option>
+                                        <option>Gynécologie obstétrique</option>
+                                        <option>Hématologie</option>
+                                        <option>Gynécologie obstétrique</option>
+                                        <option>Hématologie</option>
+                                        <option>Immunologie</option>
+                                        <option>Médecine générale</option>
+                                        <option>Médecine du travail</option>
+                                        <option>Médecine interne</option>
+                                        <option>Médecine légale</option>
+                                        <option>Médecine nucléaire</option>
+                                        <option>Médecine physique et réadaptation</option>
+                                        <option>Médecine et santé au travail</option>
+                                        <option>Médecine d'urgence</option>
+                                        <option>Néphrologie</option>
+                                        <option>Neurochirurgie</option>
+                                        <option>Neurologie</option>
+                                        <option>Oncologie médicale</option>
+                                        <option>Oncologie radiothérapique</option>
+                                        <option>Ophtalmologie</option>
+                                        <option>Oto-rhino-laryngologie</option>
+                                        <option>Pédiatrie</option>
+                                        <option>Pneumologie</option>
+                                        <option>Psychiatrie</option>
+                                        <option>Psychiatrie de l'enfant et de l'adolescent</option>
+                                        <option>Radiothérapie</option>
+                                        <option>Rhumatologie</option>
+                                        <option>Réanimation médicale</option>
+                                        <option>Réanimation chirurgicale</option>
+                                        <option>Recherche médicale</option>
+                                        <option>Radiologie et imagerie médicale</option>
+                                        <option>Stomatologie</option>
+                                        <option>Urologie</option>
+                                    </select>   
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
@@ -65,5 +153,13 @@
 
             </div>
         </div>
+    </div>
+</div>
+
+<div class="message-dialog" [class.open]="isDialogOpen">
+    <div class="message-content">
+        <h4 style="color:green;">{{ messageTitle }}&nbsp;<i class="fa-solid fa-check"></i></h4>
+        <p>{{ messageContent }}</p>
+        <button class="btn btn-primary rounded-0" (click)="closeMessageDialog()">Fermer</button>
     </div>
 </div>

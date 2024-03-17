@@ -38,7 +38,7 @@
                     <tbody>
             
                     
-                        <tr *ngFor="let patient of filteredPatients" [routerLink]="'../details/' + patient._id+'/'+ patient._id">
+                        <tr *ngFor="let patient of filteredPatients" [routerLink]="'../details/' + patient._id">
                             <td>{{patient.createdAt | date:'dd/MM/yyyy'}}</td>
                             <td>{{patient.prenom}}</td>
                             <td>{{patient.nom}}</td>
